@@ -1,0 +1,7 @@
+<div class="pull-right">
+<% if (!Parse.User.current()) { %>
+  <a href="/login" class="btn btn-success">Login/Signup</a>
+  <% } else { %>
+  <a href="/logout" class="btn btn-danger">Logout</a>
+<% } %>  
+</div>

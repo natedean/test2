@@ -1,0 +1,18 @@
+.navbar-fixed-bottom{
+  height: 60px;
+  background-color: grey;
+  color: white;
+  text-align: center;
+  line-height: 60px;
+}
+
+.form-group input{
+  width: 250px;
+  max-width: 90%;
+  margin: .3em;
+  text-align:center;
+}
+
+#signUpErrorMsg, #logInErrorMsg{
+  color: red;
+}

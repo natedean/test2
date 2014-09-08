@@ -4,6 +4,10 @@
   <body>
     <% include partials/head %>
     <% include partials/nav %>
-    <p><%= message %></p>
+    <div class="container">
+      <% include partials/login-links %>
+      <p><%= message %></p>
+      <% include partials/footer %>
+    </div><!-- end container -->
   </body>
 </html>
