@@ -1,0 +1,33 @@
+
+textarea {
+  width:100%;
+  height:1000px;
+  padding:1em;
+}
+
+
+
+.keySelectorRow {
+  margin:10px;
+}
+
+.deleteButtonRow {
+  margin-left: 10px;
+  margin-bottom:5px;
+}
+
+.chordButtonRow {
+  margin-left: 10px;
+  margin-bottom:5px;
+}
+
+.keySelectorRow a.btn.btn-default.btn-warning {
+height: 40px;
+line-height: 40px;
+color: white;
+font-size: large;
+}
+
+.keySelectorRow a.btn.btn-default.btn-warning:hover,.keySelectorRow a.btn.btn-default.btn-warning:active {
+  background-color: orange;
+}

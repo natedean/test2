@@ -1,0 +1,16 @@
+#numberPatterns a.btn.btn-warning.btn-sm {
+height: 40px;
+line-height: 40px;
+color: white;
+font-size: large;
+}
+
+#numberPatterns a.btn.btn-warning.btn-sm:hover,.keySelectorRow a.btn.btn-warning.btn-sm:active {
+  background-color: orange;
+}
+
+.chart {
+  border:1px solid;
+  border-radius:10x;
+  margin: 1em;
+}

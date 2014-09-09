@@ -16,6 +16,14 @@ app.get('/', function(req, res) {
   res.render('home', { message: 'Welcome Home!' });
 });
 
+app.get('/nashville-number-system', function(req, res) {
+  res.render('nns');
+});
+
+app.get('/chord-chart-builder', function(req, res) {
+  res.render('chartbuilder');
+});
+
 // You could have a "Log In" link on your website pointing to this.
 app.get('/login', function(req, res) {
   // Renders the login form asking for username and password.
@@ -43,7 +51,7 @@ app.post('/login', function(req, res) {
 
 // Clicking submit on the login form triggers this.
 app.post('/signup', function(req, res) {
-  Parse.User.signUp(req.body.username, req.body.password, { ACL: new Parse.ACL()}).then(function() {
+  Parse.User.signUp(req.body.username, req.body.password, { email: req.body.email, ACL: new Parse.ACL()}).then(function() {
     // Login succeeded, redirect to homepage.
     // parseExpressCookieSession will automatically set cookie.
     res.redirect('/');

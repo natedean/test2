@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <% include partials/head %>
+    <% include partials/nav %>
+    <div class="container">
+ <!-- CHART BUILDER APP -->
+        <link href="/styles/chordChartBuilder.css" rel="stylesheet">
+        <div class="row keySelectorRow">  <!-- start key selector dropdown -->
+         <div class="btn-group">
+                <button type="button" class="btn btn-lg btn-warning dropdown-toggle" data-toggle="dropdown"><span id="key">Key of&nbsp; C</span>  &nbsp;<span class="caret"></span></button>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a class="btn btn-default btn-warning" value="A">Key of A</a></li>
+                  <li><a class="btn btn-default btn-warning" value="Bb">Key of Bb</a></li>
+                  <li><a class="btn btn-default btn-warning" value="B">Key of B</a></li>
+                  <li><a class="btn btn-default btn-warning" value="C">Key of C</a></li>
+                  <li><a class="btn btn-default btn-warning" value="Db">Key of Db</a></li>
+                  <li><a class="btn btn-default btn-warning" value="D">Key of D</a></li>
+                  <li><a class="btn btn-default btn-warning" value="Eb">Key of Eb</a></li>
+                  <li><a class="btn btn-default btn-warning" value="E">Key of E</a></li>
+                  <li><a class="btn btn-default btn-warning" value="F">Key of F</a></li>
+                  <li><a class="btn btn-default btn-warning" value="Gb">Key of Gb</a></li>
+                  <li><a class="btn btn-default btn-warning" value="G">Key of G</a></li>
+                  <li><a class="btn btn-default btn-warning" value="Ab">Key of Ab</a></li>
+                  <li><a class="btn btn-default btn-warning" value="Numb">Number Chart</a></li>
+                </ul>
+            </div> 
+          </div>  <!-- end key selector dropdown -->
+        
+        <div class="row dragBoundary">
+        
+        <div class="row deleteButtonRow">
+          <div class="btn btn-danger btn-sm delete">Delete Last Placed Chord</div>
+          <div class="btn btn-danger btn-sm deleteAll">Delete All Chords</div>  
+        </div>  
+          
+        <div class="row chordButtonRow">    
+          <div class="dragChord btn btn-sm btn-primary"><span class="chord" value="1">C</span></div>
+          <div class="dragChord btn btn-sm btn-primary"><span class="chord" value="2">D</span><span>m</span></div>
+          <div class="dragChord btn btn-sm btn-primary"><span class="chord" value="3">E</span><span>m</span></div>
+          <div class="dragChord btn btn-sm btn-primary"><span class="chord" value="4">F</span></div>
+          <div class="dragChord btn btn-sm btn-primary"><span class="chord" value="5">G</span></div>
+          <div class="dragChord btn btn-sm btn-primary"><span class="chord" value="6">A</span><span>m</span></div>
+          <div class="dragChord btn btn-sm btn-primary"><span class="chord" value="5">G</span><span>/</span><span class="chord" value="7">B</span></div>
+        </div>
+        
+        
+        
+        <textarea class="droppable">
+        Type or paste in lyrics here.  Drag chords down to build chart.
+        </textarea>
+          
+        </div>  
+        
+        
+        <!-- END CHART BUILDER APP -->
+      
+      
+      
+      
+    </div><!-- end container -->
+    <% include partials/footer %>
+    <script src="/js/lib/jquery-ui-1.10.4.custom-draggable.min.js"></script>  <!-- jquery UI js --> 
+    <script src="/js/lib/jquery.ui.touch-punch.min.js"></script> <!-- touch-punch.js ALLOWS DRAGGABLE ON iOS DEVICES-->
+    <script src="js/lib/fastclick.js"></script> <!-- fastclick.js -->
+    <script src="/js/chordChartBuilder.js"></script>  <!-- chordChartBuilder js -->  
+  </body>
+</html>
+
+
+
+
