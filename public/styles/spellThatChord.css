@@ -1,0 +1,20 @@
+#stcFloorBackground{
+  background-image: url("/images/stc/floor.png");
+  background-repeat: no-repeat;
+  width: 480px;
+  height: 690px;
+  margin: 0 auto;
+  background-size:contain;
+background-position:center;
+}
+
+#stcPiano{
+  background-image: url("/images/stc/piano.png");
+  background-repeat: no-repeat;
+  width: 480px;
+  height: 420px;
+  margin: 0 auto;
+  background-size:contain;
+background-position:center;
+}
+

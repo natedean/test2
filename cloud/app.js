@@ -24,6 +24,10 @@ app.get('/chord-chart-builder', function(req, res) {
   res.render('chartbuilder');
 });
 
+app.get('/spell-that-chord', function(req, res) {
+  res.render('spellThatChord');
+});
+
 // You could have a "Log In" link on your website pointing to this.
 app.get('/login', function(req, res) {
   // Renders the login form asking for username and password.
