@@ -1,3 +1,7 @@
+body{
+  background: url('http://cur.glitter-graphics.net/pub/2845/2845587p668h916nq.jpg');
+}
+
 #stcFloorBackground{
   background-image: url("/images/stc/floor.png");
   background-repeat: no-repeat;
@@ -11,12 +15,15 @@ background-position:center;
 #stcPiano{
   background-image: url("/images/stc/piano.png");
   background-repeat: no-repeat;
+  background-size:contain;
+  background-position:center;
   width: 480px;
   height: 420px;
   margin: 0 auto;
-  background-size:contain;
-background-position:center;
+  
 }
+
+/* ---------------------------------------------------------------------------*/
 
 #stcTopPianoRow{
   height: 80px;
@@ -31,7 +38,13 @@ background-position:center;
   width: 115px;
   height: 66px;
   cursor: pointer;
+  transition: .2s;
 }
+
+.stcTopPianoRowBtn:active{
+  height:64px;
+}
+
 
 #stcHowToPlayBtn{
   background-image: url("/images/stc/HowtoPlay_btn.png");
@@ -43,19 +56,100 @@ background-position:center;
   float: right;
 }
 
+/* ---------------------------------------------------------------------------*/
+
 #stcChordDisplayRow h1{
+  margin: 0;
   color: white;
 }
 
+/* ---------------------------------------------------------------------------*/
+
+#stcScoreDisplayRow{
+  height: 96px;
+  width: 480px;
+  padding: 5px 15px;
+}
+
+.stcScoreDisplaySheetMusicBackground{
+  background-repeat: no-repeat;
+  background-size:contain;
+  background-position:center;
+}
+
+#stcPortraitSheetMusic{
+  background-image: url("/images/stc/single_.png");
+  width: 115px;
+  height: 90px;
+  float: left;
+}
+
+.stcSheetMusicNumber{
+  margin: 0 auto;
+  line-height: 90px;
+  font-size: x-large;
+  color: black;
+}
+
+#stcAnswerDisplay{
+  width: 212px;
+  height: 90px;
+  margin: 0 auto;
+  float: left;
+}
+
+.stcEasyAnswerDisplayLetter {
+  display: inline-block;
+  width: 30%;
+  border-bottom: 4px solid white;
+}
+
+.stcEasyAnswerDisplayLetter h1{
+  color: white;
+}
+
+#stcLandscapeSheetMusic{
+  background-image: url("/images/stc/1_paper.png"); 
+  width: 115px;
+  height: 90px;
+  float: right;
+}
+
+/* ---------------------------------------------------------------------------*/
+
+#stcScoreTextRow{
+  height: 26px;
+  width: 480px;
+}
+
+.stcScoreText{
+  font-size: large;
+  line-height: 26px;
+  color: white;
+}
+
+#stcScoreTextRowPointsText {
+float: left;
+margin-left: 50px;
+}
+
+#stcScoreTextRowScoreText {
+float: right;
+margin-right: 50px;
+}
+
+
+/* ---------------------------------------------------------------------------*/
+
 #stcPianoKeyboardContainer{
-  margin-top: 100px;
+/*  margin-top: 100px;*/
 }
 
 .stcPianoKeyboardRow{
   width: 400px;
-  height: 60px;
+  height: 61px;
   margin: 0 auto;
-  background-color: yellow;
+  background: white;
 }
 
 #stcPianoKeyboardRowOne{
@@ -66,9 +160,70 @@ background-position:center;
   
 }
 
-.stcPianoKeyFirstRow{
+.stcPianoKeyFirstRow, .stcPianoKeySecondRow{
   display: inline-block;
+  background-repeat: no-repeat;
+  background-size:contain;
+  background-position:center;
+  height: 60px;
+  width: 60px;
+  cursor: pointer;
+  transition: .2s;
 }
+
+.stcPianoKeyFirstRow:active, .stcPianoKeySecondRow:active{
+  height:58px;
+}
+
+#stcPianoKeyFirstRowOne{
+  background-image: url("/images/stc/A.png"); 
+}
+
+#stcPianoKeyFirstRowTwo{
+  background-image: url("/images/stc/Asharp.png"); 
+}
+
+#stcPianoKeyFirstRowThree{
+  background-image: url("/images/stc/B.png"); 
+}
+
+#stcPianoKeyFirstRowFour{
+  background-image: url("/images/stc/C.png"); 
+}
+
+#stcPianoKeyFirstRowFive{
+  background-image: url("/images/stc/Csharp.png"); 
+}
+
+#stcPianoKeyFirstRowSix{
+  background-image: url("/images/stc/D.png"); 
+}
+
+#stcPianoKeySecondRowOne{
+  background-image: url("/images/stc/Dsharp.png"); 
+}
+
+#stcPianoKeySecondRowTwo{
+  background-image: url("/images/stc/E.png"); 
+}
+
+#stcPianoKeySecondRowThree{
+  background-image: url("/images/stc/F.png"); 
+}
+
+#stcPianoKeySecondRowFour{
+  background-image: url("/images/stc/Fsharp.png"); 
+}
+
+#stcPianoKeySecondRowFive{
+  background-image: url("/images/stc/G.png"); 
+}
+
+#stcPianoKeySecondRowSix{
+  background-image: url("/images/stc/Gsharp.png"); 
+}
+
+/* ---------------------------------------------------------------------------*/
 
 #stcFirstBtnRow, #stcSecondBtnRow{
   height: 80px;
@@ -86,7 +241,13 @@ background-position:center;
   display: inline-block;
   margin: 15px;
   cursor: pointer;
+  transition: .2s;
 }
+
+.stcFirstRowBtn:active{
+  height: 64px;
+}
+
 #stcNewChordBtn{
   background-image: url("/images/stc/new_btn.png"); 
 }
@@ -98,6 +259,8 @@ background-position:center;
 #stcClearBtn{
   background-image: url("/images/stc/clear_btn.png");
 }
+
+/* ---------------------------------------------------------------------------*/
 
 #stcSecondBtnRow button{
   margin: 10px;
