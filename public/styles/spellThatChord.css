@@ -19,9 +19,55 @@ background-position:center;
 }
 
 #stcTopPianoRow{
-  height: 100px;
+  height: 80px;
   width: 480px;
+  padding: 5px 15px;
+}
+
+.stcTopPianoRowBtn{
+  background-repeat: no-repeat;
+  background-size:contain;
+  background-position:center;
+  width: 115px;
+  height: 66px;
+  cursor: pointer;
+}
+
+#stcHowToPlayBtn{
+  background-image: url("/images/stc/HowtoPlay_btn.png");
+  float: left;
+}
+
+#stcCheatSheetBtn{
+  background-image: url("/images/stc/CheatSheet_btn.png"); 
+  float: right;
+}
+
+#stcChordDisplayRow h1{
+  color: white;
+}
+
+#stcPianoKeyboardContainer{
+  margin-top: 100px;
+}
+
+.stcPianoKeyboardRow{
+  width: 400px;
+  height: 60px;
+  margin: 0 auto;
   background-color: yellow;
+}
+
+#stcPianoKeyboardRowOne{
+  
+}
+
+#stcPianoKeyboardRowTwo{
+  
+}
+
+.stcPianoKeyFirstRow{
+  display: inline-block;
 }
 
 #stcFirstBtnRow, #stcSecondBtnRow{
@@ -35,10 +81,10 @@ background-position:center;
   background-repeat: no-repeat;
   background-size:contain;
   background-position:center;
-  width: 105px;
-  height: 60px;
+  width: 115px;
+  height: 66px;
   display: inline-block;
-  margin: 0 15px;
+  margin: 15px;
   cursor: pointer;
 }
 #stcNewChordBtn{
