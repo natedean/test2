@@ -18,3 +18,45 @@ background-position:center;
 background-position:center;
 }
 
+#stcTopPianoRow{
+  height: 100px;
+  width: 480px;
+  background-color: yellow;
+}
+
+#stcFirstBtnRow, #stcSecondBtnRow{
+  height: 80px;
+  width: 460px;
+  margin: 0 auto;
+  margin-top:10px;
+}
+
+.stcFirstRowBtn{
+  background-repeat: no-repeat;
+  background-size:contain;
+  background-position:center;
+  width: 105px;
+  height: 60px;
+  display: inline-block;
+  margin: 0 15px;
+  cursor: pointer;
+}
+#stcNewChordBtn{
+  background-image: url("/images/stc/new_btn.png"); 
+}
+
+#stcBkspBtn{
+  background-image: url("/images/stc/back_btn.png");
+}
+
+#stcClearBtn{
+  background-image: url("/images/stc/clear_btn.png");
+}
+
+#stcSecondBtnRow button{
+  margin: 10px;
+  padding: 14px 20px;
+  font-size: 24px;
+}
+
+
