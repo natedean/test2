@@ -1,5 +1,5 @@
-body{
-  background: url('http://cur.glitter-graphics.net/pub/2845/2845587p668h916nq.jpg');
+.container{
+  background: url('http://everything.typepad.com/photos/uncategorized/2008/03/28/crosshatch.png');
 }
 
 #stcFloorBackground{
@@ -98,13 +98,28 @@ background-position:center;
   float: left;
 }
 
+#stcMediumAnswerDisplay, #stcHardAnswerDisplay{
+  display: none;
+}
 .stcEasyAnswerDisplayLetter {
   display: inline-block;
   width: 30%;
   border-bottom: 4px solid white;
 }
 
-.stcEasyAnswerDisplayLetter h1{
+.stcMediumAnswerDisplayLetter{
+  display: inline-block;
+  width: 23%;
+  border-bottom: 4px solid white;
+}
+
+.stcHardAnswerDisplayLetter{
+  display: inline-block;
+  width: 18%;
+  border-bottom: 4px solid white;
+}
+
+#stcAnswerDisplay h1{
   color: white;
 }
 

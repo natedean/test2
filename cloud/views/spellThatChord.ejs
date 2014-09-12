@@ -29,8 +29,19 @@
                     <div class="stcEasyAnswerDisplayLetter"><h1>B</h1></div>
                     <div class="stcEasyAnswerDisplayLetter"><h1>C</h1></div>
                   </div>
-                  <div id="stcMediumAnswerDisplay"></div>
-                  <div id="stcHardAnswerDisplay"></div>
+                  <div id="stcMediumAnswerDisplay">
+                    <div class="stcMediumAnswerDisplayLetter"><h1>A</h1></div>
+                    <div class="stcMediumAnswerDisplayLetter"><h1>B</h1></div>
+                    <div class="stcMediumAnswerDisplayLetter"><h1>C</h1></div>
+                    <div class="stcMediumAnswerDisplayLetter"><h1>D</h1></div>
+                  </div>
+                  <div id="stcHardAnswerDisplay">
+                    <div class="stcHardAnswerDisplayLetter"><h1>A</h1></div>
+                    <div class="stcHardAnswerDisplayLetter"><h1>B</h1></div>
+                    <div class="stcHardAnswerDisplayLetter"><h1>C</h1></div>
+                    <div class="stcHardAnswerDisplayLetter"><h1>D</h1></div>
+                    <div class="stcHardAnswerDisplayLetter"><h1>E</h1></div>
+                  </div>
                 </div>
                 <div id="stcLandscapeSheetMusic" class="stcScoreDisplaySheetMusicBackground">
                   <span id="stcLandscapeSheetMusicNumber" class="stcSheetMusicNumber">0</span>
@@ -65,14 +76,15 @@
                <div id="stcClearBtn" class="stcFirstRowBtn"></div>
              </div>
              <div id="stcSecondBtnRow">
-                <button class="btn btn-default btn-lg">Easy</button>
-                <button class="btn btn-default btn-lg">Medium</button>
-                <button class="btn btn-default btn-lg">Hard</button>
+                <button id="stcEasyBtn" class="btn btn-default btn-lg">Easy</button>
+                <button id="stcMediumBtn" class="btn btn-default btn-lg">Medium</button>
+                <button id="stcHardBtn" class="btn btn-default btn-lg">Hard</button>
              </div>
           </div><!-- end #stcFloorBackground -->
       </div>
       </div><!-- end #stcGameContainer -->
     </div><!-- end container -->
     <% include partials/footer %>
+    <script src="/js/spellThatChord.js"></script>  <!-- spellThatChord js -->
   </body>
 </html>
