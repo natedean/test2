@@ -1,3 +1,8 @@
+.navbar{
+  border:none;
+  background: url('http://everything.typepad.com/photos/uncategorized/2008/03/28/crosshatch.png');
+}
+
 .footer-bar{
   height: 60px;
   background-color: grey;

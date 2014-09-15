@@ -1,0 +1,1242 @@
+//
+//  MainViewController.m
+//  Spell That Chord
+//
+//  Created by blair dean on 1/2/14.
+//  Copyright (c) 2014 DeWiApps. All rights reserved.
+//
+
+#import "MainViewController.h"
+#import "FlipsideViewController.h"
+
+
+@interface MainViewController ()
+
+@end
+
+@implementation MainViewController
+
+int difficulty;
+int totalTries;
+int correctTries;
+long score = 0;
+int randomNumber;
+int lastRandomNumber;
+int allTimePoints = 0;
+int sharpsOrFlats = 1;
+int numberOfLettersInChord;
+int numberOfLettersEntered;
+int timerValue;
+int inactivityTimerValue;
+BOOL ableToAnswer;
+bool chordNeedsSharps;
+bool shouldTryAgainDisplay;
+bool timerShouldFire;
+int answerDisplayCounter = 0;
+int audioPlayerNumber = 1;
+
+int letterIndex = 1;
+int rootLetter;
+
+NSMutableString *answerString;
+NSString *currentChord;
+NSString *lastChord;
+NSTimer *timer;
+NSTimer *inactivityTimer;
+NSTimer *pianoBackgroundTimer;
+NSTimer *bonusLabelTimer;
+
+NSString *animationType = @""; // set to either piano or bonus
+
+NSString *easyChordsFlats[] = {@"C Major",@"C minor",@"G minor",@"D minor",@"A minor",@"E minor",@"F Major",@"F minor",@"Bb Major",@"Bb minor",@"Db Major",@"Eb Major",@"Eb minor",@"Ab Major"};
+
+NSString *easyChordsSharps[] = {@"G Major",@"D Major",@"A Major",@"E Major",@"B Major",@"F# Major",@"B minor",@"F# minor",@"C# minor"};
+
+NSString *mediumChordsFlats[] = {@"C Maj7",@"C min7",@"G min7",@"D min7",@"A min7",@"E min7",@"F Maj7",@"F min7",@"Bb Maj7",@"Bb min7",@"Eb Maj7",@"Eb min7",@"Ab Maj7",@"C7",@"F7",@"Bb7",@"Eb7",@"Ab7",@"C min7b5",@"E min7b5",@"A min7b5",@"D min7b5",@"C6",@"F6",@"Bb6",@"Eb6",@"F add9",@"Eb add9",@"Ab add9"};
+
+NSString *mediumChordsSharps[] = {@"G Maj7",@"D Maj7",@"A Maj7",@"E Maj7",@"B Maj7",@"B min7",@"F# min7",@"C# min7",@"G7",@"D7",@"A7",@"E7",@"B7",@"B min7b5",@"F# min7b5",@"C# min7b5",@"G# min7b5",@"G6",@"A6",@"E6",@"G add9",@"D add9",@"A add9",@"E add9"};
+
+NSString *hardChordsFlats[] = {@"C min9",@"D min9",@"G min9",@"F min9",@"F Maj9",@"Bb Maj9",@"Bb min9",@"Db Maj9",@"Eb Maj9",@"Eb min9",@"Ab Maj9",@"C9",@"F9",@"Bb9",@"Eb9",@"Ab9"};
+
+NSString *hardChordsSharps[] = {@"C Maj9",@"G Maj9",@"D Maj9",@"A Maj9",@"E Maj9",@"A min9",@"E min9",@"F# min9",@"C# min9",@"G9",@"D9",@"A9",@"E9",@"F#9"};
+
+
+NSDictionary *chordDict;
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+	// Do any additional setup after loading the view, typically from a nib.
+    
+    difficulty = 0;
+    answerDisplayCounter = 0;
+    numberOfLettersEntered = 0;
+ 
+// this block fires the contents of the newChord button
+//-----------------------------------------------
+    createNewChord();
+    //elimate dupes
+    lastChord = currentChord;
+    _questionDisplay.text = currentChord;
+    [self clearAnswer];
+    ableToAnswer = YES;
+//-----------------------------------------------
+    
+    answerString = [NSMutableString string];
+    
+    chordDict = @{@"C Major": @"C  E  G  ",
+                  @"G Major": @"G  B  D  ",
+                  @"D Major": @"D  F# A  ",
+                  @"A Major": @"A  C# E  ",
+                  @"E Major": @"E  G# B  ",
+                  @"B Major": @"B  D# F# ",
+                  @"F# Major":@"F# A# C# ",
+                  @"F Major": @"F  A  C  ",
+                  @"Bb Major":@"Bb D  F  ",
+                  @"Db Major":@"Db F  Ab ",
+                  @"Eb Major":@"Eb G  Bb ",
+                  @"Ab Major":@"Ab C  Eb ",
+                  @"C minor": @"C  Eb G  ",
+                  @"G minor": @"G  Bb D  ",
+                  @"D minor": @"D  F  A  ",
+                  @"A minor": @"A  C  E  ",
+                  @"E minor": @"E  G  B  ",
+                  @"B minor": @"B  D  F# ",
+                  @"F# minor":@"F# A  C# ",
+                  @"C# minor":@"C# E  G# ",
+                  @"F minor": @"F  Ab C  ",
+                  @"Bb minor":@"Bb Db F  ",
+                  @"Eb minor":@"Eb Gb Bb ",
+                  
+                  @"C Maj7": @"C  E  G  B  ",
+                  @"G Maj7": @"G  B  D  F# ",
+                  @"D Maj7": @"D  F# A  C# ",
+                  @"A Maj7": @"A  C# E  G# ",
+                  @"E Maj7": @"E  G# B  D# ",
+                  @"B Maj7": @"B  D# F# A# ",
+                  @"F# Maj7":@"F# A# C# E# ",
+                  @"C# Maj7":@"C# E# G# B# ",
+                  @"F Maj7": @"F  A  C  E  ",
+                  @"Bb Maj7":@"Bb D  F  A  ",
+                  @"Db Maj7":@"Db F  Ab C  ",
+                  @"Eb Maj7":@"Eb G  Bb D  ",
+                  @"Ab Maj7":@"Ab C  Eb G  ",
+                  @"C min7": @"C  Eb G  Bb ",
+                  @"G min7": @"G  Bb D  F  ",
+                  @"D min7": @"D  F  A  C  ",
+                  @"A min7": @"A  C  E  G  ",
+                  @"E min7": @"E  G  B  D  ",
+                  @"B min7": @"B  D  F# A  ",
+                  @"F# min7":@"F# A  C# E  ",
+                  @"C# min7":@"C# E  G# B  ",
+                  @"F min7": @"F  Ab C  Eb ",
+                  @"Bb min7":@"Bb Db F  Ab ",
+                  @"Eb min7":@"Eb Gb Bb Db ",
+                  
+                  @"C7": @"C  E  G  Bb ",
+                  @"F7": @"F  A  C  Eb ",
+                  @"Bb7":@"Bb D  F  Ab ",
+                  @"Eb7":@"Eb G  Bb Db ",
+                  @"Ab7":@"Ab C  Eb Gb ",
+                  @"G7": @"G  B  D  F  ",
+                  @"D7": @"D  F# A  C  ",
+                  @"A7": @"A  C# E  G  ",
+                  @"E7": @"E  G# B  D  ",
+                  @"B7": @"B  D# F# A  ",
+                  
+                  @"C min7b5":  @"C  Eb Gb Bb ",
+                  @"E min7b5":  @"E  G  Bb D  ",
+                  @"A min7b5":  @"A  C  Eb G  ",
+                  @"D min7b5":  @"D  F  Ab C  ",
+                  @"B min7b5":  @"B  D  F  A  ",
+                  @"F# min7b5": @"F# A  C  E  ",
+                  @"C# min7b5": @"C# E  G  B  ",
+                  @"G# min7b5": @"G# B  D  F# ",
+                  
+                  @"C6":  @"C  E  G  A  ",
+                  @"F6":  @"F  A  C  D  ",
+                  @"Bb6": @"Bb D  F  G  ",
+                  @"Eb6": @"Eb G  Bb C  ",
+                  @"G6":  @"G  B  D  E  ",
+                  @"D6":  @"D  F# A  B  ",
+                  @"A6":  @"A  C# E  F# ",
+                  @"E6":  @"E  G# B  C# ",
+                  
+                  @"C add9":  @"C  E  G  D  ",
+                  @"F add9":  @"F  A  C  G  ",
+                  @"Bb add9": @"Bb D  F  C  ",
+                  @"Eb add9": @"Eb G  Bb F  ",
+                  @"Ab add9": @"Ab C  Eb Bb ",
+                  @"Db add9": @"Db F  Ab Eb ",
+                  
+                  @"G add9":  @"G  B  D  A  ",
+                  @"D add9":  @"D  F# A  E  ",
+                  @"A add9":  @"A  C# E  B  ",
+                  @"E add9":  @"E  G# B  F# ",
+                  @"B add9":  @"B  D# F# C# ",
+                  
+                  @"C min9":  @"C  Eb G  Bb D  ",
+                  @"D min9":  @"D  F  A  C  E  ",
+                  @"G min9":  @"G  Bb D  F  A  ",
+                  @"F min9":  @"F  Ab C  Eb G  ",
+                  @"Bb min9": @"Bb Db F  Ab C  ",
+                  @"Eb min9": @"Eb Gb Bb Db F  ",
+                  @"F Maj9":  @"F  A  C  E  G  ",
+                  @"Bb Maj9": @"Bb D  F  A  C  ",
+                  @"Db Maj9": @"Db F  Ab C  Eb ",
+                  @"Eb Maj9": @"Eb G  Bb D  F  ",
+                  @"Ab Maj9": @"Ab C  Eb G  Bb ",
+                  
+                  @"C Maj9":  @"C  E  G  B  D  ",
+                  @"G Maj9":  @"G  B  D  F# A  ",
+                  @"D Maj9":  @"D  F# A  C# E  ",
+                  @"A Maj9":  @"A  C# E  G# B  ",
+                  @"E Maj9":  @"E  G# B  D# F# ",
+                  @"A min9":  @"A  C  E  G  B  ",
+                  @"E min9":  @"E  G  B  D  F# ",
+                  @"F# min9": @"F# A  C# E  G# ",
+                  @"C# min9": @"C# E  G# B  D# ",
+                  
+                  @"C9":  @"C  E  G  Bb D  ",
+                  @"F9":  @"F  A  C  Eb G  ",
+                  @"Bb9": @"Bb D  F  Ab C  ",
+                  @"Eb9": @"Eb G  Bb Db F  ",
+                  @"Ab9": @"Ab C  Eb Gb Bb ",
+                  @"G9":  @"G  B  D  F  A  ",
+                  @"D9":  @"D  F# A  C  E  ",
+                  @"A9":  @"A  C# E  G  B  ",
+                  @"E9":  @"E  G# B  D  F# ",
+                  @"F#9": @"F# A# C# E  G# "
+                  
+                  };
+    
+    timerShouldFire = YES;
+    [self startTimer:difficulty];
+    
+    [inactivityTimer invalidate];
+    inactivityTimer = nil;
+    [self startInactivityTimer];
+    [self supplyLetterButtonImages];
+    
+    allTimePoints = [[NSUserDefaults standardUserDefaults] integerForKey:@"HighScore"];
+    _pointsDisplay.text = [NSString stringWithFormat:@"%i", allTimePoints ];
+    
+    _tryAgainButtonOutlet.hidden = YES;
+    _tryAgainButtonOutlet.enabled = NO;
+    _bonusAnimationLabel .hidden = YES;
+    _pianoKeysBackgroundView.hidden = YES;
+    
+    [self hideXs];
+    
+    _underline1.hidden = YES;  //hide underlines to accomodate easy setting
+    _underline5.hidden = YES;
+    _underline41.hidden = YES;
+    _underline42.hidden = YES;
+    _underline43.hidden = YES;
+    _underline44.hidden = YES;
+    
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+-(void)playAudio:(NSString*)fileName{
+    //set up audio player
+    
+    if (audioPlayerNumber == 1) {
+        dispatch_queue_t dispatchQueue1 =
+        dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        
+        dispatch_async(dispatchQueue1, ^(void) {
+            NSBundle *mainBundle = [NSBundle mainBundle];
+            
+            NSString *filePath = [mainBundle pathForResource:fileName
+                                                      ofType:@"m4a"];
+            
+            NSData   *fileData = [NSData dataWithContentsOfFile:filePath];
+            
+            NSError  *error = nil;
+            
+            /* Start the audio player */
+            self.audioPlayer1 = [[AVAudioPlayer alloc] initWithData:fileData
+                                                              error:&error];
+            
+            /* Did we get an instance of AVAudioPlayer? */
+            if (self.audioPlayer1 != nil){
+                /* Set the delegate and start playing */
+                self.audioPlayer1.delegate = self;
+                if ([self.audioPlayer1 prepareToPlay] &&
+                    [self.audioPlayer1 play]){
+                    /* Successfully started playing */
+                } else {
+                    /* Failed to play */
+                }
+            } else {
+                /* Failed to instantiate AVAudioPlayer */
+            }
+        });
+    }
+    
+    if (audioPlayerNumber == 2) {
+        dispatch_queue_t dispatchQueue2 =
+        dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        
+        dispatch_async(dispatchQueue2, ^(void) {
+            NSBundle *mainBundle = [NSBundle mainBundle];
+            
+            NSString *filePath = [mainBundle pathForResource:fileName
+                                                      ofType:@"m4a"];
+            
+            NSData   *fileData = [NSData dataWithContentsOfFile:filePath];
+            
+            NSError  *error = nil;
+            
+            /* Start the audio player */
+            self.audioPlayer2 = [[AVAudioPlayer alloc] initWithData:fileData
+                                                              error:&error];
+            
+            /* Did we get an instance of AVAudioPlayer? */
+            if (self.audioPlayer2 != nil){
+                /* Set the delegate and start playing */
+                self.audioPlayer2.delegate = self;
+                if ([self.audioPlayer2 prepareToPlay] &&
+                    [self.audioPlayer2 play]){
+                    /* Successfully started playing */
+                } else {
+                    /* Failed to play */
+                }
+            } else {
+                /* Failed to instantiate AVAudioPlayer */
+            }
+        });
+    }
+    
+    if (audioPlayerNumber == 1){
+        audioPlayerNumber = 2;
+    }else{
+        audioPlayerNumber = 1;
+    }
+
+}
+
+
+- (IBAction)difficultySelector:(id)sender {
+    UISegmentedControl *s = (UISegmentedControl *)sender;
+    difficulty = s.selectedSegmentIndex;
+    [self newChordMethod];
+    
+    [inactivityTimer invalidate];
+    inactivityTimer = nil;
+    [self startInactivityTimer];
+    [self displayUnderlines];
+}
+
+- (IBAction)tryAgainButtonAction:(id)sender {
+    [self clearAnswer];
+    _correctAnswerDisplay.text = @"Spell That Chord";
+    ableToAnswer = YES;
+    numberOfLettersEntered = 0;
+    _tryAgainButtonOutlet.enabled = NO;
+    _tryAgainButtonOutlet.hidden = YES;
+    [self startInactivityTimer];
+    [self hideXs];
+}
+
+void createNewChord(){
+    
+    sharpsOrFlats = arc4random_uniform(2);
+    // 0 is sharps and 1 is flats - needs CONSTANT
+    
+    if (difficulty == 0 && sharpsOrFlats == 0){
+        randomNumber = arc4random_uniform(9);
+        currentChord = easyChordsSharps[randomNumber];
+        numberOfLettersInChord = 3;
+    }
+    else if(difficulty == 0 && sharpsOrFlats == 1){
+        randomNumber = arc4random_uniform(14);
+        currentChord = easyChordsFlats[randomNumber];
+        numberOfLettersInChord = 3;
+    }
+    else if(difficulty == 1 && sharpsOrFlats == 0){
+        randomNumber = arc4random_uniform(24);
+        currentChord = mediumChordsSharps[randomNumber];
+        numberOfLettersInChord = 4;
+    }
+    else if(difficulty == 1 && sharpsOrFlats == 1){
+        randomNumber = arc4random_uniform(29);
+        currentChord = mediumChordsFlats[randomNumber];
+        numberOfLettersInChord = 4;
+    }
+    else if(difficulty == 2 && sharpsOrFlats == 0) {
+        randomNumber = arc4random_uniform(14);
+        currentChord = hardChordsSharps[randomNumber];
+        numberOfLettersInChord = 5;
+    }
+    else {
+        randomNumber = arc4random_uniform(16);
+        currentChord = hardChordsFlats[randomNumber];
+        numberOfLettersInChord = 5;
+    }
+
+    
+}
+
+- (IBAction)newChord:(id)sender {
+
+    [self newChordMethod];
+    [self startInactivityTimer];
+}
+
+- (void) newChordMethod{
+    
+    createNewChord();
+    
+    //elimate dupes
+    if (lastChord == currentChord) {
+        createNewChord();
+    }
+    
+    lastChord = currentChord;
+    
+    _questionDisplay.text = currentChord;
+    
+    [self clearAnswer];
+    _correctAnswerDisplay.text = @"Spell That Chord";
+    
+    ableToAnswer = YES;
+    
+    numberOfLettersEntered = 0;
+    
+    timerShouldFire = YES;
+    [self startTimer:difficulty];
+    
+    [self supplyLetterButtonImages];
+    
+    _tryAgainButtonOutlet.enabled = NO;
+    _tryAgainButtonOutlet.hidden = YES;
+    [self hideXs];
+    
+    _bonusAnimationLabel.hidden = YES;
+    
+}
+
+
+
+- (void) displayTime{
+    if (timerValue >= 0 && timerShouldFire == YES) {
+        _timerDisplay.text = [NSString stringWithFormat:@"%i", timerValue];
+        --timerValue;
+        timer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(displayTime) userInfo:nil repeats:NO];
+    }
+    else{
+        [timer invalidate];
+        timer = nil;
+    }
+
+}
+
+
+- (void) startTimer: (int) difficulty{
+    [timer invalidate];
+    timer = nil;
+    
+    if (difficulty == 0) {
+        timerValue = 10;
+        [self displayTime];
+    }
+    else if (difficulty == 1) {
+        timerValue = 15;
+        [self displayTime];
+    }
+    else {
+        timerValue = 20;
+        [self displayTime];
+    }
+
+}
+
+- (void) runInactivityTimer{
+    if (inactivityTimerValue >= 0) {
+        --inactivityTimerValue;
+        inactivityTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(runInactivityTimer) userInfo:nil repeats:NO];
+    }
+    else{ //when inactivityTimer goes to 0, show yellow underneath piano fingerboard
+        _pianoKeysBackgroundView.hidden = NO;
+        
+        [self animateKeyboard];
+        
+
+    }
+}
+
+-(void) animateKeyboard{
+    // animate
+    if (inactivityTimer != nil) {
+        pianoBackgroundTimer = [NSTimer scheduledTimerWithTimeInterval:1.4 target:self selector:@selector(animateKeyboard) userInfo:nil repeats:NO];
+        _pianoKeysBackgroundView.alpha = 0.0f;
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDelegate:self];
+        [UIView setAnimationDuration:0.7f];
+        _pianoKeysBackgroundView.alpha = 1.0f;
+        [UIView commitAnimations];
+        animationType = @"piano";
+        [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
+    }
+    else{
+        [inactivityTimer invalidate];
+        inactivityTimer = nil;
+        [pianoBackgroundTimer invalidate];
+        pianoBackgroundTimer = nil;
+    }
+}
+
+-(void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished    context:(void *)context {
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.7f];
+    if ([animationType isEqualToString:@"piano"]) {
+        _pianoKeysBackgroundView.alpha = 0;
+    }
+    else {  // animationType == "bonus"
+        _bonusAnimationLabel.alpha = 0;
+    }
+    [UIView commitAnimations];
+}
+
+- (void) startInactivityTimer{
+    [inactivityTimer invalidate];
+    inactivityTimer = nil;
+    [pianoBackgroundTimer invalidate];
+    pianoBackgroundTimer = nil;
+    _pianoKeysBackgroundView.hidden = YES;
+    
+    inactivityTimerValue = 10;
+    [self runInactivityTimer];
+}
+
+
+    
+- (void) clearAnswer{
+    NSRange range = NSMakeRange(0, answerString.length);
+    [answerString deleteCharactersInRange:(range)];
+    
+    [self clearAnswerDisplayButtons];
+    answerDisplayCounter = 0;
+}
+
+- (IBAction)backButton:(id)sender {
+    if (ableToAnswer == YES) {
+        if (answerString.length > 3) {
+            NSRange range = NSMakeRange (answerString.length-3, 3);
+            [answerString deleteCharactersInRange:(range)];
+        }
+        else if (answerString.length == 3){
+            NSRange range = NSMakeRange (0, 3);
+            [answerString deleteCharactersInRange:(range)];
+        }
+    }
+    else{
+        _correctAnswerDisplay.text = @"Spell That Chord";
+    }
+    
+    if (numberOfLettersEntered > 0) {
+        numberOfLettersEntered--;
+    }
+    
+    if (shouldTryAgainDisplay == NO) {
+        _correctAnswerDisplay.text = @"Spell That Chord";
+        shouldTryAgainDisplay = YES;
+    }
+    
+    _tryAgainButtonOutlet.enabled = NO;
+    _tryAgainButtonOutlet.hidden = YES;
+    
+    [self backOutXs];
+
+    
+    [self backOutAnswerDisplayButtons:answerDisplayCounter];
+    
+    [self startInactivityTimer];
+    
+    if (answerDisplayCounter > 0) {
+        answerDisplayCounter--;
+    }
+    
+    
+    
+
+    
+
+    
+}
+
+
+#pragma mark - Flipside View
+
+- (void)flipsideViewControllerDidFinish:(FlipsideViewController *)controller
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    [inactivityTimer invalidate];
+    inactivityTimer = nil;
+    [self startInactivityTimer];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"showAlternate"]) {
+        [[segue destinationViewController] setDelegate:self];
+        FlipsideViewController *controller = (FlipsideViewController *)segue.destinationViewController;
+        controller.currentChord = currentChord; //passing currentChord to new view
+        controller.currentChordSpelling = chordDict[currentChord];
+    }
+}
+
+- (IBAction)btn1:(id)sender {
+    if (ableToAnswer == YES && numberOfLettersEntered < numberOfLettersInChord) {
+        letterIndex = 10;  //submit method sets previousLetterIndex = letterIndex
+        
+        [self selectSoundAndPlayAudio:@"A"];
+        
+        [answerString appendString:@"A  "];
+        [self answerDisplayMethod:@"A"];
+        [self submit];
+    }
+}
+
+- (IBAction)btn2:(id)sender {
+    if (ableToAnswer == YES && numberOfLettersEntered < numberOfLettersInChord) {
+        letterIndex = 11;
+        
+        [self selectSoundAndPlayAudio:@"A#"];
+        
+        if (sharpsOrFlats == 0) {
+            [answerString appendString:@"A# "];
+            [self answerDisplayMethod:@"A#"];
+        }
+        else{
+            [answerString appendString:@"Bb "];
+            [self answerDisplayMethod:@"Bb"];
+        }
+        [self submit];
+    }
+}
+
+- (IBAction)btn3:(id)sender {
+    if (ableToAnswer == YES && numberOfLettersEntered < numberOfLettersInChord) {
+        letterIndex = 12;
+        
+        [self selectSoundAndPlayAudio:@"B"];
+        
+        [answerString appendString:@"B  "];
+        [self answerDisplayMethod:@"B"];
+        [self submit];
+    }
+}
+
+- (IBAction)btn4:(id)sender {
+    if (ableToAnswer == YES && numberOfLettersEntered < numberOfLettersInChord) {
+        letterIndex = 1;
+        
+        [self selectSoundAndPlayAudio:@"C"];
+        
+        [answerString appendString:@"C  "];
+        [self answerDisplayMethod:@"C"];
+        [self submit];
+    }
+}
+
+- (IBAction)btn5:(id)sender {
+    if (ableToAnswer == YES && numberOfLettersEntered < numberOfLettersInChord) {
+        letterIndex = 2;
+        
+        [self selectSoundAndPlayAudio:@"C#"];
+        
+        if (sharpsOrFlats == 0) {
+            [answerString appendString:@"C# "];
+            [self answerDisplayMethod:@"C#"];
+        }
+        else{
+            [answerString appendString:@"Db "];
+            [self answerDisplayMethod:@"Db"];
+        }
+        [self submit];
+    }
+}
+
+- (IBAction)btn6:(id)sender {
+    if (ableToAnswer == YES && numberOfLettersEntered < numberOfLettersInChord) {
+        letterIndex = 3;
+        
+        [self selectSoundAndPlayAudio:@"D"];
+        
+        [answerString appendString:@"D  "];
+        [self answerDisplayMethod:@"D"];
+        [self submit];
+    }
+}
+
+- (IBAction)btn7:(id)sender {
+    if (ableToAnswer == YES && numberOfLettersEntered < numberOfLettersInChord) {
+        letterIndex = 4;
+        
+        [self selectSoundAndPlayAudio:@"D#"];
+        
+        if (sharpsOrFlats == 0) {
+            [answerString appendString:@"D# "];
+            [self answerDisplayMethod:@"D#"];
+        }
+        else{
+            [answerString appendString:@"Eb "];
+            [self answerDisplayMethod:@"Eb"];
+        }
+        [self submit];
+    }
+    
+}
+
+- (IBAction)btn8:(id)sender {
+    if (ableToAnswer == YES && numberOfLettersEntered < numberOfLettersInChord) {
+        letterIndex = 5;
+        
+        [self selectSoundAndPlayAudio:@"E"];
+        
+        
+        [answerString appendString:@"E  "];
+        [self answerDisplayMethod:@"E"];
+        [self submit];
+    }
+}
+
+- (IBAction)btn9:(id)sender {
+    if (ableToAnswer == YES && numberOfLettersEntered < numberOfLettersInChord) {
+        letterIndex = 6;
+        
+        [self selectSoundAndPlayAudio:@"F"];
+        
+        [answerString appendString:@"F  "];
+        [self answerDisplayMethod:@"F"];
+        [self submit];
+    }
+}
+
+- (IBAction)btn10:(id)sender {
+    if (ableToAnswer == YES && numberOfLettersEntered < numberOfLettersInChord) {
+        letterIndex = 7;
+        
+        [self selectSoundAndPlayAudio:@"F#"];
+        
+        if (sharpsOrFlats == 0) {
+            [answerString appendString:@"F# "];
+            [self answerDisplayMethod:@"F#"];
+        }
+        else{
+            [answerString appendString:@"Gb "];
+            [self answerDisplayMethod:@"Gb"];
+        }
+        [self submit];
+    }
+}
+
+- (IBAction)btn11:(id)sender {
+    if (ableToAnswer == YES && numberOfLettersEntered < numberOfLettersInChord) {
+        letterIndex = 8;
+        
+        [self selectSoundAndPlayAudio:@"G"];
+        
+        [answerString appendString:@"G  "];
+        [self answerDisplayMethod:@"G"];
+        [self submit];
+    }
+}
+
+- (IBAction)btn12:(id)sender {
+    if (ableToAnswer == YES && numberOfLettersEntered < numberOfLettersInChord) {
+        letterIndex = 9;
+        
+        [self selectSoundAndPlayAudio:@"G#"];
+        
+        if (sharpsOrFlats == 0) {
+            [answerString appendString:@"G# "];
+            [self answerDisplayMethod:@"G#"];
+        }
+        else{
+            [answerString appendString:@"Ab "];
+            [self answerDisplayMethod:@"Ab"];
+        }
+        [self submit];
+    }
+}
+
+- (void) submit{
+    
+    numberOfLettersEntered++;
+    [self startInactivityTimer]; //reset inactivityTimer
+    
+    if(numberOfLettersEntered == numberOfLettersInChord){
+        if (ableToAnswer == YES) {
+            if ([answerString  isEqual: chordDict[currentChord]]) {
+                allTimePoints++;
+                _correctAnswerDisplay.text = @"CORRECT!";
+                ableToAnswer = NO;
+                timerShouldFire = NO;
+                [self performSelector:@selector(newChordMethod) withObject:self afterDelay:1.6];
+                allTimePoints = allTimePoints + timerValue;
+                _pointsDisplay.text = [NSString stringWithFormat:@"%i", allTimePoints ];
+                [self animateBonusAnimationLabel];
+                [[NSUserDefaults standardUserDefaults] setInteger:allTimePoints forKey:@"HighScore"];
+            }
+            else{
+                _correctAnswerDisplay.text = @"";
+                _tryAgainButtonOutlet.hidden = NO;
+                shouldTryAgainDisplay = NO;
+                _tryAgainButtonOutlet.enabled = YES;
+                [_tryAgainButtonOutlet setTitle:@"Try Again" forState:UIControlStateNormal];
+                [self displayXs];
+                [inactivityTimer invalidate];
+                inactivityTimer = nil;
+            }
+        }
+        else{
+            _correctAnswerDisplay.text = @"Click New Chord";
+        }
+    }
+}
+
+
+
+-(void) animateBonusAnimationLabel{
+    _bonusAnimationLabel.hidden = NO;
+    _bonusAnimationLabel.text = [NSString stringWithFormat:@"+%i", timerValue +1];
+    
+        _bonusAnimationLabel.alpha = 0.0f;
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDelegate:self];
+        [UIView setAnimationDuration:0.8f];
+        _bonusAnimationLabel.alpha = 1.0f;
+        [UIView commitAnimations];
+        animationType = @"bonus";
+        [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
+}
+
+/*-(void)bonusAnimationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.2];
+    _bonusAnimationLabel.alpha = 0;
+    [UIView commitAnimations];
+}*/
+
+
+
+-(void) supplyLetterButtonImages{
+    if (sharpsOrFlats == 0) {
+        [_btn1_Outlet setBackgroundImage:[UIImage imageNamed:@"A.png"] forState: UIControlStateNormal];
+        [_btn2_Outlet setBackgroundImage:[UIImage imageNamed:@"A#.png"] forState: UIControlStateNormal];
+        [_btn3_Outlet setBackgroundImage:[UIImage imageNamed:@"B.png"] forState: UIControlStateNormal];
+        [_btn4_Outlet setBackgroundImage:[UIImage imageNamed:@"C.png"] forState: UIControlStateNormal];
+        [_btn5_Outlet setBackgroundImage:[UIImage imageNamed:@"C#.png"] forState: UIControlStateNormal];
+        [_btn6_Outlet setBackgroundImage:[UIImage imageNamed:@"D.png"] forState: UIControlStateNormal];
+        [_btn7_Outlet setBackgroundImage:[UIImage imageNamed:@"D#.png"] forState: UIControlStateNormal];
+        [_btn8_Outlet setBackgroundImage:[UIImage imageNamed:@"E.png"] forState: UIControlStateNormal];
+        [_btn9_Outlet setBackgroundImage:[UIImage imageNamed:@"F.png"] forState: UIControlStateNormal];
+        [_btn10_Outlet setBackgroundImage:[UIImage imageNamed:@"F#.png"] forState: UIControlStateNormal];
+        [_btn11_Outlet setBackgroundImage:[UIImage imageNamed:@"G.png"] forState: UIControlStateNormal];
+        [_btn12_Outlet setBackgroundImage:[UIImage imageNamed:@"G#.png"] forState: UIControlStateNormal];
+    }
+    else{
+        [_btn1_Outlet setBackgroundImage:[UIImage imageNamed:@"A.png"] forState: UIControlStateNormal];
+        [_btn2_Outlet setBackgroundImage:[UIImage imageNamed:@"Bb.png"] forState: UIControlStateNormal];
+        [_btn3_Outlet setBackgroundImage:[UIImage imageNamed:@"B.png"] forState: UIControlStateNormal];
+        [_btn4_Outlet setBackgroundImage:[UIImage imageNamed:@"C.png"] forState: UIControlStateNormal];
+        [_btn5_Outlet setBackgroundImage:[UIImage imageNamed:@"Db.png"] forState: UIControlStateNormal];
+        [_btn6_Outlet setBackgroundImage:[UIImage imageNamed:@"D.png"] forState: UIControlStateNormal];
+        [_btn7_Outlet setBackgroundImage:[UIImage imageNamed:@"Eb.png"] forState: UIControlStateNormal];
+        [_btn8_Outlet setBackgroundImage:[UIImage imageNamed:@"E.png"] forState: UIControlStateNormal];
+        [_btn9_Outlet setBackgroundImage:[UIImage imageNamed:@"F.png"] forState: UIControlStateNormal];
+        [_btn10_Outlet setBackgroundImage:[UIImage imageNamed:@"Gb.png"] forState: UIControlStateNormal];
+        [_btn11_Outlet setBackgroundImage:[UIImage imageNamed:@"G.png"] forState: UIControlStateNormal];
+        [_btn12_Outlet setBackgroundImage:[UIImage imageNamed:@"Ab.png"] forState: UIControlStateNormal];
+    }
+}
+
+-(void) displayXs{
+   if (difficulty == 0) {
+        NSRange range1 = NSMakeRange(0, 3);
+        NSRange range2 = NSMakeRange(3, 3);
+        NSRange range3 = NSMakeRange(6, 3);
+       
+           NSString *tempAnswer1 = [chordDict[currentChord] substringWithRange:range1];
+           if ([[answerString substringWithRange:range1] isEqualToString:tempAnswer1] == NO) {
+               _x2.hidden = NO;
+           }
+            NSString *tempAnswer2 = [chordDict[currentChord] substringWithRange:range2];
+            if ([[answerString substringWithRange:range2] isEqualToString:tempAnswer2] == NO) {
+                   _x3.hidden = NO;
+            }
+            NSString *tempAnswer3 = [chordDict[currentChord] substringWithRange:range3];
+            if ([[answerString substringWithRange:range3] isEqualToString:tempAnswer3] == NO) {
+                   _x4.hidden = NO;
+            }
+    }
+    else if(difficulty == 1){
+        NSRange range1 = NSMakeRange(0, 3);
+        NSRange range2 = NSMakeRange(3, 3);
+        NSRange range3 = NSMakeRange(6, 3);
+        NSRange range4 = NSMakeRange(9, 3);
+        
+        NSString *tempAnswer1 = [chordDict[currentChord] substringWithRange:range1];
+        if ([[answerString substringWithRange:range1] isEqualToString:tempAnswer1] == NO) {
+            _x41.hidden = NO;
+        }
+        NSString *tempAnswer2 = [chordDict[currentChord] substringWithRange:range2];
+        if ([[answerString substringWithRange:range2] isEqualToString:tempAnswer2] == NO) {
+            _x42.hidden = NO;
+        }
+        NSString *tempAnswer3 = [chordDict[currentChord] substringWithRange:range3];
+        if ([[answerString substringWithRange:range3] isEqualToString:tempAnswer3] == NO) {
+            _x43.hidden = NO;
+        }
+        NSString *tempAnswer4 = [chordDict[currentChord] substringWithRange:range4];
+        if ([[answerString substringWithRange:range4] isEqualToString:tempAnswer4] == NO) {
+            _x44.hidden = NO;
+        }
+    }
+    else{
+        NSRange range1 = NSMakeRange(0, 3);
+        NSRange range2 = NSMakeRange(3, 3);
+        NSRange range3 = NSMakeRange(6, 3);
+        NSRange range4 = NSMakeRange(9, 3);
+        NSRange range5 = NSMakeRange(12, 3);
+        
+        NSString *tempAnswer1 = [chordDict[currentChord] substringWithRange:range1];
+        if ([[answerString substringWithRange:range1] isEqualToString:tempAnswer1] == NO) {
+            _x1.hidden = NO;
+        }
+        NSString *tempAnswer2 = [chordDict[currentChord] substringWithRange:range2];
+        if ([[answerString substringWithRange:range2] isEqualToString:tempAnswer2] == NO) {
+            _x2.hidden = NO;
+        }
+        NSString *tempAnswer3 = [chordDict[currentChord] substringWithRange:range3];
+        if ([[answerString substringWithRange:range3] isEqualToString:tempAnswer3] == NO) {
+            _x3.hidden = NO;
+        }
+        NSString *tempAnswer4 = [chordDict[currentChord] substringWithRange:range4];
+        if ([[answerString substringWithRange:range4] isEqualToString:tempAnswer4] == NO) {
+            _x4.hidden = NO;
+        }
+        NSString *tempAnswer5 = [chordDict[currentChord] substringWithRange:range5];
+        if ([[answerString substringWithRange:range5] isEqualToString:tempAnswer5] == NO) {
+            _x5.hidden = NO;
+        }
+    }
+}
+
+-(void) hideXs{
+    _x1.hidden = YES;
+    _x2.hidden = YES;
+    _x3.hidden = YES;
+    _x4.hidden = YES;
+    _x5.hidden = YES;
+    
+    _x41.hidden = YES;
+    _x42.hidden = YES;
+    _x43.hidden = YES;
+    _x44.hidden = YES;
+}
+
+-(void) backOutXs{
+    if (difficulty == 0) {
+        switch (answerDisplayCounter) {
+            case 1:
+                _x2.hidden = YES;
+                break;
+            case 2:
+                _x3.hidden = YES;
+                break;
+            case 3:
+                _x4.hidden = YES;
+                break;
+            default:
+                break;
+        }
+    }
+    else if (difficulty == 1) {
+        switch (answerDisplayCounter) {
+            case 1:
+                _x41.hidden = YES;
+                break;
+            case 2:
+                _x42.hidden = YES;
+                break;
+            case 3:
+                _x43.hidden = YES;
+                break;
+            case 4:
+                _x44.hidden = YES;
+                break;
+            default:
+                break;
+        }
+    }
+    else {
+        switch (answerDisplayCounter) {
+            case 1:
+                _x1.hidden = YES;
+                break;
+            case 2:
+                _x2.hidden = YES;
+                break;
+            case 3:
+                _x3.hidden = YES;
+                break;
+            case 4:
+                _x4.hidden = YES;
+                break;
+            case 5:
+                _x5.hidden = YES;
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+-(void) answerDisplayMethod:(NSString*)stringInput{
+    if (answerDisplayCounter < 5) {
+        answerDisplayCounter++;
+    }
+    
+    if (difficulty == 0) {
+        switch (answerDisplayCounter) {
+            case 1:
+                _answerDisplayLabel2.text = stringInput;
+                break;
+            case 2:
+                _answerDisplayLabel3.text = stringInput;
+                break;
+            case 3:
+                _answerDisplayLabel4.text = stringInput;
+                break;
+            default:
+                break;
+        }
+    }
+    else if (difficulty == 1) {
+        switch (answerDisplayCounter) {
+            case 1:
+                _answerDisplayLabel41.text = stringInput;
+                break;
+            case 2:
+                _answerDisplayLabel42.text = stringInput;
+                break;
+            case 3:
+                _answerDisplayLabel43.text = stringInput;
+                break;
+            case 4:
+                _answerDisplayLabel44.text = stringInput;
+                break;
+            default:
+                break;
+        }
+    }
+    else {
+        switch (answerDisplayCounter) {
+            case 1:
+                _answerDisplayLabel1.text = stringInput;
+                break;
+            case 2:
+                _answerDisplayLabel2.text = stringInput;
+                break;
+            case 3:
+                _answerDisplayLabel3.text = stringInput;
+                break;
+            case 4:
+                _answerDisplayLabel4.text = stringInput;
+                break;
+            case 5:
+                _answerDisplayLabel5.text = stringInput;
+                break;
+            default:
+                break;
+        }
+    }
+    
+}
+
+-(void) clearAnswerDisplayButtons{
+    
+    _answerDisplayLabel1.text = @"";
+    _answerDisplayLabel2.text = @"";
+    _answerDisplayLabel3.text = @"";
+    _answerDisplayLabel4.text = @"";
+    _answerDisplayLabel5.text = @"";
+    
+    _answerDisplayLabel41.text = @"";
+    _answerDisplayLabel42.text = @"";
+    _answerDisplayLabel43.text = @"";
+    _answerDisplayLabel44.text = @"";
+    
+}
+
+-(void) backOutAnswerDisplayButtons:(int)counter{
+    if (difficulty == 0) {
+        switch (counter) {
+            case 1:
+                _answerDisplayLabel2.text = @"";
+                break;
+            case 2:
+                _answerDisplayLabel3.text = @"";
+                break;
+            case 3:
+                _answerDisplayLabel4.text = @"";
+            default:
+                break;
+        }
+    }
+    else if (difficulty == 1){
+        switch (counter) {
+            case 1:
+                _answerDisplayLabel41.text = @"";
+                break;
+            case 2:
+                _answerDisplayLabel42.text = @"";
+                break;
+            case 3:
+                _answerDisplayLabel43.text = @"";
+                break;
+            case 4:
+                _answerDisplayLabel44.text = @"";
+                break;
+            default:
+                break;
+        }
+    }
+    else  {
+        switch (counter) {
+            case 1:
+                _answerDisplayLabel1.text = @"";
+                break;
+            case 2:
+                _answerDisplayLabel2.text = @"";
+                break;
+            case 3:
+                _answerDisplayLabel3.text = @"";
+                break;
+            case 4:
+                _answerDisplayLabel4.text = @"";
+                break;
+            case 5:
+                _answerDisplayLabel5.text = @"";
+                break;
+            default:
+                break;
+        }
+    }
+
+}
+
+-(void) displayUnderlines{
+    if (difficulty == 0) {
+        _underline1.hidden = YES;
+        _underline2.hidden = NO;
+        _underline3.hidden = NO;
+        _underline4.hidden = NO;
+        _underline5.hidden = YES;
+        
+        _underline41.hidden = YES;
+        _underline42.hidden = YES;
+        _underline43.hidden = YES;
+        _underline44.hidden = YES;
+    }
+    else if(difficulty == 1){
+        _underline1.hidden = YES;
+        _underline2.hidden = YES;
+        _underline3.hidden = YES;
+        _underline4.hidden = YES;
+        _underline5.hidden = YES;
+        
+        _underline41.hidden = NO;
+        _underline42.hidden = NO;
+        _underline43.hidden = NO;
+        _underline44.hidden = NO;
+    }
+    else{
+        _underline1.hidden = NO;
+        _underline2.hidden = NO;
+        _underline3.hidden = NO;
+        _underline4.hidden = NO;
+        _underline5.hidden = NO;
+        
+        _underline41.hidden = YES;
+        _underline42.hidden = YES;
+        _underline43.hidden = YES;
+        _underline44.hidden = YES;
+        
+    }
+}
+
+-(void)selectSoundAndPlayAudio:(NSString*)fileName{
+    NSString* highFileName = [NSString stringWithFormat:@"high %@",fileName];
+    
+    
+    
+    if (numberOfLettersEntered == 0) {
+        rootLetter = letterIndex;
+    }
+
+    if (rootLetter >= 9) {
+        if (numberOfLettersEntered > 0) {
+            if ([currentChord isEqualToString:@"G# min7b5"] & (numberOfLettersEntered == 1)) {
+                [self playAudio:fileName];
+            }else{
+                if ([[currentChord substringToIndex:2] isEqualToString:@"Bb"] & (numberOfLettersEntered == 4)) {
+                    [self playAudio:@"highest C"];
+                }
+                else{
+                    [self playAudio:highFileName];
+                }
+            }
+        }
+        else {
+            [self playAudio:fileName];
+        }
+    }
+    else if (rootLetter >= 6) {
+        if (numberOfLettersEntered > 1) {
+            [self playAudio:highFileName];
+        }
+        else {
+            [self playAudio:fileName];
+        }
+    }
+    else if (rootLetter >= 3) {
+        if (numberOfLettersEntered > 2) {
+            [self playAudio:highFileName];
+        }
+        else {
+            [self playAudio:fileName];
+        }
+    }
+    else {
+        if (numberOfLettersEntered > 3) {
+            [self playAudio:highFileName];
+        }
+        else {
+            if ([currentChord isEqualToString:@"Db Maj9"] & (numberOfLettersEntered > 2)) {
+                [self playAudio:highFileName];
+            }
+            else{
+                [self playAudio:fileName];
+            }
+            
+        }
+    }
+
+
+    
+}
+
+@end
+
