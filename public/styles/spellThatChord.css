@@ -105,18 +105,21 @@ background-position:center;
   display: inline-block;
   width: 30%;
   border-bottom: 4px solid white;
+  height:70px;
 }
 
 .stcMediumAnswerDisplayLetter{
   display: inline-block;
   width: 23%;
   border-bottom: 4px solid white;
+  height:70px;
 }
 
 .stcHardAnswerDisplayLetter{
   display: inline-block;
   width: 18%;
   border-bottom: 4px solid white;
+  height:70px;
 }
 
 #stcAnswerDisplay h1{

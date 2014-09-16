@@ -1,9 +1,12 @@
 $(function(){
   
-  var currDifficultySetting = "easy";
-  var pointsAvailable = 10;
+  var settings = [{level: "easy", points: 10, numLetters: 3},{level: "medium", points: 15, numLetters: 4},{level: "hard", points: 20, numLetters: 5}];
+  
+  var currDifficultySetting = settings[0]; // set initial to easy object
+  var pointsAvailable = currDifficultySetting.points;
   var currChord;
   var prevChord;
+  var gameTimer;
   
 var easyChordsFlats = [{chord:"C Major",spelling:""},{chord:"C minor",spelling:""},{chord:"G minor",spelling:""},{chord:"D minor",spelling:""},{chord:"A minor",spelling:""},{chord:"E minor",spelling:""},{chord:"F Major",spelling:""},{chord:"F minor",spelling:""},{chord:"Bb Major",spelling:""},{chord:"Bb minor",spelling:""},{chord:"Db Major",spelling:""},{chord:"Eb Major",spelling:""},{chord:"Eb minor",spelling:""},{chord:"Ab Major",spelling:""}];
 var easyChordsSharps = [{chord:"G Major",spelling:""},{chord:"D Major",spelling:""},{chord:"A Major",spelling:""},{chord:"E Major",spelling:""},{chord:"B Major",spelling:""},{chord:"F# Major",spelling:""},{chord:"B minor",spelling:""},{chord:"F# minor",spelling:""},{chord:"C# minor",spelling:""}];
@@ -17,18 +20,14 @@ setNewChord();
 
   
  //timer stuff ------------------------------------------------------------------------------->
-  var gameTimer = setInterval( timer, 2000 );
-
-  function timer() {
-      $('#stcPortraitSheetMusicNumber').text(pointsAvailable);
-           
-//      if ( pointsAvailable < 1 ) {
-//          clearInterval( gameTimer );
-//          return;         
-//      }
+  
+  function timer() {         
       if(pointsAvailable > 0){
         pointsAvailable -= 1;
+      }else{
+        clearInterval(gameTimer);
       }
+    $('#stcPortraitSheetMusicNumber').text(pointsAvailable);
       
   }
   
@@ -36,12 +35,11 @@ setNewChord();
 // end timer logic ----------------------------------------------------------------------------->
   
   function setNewChord(){
-    
     var sharpsOrFlats = Math.round(Math.random());
     
-    switch(currDifficultySetting) {
+    switch(currDifficultySetting.level) {
     case "easy":
-        pointsAvailable = 10;
+        pointsAvailable = currDifficultySetting.points;
         if(sharpsOrFlats < .5){
           currChord = easyChordsFlats[Math.floor(Math.random()*easyChordsFlats.length)].chord;
         }else{
@@ -49,7 +47,7 @@ setNewChord();
         }
         break;
     case "medium":
-        pointsAvailable = 15;
+        pointsAvailable = currDifficultySetting.points;
         if(sharpsOrFlats < .5){
           currChord = mediumChordsFlats[Math.floor(Math.random()*mediumChordsFlats.length)].chord;
         }else{
@@ -57,7 +55,7 @@ setNewChord();
         }
         break;
     case "hard":
-        pointsAvailable = 20;
+        pointsAvailable = currDifficultySetting.points;
         if(sharpsOrFlats < .5){
           currChord = hardChordsFlats[Math.floor(Math.random()*hardChordsFlats.length)].chord;
         }else{
@@ -70,7 +68,15 @@ setNewChord();
    }
     
     $('#stcChordDisplay').text(currChord);
-  }
+    
+    //reset timer
+    if(gameTimer){
+      clearInterval(gameTimer);
+    }
+    $('#stcPortraitSheetMusicNumber').text(pointsAvailable);
+    gameTimer = setInterval(timer, 2000);
+    
+  }//end setNewChord function
   
 // click handlers
  $('#stcNewChordBtn').click(function(){
@@ -78,7 +84,7 @@ setNewChord();
  });
   
   $('#stcEasyBtn').click(function(){
-    currDifficultySetting = "easy";
+    currDifficultySetting = settings[0];
     $('#stcMediumAnswerDisplay').hide();
     $('#stcHardAnswerDisplay').hide();
     
@@ -87,7 +93,7 @@ setNewChord();
   });
   
   $('#stcMediumBtn').click(function(){
-    currDifficultySetting = "medium";
+    currDifficultySetting = settings[1];
     $('#stcEasyAnswerDisplay').hide();
     $('#stcHardAnswerDisplay').hide();
     
@@ -96,7 +102,7 @@ setNewChord();
   });
   
   $('#stcHardBtn').click(function(){
-    currDifficultySetting = "hard";
+    currDifficultySetting = settings[2];
     $('#stcEasyAnswerDisplay').hide();
     $('#stcMediumAnswerDisplay').hide();
     

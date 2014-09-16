@@ -31,27 +31,4 @@ Parse.Cloud.define("stcAdd", function(request, response){
   
 });
 
-//Parse.Cloud.define("stcLeaderboard", function(request, response){
-//  Parse.Cloud.useMasterKey();
-//  var query = new Parse.Query(Parse.User);
-//  query.select("username","stcScore");
-//  query.descending("stcScore");
-//  query.find().then(function(results){
-//    console.log("Success");
-//    console.log(results);
-//    response.success(results);
-//  },function(error){
-//    response.error(error);
-//  });
-  
-  
-//  query.limit(10);
-//  query.find().then(function(results){
-//    results.forEach(function(user){
-//      console.log(user.get("stcScore"));
-//    });
-//    response.success();
-//  },function(error){
-//    console.log(error.message);
-//  });
-//});
+
