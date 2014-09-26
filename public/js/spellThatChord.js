@@ -7,6 +7,8 @@ $(function(){
   var currChord;
   var prevChord;
   var gameTimer;
+  var sharpsOrFlats;
+  var currLetterNumber = 1;
   
 var easyChordsFlats = [{chord:"C Major",spelling:""},{chord:"C minor",spelling:""},{chord:"G minor",spelling:""},{chord:"D minor",spelling:""},{chord:"A minor",spelling:""},{chord:"E minor",spelling:""},{chord:"F Major",spelling:""},{chord:"F minor",spelling:""},{chord:"Bb Major",spelling:""},{chord:"Bb minor",spelling:""},{chord:"Db Major",spelling:""},{chord:"Eb Major",spelling:""},{chord:"Eb minor",spelling:""},{chord:"Ab Major",spelling:""}];
 var easyChordsSharps = [{chord:"G Major",spelling:""},{chord:"D Major",spelling:""},{chord:"A Major",spelling:""},{chord:"E Major",spelling:""},{chord:"B Major",spelling:""},{chord:"F# Major",spelling:""},{chord:"B minor",spelling:""},{chord:"F# minor",spelling:""},{chord:"C# minor",spelling:""}];
@@ -35,12 +37,31 @@ setNewChord();
 // end timer logic ----------------------------------------------------------------------------->
   
   function setNewChord(){
-    var sharpsOrFlats = Math.round(Math.random());
+    if (Math.round(Math.random()) < .5){
+      sharpsOrFlats = "flats";
+    }else{
+      sharpsOrFlats = "sharps";
+    }
+    
+    
+    if(sharpsOrFlats == "flats"){
+      $('#stcPianoKeyFirstRowTwo').css('background-image', 'url("/images/stc/Bflat.png")');
+      $('#stcPianoKeyFirstRowFive').css('background-image', 'url("/images/stc/Dflat.png")');
+      $('#stcPianoKeySecondRowOne').css('background-image', 'url("/images/stc/Eflat.png")');
+      $('#stcPianoKeySecondRowFour').css('background-image', 'url("/images/stc/Gflat.png")');
+      $('#stcPianoKeySecondRowSix').css('background-image', 'url("/images/stc/Aflat.png")');
+    }else{
+      $('#stcPianoKeyFirstRowTwo').css('background-image', 'url("/images/stc/Asharp.png")');
+      $('#stcPianoKeyFirstRowFive').css('background-image', 'url("/images/stc/Csharp.png")');
+      $('#stcPianoKeySecondRowOne').css('background-image', 'url("/images/stc/Dsharp.png")');
+      $('#stcPianoKeySecondRowFour').css('background-image', 'url("/images/stc/Fsharp.png")');
+      $('#stcPianoKeySecondRowSix').css('background-image', 'url("/images/stc/Gsharp.png")');
+    }
     
     switch(currDifficultySetting.level) {
     case "easy":
         pointsAvailable = currDifficultySetting.points;
-        if(sharpsOrFlats < .5){
+        if(sharpsOrFlats == "flats"){
           currChord = easyChordsFlats[Math.floor(Math.random()*easyChordsFlats.length)].chord;
         }else{
           currChord = easyChordsSharps[Math.floor(Math.random()*easyChordsSharps.length)].chord;
@@ -48,7 +69,7 @@ setNewChord();
         break;
     case "medium":
         pointsAvailable = currDifficultySetting.points;
-        if(sharpsOrFlats < .5){
+        if(sharpsOrFlats == "flats"){
           currChord = mediumChordsFlats[Math.floor(Math.random()*mediumChordsFlats.length)].chord;
         }else{
           currChord = mediumChordsSharps[Math.floor(Math.random()*mediumChordsSharps.length)].chord;
@@ -56,7 +77,7 @@ setNewChord();
         break;
     case "hard":
         pointsAvailable = currDifficultySetting.points;
-        if(sharpsOrFlats < .5){
+        if(sharpsOrFlats == "flats"){
           currChord = hardChordsFlats[Math.floor(Math.random()*hardChordsFlats.length)].chord;
         }else{
           currChord = hardChordsSharps[Math.floor(Math.random()*hardChordsSharps.length)].chord;
@@ -77,6 +98,47 @@ setNewChord();
     gameTimer = setInterval(timer, 2000);
     
   }//end setNewChord function
+  
+  function fillAnswerLetter(letter){
+    switch(currDifficultySetting.level) {
+    case "easy":
+        $( '#stcEasy' + currLetterNumber ).html( letter );
+        
+        currLetterNumber++;
+        if(currLetterNumber > 3){
+          evaluateAnswer();
+        }
+        break;
+    case "medium":
+        $( '#stcMedium' + currLetterNumber ).html( letter );
+        
+        currLetterNumber++;
+        if(currLetterNumber > 4){
+          evaluateAnswer();
+        }
+        break;
+    case "hard":
+        $( '#stcHard' + currLetterNumber ).html( letter );
+        
+        currLetterNumber++;
+        if(currLetterNumber > 5){
+          evaluateAnswer();
+        }
+        break;
+    default:
+        console.log('error in fillAnswerLetter function');
+        break;
+   }
+    
+    
+    
+  }// end fillAnswerLetter function
+  
+  function evaluateAnswer(){
+    alert('evaluating answer... please hold');
+  }
+  
+//------------------------------------------------------------------------------------------------------
   
 // click handlers
  $('#stcNewChordBtn').click(function(){
@@ -108,6 +170,69 @@ setNewChord();
     
     $('#stcHardAnswerDisplay').show();
     setNewChord();
+  });
+  
+  $('.stcPianoKeyFirstRow,.stcPianoKeySecondRow').click(function(){
+    switch(this.id) {
+    case "stcPianoKeyFirstRowOne":
+        fillAnswerLetter('A');
+        break;
+    case "stcPianoKeyFirstRowTwo":
+        if(sharpsOrFlats == "flats"){
+          fillAnswerLetter("Bb");
+        }else{
+          fillAnswerLetter("A#");
+        }
+        break;
+    case "stcPianoKeyFirstRowThree":
+        fillAnswerLetter('B');
+        break;
+    case "stcPianoKeyFirstRowFour":
+        fillAnswerLetter('C');
+        break;
+    case "stcPianoKeyFirstRowFive":
+        if(sharpsOrFlats == "flats"){
+          fillAnswerLetter("Db");
+        }else{
+          fillAnswerLetter("C#");
+        }
+        break;
+    case "stcPianoKeyFirstRowSix":
+        fillAnswerLetter('D');
+        break;
+    case "stcPianoKeySecondRowOne":
+        if(sharpsOrFlats == "flats"){
+          fillAnswerLetter("Eb");
+        }else{
+          fillAnswerLetter("D#");
+        }
+        break;
+    case "stcPianoKeySecondRowTwo":
+        fillAnswerLetter('E');
+        break;
+    case "stcPianoKeySecondRowThree":
+        fillAnswerLetter('F');
+        break;
+    case "stcPianoKeySecondRowFour":
+        if(sharpsOrFlats == "flats"){
+          fillAnswerLetter("Gb");
+        }else{
+          fillAnswerLetter("F#");
+        };
+        break;
+    case "stcPianoKeySecondRowFive":
+        fillAnswerLetter('G');
+        break;
+    case "stcPianoKeySecondRowSix":
+        if(sharpsOrFlats == "flats"){
+          fillAnswerLetter("Ab");
+        }else{
+          fillAnswerLetter("G#");
+        }
+        break;
+    default:
+        fillAnswerLetter('other');
+    }
   });
   
   // end click handlers --------------------------------->
