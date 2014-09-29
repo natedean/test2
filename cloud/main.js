@@ -14,24 +14,40 @@ Parse.Cloud.beforeSave(Parse.User, function(request, response) {
 });
 
 
-Parse.Cloud.define("stcAdd", function(request, response){
-
-  
-  
-
-  currentUser.increment('stcScore', request.params.amount);
-  currentUser.save().then(function(){
-    Parse.Cloud.useMasterKey();
+Parse.Cloud.define("stcAdd", function(request, response){ 
+  Parse.Cloud.useMasterKey();
+  var query = new Parse.Query(Parse.User);
+  query.equalTo("objectId",request.params.u);
+  query.first().then(function(currentUser){
+    currentUser.increment('stcScore', request.params.amount);
+    return currentUser.save(); 
+  }).then(function(results){
     var query = new Parse.Query(Parse.User);
     query.select("username","stcScore");
+    query.greaterThan("stcScore",0);
+    query.limit(10);
     query.descending("stcScore");
     return query.find();
-  }).then(function(results){  
+  }).then(function(results){
     response.success(results);
   },function(error){
-    console.log(error.message);
     response.error(error);
   });
+
+
+//  currentUser.increment('stcScore', request.params.amount);
+//  currentUser.save().then(function(){
+//    Parse.Cloud.useMasterKey();
+//    var query = new Parse.Query(Parse.User);
+//    query.select("username","stcScore");
+//    query.descending("stcScore");
+//    return query.find();
+//  }).then(function(results){  
+//    response.success(results);
+//  },function(error){
+//    console.log(error.message);
+//    response.error(error);
+//  });
   
 });
 

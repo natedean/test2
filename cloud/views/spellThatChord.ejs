@@ -6,7 +6,7 @@
     <div class="container">
        <link href="/styles/spellThatChord.css" rel="stylesheet" type="text/css" />
       <%  include partials/login-links  %>
-      <p><%= message %><span id="u" style="display:none"><%= u %></span>!</p>
+      <p><%= message %><span id="n"><%= n %></span><span id="u" style="display:none"><%= u %></span>!</p>
       <h1 id="stcHeader" class="text-center">Spell That Chord</h1>
       <div id="stcGameContainer">
       <div class="text-center">
@@ -45,7 +45,7 @@
                   </div>
                 </div>
                 <div id="stcLandscapeSheetMusic" class="stcScoreDisplaySheetMusicBackground">
-                  <span id="stcLandscapeSheetMusicNumber" class="stcSheetMusicNumber">0</span>
+                  <span id="stcLandscapeSheetMusicNumber" class="stcSheetMusicNumber"><%= score %></span>
                 </div>
               </div>
               <div id="stcScoreTextRow">

@@ -145,17 +145,44 @@ setNewChord();
   function evaluateAnswer(){
     
     var u = $('#u').text();
+    var n = $('#n').text();
    
       Parse.Cloud.run("stcAdd",{amount:pointsAvailable,u: u}).then(function(results){
         $('#leaderboard').html("");
         results.forEach(function(item){
           $('#leaderboard').append(item.get("username")+" has score " + item.get("stcScore") + "<br>");
+          if(item.get("username") == n){
+            $('#stcLandscapeSheetMusicNumber').text(item.get("stcScore"));
+          }
+          clearLetters();
+          setNewChord();
         });
       },function(error){
         alert(error.message);
       });
   
-  } // end evaluate answer
+  }// end evaluateAnswer
+  
+  function clearLetters(){
+    
+    if(currLetterNumber > 1){
+      currLetterNumber = 1;
+    }   
+    switch(currDifficultySetting.level) {
+    case "easy":        
+        $( '#stcEasy1,#stcEasy2,#stcEasy3' ).text( "?" ).removeClass("white");
+        break;
+    case "medium":
+        $( '#stcMedium1,#stcMedium2,#stcMedium3,#stcMedium4' ).text( "?" ).removeClass("white");
+        break;
+    case "hard":
+        $( '#stcHard1,#stcHard2,#stcHard3,#stcHard4,#stcHard5' ).text( "?" ).removeClass("white");
+        break;
+    default:
+        console.log('error in fillAnswerLetter function');
+        break;
+   }
+  }// end clearLetters
   
 //------------------------------------------------------------------------------------------------------
   
@@ -276,23 +303,7 @@ setNewChord();
   
   $('#stcClearBtn').click(function(){
 
-    if(currLetterNumber > 1){
-      currLetterNumber = 1;
-    }   
-    switch(currDifficultySetting.level) {
-    case "easy":        
-        $( '#stcEasy1,#stcEasy2,#stcEasy3' ).text( "?" ).removeClass("white");
-        break;
-    case "medium":
-        $( '#stcMedium1,#stcMedium2,#stcMedium3,#stcMedium4' ).text( "?" ).removeClass("white");
-        break;
-    case "hard":
-        $( '#stcHard1,#stcHard2,#stcHard3,#stcHard4,#stcHard5' ).text( "?" ).removeClass("white");
-        break;
-    default:
-        console.log('error in fillAnswerLetter function');
-        break;
-   }
+    clearLetters();
 
   });
   
