@@ -37,10 +37,12 @@ app.get('/chord-chart-builder', function(req, res) {
 app.get('/spell-that-chord', function(req, res) {
   if(Parse.User.current()){
     Parse.User.current().fetch().then(function(user){
-      res.render('spellThatChord', { message: 'Welcome Home ' + user.get("username") + '!' });
+      res.render('spellThatChord', { message: 'Welcome Home ' + user.get("username"), 
+                                     u: user.id
+                                   });
     });
   }else{
-    res.render('spellThatChord', { message: 'Welcome Home!' });
+    res.render('spellThatChord', { message: 'Welcome Guest!', u: "" });
   }
 
 });

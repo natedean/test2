@@ -15,7 +15,10 @@ Parse.Cloud.beforeSave(Parse.User, function(request, response) {
 
 
 Parse.Cloud.define("stcAdd", function(request, response){
-  var currentUser = Parse.User.current();
+
+  
+  
+
   currentUser.increment('stcScore', request.params.amount);
   currentUser.save().then(function(){
     Parse.Cloud.useMasterKey();
@@ -27,6 +30,7 @@ Parse.Cloud.define("stcAdd", function(request, response){
     response.success(results);
   },function(error){
     console.log(error.message);
+    response.error(error);
   });
   
 });

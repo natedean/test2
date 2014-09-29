@@ -143,26 +143,18 @@ setNewChord();
   }// end fillAnswerLetter function
   
   function evaluateAnswer(){
-    if (Parse.User){
-      Parse.User.fetch().then(function (user) {
-        alert('logged in as ' + user.get('username'));     
+    
+    var u = $('#u').text();
+   
+      Parse.Cloud.run("stcAdd",{amount:pointsAvailable,u: u}).then(function(results){
+        $('#leaderboard').html("");
+        results.forEach(function(item){
+          $('#leaderboard').append(item.get("username")+" has score " + item.get("stcScore") + "<br>");
+        });
+      },function(error){
+        alert(error.message);
       });
-    }else{
-       alert('not logged in');
-    }
-    
-//    if(!Parse.User.current()){
-//      alert('You gotta log in bro');
-//    }else{
-//      Parse.Cloud.run("stcAdd",{amount:2}).then(function(results){
-//        $('#leaderboard').html("");
-//        results.forEach(function(item){
-//          $('#leaderboard').append(item.get("username")+" has score " + item.get("stcScore") + "<br>");
-//        });
-//      });
-//    }
-    
-    
+  
   } // end evaluate answer
   
 //------------------------------------------------------------------------------------------------------
