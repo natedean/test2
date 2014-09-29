@@ -5,7 +5,8 @@
     <% include partials/nav %>
     <div class="container">
        <link href="/styles/spellThatChord.css" rel="stylesheet" type="text/css" />
-      <% /* include partials/login-links */ %>
+      <%  include partials/login-links  %>
+      <p><%= message %></p>
       <h1 id="stcHeader" class="text-center">Spell That Chord</h1>
       <div id="stcGameContainer">
       <div class="text-center">
@@ -25,22 +26,22 @@
                 </div>
                 <div id="stcAnswerDisplay">
                   <div id="stcEasyAnswerDisplay">
-                    <div class="stcEasyAnswerDisplayLetter"><h1 id="stcEasy1"></h1></div>
-                    <div class="stcEasyAnswerDisplayLetter"><h1 id="stcEasy2"></h1></div>
-                    <div class="stcEasyAnswerDisplayLetter"><h1 id="stcEasy3"></h1></div>
+                    <div class="stcEasyAnswerDisplayLetter"><h2 id="stcEasy1">?</h2></div>
+                    <div class="stcEasyAnswerDisplayLetter"><h2 id="stcEasy2">?</h2></div>
+                    <div class="stcEasyAnswerDisplayLetter"><h2 id="stcEasy3">?</h2></div>
                   </div>
                   <div id="stcMediumAnswerDisplay">
-                    <div class="stcMediumAnswerDisplayLetter"><h1 id="stcMedium1"></h1></div>
-                    <div class="stcMediumAnswerDisplayLetter"><h1 id="stcMedium2"></h1></div>
-                    <div class="stcMediumAnswerDisplayLetter"><h1 id="stcMedium3"></h1></div>
-                    <div class="stcMediumAnswerDisplayLetter"><h1 id="stcMedium4"></h1></div>
+                    <div class="stcMediumAnswerDisplayLetter"><h2 id="stcMedium1">?</h2></div>
+                    <div class="stcMediumAnswerDisplayLetter"><h2 id="stcMedium2">?</h2></div>
+                    <div class="stcMediumAnswerDisplayLetter"><h2 id="stcMedium3">?</h2></div>
+                    <div class="stcMediumAnswerDisplayLetter"><h2 id="stcMedium4">?</h2></div>
                   </div>
                   <div id="stcHardAnswerDisplay">
-                    <div class="stcHardAnswerDisplayLetter"><h1 id="stcHard1"></h1></div>
-                    <div class="stcHardAnswerDisplayLetter"><h1 id="stcHard2"></h1></div>
-                    <div class="stcHardAnswerDisplayLetter"><h1 id="stcHard3"></h1></div>
-                    <div class="stcHardAnswerDisplayLetter"><h1 id="stcHard4"></h1></div>
-                    <div class="stcHardAnswerDisplayLetter"><h1 id="stcHard5"></h1></div>
+                    <div class="stcHardAnswerDisplayLetter"><h2 id="stcHard1">?</h2></div>
+                    <div class="stcHardAnswerDisplayLetter"><h2 id="stcHard2">?</h2></div>
+                    <div class="stcHardAnswerDisplayLetter"><h2 id="stcHard3">?</h2></div>
+                    <div class="stcHardAnswerDisplayLetter"><h2 id="stcHard4">?</h2></div>
+                    <div class="stcHardAnswerDisplayLetter"><h2 id="stcHard5">?</h2></div>
                   </div>
                 </div>
                 <div id="stcLandscapeSheetMusic" class="stcScoreDisplaySheetMusicBackground">
@@ -84,6 +85,7 @@
       </div>
       </div><!-- end #stcGameContainer -->
     </div><!-- end container -->
+    <div id="leaderboard"></div>
     <% include partials/footer %>
     <script src="/js/spellThatChord.js"></script>  <!-- spellThatChord js -->
   </body>

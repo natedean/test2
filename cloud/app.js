@@ -1,19 +1,29 @@
 
 var express = require('express');
-var _ = require('underscore');
+var parseExpressHttpsRedirect = require('parse-express-https-redirect');
 var parseExpressCookieSession = require('parse-express-cookie-session');
 var app = express();
 
 app.set('views', 'cloud/views');
 app.set('view engine', 'ejs');
+app.use(parseExpressHttpsRedirect());  // Require user to be on HTTPS.
 app.use(express.bodyParser());
 app.use(express.cookieParser('YOUR_SIGNING_SECRET'));
-app.use(parseExpressCookieSession({ cookie: { maxAge: 3600000 } }));
+app.use(parseExpressCookieSession({ fetchUser: true, cookie: { maxAge: 3600000 } }));
+
+
 
 // This is an example of hooking up a request handler with a specific request
 // path and HTTP verb using the Express routing API.
 app.get('/', function(req, res) {
-  res.render('home', { message: 'Welcome Home!' });
+  if(Parse.User.current()){
+    Parse.User.current().fetch().then(function(user){
+      res.render('home', { message: 'Welcome Home ' + user.get("username") + '!' });
+    });
+  }else{
+    res.render('home', { message: 'Welcome Home!' });
+  }
+  
 });
 
 app.get('/nashville-number-system', function(req, res) {
@@ -25,7 +35,14 @@ app.get('/chord-chart-builder', function(req, res) {
 });
 
 app.get('/spell-that-chord', function(req, res) {
-  res.render('spellThatChord');
+  if(Parse.User.current()){
+    Parse.User.current().fetch().then(function(user){
+      res.render('spellThatChord', { message: 'Welcome Home ' + user.get("username") + '!' });
+    });
+  }else{
+    res.render('spellThatChord', { message: 'Welcome Home!' });
+  }
+
 });
 
 // You could have a "Log In" link on your website pointing to this.

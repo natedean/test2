@@ -37,6 +37,8 @@ setNewChord();
 // end timer logic ----------------------------------------------------------------------------->
   
   function setNewChord(){
+    currLetterNumber = 1;
+    
     if (Math.round(Math.random()) < .5){
       sharpsOrFlats = "flats";
     }else{
@@ -102,25 +104,31 @@ setNewChord();
   function fillAnswerLetter(letter){
     switch(currDifficultySetting.level) {
     case "easy":
-        $( '#stcEasy' + currLetterNumber ).html( letter );
+        $( '#stcEasy' + currLetterNumber ).text( letter ).addClass("white");
         
-        currLetterNumber++;
+        if(currLetterNumber < 4){
+          currLetterNumber++;
+        } 
         if(currLetterNumber > 3){
           evaluateAnswer();
         }
         break;
     case "medium":
-        $( '#stcMedium' + currLetterNumber ).html( letter );
+        $( '#stcMedium' + currLetterNumber ).text( letter ).addClass("white");
         
-        currLetterNumber++;
+        if(currLetterNumber < 5){
+          currLetterNumber++;
+        } 
         if(currLetterNumber > 4){
           evaluateAnswer();
         }
         break;
     case "hard":
-        $( '#stcHard' + currLetterNumber ).html( letter );
+        $( '#stcHard' + currLetterNumber ).text( letter ).addClass("white");
         
-        currLetterNumber++;
+        if(currLetterNumber < 6){
+          currLetterNumber++;
+        } 
         if(currLetterNumber > 5){
           evaluateAnswer();
         }
@@ -135,8 +143,27 @@ setNewChord();
   }// end fillAnswerLetter function
   
   function evaluateAnswer(){
-    alert('evaluating answer... please hold');
-  }
+    if (Parse.User){
+      Parse.User.fetch().then(function (user) {
+        alert('logged in as ' + user.get('username'));     
+      });
+    }else{
+       alert('not logged in');
+    }
+    
+//    if(!Parse.User.current()){
+//      alert('You gotta log in bro');
+//    }else{
+//      Parse.Cloud.run("stcAdd",{amount:2}).then(function(results){
+//        $('#leaderboard').html("");
+//        results.forEach(function(item){
+//          $('#leaderboard').append(item.get("username")+" has score " + item.get("stcScore") + "<br>");
+//        });
+//      });
+//    }
+    
+    
+  } // end evaluate answer
   
 //------------------------------------------------------------------------------------------------------
   
@@ -233,6 +260,48 @@ setNewChord();
     default:
         fillAnswerLetter('other');
     }
+  });
+  
+  $('#stcBkspBtn').click(function(){
+    if(currLetterNumber > 1){
+      currLetterNumber--;
+    }   
+    switch(currDifficultySetting.level) {
+    case "easy":        
+        $( '#stcEasy' + currLetterNumber ).text( "?" ).removeClass("white");
+        break;
+    case "medium":
+        $( '#stcMedium' + currLetterNumber ).text( "?" ).removeClass("white");
+        break;
+    case "hard":
+        $( '#stcHard' + currLetterNumber ).text( "?" ).removeClass("white");
+        break;
+    default:
+        console.log('error in fillAnswerLetter function');
+        break;
+   }
+  });
+  
+  $('#stcClearBtn').click(function(){
+
+    if(currLetterNumber > 1){
+      currLetterNumber = 1;
+    }   
+    switch(currDifficultySetting.level) {
+    case "easy":        
+        $( '#stcEasy1,#stcEasy2,#stcEasy3' ).text( "?" ).removeClass("white");
+        break;
+    case "medium":
+        $( '#stcMedium1,#stcMedium2,#stcMedium3,#stcMedium4' ).text( "?" ).removeClass("white");
+        break;
+    case "hard":
+        $( '#stcHard1,#stcHard2,#stcHard3,#stcHard4,#stcHard5' ).text( "?" ).removeClass("white");
+        break;
+    default:
+        console.log('error in fillAnswerLetter function');
+        break;
+   }
+
   });
   
   // end click handlers --------------------------------->
