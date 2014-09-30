@@ -160,6 +160,10 @@ float: right;
 margin-right: 50px;
 }
 
+#stcGuessFeedback{
+  color: white;
+}
+
 
 /* ---------------------------------------------------------------------------*/
 
@@ -251,7 +255,6 @@ margin-right: 50px;
   height: 80px;
   width: 460px;
   margin: 0 auto;
-  margin-top:10px;
 }
 
 .stcFirstRowBtn{

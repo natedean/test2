@@ -32,23 +32,7 @@ Parse.Cloud.define("stcAdd", function(request, response){
     response.success(results);
   },function(error){
     response.error(error);
-  });
-
-
-//  currentUser.increment('stcScore', request.params.amount);
-//  currentUser.save().then(function(){
-//    Parse.Cloud.useMasterKey();
-//    var query = new Parse.Query(Parse.User);
-//    query.select("username","stcScore");
-//    query.descending("stcScore");
-//    return query.find();
-//  }).then(function(results){  
-//    response.success(results);
-//  },function(error){
-//    console.log(error.message);
-//    response.error(error);
-//  });
-  
-});
+  }); 
+});//end stcAdd
 
 

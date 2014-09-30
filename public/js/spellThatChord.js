@@ -5,17 +5,19 @@ $(function(){
   var currDifficultySetting = settings[0]; // set initial to easy object
   var pointsAvailable = currDifficultySetting.points;
   var currChord;
+  var currSpelling;
+  var currGuess;
   var prevChord;
   var gameTimer;
   var sharpsOrFlats;
   var currLetterNumber = 1;
   
-var easyChordsFlats = [{chord:"C Major",spelling:""},{chord:"C minor",spelling:""},{chord:"G minor",spelling:""},{chord:"D minor",spelling:""},{chord:"A minor",spelling:""},{chord:"E minor",spelling:""},{chord:"F Major",spelling:""},{chord:"F minor",spelling:""},{chord:"Bb Major",spelling:""},{chord:"Bb minor",spelling:""},{chord:"Db Major",spelling:""},{chord:"Eb Major",spelling:""},{chord:"Eb minor",spelling:""},{chord:"Ab Major",spelling:""}];
-var easyChordsSharps = [{chord:"G Major",spelling:""},{chord:"D Major",spelling:""},{chord:"A Major",spelling:""},{chord:"E Major",spelling:""},{chord:"B Major",spelling:""},{chord:"F# Major",spelling:""},{chord:"B minor",spelling:""},{chord:"F# minor",spelling:""},{chord:"C# minor",spelling:""}];
-var mediumChordsFlats = [{chord:"C Maj7",spelling:""},{chord:"C min7",spelling:""},{chord:"G min7",spelling:""},{chord:"D min7",spelling:""},{chord:"A min7",spelling:""},{chord:"E min7",spelling:""},{chord:"F Maj7",spelling:""},{chord:"F min7",spelling:""},{chord:"Bb Maj7",spelling:""},{chord:"Bb min7",spelling:""},{chord:"Eb Maj7",spelling:""},{chord:"Eb min7",spelling:""},{chord:"Ab Maj7",spelling:""},{chord:"C7",spelling:""},{chord:"F7",spelling:""},{chord:"Bb7",spelling:""},{chord:"Eb7",spelling:""},{chord:"Ab7",spelling:""},{chord:"C min7b5",spelling:""},{chord:"E min7b5",spelling:""},{chord:"A min7b5",spelling:""},{chord:"D min7b5",spelling:""},{chord:"C6",spelling:""},{chord:"F6",spelling:""},{chord:"Bb6",spelling:""},{chord:"Eb6",spelling:""},{chord:"F add9",spelling:""},{chord:"Eb add9",spelling:""},{chord:"Ab add9",spelling:""}];
-var mediumChordsSharps = [{chord:"G Maj7",spelling:""},{chord:"D Maj7",spelling:""},{chord:"A Maj7",spelling:""},{chord:"E Maj7",spelling:""},{chord:"B Maj7",spelling:""},{chord:"B min7",spelling:""},{chord:"F# min7",spelling:""},{chord:"C# min7",spelling:""},{chord:"G7",spelling:""},{chord:"D7",spelling:""},{chord:"A7",spelling:""},{chord:"E7",spelling:""},{chord:"B7",spelling:""},{chord:"B min7b5",spelling:""},{chord:"F# min7b5",spelling:""},{chord:"C# min7b5",spelling:""},{chord:"G# min7b5",spelling:""},{chord:"G6",spelling:""},{chord:"A6",spelling:""},{chord:"E6",spelling:""},{chord:"G add9",spelling:""},{chord:"D add9",spelling:""},{chord:"A add9",spelling:""},{chord:"E add9",spelling:""}];
-var hardChordsFlats = [{chord:"C min9",spelling:""},{chord:"D min9",spelling:""},{chord:"G min9",spelling:""},{chord:"F min9",spelling:""},{chord:"F Maj9",spelling:""},{chord:"Bb Maj9",spelling:""},{chord:"Bb min9",spelling:""},{chord:"Db Maj9",spelling:""},{chord:"Eb Maj9",spelling:""},{chord:"Eb min9",spelling:""},{chord:"Ab Maj9",spelling:""},{chord:"C9",spelling:""},{chord:"F9",spelling:""},{chord:"Bb9",spelling:""},{chord:"Eb9",spelling:""},{chord:"Ab9",spelling:""}];
-var hardChordsSharps = [{chord:"C Maj9",spelling:""},{chord:"G Maj9",spelling:""},{chord:"D Maj9",spelling:""},{chord:"A Maj9",spelling:""},{chord:"E Maj9",spelling:""},{chord:"A min9",spelling:""},{chord:"E min9",spelling:""},{chord:"F# min9",spelling:""},{chord:"C# min9",spelling:""},{chord:"G9",spelling:""},{chord:"D9",spelling:""},{chord:"A9",spelling:""},{chord:"E9",spelling:""},{chord:"F#9",spelling:""}];
+var easyChordsFlats = [{chord:"C Major",spelling:"C E G"},{chord:"C minor",spelling:"C Eb G"},{chord:"G minor",spelling:"G Bb D"},{chord:"D minor",spelling:"D F A"},{chord:"A minor",spelling:"A C E"},{chord:"E minor",spelling:"E G B"},{chord:"F Major",spelling:"F A C"},{chord:"F minor",spelling:"F Ab C"},{chord:"Bb Major",spelling:"Bb D F"},{chord:"Bb minor",spelling:"Bb Db F"},{chord:"Db Major",spelling:"Db F Ab"},{chord:"Eb Major",spelling:"Eb G Bb"},{chord:"Eb minor",spelling:"Eb Gb Bb"},{chord:"Ab Major",spelling:"Ab C Eb"}];
+var easyChordsSharps = [{chord:"G Major",spelling:"G B D"},{chord:"D Major",spelling:"D F# A"},{chord:"A Major",spelling:"A C# E"},{chord:"E Major",spelling:"E G# B"},{chord:"B Major",spelling:"B D# F#"},{chord:"F# Major",spelling:"F# A# C#"},{chord:"B minor",spelling:"B D F#"},{chord:"F# minor",spelling:"F# A C#"},{chord:"C# minor",spelling:"C# E G#"}];
+var mediumChordsFlats = [{chord:"C Maj7",spelling:"C E G B"},{chord:"C min7",spelling:"C Eb G Bb"},{chord:"G min7",spelling:"G Bb D F"},{chord:"D min7",spelling:"D F A C"},{chord:"A min7",spelling:"A C E G"},{chord:"E min7",spelling:"E G B D"},{chord:"F Maj7",spelling:"F A C E"},{chord:"F min7",spelling:"F Ab C Eb"},{chord:"Bb Maj7",spelling:"Bb D F A"},{chord:"Bb min7",spelling:"Bb Db F Ab"},{chord:"Eb Maj7",spelling:"Eb G Bb D"},{chord:"Eb min7",spelling:"Eb Gb Bb Db"},{chord:"Ab Maj7",spelling:"Ab C Eb G"},{chord:"C7",spelling:"C E G Bb"},{chord:"F7",spelling:"F A C Eb"},{chord:"Bb7",spelling:"Bb D F Ab"},{chord:"Eb7",spelling:"Eb G Bb Db"},{chord:"Ab7",spelling:"Ab C Eb Gb"},{chord:"C min7b5",spelling:"C Eb Gb Bb"},{chord:"E min7b5",spelling:"E G Bb D"},{chord:"A min7b5",spelling:"A C Eb G"},{chord:"D min7b5",spelling:"D F Ab C"},{chord:"C6",spelling:"C E G A"},{chord:"F6",spelling:"F A C D"},{chord:"Bb6",spelling:"Bb D F G"},{chord:"Eb6",spelling:"Eb G Bb C"},{chord:"F add9",spelling:"F A C G"},{chord:"Eb add9",spelling:"Eb G Bb F"},{chord:"Ab add9",spelling:"Ab C Eb Bb"}];
+var mediumChordsSharps = [{chord:"G Maj7",spelling:"G B D F#"},{chord:"D Maj7",spelling:"D F# A C#"},{chord:"A Maj7",spelling:"A C# E G#"},{chord:"E Maj7",spelling:"E G# B D#"},{chord:"B Maj7",spelling:"B D# F# A#"},{chord:"B min7",spelling:"B D F# A"},{chord:"F# min7",spelling:"F# A C# E"},{chord:"C# min7",spelling:"C# E G# B"},{chord:"G7",spelling:"G B D F"},{chord:"D7",spelling:"D F# A C"},{chord:"A7",spelling:"A C# E G"},{chord:"E7",spelling:"E G# B D"},{chord:"B7",spelling:"B D# F# A"},{chord:"B min7b5",spelling:"B D F A"},{chord:"F# min7b5",spelling:"F# A C E"},{chord:"C# min7b5",spelling:"C# E G B"},{chord:"G# min7b5",spelling:"G# B D F#"},{chord:"G6",spelling:"G B D E"},{chord:"A6",spelling:"A C# E F#"},{chord:"E6",spelling:"E G# B C#"},{chord:"G add9",spelling:"G B D A"},{chord:"D add9",spelling:"D F# A E"},{chord:"A add9",spelling:"A C# E B"},{chord:"E add9",spelling:"E G# B F#"}];
+var hardChordsFlats = [{chord:"C min9",spelling:"C Eb G Bb D"},{chord:"D min9",spelling:"D F A C E"},{chord:"G min9",spelling:"G Bb D F A"},{chord:"F min9",spelling:"F Ab C Eb G"},{chord:"F Maj9",spelling:"F A C E G"},{chord:"Bb Maj9",spelling:"Bb D F A C"},{chord:"Bb min9",spelling:"Bb Db F Ab C"},{chord:"Db Maj9",spelling:"Db F Ab C Eb"},{chord:"Eb Maj9",spelling:"Eb G Bb D F"},{chord:"Eb min9",spelling:"Eb Gb Bb Db F"},{chord:"Ab Maj9",spelling:"Ab C Eb G Bb"},{chord:"C9",spelling:"C E G Bb D"},{chord:"F9",spelling:"F A C Eb G"},{chord:"Bb9",spelling:"Bb D F Ab C"},{chord:"Eb9",spelling:"Eb G Bb Db F"},{chord:"Ab9",spelling:"Ab C Eb Gb Bb"}];
+var hardChordsSharps = [{chord:"C Maj9",spelling:"C E G B D"},{chord:"G Maj9",spelling:"G B D F# A"},{chord:"D Maj9",spelling:"D F# A C# E"},{chord:"A Maj9",spelling:"A C# E G# B"},{chord:"E Maj9",spelling:"E G# B D# F#"},{chord:"A min9",spelling:"A C E G B"},{chord:"E min9",spelling:"E G B D F#"},{chord:"F# min9",spelling:"F# A C# E G#"},{chord:"C# min9",spelling:"C# E G# B D#"},{chord:"G9",spelling:"G B D F A"},{chord:"D9",spelling:"D F# A C E"},{chord:"A9",spelling:"A C# E G B"},{chord:"E9",spelling:"E G# B D F#"},{chord:"F#9",spelling:"F# A# C# E G#"}];
 
 // start game
 setNewChord();
@@ -29,14 +31,15 @@ setNewChord();
       }else{
         clearInterval(gameTimer);
       }
-    $('#stcPortraitSheetMusicNumber').text(pointsAvailable);
-      
+    $('#stcPortraitSheetMusicNumber').text(pointsAvailable);    
   }
   
   
 // end timer logic ----------------------------------------------------------------------------->
   
   function setNewChord(){
+    var rand;
+    
     currLetterNumber = 1;
     
     if (Math.round(Math.random()) < .5){
@@ -64,25 +67,37 @@ setNewChord();
     case "easy":
         pointsAvailable = currDifficultySetting.points;
         if(sharpsOrFlats == "flats"){
-          currChord = easyChordsFlats[Math.floor(Math.random()*easyChordsFlats.length)].chord;
+          rand = Math.floor(Math.random()*easyChordsFlats.length);
+          currChord = easyChordsFlats[rand].chord;
+          currSpelling = easyChordsFlats[rand].spelling;
         }else{
-          currChord = easyChordsSharps[Math.floor(Math.random()*easyChordsSharps.length)].chord;
+          rand = Math.floor(Math.random()*easyChordsSharps.length);
+          currChord = easyChordsSharps[rand].chord;
+          currSpelling = easyChordsSharps[rand].spelling;
         }
         break;
     case "medium":
         pointsAvailable = currDifficultySetting.points;
         if(sharpsOrFlats == "flats"){
-          currChord = mediumChordsFlats[Math.floor(Math.random()*mediumChordsFlats.length)].chord;
+          rand = Math.floor(Math.random()*mediumChordsFlats.length);
+          currChord = mediumChordsFlats[rand].chord;
+          currSpelling = mediumChordsFlats[rand].spelling;
         }else{
-          currChord = mediumChordsSharps[Math.floor(Math.random()*mediumChordsSharps.length)].chord;
+          rand = Math.floor(Math.random()*mediumChordsSharps.length);
+          currChord = mediumChordsSharps[rand].chord;
+          currSpelling = mediumChordsSharps[rand].spelling;
         }
         break;
     case "hard":
         pointsAvailable = currDifficultySetting.points;
         if(sharpsOrFlats == "flats"){
-          currChord = hardChordsFlats[Math.floor(Math.random()*hardChordsFlats.length)].chord;
+          rand = Math.floor(Math.random()*hardChordsFlats.length);
+          currChord = hardChordsFlats[rand].chord;
+          currSpelling = hardChordsFlats[rand].spelling;
         }else{
-          currChord = hardChordsSharps[Math.floor(Math.random()*hardChordsSharps.length)].chord;
+          rand = Math.floor(Math.random()*hardChordsSharps.length);
+          currChord = hardChordsSharps[rand].chord;
+          currSpelling = hardChordsSharps[rand].spelling;
         }
         break;
     default:
@@ -110,7 +125,8 @@ setNewChord();
           currLetterNumber++;
         } 
         if(currLetterNumber > 3){
-          evaluateAnswer();
+          currGuess = "" + $('#stcEasy1').text() + " " + $('#stcEasy2').text() + " " + $('#stcEasy3').text();
+          evaluateAnswer(currGuess);
         }
         break;
     case "medium":
@@ -120,7 +136,8 @@ setNewChord();
           currLetterNumber++;
         } 
         if(currLetterNumber > 4){
-          evaluateAnswer();
+          currGuess = "" + $('#stcMedium1').text() + " " + $('#stcMedium2').text() + " " + $('#stcMedium3').text() + " " + $('#stcMedium4').text();
+          evaluateAnswer(currGuess);
         }
         break;
     case "hard":
@@ -130,7 +147,8 @@ setNewChord();
           currLetterNumber++;
         } 
         if(currLetterNumber > 5){
-          evaluateAnswer();
+          currGuess = "" + $('#stcHard1').text() + " " + $('#stcHard2').text() + " " + $('#stcHard3').text() + " " + $('#stcHard4').text() + " " + $('#stcHard5').text();
+          evaluateAnswer(currGuess);
         }
         break;
     default:
@@ -142,15 +160,23 @@ setNewChord();
     
   }// end fillAnswerLetter function
   
-  function evaluateAnswer(){
+  function evaluateAnswer(guess){
     
     var u = $('#u').text();
     var n = $('#n').text();
-   
+    
+    if (u === ""){
+      return alert("Need to log in bro man");
+    }
+    
+    if(guess == currSpelling){
+      $('#stcGuessFeedback').text("Yes! +" + pointsAvailable).fadeIn(500,function(){
+        $('#stcGuessFeedback').fadeOut(2000);
+      });
       Parse.Cloud.run("stcAdd",{amount:pointsAvailable,u: u}).then(function(results){
         $('#leaderboard').html("");
         results.forEach(function(item){
-          $('#leaderboard').append(item.get("username")+" has score " + item.get("stcScore") + "<br>");
+          $('#leaderboard').append(item.get("username")+": " + item.get("stcScore") + " points<br>");
           if(item.get("username") == n){
             $('#stcLandscapeSheetMusicNumber').text(item.get("stcScore"));
           }
@@ -160,7 +186,12 @@ setNewChord();
       },function(error){
         alert(error.message);
       });
-  
+    }else{
+      $('#stcGuessFeedback').text("Try again!").fadeIn(500,function(){
+        $('#stcGuessFeedback').fadeOut(2000);
+      });
+    }
+   
   }// end evaluateAnswer
   
   function clearLetters(){
