@@ -3,11 +3,15 @@
   <body>
     <% include partials/head %>
     <% include partials/nav %>
-    <div class="container">
+    <div class="container" style="padding-top:10px;">
        <link href="/styles/spellThatChord.css" rel="stylesheet" type="text/css" />
-      <%  include partials/login-links  %>
-      <p><%= message %><span id="n"><%= n %></span><span id="u" style="display:none"><%= u %></span>!</p>
-      <h1 id="stcHeader" class="text-center">Spell That Chord</h1>
+      <div class="gameHeader">
+        <%  include partials/login-links  %>
+          <p class="pull-right text-muted"><%= message %><span id="n"><%= n %></span><span id="u" style="display:none"><%= u %></span></p>  
+      </div>
+      <div class="row">
+        <h1 id="stcHeader" class="text-center" style="margin-bottom:20px;">Spell That Chord</h1>
+      <div class="col-md-8">
       <div id="stcGameContainer">
       <div class="text-center">
            <div id="stcHeader"></div>  
@@ -82,11 +86,24 @@
                 <button id="stcMediumBtn" class="btn btn-default btn-lg">Medium</button>
                 <button id="stcHardBtn" class="btn btn-default btn-lg">Hard</button>
              </div>
-             <div id="leaderboard"></div>
           </div><!-- end #stcFloorBackground -->
       </div>
-      </div><!-- end #stcGameContainer -->
-    </div><!-- end container -->
+      </div><!--/#stcGameContainer -->
+        </div><!--/col-->
+        <div class="col-md-4">
+          <div id="stcLeaderboard">
+              <h4 class="text-center">Leaderboard</h4>
+              <div id="stcLeaderboardBtnRow">
+              <span>Sort by: </span><div class="btn btn-sm btn-default">Top Scorers</div><div class="btn btn-sm btn-default">Near Me</div>
+              </div>  
+            <div id="stcScores" class="row">
+              <div id="stcScoresNames" class="col-xs-8"></div>
+              <div id="stcScoresValues" class="col-xs-4"></div>
+            </div>
+          </div>
+        </div><!--/col--> 
+      </div><!--/row-->  
+    </div><!--/container -->
     <% include partials/footer %>
     <script src="/js/spellThatChord.js"></script>  <!-- spellThatChord js -->
   </body>

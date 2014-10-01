@@ -293,4 +293,22 @@ margin-right: 50px;
   font-size: 24px;
 }
 
+/* ---------------------------------------------------------------------------*/
+
+#stcLeaderboard{
+  background: rgba(255,255,255,.4);
+  min-height: 400px;
+  padding: 5px;
+}
+
+#stcLeaderboardBtnRow{
+  height: 40px; 
+  padding: 0 10px;
+}
+
+#stcScores{
+  padding: 5% 10%;
+  font-size: 16px;
+}
+
 

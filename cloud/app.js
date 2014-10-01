@@ -37,7 +37,7 @@ app.get('/chord-chart-builder', function(req, res) {
 app.get('/spell-that-chord', function(req, res) {
   if(Parse.User.current()){
     Parse.User.current().fetch().then(function(user){
-      res.render('spellThatChord', { message: 'Welcome Home ',
+      res.render('spellThatChord', { message: 'Logged in as ',
                                      n: user.get("username"),
                                      u: user.id,
                                      score: user.get("stcScore")
@@ -77,7 +77,9 @@ app.post('/login', function(req, res) {
 // Clicking submit on the login form triggers this.
 app.post('/signup', function(req, res) {
   if(req.body.email === ""){
-    res.render('login', {loginMessage: "",signupMessage: "You must have an email address.  If you lose your password, it can be recovered via email."});
+    res.render('login', {loginMessage: "",signupMessage: "You must have an email address. If you lose your password, it can be recovered via email."});
+  }else if(req.body.username.length > 10){
+    res.render('login', {loginMessage: "",signupMessage: "Username cannot exceed 10 characters. Try a shorter one."});
   }else{
       Parse.User.signUp(req.body.username, req.body.password, { email: req.body.email, stcScore: 0, ACL: new Parse.ACL()}).then(function() {
       // Login succeeded, redirect to homepage.

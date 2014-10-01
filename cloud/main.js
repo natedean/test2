@@ -5,13 +5,20 @@ Parse.Cloud.define("hello", function(request, response) {
   response.success("Welcome Home!");
 });
 
-//Parse.Cloud.beforeSave(Parse.User, function(request, response) {
-////  if (!request.object.get("email")) {
-////    response.error("email is required for signup");
-////  } else {
-////    response.success();
-////  }
-//});
+Parse.Cloud.define("stcGetLeaders", function(request,response){
+  Parse.Cloud.useMasterKey();
+  var query = new Parse.Query(Parse.User);
+  query.select("username","stcScore");
+  query.greaterThan("stcScore",0);
+  query.limit(10);
+  query.descending("stcScore");
+  query.find().then(function(results){
+    response.success(results);
+  },function(error){
+    response.error(error);
+  });
+
+});//end getStcLeaders
 
 
 Parse.Cloud.define("stcAdd", function(request, response){ 

@@ -21,6 +21,7 @@ var hardChordsSharps = [{chord:"C Maj9",spelling:"C E G B D"},{chord:"G Maj9",sp
 
 // start game
 setNewChord();
+findLeaders();  
 
   
  //timer stuff ------------------------------------------------------------------------------->
@@ -174,15 +175,17 @@ setNewChord();
         $('#stcGuessFeedback').fadeOut(2000);
       });
       Parse.Cloud.run("stcAdd",{amount:pointsAvailable,u: u}).then(function(results){
-        $('#leaderboard').html("");
+        $('#stcScoresNames').html("");
+        $('#stcScoresValues').html("");
         results.forEach(function(item){
-          $('#leaderboard').append(item.get("username")+": " + item.get("stcScore") + " points<br>");
+          $('#stcScoresNames').append(item.get("username")+"<br>");
+          $('#stcScoresValues').append(item.get("stcScore")+"<br>");
           if(item.get("username") == n){
             $('#stcLandscapeSheetMusicNumber').text(item.get("stcScore"));
           }
-          clearLetters();
-          setNewChord();
         });
+        clearLetters();
+        setNewChord();
       },function(error){
         alert(error.message);
       });
@@ -214,6 +217,20 @@ setNewChord();
         break;
    }
   }// end clearLetters
+  
+  function findLeaders(){
+    Parse.Cloud.run("stcGetLeaders").then(function(results){
+        $('#stcScoresNames').html("");
+        $('#stcScoresValues').html("");
+        results.forEach(function(item){
+          $('#stcScoresNames').append(item.get("username")+"<br>");
+          $('#stcScoresValues').append(item.get("stcScore")+"<br>");
+        });
+      },function(error){
+        alert(error.message);
+      });
+  }// end findLeaders
+  
   
 //------------------------------------------------------------------------------------------------------
   

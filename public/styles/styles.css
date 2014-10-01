@@ -21,3 +21,13 @@
 #signUpErrorMsg, #logInErrorMsg{
   color: red;
 }
+
+.gameHeader{
+  height: 20px;
+}
+
+.gameHeader p{
+  line-height: 28px;
+  padding-right: 20px;
+  font-size: 16px;
+}
