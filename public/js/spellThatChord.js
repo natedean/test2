@@ -1,6 +1,7 @@
 $(function(){
   
   var settings = [{level: "easy", points: 10, numLetters: 3},{level: "medium", points: 15, numLetters: 4},{level: "hard", points: 20, numLetters: 5}];
+  var leaderboardVersions = ["nearMe","topScorers"];
   
   var currDifficultySetting = settings[0]; // set initial to easy object
   var pointsAvailable = currDifficultySetting.points;
@@ -10,6 +11,7 @@ $(function(){
   var prevChord;
   var gameTimer;
   var sharpsOrFlats;
+  var currLeaderboardVersion = leaderboardVersions[0];
   var currLetterNumber = 1;
   
 var easyChordsFlats = [{chord:"C Major",spelling:"C E G"},{chord:"C minor",spelling:"C Eb G"},{chord:"G minor",spelling:"G Bb D"},{chord:"D minor",spelling:"D F A"},{chord:"A minor",spelling:"A C E"},{chord:"E minor",spelling:"E G B"},{chord:"F Major",spelling:"F A C"},{chord:"F minor",spelling:"F Ab C"},{chord:"Bb Major",spelling:"Bb D F"},{chord:"Bb minor",spelling:"Bb Db F"},{chord:"Db Major",spelling:"Db F Ab"},{chord:"Eb Major",spelling:"Eb G Bb"},{chord:"Eb minor",spelling:"Eb Gb Bb"},{chord:"Ab Major",spelling:"Ab C Eb"}];
@@ -212,7 +214,9 @@ findLeaders();
   
   function findLeaders(){
     var n = $('#n').text();
-    Parse.Cloud.run("stcGetLeaders").then(function(results){
+    var u = $('#u').text();
+    var currPlayerScore = parseInt($('#stcLandscapeSheetMusicNumber').text());
+    Parse.Cloud.run("stcGetLeaders",{version: currLeaderboardVersion, u: u, score: currPlayerScore}).then(function(results){
         $('#stcScoresNames').html("");
         $('#stcScoresValues').html("");
         results.forEach(function(item){
@@ -349,6 +353,16 @@ findLeaders();
 
     clearLetters();
 
+  });
+  
+  $('#stcLbTopScorersBtn').click(function(){
+    currLeaderboardVersion = leaderboardVersions[1];
+    findLeaders();
+  });
+  
+  $('#stcLbNearMeBtn').click(function(){
+    currLeaderboardVersion = leaderboardVersions[0];
+    findLeaders();
   });
   
   // end click handlers --------------------------------->

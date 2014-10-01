@@ -8,16 +8,27 @@ Parse.Cloud.define("hello", function(request, response) {
 Parse.Cloud.define("stcGetLeaders", function(request,response){
   Parse.Cloud.useMasterKey();
   var query = new Parse.Query(Parse.User);
-  query.select("username","stcScore");
-  query.greaterThan("stcScore",0);
-  query.limit(10);
-  query.descending("stcScore");
-  query.find().then(function(results){
-    response.success(results);
-  },function(error){
-    response.error(error);
-  });
-
+  query.select("stcScore", "username");
+  if(request.params.version === "nearMe"){
+    query.lessThan("stcScore", request.params.score + 300);
+    query.descending("stcScore");
+    query.limit(10);
+    
+    query.find().then(function(results){
+      response.success(results);
+    },function(error){
+      response.error(error);
+    });
+  }else{
+    query.greaterThan("stcScore",0);
+    query.limit(10);
+    query.descending("stcScore");
+    query.find().then(function(results){
+      response.success(results);
+    },function(error){
+      response.error(error);
+    });
+  }
 });//end getStcLeaders
 
 
