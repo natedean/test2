@@ -29,13 +29,6 @@ Parse.Cloud.define("stcAdd", function(request, response){
     currentUser.increment('stcScore', request.params.amount);
     return currentUser.save(); 
   }).then(function(results){
-    var query = new Parse.Query(Parse.User);
-    query.select("username","stcScore");
-    query.greaterThan("stcScore",0);
-    query.limit(10);
-    query.descending("stcScore");
-    return query.find();
-  }).then(function(results){
     response.success(results);
   },function(error){
     response.error(error);

@@ -175,17 +175,9 @@ findLeaders();
         $('#stcGuessFeedback').fadeOut(2000);
       });
       Parse.Cloud.run("stcAdd",{amount:pointsAvailable,u: u}).then(function(results){
-        $('#stcScoresNames').html("");
-        $('#stcScoresValues').html("");
-        results.forEach(function(item){
-          $('#stcScoresNames').append(item.get("username")+"<br>");
-          $('#stcScoresValues').append(item.get("stcScore")+"<br>");
-          if(item.get("username") == n){
-            $('#stcLandscapeSheetMusicNumber').text(item.get("stcScore"));
-          }
-        });
         clearLetters();
         setNewChord();
+        findLeaders();
       },function(error){
         alert(error.message);
       });
@@ -219,12 +211,16 @@ findLeaders();
   }// end clearLetters
   
   function findLeaders(){
+    var n = $('#n').text();
     Parse.Cloud.run("stcGetLeaders").then(function(results){
         $('#stcScoresNames').html("");
         $('#stcScoresValues').html("");
         results.forEach(function(item){
           $('#stcScoresNames').append(item.get("username")+"<br>");
           $('#stcScoresValues').append(item.get("stcScore")+"<br>");
+          if(item.get("username") == n){
+            $('#stcLandscapeSheetMusicNumber').text(item.get("stcScore"));
+          }
         });
       },function(error){
         alert(error.message);
