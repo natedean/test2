@@ -5,13 +5,13 @@ Parse.Cloud.define("hello", function(request, response) {
   response.success("Welcome Home!");
 });
 
-Parse.Cloud.beforeSave(Parse.User, function(request, response) {
-  if (!request.object.get("email")) {
-    response.error("email is required for signup");
-  } else {
-    response.success();
-  }
-});
+//Parse.Cloud.beforeSave(Parse.User, function(request, response) {
+////  if (!request.object.get("email")) {
+////    response.error("email is required for signup");
+////  } else {
+////    response.success();
+////  }
+//});
 
 
 Parse.Cloud.define("stcAdd", function(request, response){ 

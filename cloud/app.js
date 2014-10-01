@@ -76,15 +76,21 @@ app.post('/login', function(req, res) {
 
 // Clicking submit on the login form triggers this.
 app.post('/signup', function(req, res) {
-  Parse.User.signUp(req.body.username, req.body.password, { email: req.body.email, ACL: new Parse.ACL()}).then(function() {
-    // Login succeeded, redirect to homepage.
-    // parseExpressCookieSession will automatically set cookie.
-    res.redirect('/');
-  },
-  function(error) {
-    // Login failed, redirect back to login form.
-    res.render('login', {loginMessage: "",signupMessage: error.message});
-  });
+  if(req.body.email === ""){
+    res.render('login', {loginMessage: "",signupMessage: "You must have an email address.  If you lose your password, it can be recovered via email."});
+  }else{
+      Parse.User.signUp(req.body.username, req.body.password, { email: req.body.email, stcScore: 0, ACL: new Parse.ACL()}).then(function() {
+      // Login succeeded, redirect to homepage.
+      // parseExpressCookieSession will automatically set cookie.
+      res.redirect('/');
+    },
+    function(error) {
+      // Login failed, redirect back to login form.
+      res.render('login', {loginMessage: "",signupMessage: error.message});
+    });
+  }
+  
+  
 });
 
 
