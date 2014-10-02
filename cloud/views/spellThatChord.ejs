@@ -6,7 +6,7 @@
     <div class="container">
        <link href="/styles/spellThatChord.css" rel="stylesheet" type="text/css" />
       <div class="gameHeader">
-        <%  include partials/login-links-stc  %>
+        <%  include partials/spellThatChord/login-links-stc  %>
           <p class="pull-right text-muted"><%= message %><span id="n"><%= n %></span><span id="u" style="display:none"><%= u %></span></p>  
       </div>
       <div class="row">
@@ -18,7 +18,7 @@
            <div id="stcFloorBackground">
             <div id="stcPiano">
               <div id="stcTopPianoRow">
-                <div id="stcHowToPlayBtn" class="stcTopPianoRowBtn"></div>
+                <%  include partials/spellThatChord/howToPlay  %>
                 <div id="stcCheatSheetBtn" class="stcTopPianoRowBtn"></div>
               </div>
               <div id="stcChordDisplayRow">

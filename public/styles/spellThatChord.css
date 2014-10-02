@@ -26,6 +26,21 @@ background-position:center;
   margin: 0 auto;
   
 }
+/* ---------------------------------------------------------------------------*/
+
+#stcHowToPlay .modal-content{
+  height: 690px;
+}
+
+#stcHowToPlayImage{
+  background-image: url("/images/stc/howtoPlay.png");
+  background-repeat: no-repeat;
+  width: 480px;
+  height: 690px;
+  margin: 0 auto;
+  background-size:contain;
+  background-position:center;
+}
 
 /* ---------------------------------------------------------------------------*/
 
@@ -310,5 +325,7 @@ margin-right: 50px;
   padding: 5% 10%;
   font-size: 16px;
 }
+
+
 
 
