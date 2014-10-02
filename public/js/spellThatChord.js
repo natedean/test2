@@ -169,7 +169,7 @@ findLeaders();
     var n = $('#n').text();
     
     if (u === ""){
-      return alert("Need to log in bro man");
+      return $("#loginModal").modal("show");
     }
     
     if(guess == currSpelling){

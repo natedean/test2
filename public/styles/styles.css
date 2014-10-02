@@ -1,3 +1,12 @@
+.container{
+  background: url('/images/lightBlueBackground.png');
+  padding-top: 10px;
+}
+
+.jumbotron{
+  background-color: rgba(245,245,245,.5);
+}
+
 .navbar{
   border:none;
   background: url('/images/lightBlueBackground.png');
