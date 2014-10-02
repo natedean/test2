@@ -95,20 +95,37 @@ app.post('/signup', function(req, res) {
   
 });
 
+// Clicking submit on the login form triggers this.
+app.post('/login-stc', function(req, res) {
+  Parse.User.logIn(req.body.username, req.body.password).then(function() {
+    // Login succeeded, redirect to homepage.
+    // parseExpressCookieSession will automatically set cookie.
+    res.redirect('/spell-that-chord');
+  },
+  function(error) {
+    // Login failed, redirect back to login form.
+    res.render('login', {loginMessage: error.message,signupMessage: ""});
+  });
+});
 
-
-
-// // Example reading from the request query string of an HTTP get request.
-// app.get('/test', function(req, res) {
-//   // GET http://example.parseapp.com/test?message=hello
-//   res.send(req.query.message);
-// });
-
-// // Example reading from the request body of an HTTP post request.
-// app.post('/test', function(req, res) {
-//   // POST http://example.parseapp.com/test (with request body "message=hello")
-//   res.send(req.body.message);
-// });
+// Clicking submit on the login form triggers this.
+app.post('/signup-stc', function(req, res) {
+  if(req.body.email === ""){
+    res.render('login', {loginMessage: "",signupMessage: "You must have an email address. If you lose your password, it can be recovered via email."});
+  }else if(req.body.username.length > 10){
+    res.render('login', {loginMessage: "",signupMessage: "Username cannot exceed 10 characters. Try a shorter one."});
+  }else{
+      Parse.User.signUp(req.body.username, req.body.password, { email: req.body.email, stcScore: 0, ACL: new Parse.ACL()}).then(function() {
+      // Login succeeded, redirect to homepage.
+      // parseExpressCookieSession will automatically set cookie.
+      res.redirect('/spell-that-chord');
+    },
+    function(error) {
+      // Login failed, redirect back to login form.
+      res.render('login', {loginMessage: "",signupMessage: error.message});
+    });
+  }
+});
 
 // Attach the Express app to Cloud Code.
 app.listen();
