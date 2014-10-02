@@ -173,13 +173,12 @@ findLeaders();
     }
     
     if(guess == currSpelling){
-      $('#stcGuessFeedback').text("Yes! +" + pointsAvailable).fadeIn(500,function(){
-        $('#stcGuessFeedback').fadeOut(2000);
-      });
+      $('#stcGuessFeedback').text("Yes! +" + pointsAvailable).fadeIn(500);
       Parse.Cloud.run("stcAdd",{amount:pointsAvailable,u: u}).then(function(results){
         clearLetters();
         setNewChord();
         findLeaders();
+        $('#stcGuessFeedback').fadeOut(2000);
       },function(error){
         alert(error.message);
       });
