@@ -169,6 +169,7 @@ findLeaders();
     var n = $('#n').text();
     
     if (u === ""){
+      alert('You have to be signed up and logged in to play this game.  This way we can keep track of your score!');
       return $("#loginModal").modal("show");
     }
     
@@ -219,10 +220,13 @@ findLeaders();
         $('#stcScoresNames').html("");
         $('#stcScoresValues').html("");
         results.forEach(function(item){
-          $('#stcScoresNames').append(item.get("username")+"<br>");
-          $('#stcScoresValues').append(item.get("stcScore")+"<br>");
           if(item.get("username") == n){
             $('#stcLandscapeSheetMusicNumber').text(item.get("stcScore"));
+            $('#stcScoresNames').append('<span class="green">' + item.get("username")+'</span><br>');
+            $('#stcScoresValues').append('<span class="green">' + item.get("stcScore")+'</span><br>');
+          }else{
+            $('#stcScoresNames').append(item.get("username")+"<br>");
+            $('#stcScoresValues').append(item.get("stcScore")+"<br>");
           }
         });
       },function(error){

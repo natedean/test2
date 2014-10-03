@@ -5,6 +5,33 @@ Parse.Cloud.define("hello", function(request, response) {
   response.success("Welcome Home!");
 });
 
+Parse.Cloud.define("gtGetLeaders", function(request,response){
+  Parse.Cloud.useMasterKey();
+  var query = new Parse.Query(Parse.User);
+  query.select("gtScore", "username");
+  if(request.params.version === "nearMe"){
+    query.lessThan("gtScore", request.params.score + 300);
+    query.descending("gtScore");
+    query.limit(10);
+    
+    query.find().then(function(results){
+      response.success(results);
+    },function(error){
+      response.error(error);
+    });
+  }else{
+    query.greaterThan("gtScore",0);
+    query.limit(10);
+    query.descending("gtScore");
+    query.find().then(function(results){
+      response.success(results);
+    },function(error){
+      response.error(error);
+    });
+  }
+});//end gtGetLeaders
+
+
 Parse.Cloud.define("stcGetLeaders", function(request,response){
   Parse.Cloud.useMasterKey();
   var query = new Parse.Query(Parse.User);
@@ -38,6 +65,7 @@ Parse.Cloud.define("stcAdd", function(request, response){
   query.equalTo("objectId",request.params.u);
   query.first().then(function(currentUser){
     currentUser.increment('stcScore', request.params.amount);
+    currentUser.increment('gtScore', request.params.amount);
     return currentUser.save(); 
   }).then(function(results){
     response.success(results);

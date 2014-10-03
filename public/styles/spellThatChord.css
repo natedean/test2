@@ -2,10 +2,6 @@
   background: url('/images/lightBlueBackground.png');
 }
 
-.white{
-  color: white;
-}
-
 #stcFloorBackground{
   background-image: url("/images/stc/floor.png");
   background-repeat: no-repeat;
@@ -318,12 +314,17 @@ margin-right: 50px;
 
 #stcLeaderboardBtnRow{
   height: 40px; 
-  padding: 0 10px;
+  width: 250px;
+  margin: 0 auto;
+}
+
+#stcLeaderboardBtnRow .btn{
+  margin: 0 10px;
 }
 
 #stcScores{
   padding: 5% 10%;
-  font-size: 16px;
+  font-size: 18px;
   max-width: 400px;
   margin: 0 auto;
 }

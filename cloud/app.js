@@ -18,10 +18,13 @@ app.use(parseExpressCookieSession({ fetchUser: true, cookie: { maxAge: 3600000 }
 app.get('/', function(req, res) {
   if(Parse.User.current()){
     Parse.User.current().fetch().then(function(user){
-      res.render('home', { message: 'Welcome Home ' + user.get("username") + '!' });
+      res.render('home', { message: 'Logged in as ',
+                                     n: user.get("username"),
+                                     u: user.id
+                                   });
     });
   }else{
-    res.render('home', { message: 'Welcome Home!' });
+    res.render('home', { message: 'Welcome ', n: "Guest", u: ""});
   }
   
 });
@@ -44,7 +47,7 @@ app.get('/spell-that-chord', function(req, res) {
                                    });
     });
   }else{
-    res.render('spellThatChord', { message: 'Welcome ', n: "guest", u: "", score: 0 });
+    res.render('spellThatChord', { message: 'Welcome ', n: "Guest", u: "", score: 0 });
   }
 
 });
@@ -81,7 +84,7 @@ app.post('/signup', function(req, res) {
   }else if(req.body.username.length > 10){
     res.render('login', {loginMessage: "",signupMessage: "Username cannot exceed 10 characters. Try a shorter one."});
   }else{
-      Parse.User.signUp(req.body.username, req.body.password, { email: req.body.email, stcScore: 0, ACL: new Parse.ACL()}).then(function() {
+      Parse.User.signUp(req.body.username, req.body.password, { email: req.body.email, stcScore: 0, gtScore: 0, ACL: new Parse.ACL()}).then(function() {
       // Login succeeded, redirect to homepage.
       // parseExpressCookieSession will automatically set cookie.
       res.redirect('/');

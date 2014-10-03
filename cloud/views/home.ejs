@@ -4,10 +4,23 @@
     <% include partials/head %>
     <% include partials/nav %>
     <div class="container">
+      <link href="/styles/home.css" rel="stylesheet" type="text/css" />
       <% include partials/login-links %>
+       <p id="homeWelcome" class="pull-right text-muted"><%= message %><span id="n"><%= n %></span><span id="u" style="display:none"><%= u %></span></p>
       <div class="jumbotron">
       <h3>Welcome to GuitarThinker.com</h3>
       <p>This site is being transitioned and is a work in progress!  But there are a lot of goodies in here right now... you should check them out!</p>
+        
+          <div id="gtLeaderboard">
+              <h3 class="text-center">GuitarThinker Leaderboard</h3>
+              <div id="gtLeaderboardBtnRow">
+              <span>Sort by: </span><div id="gtLbTopScorersBtn" class="btn btn-sm btn-default">Top Scorers</div><div id="gtLbNearMeBtn" class="btn btn-sm btn-default">Near Me</div>
+              </div>  
+            <div id="gtScores" class="row">
+              <div id="gtScoresNames" class="col-xs-8"></div>
+              <div id="gtScoresValues" class="col-xs-4"></div>
+            </div>
+          </div>
       
         <h3>This site is dedicated to making learning music easier and more fun.</h3>
         <p>Here are some things that are coming very soon:</p>
@@ -25,5 +38,6 @@
       </div><!--/jumbotron-->  
     </div><!-- end container -->
     <% include partials/footer %>
+    <script src="/js/home.js"></script>  <!-- home js -->
   </body>
 </html>

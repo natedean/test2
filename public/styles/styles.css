@@ -1,3 +1,11 @@
+.white{
+  color: white;
+}
+
+.green{
+  color: #4cae4c;
+}
+
 .container{
   background: url('/images/lightBlueBackground.png');
   padding-top: 10px;
