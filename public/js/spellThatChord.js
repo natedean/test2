@@ -109,6 +109,8 @@ findLeaders();
    }
     
     $('#stcChordDisplay').text(currChord);
+    $('#stcCheatSheetChord').text(currChord);
+    $('#stcCheatSheetSpelling').text(currSpelling);
     
     //reset timer
     if(gameTimer){
