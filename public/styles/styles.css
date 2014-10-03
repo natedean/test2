@@ -6,6 +6,10 @@
   color: #4cae4c;
 }
 
+.brown{
+  color: brown;
+}
+
 .container{
   background: url('/images/lightBlueBackground.png');
   padding-top: 10px;

@@ -52,6 +52,12 @@ background-position:center;
   background-position:center;
 }
 
+#stcCheatSheetTextContainer{
+  padding-top: 80px;
+  max-width:300px;
+  margin:0 auto;
+}
+
 /* ---------------------------------------------------------------------------*/
 
 #stcTopPianoRow{

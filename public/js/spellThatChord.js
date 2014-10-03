@@ -7,6 +7,7 @@ $(function(){
   var pointsAvailable = currDifficultySetting.points;
   var currChord;
   var currSpelling;
+  var currNumbers;
   var currGuess;
   var prevChord;
   var gameTimer;
@@ -14,12 +15,12 @@ $(function(){
   var currLeaderboardVersion = leaderboardVersions[0];
   var currLetterNumber = 1;
   
-var easyChordsFlats = [{chord:"C Major",spelling:"C E G"},{chord:"C minor",spelling:"C Eb G"},{chord:"G minor",spelling:"G Bb D"},{chord:"D minor",spelling:"D F A"},{chord:"A minor",spelling:"A C E"},{chord:"E minor",spelling:"E G B"},{chord:"F Major",spelling:"F A C"},{chord:"F minor",spelling:"F Ab C"},{chord:"Bb Major",spelling:"Bb D F"},{chord:"Bb minor",spelling:"Bb Db F"},{chord:"Db Major",spelling:"Db F Ab"},{chord:"Eb Major",spelling:"Eb G Bb"},{chord:"Eb minor",spelling:"Eb Gb Bb"},{chord:"Ab Major",spelling:"Ab C Eb"}];
-var easyChordsSharps = [{chord:"G Major",spelling:"G B D"},{chord:"D Major",spelling:"D F# A"},{chord:"A Major",spelling:"A C# E"},{chord:"E Major",spelling:"E G# B"},{chord:"B Major",spelling:"B D# F#"},{chord:"F# Major",spelling:"F# A# C#"},{chord:"B minor",spelling:"B D F#"},{chord:"F# minor",spelling:"F# A C#"},{chord:"C# minor",spelling:"C# E G#"}];
-var mediumChordsFlats = [{chord:"C Maj7",spelling:"C E G B"},{chord:"C min7",spelling:"C Eb G Bb"},{chord:"G min7",spelling:"G Bb D F"},{chord:"D min7",spelling:"D F A C"},{chord:"A min7",spelling:"A C E G"},{chord:"E min7",spelling:"E G B D"},{chord:"F Maj7",spelling:"F A C E"},{chord:"F min7",spelling:"F Ab C Eb"},{chord:"Bb Maj7",spelling:"Bb D F A"},{chord:"Bb min7",spelling:"Bb Db F Ab"},{chord:"Eb Maj7",spelling:"Eb G Bb D"},{chord:"Eb min7",spelling:"Eb Gb Bb Db"},{chord:"Ab Maj7",spelling:"Ab C Eb G"},{chord:"C7",spelling:"C E G Bb"},{chord:"F7",spelling:"F A C Eb"},{chord:"Bb7",spelling:"Bb D F Ab"},{chord:"Eb7",spelling:"Eb G Bb Db"},{chord:"Ab7",spelling:"Ab C Eb Gb"},{chord:"C min7b5",spelling:"C Eb Gb Bb"},{chord:"E min7b5",spelling:"E G Bb D"},{chord:"A min7b5",spelling:"A C Eb G"},{chord:"D min7b5",spelling:"D F Ab C"},{chord:"C6",spelling:"C E G A"},{chord:"F6",spelling:"F A C D"},{chord:"Bb6",spelling:"Bb D F G"},{chord:"Eb6",spelling:"Eb G Bb C"},{chord:"F add9",spelling:"F A C G"},{chord:"Eb add9",spelling:"Eb G Bb F"},{chord:"Ab add9",spelling:"Ab C Eb Bb"}];
-var mediumChordsSharps = [{chord:"G Maj7",spelling:"G B D F#"},{chord:"D Maj7",spelling:"D F# A C#"},{chord:"A Maj7",spelling:"A C# E G#"},{chord:"E Maj7",spelling:"E G# B D#"},{chord:"B Maj7",spelling:"B D# F# A#"},{chord:"B min7",spelling:"B D F# A"},{chord:"F# min7",spelling:"F# A C# E"},{chord:"C# min7",spelling:"C# E G# B"},{chord:"G7",spelling:"G B D F"},{chord:"D7",spelling:"D F# A C"},{chord:"A7",spelling:"A C# E G"},{chord:"E7",spelling:"E G# B D"},{chord:"B7",spelling:"B D# F# A"},{chord:"B min7b5",spelling:"B D F A"},{chord:"F# min7b5",spelling:"F# A C E"},{chord:"C# min7b5",spelling:"C# E G B"},{chord:"G# min7b5",spelling:"G# B D F#"},{chord:"G6",spelling:"G B D E"},{chord:"A6",spelling:"A C# E F#"},{chord:"E6",spelling:"E G# B C#"},{chord:"G add9",spelling:"G B D A"},{chord:"D add9",spelling:"D F# A E"},{chord:"A add9",spelling:"A C# E B"},{chord:"E add9",spelling:"E G# B F#"}];
-var hardChordsFlats = [{chord:"C min9",spelling:"C Eb G Bb D"},{chord:"D min9",spelling:"D F A C E"},{chord:"G min9",spelling:"G Bb D F A"},{chord:"F min9",spelling:"F Ab C Eb G"},{chord:"F Maj9",spelling:"F A C E G"},{chord:"Bb Maj9",spelling:"Bb D F A C"},{chord:"Bb min9",spelling:"Bb Db F Ab C"},{chord:"Db Maj9",spelling:"Db F Ab C Eb"},{chord:"Eb Maj9",spelling:"Eb G Bb D F"},{chord:"Eb min9",spelling:"Eb Gb Bb Db F"},{chord:"Ab Maj9",spelling:"Ab C Eb G Bb"},{chord:"C9",spelling:"C E G Bb D"},{chord:"F9",spelling:"F A C Eb G"},{chord:"Bb9",spelling:"Bb D F Ab C"},{chord:"Eb9",spelling:"Eb G Bb Db F"},{chord:"Ab9",spelling:"Ab C Eb Gb Bb"}];
-var hardChordsSharps = [{chord:"C Maj9",spelling:"C E G B D"},{chord:"G Maj9",spelling:"G B D F# A"},{chord:"D Maj9",spelling:"D F# A C# E"},{chord:"A Maj9",spelling:"A C# E G# B"},{chord:"E Maj9",spelling:"E G# B D# F#"},{chord:"A min9",spelling:"A C E G B"},{chord:"E min9",spelling:"E G B D F#"},{chord:"F# min9",spelling:"F# A C# E G#"},{chord:"C# min9",spelling:"C# E G# B D#"},{chord:"G9",spelling:"G B D F A"},{chord:"D9",spelling:"D F# A C E"},{chord:"A9",spelling:"A C# E G B"},{chord:"E9",spelling:"E G# B D F#"},{chord:"F#9",spelling:"F# A# C# E G#"}];
+var easyChordsFlats = [{chord:"C Major",spelling:"C E G",numbers:"1 3 5"},{chord:"C minor",spelling:"C Eb G",numbers:"1 b3 5"},{chord:"G minor",spelling:"G Bb D",numbers:"1 b3 5"},{chord:"D minor",spelling:"D F A",numbers:"1 b3 5"},{chord:"A minor",spelling:"A C E",numbers:"1 b3 5"},{chord:"E minor",spelling:"E G B",numbers:"1 b3 5"},{chord:"F Major",spelling:"F A C",numbers:"1 3 5"},{chord:"F minor",spelling:"F Ab C",numbers:"1 b3 5"},{chord:"Bb Major",spelling:"Bb D F",numbers:"1 3 5"},{chord:"Bb minor",spelling:"Bb Db F",numbers:"1 b3 5"},{chord:"Db Major",spelling:"Db F Ab",numbers:"1 3 5"},{chord:"Eb Major",spelling:"Eb G Bb",numbers:"1 3 5"},{chord:"Eb minor",spelling:"Eb Gb Bb",numbers:"1 b3 5"},{chord:"Ab Major",spelling:"Ab C Eb",numbers:"1 3 5"}];
+var easyChordsSharps = [{chord:"G Major",spelling:"G B D",numbers:"1 3 5"},{chord:"D Major",spelling:"D F# A",numbers:"1 3 5"},{chord:"A Major",spelling:"A C# E",numbers:"1 3 5"},{chord:"E Major",spelling:"E G# B",numbers:"1 3 5"},{chord:"B Major",spelling:"B D# F#",numbers:"1 3 5"},{chord:"F# Major",spelling:"F# A# C#",numbers:"1 3 5"},{chord:"B minor",spelling:"B D F#",numbers:"1 b3 5"},{chord:"F# minor",spelling:"F# A C#",numbers:"1 b3 5"},{chord:"C# minor",spelling:"C# E G#",numbers:"1 b3 5"}];
+var mediumChordsFlats = [{chord:"C Maj7",spelling:"C E G B",numbers:"1 3 5 7"},{chord:"C min7",spelling:"C Eb G Bb",numbers:"1 b3 5 b7"},{chord:"G min7",spelling:"G Bb D F",numbers:"1 b3 5 b7"},{chord:"D min7",spelling:"D F A C",numbers:"1 b3 5 b7"},{chord:"A min7",spelling:"A C E G",numbers:"1 b3 5 b7"},{chord:"E min7",spelling:"E G B D",numbers:"1 b3 5 b7"},{chord:"F Maj7",spelling:"F A C E",numbers:"1 3 5 7"},{chord:"F min7",spelling:"F Ab C Eb",numbers:"1 b3 5 b7"},{chord:"Bb Maj7",spelling:"Bb D F A",numbers:"1 3 5 7"},{chord:"Bb min7",spelling:"Bb Db F Ab",numbers:"1 b3 5 b7"},{chord:"Eb Maj7",spelling:"Eb G Bb D",numbers:"1 3 5 7"},{chord:"Eb min7",spelling:"Eb Gb Bb Db",numbers:"1 b3 5 b7"},{chord:"Ab Maj7",spelling:"Ab C Eb G",numbers:"1 3 5 7"},{chord:"C7",spelling:"C E G Bb",numbers:"1 3 5 b7"},{chord:"F7",spelling:"F A C Eb",numbers:"1 3 5 b7"},{chord:"Bb7",spelling:"Bb D F Ab",numbers:"1 3 5 b7"},{chord:"Eb7",spelling:"Eb G Bb Db",numbers:"1 3 5 b7"},{chord:"Ab7",spelling:"Ab C Eb Gb",numbers:"1 3 5 b7"},{chord:"C min7b5",spelling:"C Eb Gb Bb",numbers:"1 b3 b5 b7"},{chord:"E min7b5",spelling:"E G Bb D",numbers:"1 b3 b5 b7"},{chord:"A min7b5",spelling:"A C Eb G",numbers:"1 b3 b5 b7"},{chord:"D min7b5",spelling:"D F Ab C",numbers:"1 b3 b5 b7"},{chord:"C6",spelling:"C E G A",numbers:"1 3 5 6"},{chord:"F6",spelling:"F A C D",numbers:"1 3 5 6"},{chord:"Bb6",spelling:"Bb D F G",numbers:"1 3 5 6"},{chord:"Eb6",spelling:"Eb G Bb C",numbers:"1 3 5 6"},{chord:"F add9",spelling:"F A C G",numbers:"1 3 5 9"},{chord:"Eb add9",spelling:"Eb G Bb F",numbers:"1 3 5 9"},{chord:"Ab add9",spelling:"Ab C Eb Bb",numbers:"1 3 5 9"}];
+var mediumChordsSharps = [{chord:"G Maj7",spelling:"G B D F#",numbers:"1 3 5 7"},{chord:"D Maj7",spelling:"D F# A C#",numbers:"1 3 5 7"},{chord:"A Maj7",spelling:"A C# E G#",numbers:"1 3 5 7"},{chord:"E Maj7",spelling:"E G# B D#",numbers:"1 3 5 7"},{chord:"B Maj7",spelling:"B D# F# A#",numbers:"1 3 5 7"},{chord:"B min7",spelling:"B D F# A",numbers:"1 b3 5 b7"},{chord:"F# min7",spelling:"F# A C# E",numbers:"1 b3 5 b7"},{chord:"C# min7",spelling:"C# E G# B",numbers:"1 b3 5 b7"},{chord:"G7",spelling:"G B D F",numbers:"1 3 5 b7"},{chord:"D7",spelling:"D F# A C",numbers:"1 3 5 b7"},{chord:"A7",spelling:"A C# E G",numbers:"1 3 5 b7"},{chord:"E7",spelling:"E G# B D",numbers:"1 3 5 b7"},{chord:"B7",spelling:"B D# F# A",numbers:"1 3 5 b7"},{chord:"B min7b5",spelling:"B D F A",numbers:"1 b3 b5 b7"},{chord:"F# min7b5",spelling:"F# A C E",numbers:"1 b3 b5 b7"},{chord:"C# min7b5",spelling:"C# E G B",numbers:"1 b3 b5 b7"},{chord:"G# min7b5",spelling:"G# B D F#",numbers:"1 b3 b5 b7"},{chord:"G6",spelling:"G B D E",numbers:"1 3 5 6"},{chord:"A6",spelling:"A C# E F#",numbers:"1 3 5 6"},{chord:"E6",spelling:"E G# B C#",numbers:"1 3 5 6"},{chord:"G add9",spelling:"G B D A",numbers:"1 3 5 9"},{chord:"D add9",spelling:"D F# A E",numbers:"1 3 5 9"},{chord:"A add9",spelling:"A C# E B",numbers:"1 3 5 9"},{chord:"E add9",spelling:"E G# B F#",numbers:"1 3 5 9"}];
+var hardChordsFlats = [{chord:"C min9",spelling:"C Eb G Bb D",numbers:"1 b3 5 b7 9"},{chord:"D min9",spelling:"D F A C E",numbers:"1 b3 5 b7 9"},{chord:"G min9",spelling:"G Bb D F A",numbers:"1 b3 5 b7 9"},{chord:"F min9",spelling:"F Ab C Eb G",numbers:"1 b3 5 b7 9"},{chord:"F Maj9",spelling:"F A C E G",numbers:"1 3 5 7 9"},{chord:"Bb Maj9",spelling:"Bb D F A C",numbers:"1 3 5 7 9"},{chord:"Bb min9",spelling:"Bb Db F Ab C",numbers:"1 b3 5 b7 9"},{chord:"Db Maj9",spelling:"Db F Ab C Eb",numbers:"1 3 5 7 9"},{chord:"Eb Maj9",spelling:"Eb G Bb D F",numbers:"1 3 5 7 9"},{chord:"Eb min9",spelling:"Eb Gb Bb Db F",numbers:"1 b3 5 b7 9"},{chord:"Ab Maj9",spelling:"Ab C Eb G Bb",numbers:"1 3 5 7 9"},{chord:"C9",spelling:"C E G Bb D",numbers:"1 3 5 b7 9"},{chord:"F9",spelling:"F A C Eb G",numbers:"1 3 5 b7 9"},{chord:"Bb9",spelling:"Bb D F Ab C",numbers:"1 3 5 b7 9"},{chord:"Eb9",spelling:"Eb G Bb Db F",numbers:"1 3 5 b7 9"},{chord:"Ab9",spelling:"Ab C Eb Gb Bb",numbers:"1 3 5 b7 9"}];
+var hardChordsSharps = [{chord:"C Maj9",spelling:"C E G B D",numbers:"1 3 5 7 9"},{chord:"G Maj9",spelling:"G B D F# A",numbers:"1 3 5 7 9"},{chord:"D Maj9",spelling:"D F# A C# E",numbers:"1 3 5 7 9"},{chord:"A Maj9",spelling:"A C# E G# B",numbers:"1 3 5 7 9"},{chord:"E Maj9",spelling:"E G# B D# F#",numbers:"1 3 5 7 9"},{chord:"A min9",spelling:"A C E G B",numbers:"1 b3 5 b7 9"},{chord:"E min9",spelling:"E G B D F#",numbers:"1 b3 5 b7 9"},{chord:"F# min9",spelling:"F# A C# E G#",numbers:"1 b3 5 b7 9"},{chord:"C# min9",spelling:"C# E G# B D#",numbers:"1 b3 5 b7 9"},{chord:"G9",spelling:"G B D F A",numbers:"1 3 5 b7 9"},{chord:"D9",spelling:"D F# A C E",numbers:"1 3 5 b7 9"},{chord:"A9",spelling:"A C# E G B",numbers:"1 3 5 b7 9"},{chord:"E9",spelling:"E G# B D F#",numbers:"1 3 5 b7 9"},{chord:"F#9",spelling:"F# A# C# E G#",numbers:"1 3 5 b7 9"}];
 
 // start game
 setNewChord();
@@ -29,7 +30,7 @@ findLeaders();
  //timer stuff ------------------------------------------------------------------------------->
   
   function timer() {         
-      if(pointsAvailable > 0){
+      if(pointsAvailable > 1){
         pointsAvailable -= 1;
       }else{
         clearInterval(gameTimer);
@@ -73,10 +74,12 @@ findLeaders();
           rand = Math.floor(Math.random()*easyChordsFlats.length);
           currChord = easyChordsFlats[rand].chord;
           currSpelling = easyChordsFlats[rand].spelling;
+          currNumbers = easyChordsFlats[rand].numbers;
         }else{
           rand = Math.floor(Math.random()*easyChordsSharps.length);
           currChord = easyChordsSharps[rand].chord;
           currSpelling = easyChordsSharps[rand].spelling;
+          currNumbers = easyChordsSharps[rand].numbers;
         }
         break;
     case "medium":
@@ -85,10 +88,12 @@ findLeaders();
           rand = Math.floor(Math.random()*mediumChordsFlats.length);
           currChord = mediumChordsFlats[rand].chord;
           currSpelling = mediumChordsFlats[rand].spelling;
+          currNumbers = mediumChordsFlats[rand].numbers;
         }else{
           rand = Math.floor(Math.random()*mediumChordsSharps.length);
           currChord = mediumChordsSharps[rand].chord;
           currSpelling = mediumChordsSharps[rand].spelling;
+          currNumbers = mediumChordsSharps[rand].numbers;
         }
         break;
     case "hard":
@@ -97,10 +102,12 @@ findLeaders();
           rand = Math.floor(Math.random()*hardChordsFlats.length);
           currChord = hardChordsFlats[rand].chord;
           currSpelling = hardChordsFlats[rand].spelling;
+          currNumbers = hardChordsFlats[rand].numbers;
         }else{
           rand = Math.floor(Math.random()*hardChordsSharps.length);
           currChord = hardChordsSharps[rand].chord;
           currSpelling = hardChordsSharps[rand].spelling;
+          currNumbers = hardChordsSharps[rand].numbers;
         }
         break;
     default:
@@ -111,6 +118,7 @@ findLeaders();
     $('#stcChordDisplay').text(currChord);
     $('#stcCheatSheetChord').text(currChord);
     $('#stcCheatSheetSpelling').text(currSpelling);
+    $('#stcCheatSheetNumbers').text(currNumbers);
     
     //reset timer
     if(gameTimer){
@@ -166,7 +174,6 @@ findLeaders();
   }// end fillAnswerLetter function
   
   function evaluateAnswer(guess){
-    
     var u = $('#u').text();
     var n = $('#n').text();
     
@@ -240,6 +247,13 @@ findLeaders();
 //------------------------------------------------------------------------------------------------------
   
 // click handlers
+  $('#stcCheatSheetBtn').click(function(){
+    pointsAvailable = pointsAvailable - 5;
+    if(pointsAvailable < 1){
+      pointsAvailable = 1;
+    }
+  });
+  
  $('#stcNewChordBtn').click(function(){
    setNewChord();
  });
@@ -355,9 +369,7 @@ findLeaders();
   });
   
   $('#stcClearBtn').click(function(){
-
     clearLetters();
-
   });
   
   $('#stcLbTopScorersBtn').click(function(){
