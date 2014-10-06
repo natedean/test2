@@ -52,6 +52,21 @@ app.get('/spell-that-chord', function(req, res) {
 
 });
 
+app.get('/music-theory-master', function(req, res) {
+  if(Parse.User.current()){
+    Parse.User.current().fetch().then(function(user){
+      res.render('musicTheoryMaster', { message: 'Logged in as ',
+                                     n: user.get("username"),
+                                     u: user.id,
+                                     score: user.get("stcScore")
+                                   });
+    });
+  }else{
+    res.render('musicTheoryMaster', { message: 'Welcome ', n: "Guest", u: "", score: 0 });
+  }
+
+});
+
 // You could have a "Log In" link on your website pointing to this.
 app.get('/login', function(req, res) {
   // Renders the login form asking for username and password.

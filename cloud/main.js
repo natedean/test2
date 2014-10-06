@@ -68,7 +68,7 @@ Parse.Cloud.define("stcGetLeaders", function(request,response){
   var query = new Parse.Query(Parse.User);
   query.select("stcScore", "username");
   if(request.params.version === "nearMe"){
-    query.lessThan("stcScore", request.params.score + 300);
+    query.lessThan("stcScore", request.params.score + 100);
     query.descending("stcScore");
     query.limit(10);
     
