@@ -3,6 +3,7 @@ $(function(){
 
   var leaderboardVersions = ["nearMe","topScorers"];
   var currLeaderboardVersion = leaderboardVersions[1];
+  var currPlayerScore = 0;
   
   //initialize
   findLeaders();
@@ -19,6 +20,7 @@ $(function(){
             $('#gtLandscapeSheetMusicNumber').text(item.get("gtScore"));
             $('#gtScoresNames').append('<span class="green">' + item.get("username")+'</span><br>');
             $('#gtScoresValues').append('<span class="green">' + item.get("gtScore")+'</span><br>');
+            currPlayerScore = item.get("mtmScore");
           }else{
             $('#gtScoresNames').append(item.get("username")+"<br>");
             $('#gtScoresValues').append(item.get("gtScore")+"<br>");

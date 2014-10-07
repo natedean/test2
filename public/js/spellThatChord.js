@@ -12,7 +12,7 @@ $(function(){
   var prevChord;
   var gameTimer;
   var sharpsOrFlats;
-  var currLeaderboardVersion = leaderboardVersions[0];
+  var currLeaderboardVersion = leaderboardVersions[1];
   var currLetterNumber = 1;
   
 var easyChordsFlats = [{chord:"C Major",spelling:"C E G",numbers:"1 3 5"},{chord:"C minor",spelling:"C Eb G",numbers:"1 b3 5"},{chord:"G minor",spelling:"G Bb D",numbers:"1 b3 5"},{chord:"D minor",spelling:"D F A",numbers:"1 b3 5"},{chord:"A minor",spelling:"A C E",numbers:"1 b3 5"},{chord:"E minor",spelling:"E G B",numbers:"1 b3 5"},{chord:"F Major",spelling:"F A C",numbers:"1 3 5"},{chord:"F minor",spelling:"F Ab C",numbers:"1 b3 5"},{chord:"Bb Major",spelling:"Bb D F",numbers:"1 3 5"},{chord:"Bb minor",spelling:"Bb Db F",numbers:"1 b3 5"},{chord:"Db Major",spelling:"Db F Ab",numbers:"1 3 5"},{chord:"Eb Major",spelling:"Eb G Bb",numbers:"1 3 5"},{chord:"Eb minor",spelling:"Eb Gb Bb",numbers:"1 b3 5"},{chord:"Ab Major",spelling:"Ab C Eb",numbers:"1 3 5"}];
@@ -183,7 +183,7 @@ findLeaders();
     }
     
     if(guess == currSpelling){
-      $('#stcGuessFeedback').text("Yes! +" + pointsAvailable).fadeIn(500);
+      $('#stcGuessFeedback').text("Correct! +" + pointsAvailable).fadeIn(500);
       Parse.Cloud.run("stcAdd",{amount:pointsAvailable,u: u}).then(function(results){
         clearLetters();
         setNewChord();

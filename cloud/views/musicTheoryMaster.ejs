@@ -6,17 +6,26 @@
     <div class="container">
        <link href="/styles/musicTheoryMaster.css" rel="stylesheet" type="text/css" />
       <div class="gameHeader">
-        <%  include partials/spellThatChord/login-links-stc  %>
+        <%  include partials/musicTheoryMaster/login-links-mtm  %>
           <p class="pull-right text-muted"><%= message %><span id="n"><%= n %></span><span id="u" style="display:none"><%= u %></span></p>  
       </div>
-      <div class="text-center">
-    <div id="timeBtn" class="btn btn-lg btn-danger">Time</div>
-    <br>
-  <br>
-    <h4 id="timeKeeper"></h4>
-    <h4 id="question"></h4>
-    <div id="answerContainer"></div>
-  </div>
+      <div id="mtmMain" class="text-center">
+        <h2 id="mtmQuestion"></h2>
+        <div id="mtmAnswerContainer"></div>
+        <div id="mtmFeedbackContainer">
+          <p id="mtmGuessFeedback">What's your guess?</p>
+        </div>  
+      </div>
+      <div id="mtmLeaderboard">
+              <h3 class="text-center">Leaderboard</h3>
+              <div id="mtmLeaderboardBtnRow">
+              <span>Sort by: </span><div id="mtmLbTopScorersBtn" class="btn btn-sm btn-default">Top Scorers</div><div id="mtmLbNearMeBtn" class="btn btn-sm btn-default">Near Me</div>
+              </div>  
+            <div id="mtmScores" class="row">
+              <div id="mtmScoresNames" class="col-xs-8"></div>
+              <div id="mtmScoresValues" class="col-xs-4"></div>
+            </div>
+          </div>
     </div><!--/container -->
     <% include partials/footer %>
     <script src="/js/musicTheoryMaster.js"></script>  <!-- spellThatChord js -->

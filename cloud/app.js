@@ -11,8 +11,6 @@ app.use(express.bodyParser());
 app.use(express.cookieParser('YOUR_SIGNING_SECRET'));
 app.use(parseExpressCookieSession({ fetchUser: true, cookie: { maxAge: 3600000 } }));
 
-
-
 // This is an example of hooking up a request handler with a specific request
 // path and HTTP verb using the Express routing API.
 app.get('/', function(req, res) {
@@ -99,7 +97,7 @@ app.post('/signup', function(req, res) {
   }else if(req.body.username.length > 10){
     res.render('login', {loginMessage: "",signupMessage: "Username cannot exceed 10 characters. Try a shorter one."});
   }else{
-      Parse.User.signUp(req.body.username, req.body.password, { email: req.body.email, stcScore: 0, gtScore: 0, ACL: new Parse.ACL()}).then(function() {
+      Parse.User.signUp(req.body.username, req.body.password, { email: req.body.email, stcScore: 0, mtmScore: 0, gtScore: 0, ACL: new Parse.ACL() }).then(function() {
       // Login succeeded, redirect to homepage.
       // parseExpressCookieSession will automatically set cookie.
       res.redirect('/');
@@ -133,10 +131,42 @@ app.post('/signup-stc', function(req, res) {
   }else if(req.body.username.length > 10){
     res.render('login', {loginMessage: "",signupMessage: "Username cannot exceed 10 characters. Try a shorter one."});
   }else{
-      Parse.User.signUp(req.body.username, req.body.password, { email: req.body.email, stcScore: 0, ACL: new Parse.ACL()}).then(function() {
+      Parse.User.signUp(req.body.username, req.body.password, { email: req.body.email, stcScore: 0, mtmScore: 0, gtScore: 0, ACL: new Parse.ACL() }).then(function() {
       // Login succeeded, redirect to homepage.
       // parseExpressCookieSession will automatically set cookie.
       res.redirect('/spell-that-chord');
+    },
+    function(error) {
+      // Login failed, redirect back to login form.
+      res.render('login', {loginMessage: "",signupMessage: error.message});
+    });
+  }
+});
+
+// Clicking submit on the login form triggers this.
+app.post('/login-mtm', function(req, res) {
+  Parse.User.logIn(req.body.username, req.body.password).then(function() {
+    // Login succeeded, redirect to homepage.
+    // parseExpressCookieSession will automatically set cookie.
+    res.redirect('/music-theory-master');
+  },
+  function(error) {
+    // Login failed, redirect back to login form.
+    res.render('login', {loginMessage: error.message,signupMessage: ""});
+  });
+});
+
+// Clicking submit on the login form triggers this.
+app.post('/signup-mtm', function(req, res) {
+  if(req.body.email === ""){
+    res.render('login', {loginMessage: "",signupMessage: "You must have an email address. If you lose your password, it can be recovered via email."});
+  }else if(req.body.username.length > 10){
+    res.render('login', {loginMessage: "",signupMessage: "Username cannot exceed 10 characters. Try a shorter one."});
+  }else{
+      Parse.User.signUp(req.body.username, req.body.password, { email: req.body.email, stcScore: 0, mtmScore: 0, gtScore: 0, ACL: new Parse.ACL() }).then(function() {
+      // Login succeeded, redirect to homepage.
+      // parseExpressCookieSession will automatically set cookie.
+      res.redirect('/music-theory-master');
     },
     function(error) {
       // Login failed, redirect back to login form.

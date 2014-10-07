@@ -1,0 +1,42 @@
+div#mtmMain {
+  margin: 30px 0 20px 0;
+}
+
+h2#mtmQuestion {
+  margin-bottom: 20px;
+}
+
+.btn.answer{
+  margin: 6px;
+}
+
+#mtmFeedbackContainer{
+  height:30px;
+  margin-top: 10px;
+}
+
+/*leaderboard styles*/
+#mtmLeaderboard{
+  background: rgba(255,255,255,.4);
+  min-height: 400px;
+  padding: 5px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+#mtmLeaderboardBtnRow{
+  height: 40px; 
+  width: 250px;
+  margin: 0 auto;
+}
+
+#mtmLeaderboardBtnRow .btn{
+  margin: 0 10px;
+}
+
+#mtmScores{
+  padding: 5% 10%;
+  font-size: 22px;
+  max-width: 400px;
+  margin: 0 auto;
+}
