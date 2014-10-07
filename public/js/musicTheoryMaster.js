@@ -1,6 +1,7 @@
 var leaderboardVersions = ["nearMe","topScorers"];
 var currLeaderboardVersion = leaderboardVersions[1];
-var currPlayerScore = 0;
+var pointsAvailable = 10;
+var gameTimer;
 
 var awesomeArray = [{question: "How many sharps in the key of C Major?", answers: [{answer: 0, correct: true},{answer: 1,correct: false},{answer: 2,correct: false},{answer: 3,correct: false}]},
                     {question: "How many sharps in the key of G Major?", answers: [{answer: 1, correct: true},{answer: 0,correct: false},{answer: 2,correct: false},{answer: 3,correct: false}]},
@@ -36,6 +37,8 @@ $(function(){
   //initialize game
   GAME.findLeaders("mtm",currLeaderboardVersion);
   getNew();
+  $('#mtmPointsAvailableDisplay').text(pointsAvailable);
+  gameTimer = setInterval(timer, 2000);
   
   
   function getNew(){
@@ -46,17 +49,18 @@ $(function(){
     
     var newResults = shuffle(newQuestion.answers);     
     newResults.map(function(item){
-    if(item.correct){
-      $('#mtmAnswerContainer').append(
-    '<div id="c" class="btn btn-lg btn-default answer">' + item.answer + '</div>'
-    );
-    }else{
-      $('#mtmAnswerContainer').append(
-    '<div class="btn btn-lg btn-default answer">' + item.answer + '</div>'
-    );   
-    } 
-  });// end map
-    $('.answer').click(function(e){
+      if(item.correct){
+        $('#mtmAnswerContainer').append(
+          '<div id="c" class="btn btn-lg btn-default answer">' + item.answer + '</div>'
+        );
+      }else{
+        $('#mtmAnswerContainer').append(
+          '<div class="btn btn-lg btn-default answer">' + item.answer + '</div>'
+        );   
+      } 
+    });// end map
+    $('.answer').click(function(e){ // click handler
+//      $('#mtmPointsAvailableText').fadeOut(200);
       if(e.target.id === "c"){
         var u = $('#u').text();
         var n = $('#n').text();
@@ -65,13 +69,18 @@ $(function(){
           alert('You have to be signed up and logged in to play this game.  This way we can keep track of your score!');
           return $("#loginModal").modal("show");
         }
-        $('#mtmGuessFeedback').text("Correct! +" + 5).fadeIn(500);
-        Parse.Cloud.run("add",{amount:5,u: u,currApp: "mtm"}).then(function(results){
-        GAME.findLeaders("mtm",currLeaderboardVersion);
-        getNew();
-        $('#mtmGuessFeedback').fadeOut(2000);
+        $('#mtmGuessFeedback').text("Correct! +" + pointsAvailable).fadeIn(500);
+        
+        Parse.Cloud.run("add",{amount:pointsAvailable,u: u,currApp: "mtm"}).then(function(results){
+          GAME.findLeaders("mtm",currLeaderboardVersion);
+          getNew();
+          $('#mtmGuessFeedback').fadeOut(2000);
+          resetTimer();
+//          $('#mtmPointsAvailableText').fadeIn(1000);
         },function(error){
-          alert(error.message);
+          resetTimer();
+//          $('#mtmPointsAvailableText').fadeIn(1000);
+          console.log(error.message);
         });
       }else{
         var ans = $("#c").text();
@@ -79,10 +88,12 @@ $(function(){
         setTimeout(function(){
           GAME.findLeaders("mtm",currLeaderboardVersion);
           getNew();
+          resetTimer();
+//          $('#mtmPointsAvailableText').fadeIn(1000);
           $('#mtmGuessFeedback').fadeOut(2000);
         },1000);
       }
-    });
+    });// end click handler
 }// end getNew
   
   function shuffle(array) {
@@ -102,7 +113,7 @@ $(function(){
   }
 
   return array;
-}
+}// end shuffle
   
 // click handlers
 
@@ -117,6 +128,27 @@ $(function(){
   });
   
   // end click handlers --------------------------------->  
+  
+  //timer stuff ------------------------------------------------------------------------------->
+  
+  function timer() {         
+      if(pointsAvailable > 1){
+        pointsAvailable -= 1;
+      }else{
+        clearInterval(gameTimer);
+      }
+    $('#mtmPointsAvailableDisplay').text(pointsAvailable);    
+  }
+  
+  function resetTimer(){
+    //reset timer
+    if(gameTimer){
+      clearInterval(gameTimer);
+    }
+    pointsAvailable = 10;
+    $('#mtmPointsAvailableDisplay').text(pointsAvailable);
+    gameTimer = setInterval(timer, 2000);
+  }
   
   
 });// end doc ready

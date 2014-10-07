@@ -9,7 +9,6 @@ var GAME = (function(){
     findLeaders: function(){
       var app = arguments[0];
       var currLeaderboardVersion = arguments[1];
-      
       var n = $('#n').text();
       var u = $('#u').text();
     Parse.Cloud.run("getLeaders",{version: currLeaderboardVersion, u: u, score: currPlayerScore, currApp: app}).then(function(results){
