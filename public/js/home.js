@@ -12,7 +12,7 @@ $(function(){
     var n = $('#n').text();
     var u = $('#u').text();
     var currPlayerScore = parseInt($('#gtLandscapeSheetMusicNumber').text());
-    Parse.Cloud.run("gtGetLeaders",{version: currLeaderboardVersion, u: u, score: currPlayerScore}).then(function(results){
+    Parse.Cloud.run("getLeaders",{version: currLeaderboardVersion, u: u, score: currPlayerScore, currApp: "gt"}).then(function(results){
         $('#gtScoresNames').html("");
         $('#gtScoresValues').html("");
         results.forEach(function(item){

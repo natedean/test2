@@ -66,7 +66,7 @@ $(function(){
           return $("#loginModal").modal("show");
         }
         $('#mtmGuessFeedback').text("Correct! +" + 5).fadeIn(500);
-        Parse.Cloud.run("mtmAdd",{amount:5,u: u}).then(function(results){
+        Parse.Cloud.run("add",{amount:5,u: u,currApp: "mtm"}).then(function(results){
         findLeaders();
         getNew();
         $('#mtmGuessFeedback').fadeOut(2000);
@@ -88,7 +88,7 @@ $(function(){
   function findLeaders(){
     var n = $('#n').text();
     var u = $('#u').text();
-    Parse.Cloud.run("mtmGetLeaders",{version: currLeaderboardVersion, u: u, score: currPlayerScore}).then(function(results){
+    Parse.Cloud.run("getLeaders",{version: currLeaderboardVersion, u: u, score: currPlayerScore, currApp: "mtm"}).then(function(results){
         $('#mtmScoresNames').html("");
         $('#mtmScoresValues').html("");
         results.forEach(function(item){

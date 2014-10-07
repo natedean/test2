@@ -184,7 +184,7 @@ findLeaders();
     
     if(guess == currSpelling){
       $('#stcGuessFeedback').text("Correct! +" + pointsAvailable).fadeIn(500);
-      Parse.Cloud.run("stcAdd",{amount:pointsAvailable,u: u}).then(function(results){
+      Parse.Cloud.run("add",{amount:pointsAvailable,u: u,currApp: "stc"}).then(function(results){
         clearLetters();
         setNewChord();
         findLeaders();
@@ -225,7 +225,7 @@ findLeaders();
     var n = $('#n').text();
     var u = $('#u').text();
     var currPlayerScore = parseInt($('#stcLandscapeSheetMusicNumber').text());
-    Parse.Cloud.run("stcGetLeaders",{version: currLeaderboardVersion, u: u, score: currPlayerScore}).then(function(results){
+    Parse.Cloud.run("getLeaders",{version: currLeaderboardVersion, u: u, score: currPlayerScore, currApp: "stc"}).then(function(results){
         $('#stcScoresNames').html("");
         $('#stcScoresValues').html("");
         results.forEach(function(item){
