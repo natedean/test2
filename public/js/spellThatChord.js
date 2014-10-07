@@ -24,7 +24,7 @@ var hardChordsSharps = [{chord:"C Maj9",spelling:"C E G B D",numbers:"1 3 5 7 9"
 
 // start game
 setNewChord();
-findLeaders();  
+GAME.findLeaders("stc",currLeaderboardVersion); 
 
   
  //timer stuff ------------------------------------------------------------------------------->
@@ -187,7 +187,7 @@ findLeaders();
       Parse.Cloud.run("add",{amount:pointsAvailable,u: u,currApp: "stc"}).then(function(results){
         clearLetters();
         setNewChord();
-        findLeaders();
+        GAME.findLeaders("stc",currLeaderboardVersion);
         $('#stcGuessFeedback').fadeOut(2000);
       },function(error){
         alert(error.message);
@@ -220,30 +220,7 @@ findLeaders();
         break;
    }
   }// end clearLetters
-  
-  function findLeaders(){
-    var n = $('#n').text();
-    var u = $('#u').text();
-    var currPlayerScore = parseInt($('#stcLandscapeSheetMusicNumber').text());
-    Parse.Cloud.run("getLeaders",{version: currLeaderboardVersion, u: u, score: currPlayerScore, currApp: "stc"}).then(function(results){
-        $('#stcScoresNames').html("");
-        $('#stcScoresValues').html("");
-        results.forEach(function(item){
-          if(item.get("username") == n){
-            $('#stcLandscapeSheetMusicNumber').text(item.get("stcScore"));
-            $('#stcScoresNames').append('<span class="green">' + item.get("username")+'</span><br>');
-            $('#stcScoresValues').append('<span class="green">' + item.get("stcScore")+'</span><br>');
-          }else{
-            $('#stcScoresNames').append(item.get("username")+"<br>");
-            $('#stcScoresValues').append(item.get("stcScore")+"<br>");
-          }
-        });
-      },function(error){
-        alert(error.message);
-      });
-  }// end findLeaders
-  
-  
+    
 //------------------------------------------------------------------------------------------------------
   
 // click handlers
@@ -374,12 +351,12 @@ findLeaders();
   
   $('#stcLbTopScorersBtn').click(function(){
     currLeaderboardVersion = leaderboardVersions[1];
-    findLeaders();
+    GAME.findLeaders("stc",currLeaderboardVersion);
   });
   
   $('#stcLbNearMeBtn').click(function(){
     currLeaderboardVersion = leaderboardVersions[0];
-    findLeaders();
+    GAME.findLeaders("stc",currLeaderboardVersion);
   });
   
   // end click handlers --------------------------------->

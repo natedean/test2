@@ -34,7 +34,7 @@ var awesomeArray = [{question: "How many sharps in the key of C Major?", answers
 $(function(){
   
   //initialize game
-  findLeaders();
+  GAME.findLeaders("mtm",currLeaderboardVersion);
   getNew();
   
   
@@ -67,7 +67,7 @@ $(function(){
         }
         $('#mtmGuessFeedback').text("Correct! +" + 5).fadeIn(500);
         Parse.Cloud.run("add",{amount:5,u: u,currApp: "mtm"}).then(function(results){
-        findLeaders();
+        GAME.findLeaders("mtm",currLeaderboardVersion);
         getNew();
         $('#mtmGuessFeedback').fadeOut(2000);
         },function(error){
@@ -77,7 +77,7 @@ $(function(){
         var ans = $("#c").text();
         $('#mtmGuessFeedback').text("Incorrect. The answer is " + ans).fadeIn(500);
         setTimeout(function(){
-          findLeaders();
+          GAME.findLeaders("mtm",currLeaderboardVersion);
           getNew();
           $('#mtmGuessFeedback').fadeOut(2000);
         },1000);
@@ -85,28 +85,6 @@ $(function(){
     });
 }// end getNew
   
-  function findLeaders(){
-    var n = $('#n').text();
-    var u = $('#u').text();
-    Parse.Cloud.run("getLeaders",{version: currLeaderboardVersion, u: u, score: currPlayerScore, currApp: "mtm"}).then(function(results){
-        $('#mtmScoresNames').html("");
-        $('#mtmScoresValues').html("");
-        results.forEach(function(item){
-          if(item.get("username") == n){
-            $('#mtmLandscapeSheetMusicNumber').text(item.get("mtmScore"));
-            $('#mtmScoresNames').append('<span class="green">' + item.get("username")+'</span><br>');
-            $('#mtmScoresValues').append('<span class="green">' + item.get("mtmScore")+'</span><br>');
-            currPlayerScore = item.get("mtmScore");
-          }else{
-            $('#mtmScoresNames').append(item.get("username")+"<br>");
-            $('#mtmScoresValues').append(item.get("mtmScore")+"<br>");
-          }
-        });
-      },function(error){
-        alert(error.message);
-      });
-  }// end findLeaders
-
   function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex ;
 
@@ -130,12 +108,12 @@ $(function(){
 
   $('#mtmLbTopScorersBtn').click(function(){
     currLeaderboardVersion = leaderboardVersions[1];
-    findLeaders();
+    GAME.findLeaders("mtm",currLeaderboardVersion);
   });
   
   $('#mtmLbNearMeBtn').click(function(){
     currLeaderboardVersion = leaderboardVersions[0];
-    findLeaders();
+    GAME.findLeaders("mtm",currLeaderboardVersion);
   });
   
   // end click handlers --------------------------------->  

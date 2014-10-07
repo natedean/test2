@@ -15,7 +15,6 @@ Parse.Cloud.define("getLeaders", function(request,response){
   var query = new Parse.Query(Parse.User);
   query.select(currColumn, "username");
   if(request.params.version === "nearMe"){
-    query.greaterThan(currColumn,0);
     query.lessThan(currColumn, request.params.score + leaderBoardAdjustor);
     query.descending(currColumn);
     query.limit(10);
