@@ -10,9 +10,13 @@
   color: brown;
 }
 
-.container{
+.navbar .container{
   background: url('/images/lightBlueBackground.png');
-  padding-top: 10px;
+  padding-top: 5px;
+}
+
+.textured-background{
+  background: url('/images/lightBlueBackground.png');
 }
 
 .jumbotron{

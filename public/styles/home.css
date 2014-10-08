@@ -1,3 +1,20 @@
+.navbar{
+  margin-bottom: 0;
+}
+
+.header-image {
+  position: relative;
+  min-height: 310px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background: #8b979e url(http://www.fullhdwpp.com/wp-content/uploads/sound-of-music-field-21.jpg) no-repeat center 20%;
+  background-size: cover;
+}
+
+#homeLoginSection{
+  height: 40px;
+}
+
 .jumbotron{
   padding: 10px;
 }
@@ -14,7 +31,7 @@
   background: rgba(255,255,255,.4);
   min-height: 400px;
   padding: 5px;
-  max-width: 480px;
+  max-width: 300px;
   margin: 0 auto;
 }
 
@@ -30,7 +47,7 @@
 
 #gtScores{
   padding: 5% 10%;
-  font-size: 22px;
+  font-size: 18px;
   max-width: 400px;
   margin: 0 auto;
 }

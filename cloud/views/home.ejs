@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html>
+  <% include partials/head %>
   <body>
-    <% include partials/head %>
     <% include partials/nav %>
-    <div class="container">
-      <link href="/styles/home.css" rel="stylesheet" type="text/css" />
+    <link href="/styles/home.css" rel="stylesheet" type="text/css" />
+    
+    <div class="header-image">
+      <div id="homeLoginSection">
       <% include partials/login-links %>
        <p id="homeWelcome" class="pull-right text-muted"><%= message %><span id="n"><%= n %></span><span id="u" style="display:none"><%= u %></span></p>
-      <div class="jumbotron">
-      <h3>Welcome to GuitarThinker.com</h3>
-      <p>This site is being transitioned and is a work in progress!  But there are a lot of goodies in here right now... you should check them out!</p>
-        
-          <div id="gtLeaderboard">
-              <h3 class="text-center">GuitarThinker Leaderboard</h3>
+      </div>
+      <div class="row">
+      <div class="col-sm-8">
+      
+      </div>
+      <div class="col-sm-4">
+        <div id="gtLeaderboard">
+              <h5 class="text-center">GuitarThinker Leaderboard</h5>
               <div id="gtLeaderboardBtnRow">
               <span>Sort by: </span><div id="gtLbTopScorersBtn" class="btn btn-sm btn-default">Top Scorers</div><div id="gtLbNearMeBtn" class="btn btn-sm btn-default">Near Me</div>
               </div>  
@@ -21,21 +25,36 @@
               <div id="gtScoresValues" class="col-xs-4"></div>
             </div>
           </div>
-      
-        <h3>This site is dedicated to making learning music easier and more fun.</h3>
-        <p>Here are some things that are coming very soon:</p>
+      </div>
+    </div><!--/.row-->
+    </div><!--/.header-image-->
+    
+    <div class="container">
+        <div class="row">
+		<div class="col-sm-4">
+			<h2 class="text-center">Games</h2>
+		</div>
+		<div class="col-sm-4">
+			<h2 class="text-center">Apps</h2>
+		</div>
+		<div class="col-sm-4">
+			<h3>This site is dedicated to making learning music easier and more fun.</h3>
+			<p>Here are some things that are coming very soon:</p>
           <ul>
             <li><p>More games and apps to help you be awesome.</p></li>
             <li><p>Live leaderboards for each game.</p></li>
             <li><p>A master GuitarThinker leaderboard that tracks points scored for all games.</p></li>
             <li><p>Even more awesome stuff.</p></li>
           </ul>
+		</div>
+	</div>
         
+      <div class="textured-background">
         <h4>Here's what I think:</h4>
         <p>There is a serious lack of cool web 3.0 tools for musicians.  What does that mean?  Stuff like live data, interactivity, mobile device compatibility, and great looking design.  Why?  Well, probably because music education is not a super lucrative market, or maybe just because most musicians are not stellar programmers.</p>
         <h4>GuitarThinker to the rescue!</h4>
         <p>This site will be a fun place to visit, learn, come back and see what's new.  GuitarThinker will be a place to compete with yourself and others, because competetion motivates us.  This site will have lots of games that are fun to play and teach you music.</p>
-      </div><!--/jumbotron-->  
+        </div><!--/.textured-background-->
     </div><!-- end container -->
     <% include partials/footer %>
     <script src="/js/home.js"></script>  <!-- home js -->
