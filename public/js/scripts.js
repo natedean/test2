@@ -29,6 +29,34 @@ var GAME = (function(){
       },function(error){
         alert(error.message);
       });
-    }// end findLeaders
+    },// end findLeaders
+    masterLeaders: function(){
+      var currLeaderboardVersion = arguments[0];
+      var n = $('#n').text();
+      var u = $('#u').text();
+    Parse.Cloud.run("getMasterLeaders",{version: currLeaderboardVersion, u: u, score: currPlayerScore}).then(function(results){
+        $('#masterLeaderboardTable').html("");
+        var i = 1;
+        results.forEach(function(item){
+//          if(item.get("username") == n){
+//            $('#' + app + 'LandscapeSheetMusicNumber').text(item.get(currColumn));
+//            $('#' + app + 'ScoresNames').append('<span class="green">' + item.get("username")+'</span><br>');
+//            $('#' + app + 'ScoresValues').append('<span class="green">' + item.get(currColumn)+'</span><br>');
+//            currPlayerScore = item.get(currColumn);
+//          }else{
+            $('#masterLeaderboardTable').append("<tr>");
+            $('#masterLeaderboardTable').append("<td>" + i + "</td>");
+            $('#masterLeaderboardTable').append("<td>" + item.get("username") + "</td>");
+            $('#masterLeaderboardTable').append("<td>" + item.get("stcScore") + "</td>");
+            $('#masterLeaderboardTable').append("<td>" + item.get("mtmScore") + "</td>");
+            $('#masterLeaderboardTable').append("<td>" + item.get("gtScore") + "</td>");
+            $('#masterLeaderboardTable').append("</tr>");
+//          }
+          i++;
+        });
+      },function(error){
+        alert(error.message);
+      });
+    }//end masterLeaders
   }
 })();// end GAME

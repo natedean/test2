@@ -17,6 +17,7 @@
 
 .textured-background{
   background: url('/images/lightBlueBackground.png');
+  padding: 10px;
 }
 
 .jumbotron{

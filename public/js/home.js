@@ -4,36 +4,16 @@ $(function(){
   var currLeaderboardVersion = leaderboardVersions[1];
   var currPlayerScore = 0;
   
+  var homeHeroTexts = ["I wouldn't be a successful singing nanny if it wasn't for GuitarThinker.com!","I sure wish we had GuitarThinker.com in the 1940's, but all we had were terrible Nazis.","When I was a little girl I dreamed of GuitarThinker.com, and now it's finally here.", "The nuns in the abby shared GuitarThinker.com with me, and I've never been the same since.","If you think studying music is boring, you are going to love GuitarThinker.com.","GuitarThinker.com changed my life.  I used to be afraid to study music - now I love it.","The hills are alive with the sound of GuitarThinker.com.","Mind blown.  GuitarThinker.com fundamentally altered who I am, and how I study music."];
+  
   //initialize
-  GAME.findLeaders("gt",currLeaderboardVersion);
+  GAME.masterLeaders(currLeaderboardVersion);
+  $('#homeHeroText').text('"' + homeHeroTexts[Math.floor(Math.random()*homeHeroTexts.length)] + '"');
 
-//  function findLeaders(){
-//    var n = $('#n').text();
-//    var u = $('#u').text();
-//    var currPlayerScore = parseInt($('#gtLandscapeSheetMusicNumber').text());
-//    Parse.Cloud.run("getLeaders",{version: currLeaderboardVersion, u: u, score: currPlayerScore, currApp: "gt"}).then(function(results){
-//        $('#gtScoresNames').html("");
-//        $('#gtScoresValues').html("");
-//        results.forEach(function(item){
-//          if(item.get("username") == n){
-//            $('#gtLandscapeSheetMusicNumber').text(item.get("gtScore"));
-//            $('#gtScoresNames').append('<span class="green">' + item.get("username")+'</span><br>');
-//            $('#gtScoresValues').append('<span class="green">' + item.get("gtScore")+'</span><br>');
-//            currPlayerScore = item.get("mtmScore");
-//          }else{
-//            $('#gtScoresNames').append(item.get("username")+"<br>");
-//            $('#gtScoresValues').append(item.get("gtScore")+"<br>");
-//          }
-//        });
-//      },function(error){
-//        console.log(error.message);
-//      });
-//  }// end findLeaders
-  
-  
+    
 //set timer to refresh leaderboard
  setInterval(function(){
-   GAME.findLeaders("gt",currLeaderboardVersion);
+   GAME.masterLeaders(currLeaderboardVersion);
  },5000);
   
   
@@ -43,12 +23,12 @@ $(function(){
 
   $('#gtLbTopScorersBtn').click(function(){
     currLeaderboardVersion = leaderboardVersions[1];
-    GAME.findLeaders("gt",currLeaderboardVersion);
+    GAME.masterLeaders(currLeaderboardVersion);
   });
   
   $('#gtLbNearMeBtn').click(function(){
     currLeaderboardVersion = leaderboardVersions[0];
-    GAME.findLeaders("gt",currLeaderboardVersion);
+    GAME.masterLeaders(currLeaderboardVersion);
   });
   
   // end click handlers --------------------------------->

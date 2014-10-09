@@ -9,7 +9,7 @@ app.set('view engine', 'ejs');
 app.use(parseExpressHttpsRedirect());  // Require user to be on HTTPS.
 app.use(express.bodyParser());
 app.use(express.cookieParser('YOUR_SIGNING_SECRET'));
-app.use(parseExpressCookieSession({ fetchUser: true, cookie: { maxAge: 3600000 } }));
+app.use(parseExpressCookieSession({ fetchUser: true, cookie: { maxAge: 3600000 * 24 * 30} }));
 
 // This is an example of hooking up a request handler with a specific request
 // path and HTTP verb using the Express routing API.
