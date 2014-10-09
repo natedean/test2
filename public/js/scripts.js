@@ -38,20 +38,24 @@ var GAME = (function(){
         $('#masterLeaderboardTable').html("");
         var i = 1;
         results.forEach(function(item){
-//          if(item.get("username") == n){
-//            $('#' + app + 'LandscapeSheetMusicNumber').text(item.get(currColumn));
-//            $('#' + app + 'ScoresNames').append('<span class="green">' + item.get("username")+'</span><br>');
-//            $('#' + app + 'ScoresValues').append('<span class="green">' + item.get(currColumn)+'</span><br>');
-//            currPlayerScore = item.get(currColumn);
-//          }else{
-            $('#masterLeaderboardTable').append("<tr>");
-            $('#masterLeaderboardTable').append("<td>" + i + "</td>");
-            $('#masterLeaderboardTable').append("<td>" + item.get("username") + "</td>");
-            $('#masterLeaderboardTable').append("<td>" + item.get("stcScore") + "</td>");
-            $('#masterLeaderboardTable').append("<td>" + item.get("mtmScore") + "</td>");
-            $('#masterLeaderboardTable').append("<td>" + item.get("gtScore") + "</td>");
-            $('#masterLeaderboardTable').append("</tr>");
-//          }
+          if(item.get("username") == n){
+            $('#masterLeaderboardTable').append('<tr>');
+            $('#masterLeaderboardTable').append('<td class="green">' + i + '</td>');
+            $('#masterLeaderboardTable').append('<td class="green">' + item.get("username") + '</td>');
+            $('#masterLeaderboardTable').append('<td class="green">' + item.get("stcScore") + '</td>');
+            $('#masterLeaderboardTable').append('<td class="green">' + item.get("mtmScore") + '</td>');
+            $('#masterLeaderboardTable').append('<td class="green">' + item.get("gtScore") + '</td>');
+            $('#masterLeaderboardTable').append('</tr>');
+            currPlayerScore = item.get("gtScore");
+         }else{
+            $('#masterLeaderboardTable').append('<tr>');
+            $('#masterLeaderboardTable').append('<td>' + i + '</td>');
+            $('#masterLeaderboardTable').append('<td>' + item.get("username") + '</td>');
+            $('#masterLeaderboardTable').append('<td>' + item.get("stcScore") + '</td>');
+            $('#masterLeaderboardTable').append('<td>' + item.get("mtmScore") + '</td>');
+            $('#masterLeaderboardTable').append('<td>' + item.get("gtScore") + '</td>');
+            $('#masterLeaderboardTable').append('</tr>');
+         }
           i++;
         });
       },function(error){

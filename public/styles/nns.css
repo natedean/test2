@@ -16,3 +16,7 @@ font-size: large;
   border-radius:10x;
   margin: 1em;
 }
+
+.jumbotron{
+  background: url('/images/lightBlueBackground.png');
+}

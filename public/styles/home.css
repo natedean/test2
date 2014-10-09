@@ -32,7 +32,7 @@
 
 /*leaderboard styles*/
 #gtLeaderboard{
-  background: rgba(255,255,255,.4);
+  background: rgba(255,255,255,.7);
   min-height: 400px;
   padding: 5px;
   max-width: 300px;
@@ -49,9 +49,6 @@
   margin: 0 10px;
 }
 
-#gtScores{
-  padding: 5% 10%;
-  font-size: 18px;
-  max-width: 400px;
-  margin: 0 auto;
+#gtLeaderboard td{
+  padding-left: 10px;
 }
