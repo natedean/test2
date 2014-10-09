@@ -29,7 +29,20 @@ var awesomeArray = [{question: "How many sharps in the key of C Major?", answers
                     {question: "How many flats in the key of C minor?", answers: [{answer: 3, correct: true},{answer: 2,correct: false},{answer: 4,correct: false},{answer: 5,correct: false}]},
                     {question: "How many flats in the key of F minor?", answers: [{answer: 4, correct: true},{answer: 3,correct: false},{answer: 5,correct: false},{answer: 6,correct: false}]},
                     {question: "How many flats in the key of Bb minor?", answers: [{answer: 5, correct: true},{answer: 3,correct: false},{answer: 4,correct: false},{answer: 6,correct: false}]},
-                    {question: "How many flats in the key of Eb minor?", answers: [{answer: 6, correct: true},{answer: 4,correct: false},{answer: 5,correct: false},{answer: 7,correct: false}]}
+                    {question: "How many flats in the key of Eb minor?", answers: [{answer: 6, correct: true},{answer: 4,correct: false},{answer: 5,correct: false},{answer: 7,correct: false}]},
+                    {question: "What is the 1st Church Mode?", answers: [{answer: "Ionian", correct: true},{answer: "Dorian",correct: false},{answer: "Phrygian",correct: false},{answer: "Lydian",correct: false}]},
+                    {question: "What is the 2nd Church Mode?", answers: [{answer: "Dorian", correct: true},{answer: "Mixolydian",correct: false},{answer: "Phrygian",correct: false},{answer: "Lydian",correct: false}]},
+                    {question: "What is the 3rd Church Mode?", answers: [{answer: "Phrygian", correct: true},{answer: "Mixolydian",correct: false},{answer: "Ionian",correct: false},{answer: "Lydian",correct: false}]},
+                    {question: "What is the 4th Church Mode?", answers: [{answer: "Lydian", correct: true},{answer: "Mixolydian",correct: false},{answer: "Ionian",correct: false},{answer: "Dorian",correct: false}]},
+                    {question: "What is the 5th Church Mode?", answers: [{answer: "Mixolydian", correct: true},{answer: "Phrygian",correct: false},{answer: "Aeolian",correct: false},{answer: "Locrian",correct: false}]},
+                    {question: "What is the 6th Church Mode?", answers: [{answer: "Aeolian", correct: true},{answer: "Phrygian",correct: false},{answer: "Lydian",correct: false},{answer: "Locrian",correct: false}]},
+                    {question: "What is the 7th Church Mode?", answers: [{answer: "Locrian", correct: true},{answer: "Phrygian",correct: false},{answer: "Aeolian",correct: false},{answer: "Mixolydian",correct: false}]},
+                    {question: "What notes of the major scale make up a Major chord?", answers: [{answer: "1 3 5", correct: true},{answer: "1 2 3",correct: false},{answer: "1 3 4",correct: false},{answer: "1 b3 5",correct: false}]},
+                    {question: "What notes of the major scale make up a minor chord?", answers: [{answer: "1 b3 5", correct: true},{answer: "1 2 3",correct: false},{answer: "1 3 4",correct: false},{answer: "1 3 5",correct: false}]},
+                    {question: "What notes of the major scale make up a diminished chord?", answers: [{answer: "1 b3 b5", correct: true},{answer: "1 2 3",correct: false},{answer: "1 3 5",correct: false},{answer: "1 b3 5",correct: false}]},
+                    {question: "What notes of the major scale make up a augmented chord?", answers: [{answer: "1 3 #5", correct: true},{answer: "1 #3 5",correct: false},{answer: "1 3 5",correct: false},{answer: "1 b3 5",correct: false}]},
+                    {question: "What notes of the major scale make up a suspended chord?", answers: [{answer: "1 4 5", correct: true},{answer: "1 3 5",correct: false},{answer: "1 b3 5",correct: false},{answer: "1 5 6",correct: false}]},
+                    {question: "What notes of the major scale make up a 2 chord?", answers: [{answer: "1 2 5", correct: true},{answer: "1 3 5",correct: false},{answer: "1 2 3",correct: false},{answer: "1 2 4",correct: false}]}
                    ];
 
 $(function(){

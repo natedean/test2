@@ -4,7 +4,7 @@ $(function(){
   var currLeaderboardVersion = leaderboardVersions[1];
   var currPlayerScore = 0;
   
-  var homeHeroTexts = ["I wouldn't be a successful singing nanny if it wasn't for GuitarThinker.com!","I sure wish we had GuitarThinker.com in the 1940's, but all we had were terrible Nazis.","When I was a little girl I dreamed of GuitarThinker.com, and now it's finally here.", "The nuns in the abby shared GuitarThinker.com with me, and I've never been the same since.","If you think studying music is boring, you are going to love GuitarThinker.com.","GuitarThinker.com changed my life.  I used to be afraid to study music - now I love it.","The hills are alive with the sound of GuitarThinker.com.","Mind blown.  GuitarThinker.com fundamentally altered who I am, and how I study music."];
+  var homeHeroTexts = ["I wouldn't be a successful singing nanny if it wasn't for GuitarThinker.com!","I sure wish we had GuitarThinker.com in the 1940's, but all we had were terrible Nazis.","When I was a little girl I dreamed of GuitarThinker.com, and now it's finally here.", "The nuns in the abbey shared GuitarThinker.com with me, and I've never been the same since.","If you think studying music is boring, you are going to love GuitarThinker.com.","GuitarThinker.com changed my life.  I used to be afraid to study music - now I love it.","The hills are alive with the sound of GuitarThinker.com.","Mind blown.  GuitarThinker.com fundamentally altered who I am, and how I study music."];
   
   //initialize
   GAME.masterLeaders(currLeaderboardVersion);
