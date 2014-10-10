@@ -25,6 +25,23 @@ var hardChordsSharps = [{chord:"C Maj9",spelling:"C E G B D",numbers:"1 3 5 7 9"
 // initialize game
 setNewChord();
 GAME.findLeaders("stc",currLeaderboardVersion); 
+  
+//ion.sound({
+//    sounds: [
+//        {
+//            name: "A"
+//        },
+//        {
+//            name: "Asharp"
+//        },
+//        {
+//            name: "C"
+//        }
+//    ],
+//    volume: 0.5,
+//    path: "../sounds/",
+//    preload: true
+//});  
 
   
  //timer stuff ------------------------------------------------------------------------------->
@@ -265,6 +282,7 @@ GAME.findLeaders("stc",currLeaderboardVersion);
   $('.stcPianoKeyFirstRow,.stcPianoKeySecondRow').click(function(){
     switch(this.id) {
     case "stcPianoKeyFirstRowOne":
+//        ion.sound.play("A");
         fillAnswerLetter('A');
         break;
     case "stcPianoKeyFirstRowTwo":
