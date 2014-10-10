@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <% include partials/head %>
+  <% include partials/head/home-head %>
   <body>
     <% include partials/nav %>
     <link href="/styles/home.css" rel="stylesheet" type="text/css" />
@@ -8,7 +8,7 @@
     <div class="header-image">
       <div id="homeLoginSection">
       <% include partials/login-links %>
-       <p id="homeWelcome" class="pull-right text-muted"><%= message %><span id="n"><%= n %></span><span id="u" style="display:none"><%= u %></span></p>
+       <p id="homeWelcome" class="pull-right text-muted snall"><%= message %><span id="n"><%= n %></span><span id="u" style="display:none"><%= u %></span></p>
       </div>
       <div class="row">
       <div class="col-md-4 col-sm-8">
@@ -37,7 +37,7 @@
       </div><!--/.col-->
       <div class="col-md-4"></div><!-- SPACER COLUMN -->
       <div class="col-md-4 col-sm-4">
-        <h4><span class="glyphicon glyphicon-arrow-left"></span> <span id="homeHeroText"></span></h4>
+        <h4 style="padding-right: 20px;"><span class="glyphicon glyphicon-arrow-left"></span> <span id="homeHeroText"></span></h4>
       </div><!--/.col-->
     </div><!--/.row-->
     </div><!--/.header-image-->

@@ -24,10 +24,10 @@
 }
 
 #homeWelcome{
-  line-height: 28px;
-  padding-right: 20px;
+  line-height: 24px;
+  padding-right: 10px;
   margin-top: 10px;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 /*leaderboard styles*/

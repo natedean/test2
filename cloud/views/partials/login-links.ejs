@@ -1,9 +1,7 @@
 <!-- Button trigger modal -->
 <div class="pull-right" style="margin: 10px 10px 0 0;">
 <% if (!Parse.User.current()) { %>
-  <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#loginModal">
-    Login/Signup
-  </button>
+  <button id="loginModalBtn" class="btn btn-success" data-toggle="modal" data-target="#loginModal">Login | Signup</button>
   <% } else { %>
   <a href="/logout" class="btn btn-danger btn-sm">Logout</a>
 <% } %>  

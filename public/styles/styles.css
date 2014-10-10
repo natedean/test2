@@ -15,6 +15,11 @@
   padding-top: 5px;
 }
 
+/*login*/
+#loginModalBtn{
+  padding: 2px 5px;
+}
+
 .textured-background{
   background: url('/images/lightBlueBackground.png');
   padding: 10px;
