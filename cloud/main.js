@@ -17,7 +17,13 @@ Parse.Cloud.define("getLeaders", function(request,response){
     var currUserQuery = new Parse.Query(Parse.User);
     currUserQuery.equalTo("objectId",request.params.u);
     currUserQuery.first().then(function(currUser){
-      var currUserPoints = currUser.get(currColumn);
+      
+      if(!currUser){
+        var currUserPoints = currUser.get(currColumn);
+      }else{
+        currUserPoints = 0;
+      }
+      
       query.lessThan(currColumn, currUserPoints + leaderBoardAdjustor);
       query.descending(currColumn);
       query.limit(10);
@@ -47,7 +53,13 @@ Parse.Cloud.define("getMasterLeaders", function(request,response){
   currUserQuery.equalTo("objectId",request.params.u);
   if(request.params.version === "nearMe"){
     currUserQuery.first().then(function(currUser){
-    currUser.set("leaderboardPreference","nearMe");
+      var currUserPoints;
+      if(!currUser){
+        currUserPoints = 0;
+      }else{
+         currUserPoints = currUser.get("gtScore");
+        
+      }
       query.lessThan("gtScore", currUser.get("gtScore") + leaderBoardAdjustor);
       query.descending("gtScore");
       query.limit(10);
@@ -59,7 +71,6 @@ Parse.Cloud.define("getMasterLeaders", function(request,response){
     });
   }else{
     currUserQuery.first().then(function(currUser){
-    currUser.set("leaderboardPreference","nearMe");
     query.greaterThan("gtScore",0);
     query.limit(10);
     query.descending("gtScore");
