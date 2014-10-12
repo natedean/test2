@@ -10,9 +10,18 @@
   color: brown;
 }
 
+.navbar-brand{
+  background: url('/images/gtLogo.jpg') center no-repeat;
+  background-size: contain;
+  width: 150px;
+}
+
+.navbar-default{
+  background-color: white;
+}
+
 .navbar .container{
-  background: url('/images/lightBlueBackground.png');
-  padding-top: 5px;
+  
 }
 
 /*login*/
@@ -31,7 +40,6 @@
 
 .navbar{
   border:none;
-  background: url('/images/lightBlueBackground.png');
 }
 
 .footer-bar{
@@ -62,3 +70,28 @@
   padding-right: 20px;
   font-size: 16px;
 }
+
+/* leaderboard styles*/
+/*leaderboard styles*/
+.leaderboardContainer{
+  background: rgba(255,255,255,.7);
+  min-height: 400px;
+  padding: 5px;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.leaderboardBtnRow{
+  height: 40px; 
+  width: 250px;
+  margin: 0 auto;
+}
+
+.leaderboardBtnRow .btn{
+  margin: 0 10px;
+}
+
+.leaderboardBtnRow .btn.selected{
+  border: 1px solid black;
+}
+

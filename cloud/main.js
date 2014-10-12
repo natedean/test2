@@ -12,7 +12,7 @@ Parse.Cloud.define("getLeaders", function(request,response){
   Parse.Cloud.useMasterKey();
   var currColumn = request.params.currApp + "Score";
   var query = new Parse.Query(Parse.User);
-  query.select(currColumn, "username");
+  query.select(currColumn, "username","leaderboardPreference");
   if(request.params.version === "nearMe"){
     var currUserQuery = new Parse.Query(Parse.User);
     currUserQuery.equalTo("objectId",request.params.u);
@@ -42,11 +42,12 @@ Parse.Cloud.define("getLeaders", function(request,response){
 Parse.Cloud.define("getMasterLeaders", function(request,response){
   Parse.Cloud.useMasterKey();
   var query = new Parse.Query(Parse.User);
-  query.select("username","stcScore","mtmScore","gtScore");
+  query.select("username","stcScore","mtmScore","gtScore","leaderboardPreference");
+  var currUserQuery = new Parse.Query(Parse.User);
+  currUserQuery.equalTo("objectId",request.params.u);
   if(request.params.version === "nearMe"){
-    var currUserQuery = new Parse.Query(Parse.User);
-    currUserQuery.equalTo("objectId",request.params.u);
     currUserQuery.first().then(function(currUser){
+    currUser.set("leaderboardPreference","nearMe");
       query.lessThan("gtScore", currUser.get("gtScore") + leaderBoardAdjustor);
       query.descending("gtScore");
       query.limit(10);
@@ -57,10 +58,13 @@ Parse.Cloud.define("getMasterLeaders", function(request,response){
       response.error(error);
     });
   }else{
+    currUserQuery.first().then(function(currUser){
+    currUser.set("leaderboardPreference","nearMe");
     query.greaterThan("gtScore",0);
     query.limit(10);
     query.descending("gtScore");
-    query.find().then(function(results){
+    return query.find();
+    }).then(function(results){
       response.success(results);
     },function(error){
       response.error(error);

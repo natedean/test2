@@ -30,25 +30,6 @@
   font-size: 14px;
 }
 
-/*leaderboard styles*/
-#gtLeaderboard{
-  background: rgba(255,255,255,.7);
-  min-height: 400px;
-  padding: 5px;
-  max-width: 300px;
-  margin: 0 auto;
-}
-
-#gtLeaderboardBtnRow{
-  height: 40px; 
-  width: 250px;
-  margin: 0 auto;
-}
-
-#gtLeaderboardBtnRow .btn{
-  margin: 0 10px;
-}
-
 #gtLeaderboard td{
   padding-left: 10px;
 }
