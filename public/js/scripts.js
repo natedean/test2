@@ -3,7 +3,6 @@ Parse.initialize("jjrIZ3jiKnpq02brttE2FXl9BuZCmj9ZuY1UTJaU",
 
 
 var GAME = (function(){
-  var currPlayerScore = 0; //initialize
   
   return {
     findLeaders: function(){
@@ -11,7 +10,7 @@ var GAME = (function(){
       var currLeaderboardVersion = arguments[1];
       var n = $('#n').text();
       var u = $('#u').text();
-    Parse.Cloud.run("getLeaders",{version: currLeaderboardVersion, u: u, score: currPlayerScore, currApp: app}).then(function(results){
+    Parse.Cloud.run("getLeaders",{version: currLeaderboardVersion, u: u, currApp: app}).then(function(results){
         $('#' + app + 'ScoresNames').html("");
         $('#' + app + 'ScoresValues').html("");
         var currColumn = app + "Score";
@@ -34,7 +33,7 @@ var GAME = (function(){
       var currLeaderboardVersion = arguments[0];
       var n = $('#n').text();
       var u = $('#u').text();
-    Parse.Cloud.run("getMasterLeaders",{version: currLeaderboardVersion, u: u, score: currPlayerScore}).then(function(results){
+    Parse.Cloud.run("getMasterLeaders",{version: currLeaderboardVersion, u: u}).then(function(results){
         $('#masterLeaderboardTable').html("");
         var i = 1;
         results.forEach(function(item){
