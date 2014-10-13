@@ -26,7 +26,7 @@ var GAME = (function(){
           }
         });
       },function(error){
-        alert(error.message);
+        console.log(error.message);
       });
     },// end findLeaders
     masterLeaders: function(){
@@ -58,7 +58,7 @@ var GAME = (function(){
           i++;
         });
       },function(error){
-        alert(error.message);
+        console.log(error.message);
       });
     }//end masterLeaders
   }

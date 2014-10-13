@@ -18,12 +18,10 @@ app.get('/', function(req, res) {
     Parse.User.current().fetch().then(function(user){
       res.render('home', { message: 'Logged in as ',
                                      n: user.get("username"),
-                                     u: user.id,
-                                     leaderboardPreference: user.get("leaderboardPreference")
-                                   });
+                                     u: user.id});
     });
   }else{
-    res.render('home', { message: 'Welcome ', n: "Guest", u: "", leaderboradPreference: "topScorers"});
+    res.render('home', { message: 'Welcome ', n: "Guest", u: ""});
   }
   
 });

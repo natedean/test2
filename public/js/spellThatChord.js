@@ -12,7 +12,7 @@ $(function(){
   var prevChord;
   var gameTimer;
   var sharpsOrFlats;
-  var currLeaderboardVersion = leaderboardVersions[1];
+  var currLeaderboardVersion;
   var currLetterNumber = 1;
   
 var easyChordsFlats = [{chord:"C Major",spelling:"C E G",numbers:"1 3 5"},{chord:"C minor",spelling:"C Eb G",numbers:"1 b3 5"},{chord:"G minor",spelling:"G Bb D",numbers:"1 b3 5"},{chord:"D minor",spelling:"D F A",numbers:"1 b3 5"},{chord:"A minor",spelling:"A C E",numbers:"1 b3 5"},{chord:"E minor",spelling:"E G B",numbers:"1 b3 5"},{chord:"F Major",spelling:"F A C",numbers:"1 3 5"},{chord:"F minor",spelling:"F Ab C",numbers:"1 b3 5"},{chord:"Bb Major",spelling:"Bb D F",numbers:"1 3 5"},{chord:"Bb minor",spelling:"Bb Db F",numbers:"1 b3 5"},{chord:"Db Major",spelling:"Db F Ab",numbers:"1 3 5"},{chord:"Eb Major",spelling:"Eb G Bb",numbers:"1 3 5"},{chord:"Eb minor",spelling:"Eb Gb Bb",numbers:"1 b3 5"},{chord:"Ab Major",spelling:"Ab C Eb",numbers:"1 3 5"}];
@@ -24,6 +24,13 @@ var hardChordsSharps = [{chord:"C Maj9",spelling:"C E G B D",numbers:"1 3 5 7 9"
 
 // initialize game
 setNewChord();
+var u = $('#u').text();
+  if(u){ // user logged in
+    currLeaderboardVersion = leaderboardVersions[0];
+    $('#stcLbNearMeBtn').addClass('selected');
+  }else{
+    currLeaderboardVersion = leaderboardVersions[1];
+  }  
 GAME.findLeaders("stc",currLeaderboardVersion); 
   
 //ion.sound({
@@ -207,7 +214,7 @@ GAME.findLeaders("stc",currLeaderboardVersion);
         GAME.findLeaders("stc",currLeaderboardVersion);
         $('#stcGuessFeedback').fadeOut(2000);
       },function(error){
-        alert(error.message);
+        console.log(error.message);
       });
     }else{
       $('#stcGuessFeedback').text("Try again!").fadeIn(500,function(){
@@ -370,11 +377,15 @@ GAME.findLeaders("stc",currLeaderboardVersion);
   $('#stcLbTopScorersBtn').click(function(){
     currLeaderboardVersion = leaderboardVersions[1];
     GAME.findLeaders("stc",currLeaderboardVersion);
+    $('#stcLbTopScorersBtn').addClass('selected');
+    $('#stcLbNearMeBtn').removeClass('selected');
   });
   
   $('#stcLbNearMeBtn').click(function(){
     currLeaderboardVersion = leaderboardVersions[0];
     GAME.findLeaders("stc",currLeaderboardVersion);
+    $('#stcLbNearMeBtn').addClass('selected');
+    $('#stcLbTopScorersBtn').removeClass('selected');
   });
   
   // end click handlers --------------------------------->

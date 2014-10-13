@@ -1,5 +1,5 @@
 var leaderboardVersions = ["nearMe","topScorers"];
-var currLeaderboardVersion = leaderboardVersions[1];
+var currLeaderboardVersion;
 var pointsAvailable = 10;
 var gameTimer;
 
@@ -48,8 +48,15 @@ var awesomeArray = [{question: "How many sharps in the key of C Major?", answers
 $(function(){
   
   //initialize game
-  GAME.findLeaders("mtm",currLeaderboardVersion);
   getNew();
+  var u = $('#u').text();
+  if(u){ // user logged in
+    currLeaderboardVersion = leaderboardVersions[0];
+    $('#mtmLbNearMeBtn').addClass('selected');
+  }else{
+    currLeaderboardVersion = leaderboardVersions[1];
+  }  
+  GAME.findLeaders("mtm",currLeaderboardVersion);
   $('#mtmPointsAvailableDisplay').text(pointsAvailable);
   gameTimer = setInterval(timer, 2000);
   
@@ -133,11 +140,15 @@ $(function(){
   $('#mtmLbTopScorersBtn').click(function(){
     currLeaderboardVersion = leaderboardVersions[1];
     GAME.findLeaders("mtm",currLeaderboardVersion);
+    $('#mtmLbTopScorersBtn').addClass('selected');
+    $('#mtmLbNearMeBtn').removeClass('selected');
   });
   
   $('#mtmLbNearMeBtn').click(function(){
     currLeaderboardVersion = leaderboardVersions[0];
     GAME.findLeaders("mtm",currLeaderboardVersion);
+    $('#mtmLbNearMeBtn').addClass('selected');
+    $('#mtmLbTopScorersBtn').removeClass('selected');
   });
   
   // end click handlers --------------------------------->  
