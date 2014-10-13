@@ -11,8 +11,12 @@
 }
 
 .navbar-brand{
-  background: url('/images/gtLogo.jpg') center no-repeat;
-  background-size: contain;
+  height: 70px;
+  padding-top: 0;
+}
+
+.navLogoImg{
+  height: 70px;
   width: 150px;
 }
 
@@ -22,6 +26,11 @@
 
 .navbar .container{
   
+}
+
+.navbar-nav>li>a {
+  line-height: 40px;
+  font-size: 18px;
 }
 
 /*login*/
@@ -95,3 +104,11 @@
   border: 1px solid black;
 }
 
+/*large screen media queries*/
+@media (min-width: 768px){
+  .navbar-nav {
+    margin: 0;
+    float: right;
+  }
+
+}
