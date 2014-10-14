@@ -20,17 +20,23 @@
         </div>
          
       </div>
-      <div id="mtmLeaderboard">
-              <h3 class="text-center">Leaderboard</h3>
+      <div id="mtmLeaderboard" class="leaderboardContainer">
+              <h5 class="text-center">Music Theory Master Leaderboard</h5>
               <% if (Parse.User.current()) { %>
-              <div id="mtmLeaderboardBtnRow">
-              <span>Sort by: </span><div id="mtmLbTopScorersBtn" class="btn btn-sm btn-default">Top Scorers</div><div id="mtmLbNearMeBtn" class="btn btn-sm btn-default">Near Me</div>
-              </div>
-              <% } %>
-            <div id="mtmScores" class="row">
-              <div id="mtmScoresNames" class="col-xs-8"></div>
-              <div id="mtmScoresValues" class="col-xs-4"></div>
-            </div>
+              <div id="mtmLeaderboardBtnRow" class="leaderboardBtnRow"><span>Sort by: </span><div id="mtmLbTopScorersBtn" class="btn btn-sm btn-default">Top Scorers</div><div id="mtmLbNearMeBtn" class="btn btn-sm btn-default">Near Me</div></div><% } %>  
+        <table class="table">  
+        <thead>  
+          <tr>  
+            <th>#</th>  
+            <th>Name</th>  
+            <th>Music Theory Master<br>Points</th>  
+            <th>All GuitarThinker<br>Points</th>
+          </tr>  
+        </thead>  
+        <tbody id="masterLeaderboardTable">  
+            
+        </tbody>
+        </table>
           </div><!--/#mtmLeaderboard-->
     </div><!--/container -->
     <% include partials/footer %>

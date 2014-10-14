@@ -12,7 +12,7 @@ Parse.Cloud.define("getLeaders", function(request,response){
   Parse.Cloud.useMasterKey();
   var currColumn = request.params.currApp + "Score";
   var query = new Parse.Query(Parse.User);
-  query.select(currColumn, "username");
+  query.select(currColumn, "username", "gtScore");
   if(request.params.version === "nearMe"){
     var currUserQuery = new Parse.Query(Parse.User);
     currUserQuery.equalTo("objectId",request.params.u);

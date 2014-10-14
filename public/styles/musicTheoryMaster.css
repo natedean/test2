@@ -38,9 +38,11 @@ h2#mtmQuestion {
   margin: 0 10px;
 }
 
-#mtmScores{
-  padding: 5% 10%;
-  font-size: 22px;
-  max-width: 400px;
-  margin: 0 auto;
+
+#mtmLeaderboard td{
+  padding-left: 10px;
+}
+
+#mtmLeaderboard td.scoreTd{
+  padding-left: 15px;
 }

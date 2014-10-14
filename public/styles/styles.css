@@ -70,8 +70,9 @@
   color: red;
 }
 
-.gameHeader{
-  height: 20px;
+.gameHeader {
+  height: 30px;
+  padding-top: 10px;
 }
 
 .gameHeader p{

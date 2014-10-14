@@ -37,3 +37,7 @@
 #gtLeaderboard td.scoreTd{
   padding-left: 15px;
 }
+
+.homeGameTop {
+  height: 110px;
+}

@@ -11,19 +11,27 @@ var GAME = (function(){
       var n = $('#n').text();
       var u = $('#u').text();
     Parse.Cloud.run("getLeaders",{version: currLeaderboardVersion, u: u, currApp: app}).then(function(results){
-        $('#' + app + 'ScoresNames').html("");
-        $('#' + app + 'ScoresValues').html("");
-        var currColumn = app + "Score";
+        $('#masterLeaderboardTable').html("");
+        var i = 1;
+        var currApp = app + "Score";
         results.forEach(function(item){
           if(item.get("username") == n){
-            $('#' + app + 'LandscapeSheetMusicNumber').text(item.get(currColumn));
-            $('#' + app + 'ScoresNames').append('<span class="green">' + item.get("username")+'</span><br>');
-            $('#' + app + 'ScoresValues').append('<span class="green">' + item.get(currColumn)+'</span><br>');
-            currPlayerScore = item.get(currColumn);
-          }else{
-            $('#' + app + 'ScoresNames').append(item.get("username")+"<br>");
-            $('#' + app + 'ScoresValues').append(item.get(currColumn)+"<br>");
-          }
+            $('#masterLeaderboardTable').append('<tr>');
+            $('#masterLeaderboardTable').append('<td class="green">' + i + '</td>');
+            $('#masterLeaderboardTable').append('<td class="green">' + item.get("username") + '</td>');
+            $('#masterLeaderboardTable').append('<td class="green scoreTd">' + item.get(currApp) + '</td>');
+            $('#masterLeaderboardTable').append('<td class="green scoreTd">' + item.get("gtScore") + '</td>');
+            $('#masterLeaderboardTable').append('</tr>');
+            currPlayerScore = item.get("gtScore");
+         }else{
+            $('#masterLeaderboardTable').append('<tr>');
+            $('#masterLeaderboardTable').append('<td>' + i + '</td>');
+            $('#masterLeaderboardTable').append('<td>' + item.get("username") + '</td>');
+            $('#masterLeaderboardTable').append('<td class="scoreTd">' + item.get(currApp) + '</td>');
+            $('#masterLeaderboardTable').append('<td class="scoreTd">' + item.get("gtScore") + '</td>');
+            $('#masterLeaderboardTable').append('</tr>');
+         }
+          i++;
         });
       },function(error){
         console.log(error.message);
