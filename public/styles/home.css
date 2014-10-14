@@ -33,3 +33,7 @@
 #gtLeaderboard td{
   padding-left: 10px;
 }
+
+#gtLeaderboard td.scoreTd{
+  padding-left: 15px;
+}

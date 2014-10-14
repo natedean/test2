@@ -41,18 +41,18 @@ var GAME = (function(){
             $('#masterLeaderboardTable').append('<tr>');
             $('#masterLeaderboardTable').append('<td class="green">' + i + '</td>');
             $('#masterLeaderboardTable').append('<td class="green">' + item.get("username") + '</td>');
-            $('#masterLeaderboardTable').append('<td class="green">' + item.get("stcScore") + '</td>');
-            $('#masterLeaderboardTable').append('<td class="green">' + item.get("mtmScore") + '</td>');
-            $('#masterLeaderboardTable').append('<td class="green">' + item.get("gtScore") + '</td>');
+            $('#masterLeaderboardTable').append('<td class="green scoreTd">' + item.get("stcScore") + '</td>');
+            $('#masterLeaderboardTable').append('<td class="green scoreTd">' + item.get("mtmScore") + '</td>');
+            $('#masterLeaderboardTable').append('<td class="green scoreTd">' + item.get("gtScore") + '</td>');
             $('#masterLeaderboardTable').append('</tr>');
             currPlayerScore = item.get("gtScore");
          }else{
             $('#masterLeaderboardTable').append('<tr>');
             $('#masterLeaderboardTable').append('<td>' + i + '</td>');
             $('#masterLeaderboardTable').append('<td>' + item.get("username") + '</td>');
-            $('#masterLeaderboardTable').append('<td>' + item.get("stcScore") + '</td>');
-            $('#masterLeaderboardTable').append('<td>' + item.get("mtmScore") + '</td>');
-            $('#masterLeaderboardTable').append('<td>' + item.get("gtScore") + '</td>');
+            $('#masterLeaderboardTable').append('<td class="scoreTd">' + item.get("stcScore") + '</td>');
+            $('#masterLeaderboardTable').append('<td class="scoreTd">' + item.get("mtmScore") + '</td>');
+            $('#masterLeaderboardTable').append('<td class="scoreTd">' + item.get("gtScore") + '</td>');
             $('#masterLeaderboardTable').append('</tr>');
          }
           i++;
