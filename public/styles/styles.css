@@ -55,8 +55,8 @@
   height: 60px;
   background-color: grey;
   color: white;
-  text-align: center;
   line-height: 60px;
+  font-size: 18px;
 }
 
 .form-group input{
