@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <% include partials/head/home-head %>
+  <body>
+    <% include partials/nav %>
+    <link href="/styles/home.css" rel="stylesheet" type="text/css" />
+     <script src="/js/lib/phaser.min.js"></script>  <!-- phaser js -->
+    
+    <div class="container">
+      <div id="homeLoginSection">
+      <% include partials/login-links %>
+       <p id="homeWelcome" class="pull-right text-muted snall"><%= message %><span id="n"><%= n %></span><span id="u" style="display:none"><%= u %></span></p>
+      </div>
+      <h1>TEST</h1>
+      <div class="text-center">
+        <div id="phaser-example"></div>
+      </div>
+    </div>
+    
+    <script type="text/javascript">
+      
+    </script>
+    
+    <% include partials/footer %>
+    <script src="/js/test.js"></script>  <!-- home js -->
+  </body>
+</html>

@@ -85,3 +85,20 @@ Parse.Cloud.define("add", function(request, response){
   }); 
 });//end add
 
+Parse.Cloud.define("testAdd", function(request,response){
+  Parse.Cloud.useMasterKey();
+  var query = new Parse.Query(Parse.User);
+  query.equalTo("objectId",request.params.u);
+  query.first().then(function(currentUser){
+    currentUser.increment("testScore", request.params.amount);
+    currentUser.increment("gtScore", request.params.amount);
+    return currentUser.save();
+  }).then(function(currentUser){
+    return query.first();
+  }).then(function(results){
+    response.success(results);
+  },function(error){
+      response.error(error);
+  });
+});
+

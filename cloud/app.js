@@ -76,6 +76,20 @@ app.get('/logout', function(req, res) {
   res.redirect('/');
 });
 
+app.get('/test', function(req, res){
+  if(Parse.User.current()){
+    Parse.User.current().fetch().then(function(user){
+      res.render('test', { message: 'Logged in as ',
+                                     n: user.get("username"),
+                                     u: user.id});
+    });
+  }else{
+    res.render('test', { message: 'Welcome ', n: "Guest", u: ""});
+  }
+});
+
+// -------------------------- END ROUTING ----------------------------------------------------
+
 // Clicking submit on the login form triggers this.
 app.post('/login', function(req, res) {
   Parse.User.logIn(req.body.username, req.body.password).then(function() {
