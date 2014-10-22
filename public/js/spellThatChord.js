@@ -33,22 +33,49 @@ var u = $('#u').text();
   }  
 GAME.findLeaders("stc",currLeaderboardVersion); 
   
-//ion.sound({
-//    sounds: [
-//        {
-//            name: "A"
-//        },
-//        {
-//            name: "Asharp"
-//        },
-//        {
-//            name: "C"
-//        }
-//    ],
-//    volume: 0.5,
-//    path: "../sounds/",
-//    preload: true
-//});  
+ion.sound({
+    sounds: [
+        {
+            name: "A"
+        },
+        {
+            name: "Asharp"
+        },
+        {
+            name: "B"
+        },
+        {
+            name: "C"
+        },
+        {
+            name: "Csharp"
+        },
+        {
+            name: "D"
+        },
+        {
+            name: "Dsharp"
+        },
+        {
+            name: "E"
+        },
+        {
+            name: "F"
+        },
+        {
+            name: "Fsharp"
+        },
+        {
+            name: "G"
+        },
+        {
+            name: "Gsharp"
+        },
+    ],
+    volume: 0.5,
+    path: "../sounds/mp3s_oggs/",
+    preload: true
+});  
 
   
  //timer stuff ------------------------------------------------------------------------------->
@@ -289,10 +316,11 @@ GAME.findLeaders("stc",currLeaderboardVersion);
   $('.stcPianoKeyFirstRow,.stcPianoKeySecondRow').click(function(){
     switch(this.id) {
     case "stcPianoKeyFirstRowOne":
-//        ion.sound.play("A");
+        ion.sound.play("A");
         fillAnswerLetter('A');
         break;
     case "stcPianoKeyFirstRowTwo":
+        ion.sound.play("Asharp");
         if(sharpsOrFlats == "flats"){
           fillAnswerLetter("Bb");
         }else{
@@ -300,12 +328,15 @@ GAME.findLeaders("stc",currLeaderboardVersion);
         }
         break;
     case "stcPianoKeyFirstRowThree":
+        ion.sound.play("B");
         fillAnswerLetter('B');
         break;
     case "stcPianoKeyFirstRowFour":
+        ion.sound.play("C");
         fillAnswerLetter('C');
         break;
-    case "stcPianoKeyFirstRowFive":
+    case "stcPianoKeyFirstRowFive": 
+        ion.sound.play("Csharp");
         if(sharpsOrFlats == "flats"){
           fillAnswerLetter("Db");
         }else{
@@ -313,9 +344,11 @@ GAME.findLeaders("stc",currLeaderboardVersion);
         }
         break;
     case "stcPianoKeyFirstRowSix":
+        ion.sound.play("D");
         fillAnswerLetter('D');
         break;
     case "stcPianoKeySecondRowOne":
+        ion.sound.play("Dsharp");
         if(sharpsOrFlats == "flats"){
           fillAnswerLetter("Eb");
         }else{
@@ -323,12 +356,15 @@ GAME.findLeaders("stc",currLeaderboardVersion);
         }
         break;
     case "stcPianoKeySecondRowTwo":
+        ion.sound.play("E");
         fillAnswerLetter('E');
         break;
     case "stcPianoKeySecondRowThree":
+        ion.sound.play("F");
         fillAnswerLetter('F');
         break;
     case "stcPianoKeySecondRowFour":
+        ion.sound.play("Fsharp");
         if(sharpsOrFlats == "flats"){
           fillAnswerLetter("Gb");
         }else{
@@ -336,9 +372,11 @@ GAME.findLeaders("stc",currLeaderboardVersion);
         };
         break;
     case "stcPianoKeySecondRowFive":
+        ion.sound.play("G");
         fillAnswerLetter('G');
         break;
     case "stcPianoKeySecondRowSix":
+        ion.sound.play("Gsharp");
         if(sharpsOrFlats == "flats"){
           fillAnswerLetter("Ab");
         }else{
