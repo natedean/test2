@@ -501,7 +501,6 @@ ion.sound({
     default:
         fillAnswerLetter('other');
     }
-    console.log("toneIndex = " + toneIndex);
   });
   
   $('#stcBkspBtn').click(function(){

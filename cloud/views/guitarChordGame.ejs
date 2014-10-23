@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <% include partials/head/gcg-head %>
+  <body>  
+    <% include partials/nav %>
+    <div class="container main">
+       <link href="/styles/guitarChordGame.css" rel="stylesheet" type="text/css" />
+      <div class="gameHeader">
+        <%  include partials/guitarChordGame/login-links-gcg  %>
+          <p class="pull-right text-muted"><%= message %><span id="n"><%= n %></span><span id="u" style="display:none"><%= u %></span></p>  
+      </div>
+      <div id="gcgMain" class="text-center">
+        <h2 id="gcgQuestion"></h2>
+        <div id="game"></div>
+        <div id="gcgPointsAvailableContainer">
+          <p id="gcgPointsAvailableText">Points Available: <span id="gcgPointsAvailableDisplay"></span></p>
+        </div>
+        <div id="gcgAnswerContainer"></div>
+        <div id="gcgFeedbackContainer">
+          <p id="gcgGuessFeedback">What's your guess?</p>
+        </div>
+         
+      </div>
+      <div id="gcgLeaderboard" class="leaderboardContainer">
+              <h5 class="text-center">Guitar Chord Game Leaderboard</h5>
+              <% if (Parse.User.current()) { %>
+              <div id="gcgLeaderboardBtnRow" class="leaderboardBtnRow"><span>Sort by: </span><div id="gcgLbTopScorersBtn" class="btn btn-sm btn-default">Top Scorers</div><div id="gcgLbNearMeBtn" class="btn btn-sm btn-default">Near Me</div></div><% } %>  
+        <table class="table">  
+        <thead>  
+          <tr>  
+            <th>#</th>  
+            <th>Name</th>  
+            <th>Guitar Chord Game<br>Points</th>  
+            <th>All GuitarThinker<br>Points</th>
+          </tr>  
+        </thead>  
+        <tbody id="masterLeaderboardTable">  
+            
+        </tbody>
+        </table>
+          </div><!--/#gcgLeaderboard-->
+    </div><!--/container -->
+    <% include partials/footer %>
+    <script src="js/lib/phaser.min.js"></script>
+    <script src="/js/guitarChordGame.js"></script>  <!-- spellThatChord js -->
+  </body>
+</html>
