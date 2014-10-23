@@ -14,7 +14,8 @@ $(function(){
   var sharpsOrFlats;
   var currLeaderboardVersion;
   var currLetterNumber = 1;
-  
+  var toneIndex = 0;
+    
 var easyChordsFlats = [{chord:"C Major",spelling:"C E G",numbers:"1 3 5"},{chord:"C minor",spelling:"C Eb G",numbers:"1 b3 5"},{chord:"G minor",spelling:"G Bb D",numbers:"1 b3 5"},{chord:"D minor",spelling:"D F A",numbers:"1 b3 5"},{chord:"A minor",spelling:"A C E",numbers:"1 b3 5"},{chord:"E minor",spelling:"E G B",numbers:"1 b3 5"},{chord:"F Major",spelling:"F A C",numbers:"1 3 5"},{chord:"F minor",spelling:"F Ab C",numbers:"1 b3 5"},{chord:"Bb Major",spelling:"Bb D F",numbers:"1 3 5"},{chord:"Bb minor",spelling:"Bb Db F",numbers:"1 b3 5"},{chord:"Db Major",spelling:"Db F Ab",numbers:"1 3 5"},{chord:"Eb Major",spelling:"Eb G Bb",numbers:"1 3 5"},{chord:"Eb minor",spelling:"Eb Gb Bb",numbers:"1 b3 5"},{chord:"Ab Major",spelling:"Ab C Eb",numbers:"1 3 5"}];
 var easyChordsSharps = [{chord:"G Major",spelling:"G B D",numbers:"1 3 5"},{chord:"D Major",spelling:"D F# A",numbers:"1 3 5"},{chord:"A Major",spelling:"A C# E",numbers:"1 3 5"},{chord:"E Major",spelling:"E G# B",numbers:"1 3 5"},{chord:"B Major",spelling:"B D# F#",numbers:"1 3 5"},{chord:"F# Major",spelling:"F# A# C#",numbers:"1 3 5"},{chord:"B minor",spelling:"B D F#",numbers:"1 b3 5"},{chord:"F# minor",spelling:"F# A C#",numbers:"1 b3 5"},{chord:"C# minor",spelling:"C# E G#",numbers:"1 b3 5"}];
 var mediumChordsFlats = [{chord:"C Maj7",spelling:"C E G B",numbers:"1 3 5 7"},{chord:"C min7",spelling:"C Eb G Bb",numbers:"1 b3 5 b7"},{chord:"G min7",spelling:"G Bb D F",numbers:"1 b3 5 b7"},{chord:"D min7",spelling:"D F A C",numbers:"1 b3 5 b7"},{chord:"A min7",spelling:"A C E G",numbers:"1 b3 5 b7"},{chord:"E min7",spelling:"E G B D",numbers:"1 b3 5 b7"},{chord:"F Maj7",spelling:"F A C E",numbers:"1 3 5 7"},{chord:"F min7",spelling:"F Ab C Eb",numbers:"1 b3 5 b7"},{chord:"Bb Maj7",spelling:"Bb D F A",numbers:"1 3 5 7"},{chord:"Bb min7",spelling:"Bb Db F Ab",numbers:"1 b3 5 b7"},{chord:"Eb Maj7",spelling:"Eb G Bb D",numbers:"1 3 5 7"},{chord:"Eb min7",spelling:"Eb Gb Bb Db",numbers:"1 b3 5 b7"},{chord:"Ab Maj7",spelling:"Ab C Eb G",numbers:"1 3 5 7"},{chord:"C7",spelling:"C E G Bb",numbers:"1 3 5 b7"},{chord:"F7",spelling:"F A C Eb",numbers:"1 3 5 b7"},{chord:"Bb7",spelling:"Bb D F Ab",numbers:"1 3 5 b7"},{chord:"Eb7",spelling:"Eb G Bb Db",numbers:"1 3 5 b7"},{chord:"Ab7",spelling:"Ab C Eb Gb",numbers:"1 3 5 b7"},{chord:"C min7b5",spelling:"C Eb Gb Bb",numbers:"1 b3 b5 b7"},{chord:"E min7b5",spelling:"E G Bb D",numbers:"1 b3 b5 b7"},{chord:"A min7b5",spelling:"A C Eb G",numbers:"1 b3 b5 b7"},{chord:"D min7b5",spelling:"D F Ab C",numbers:"1 b3 b5 b7"},{chord:"C6",spelling:"C E G A",numbers:"1 3 5 6"},{chord:"F6",spelling:"F A C D",numbers:"1 3 5 6"},{chord:"Bb6",spelling:"Bb D F G",numbers:"1 3 5 6"},{chord:"Eb6",spelling:"Eb G Bb C",numbers:"1 3 5 6"},{chord:"F add9",spelling:"F A C G",numbers:"1 3 5 9"},{chord:"Eb add9",spelling:"Eb G Bb F",numbers:"1 3 5 9"},{chord:"Ab add9",spelling:"Ab C Eb Bb",numbers:"1 3 5 9"}];
@@ -71,6 +72,43 @@ ion.sound({
         {
             name: "Gsharp"
         },
+        {
+            name: "high_A"
+        },
+        {
+            name: "high_Asharp"
+        },
+        {
+            name: "high_B"
+        },
+        {
+            name: "high_C"
+        },
+        {
+            name: "high_Csharp"
+        },
+        {
+            name: "high_D"
+        },
+        {
+            name: "high_Dsharp"
+        },
+        {
+            name: "high_E"
+        },
+        {
+            name: "high_F"
+        },
+        {
+            name: "high_Fsharp"
+        },
+        {
+            name: "high_G"
+        },
+        {
+            name: "high_Gsharp"
+        },
+        
     ],
     volume: 0.5,
     path: "../sounds/mp3s_oggs/",
@@ -96,6 +134,7 @@ ion.sound({
     var rand;
     
     currLetterNumber = 1;
+    toneIndex = 0;
     
     if (Math.round(Math.random()) < .5){
       sharpsOrFlats = "flats";
@@ -218,10 +257,7 @@ ion.sound({
     default:
         console.log('error in fillAnswerLetter function');
         break;
-   }
-    
-    
-    
+   }  
   }// end fillAnswerLetter function
   
   function evaluateAnswer(guess){
@@ -271,7 +307,8 @@ ion.sound({
         break;
    }
   }// end clearLetters
-    
+
+  
 //------------------------------------------------------------------------------------------------------
   
 // click handlers
@@ -312,15 +349,30 @@ ion.sound({
     $('#stcHardAnswerDisplay').show();
     setNewChord();
   });
+
+  // C Csharp D Dsharp E F Fsharp G Gsharp A  Asharp B  high_C high_Csharp high_D high_Dsharp high_E high_F high_Fsharp high_G high_Gsharp high_A high_Asharp high_B highest_C
+  // 1 2      3 4      5 6 7      8 9      10 11     12 13     14          15     16          17     18     19          20     21          22     23          24     25
   
   $('.stcPianoKeyFirstRow,.stcPianoKeySecondRow').click(function(){
     switch(this.id) {
     case "stcPianoKeyFirstRowOne":
-        ion.sound.play("A");
+        if(toneIndex < 10){
+          toneIndex = 10;
+          ion.sound.play("A");
+        }else{
+          toneIndex = 22;
+          ion.sound.play("high_A");
+        }
         fillAnswerLetter('A');
         break;
     case "stcPianoKeyFirstRowTwo":
-        ion.sound.play("Asharp");
+        if(toneIndex < 11){
+          toneIndex = 11;
+          ion.sound.play("Asharp");
+        }else{
+          toneIndex = 23;
+          ion.sound.play("high_Asharp");
+        }
         if(sharpsOrFlats == "flats"){
           fillAnswerLetter("Bb");
         }else{
@@ -328,15 +380,36 @@ ion.sound({
         }
         break;
     case "stcPianoKeyFirstRowThree":
-        ion.sound.play("B");
+        if(toneIndex < 12){
+          toneIndex = 12;
+          ion.sound.play("B");
+        }else{
+          toneIndex = 24;
+          ion.sound.play("high_B");
+        }
         fillAnswerLetter('B');
         break;
     case "stcPianoKeyFirstRowFour":
-        ion.sound.play("C");
+        if(toneIndex < 1){
+          toneIndex = 1;
+          ion.sound.play("C");
+        }else if (toneIndex < 13){
+          toneIndex = 13;
+          ion.sound.play("high_C");
+        }else{
+          toneIndex = 25;
+          ion.sound.play("highest_C");
+        }
         fillAnswerLetter('C');
         break;
     case "stcPianoKeyFirstRowFive": 
-        ion.sound.play("Csharp");
+        if(toneIndex < 2){
+          toneIndex = 2;
+          ion.sound.play("Csharp");
+        }else{
+          toneIndex = 14;
+          ion.sound.play("high_Csharp");
+        }
         if(sharpsOrFlats == "flats"){
           fillAnswerLetter("Db");
         }else{
@@ -344,11 +417,23 @@ ion.sound({
         }
         break;
     case "stcPianoKeyFirstRowSix":
-        ion.sound.play("D");
+        if(toneIndex < 3){
+          toneIndex = 3;
+          ion.sound.play("D");
+        }else{
+          toneIndex = 15;
+          ion.sound.play("high_D");
+        }
         fillAnswerLetter('D');
         break;
     case "stcPianoKeySecondRowOne":
-        ion.sound.play("Dsharp");
+        if(toneIndex < 4){
+          toneIndex = 4;
+          ion.sound.play("Dsharp");
+        }else{
+          toneIndex = 16;
+          ion.sound.play("high_Dsharp");
+        }
         if(sharpsOrFlats == "flats"){
           fillAnswerLetter("Eb");
         }else{
@@ -356,15 +441,33 @@ ion.sound({
         }
         break;
     case "stcPianoKeySecondRowTwo":
-        ion.sound.play("E");
+        if(toneIndex < 5){
+          toneIndex = 5;
+          ion.sound.play("E");
+        }else{
+          toneIndex = 17;
+          ion.sound.play("high_E");
+        }
         fillAnswerLetter('E');
         break;
     case "stcPianoKeySecondRowThree":
-        ion.sound.play("F");
+        if(toneIndex < 6){
+          toneIndex = 6;
+          ion.sound.play("F");
+        }else{
+          toneIndex = 18;
+          ion.sound.play("high_F");
+        }
         fillAnswerLetter('F');
         break;
     case "stcPianoKeySecondRowFour":
-        ion.sound.play("Fsharp");
+        if(toneIndex < 7){
+          toneIndex = 7;
+          ion.sound.play("Fsharp");
+        }else{
+          toneIndex = 19;
+          ion.sound.play("high_Fsharp");
+        }
         if(sharpsOrFlats == "flats"){
           fillAnswerLetter("Gb");
         }else{
@@ -372,11 +475,23 @@ ion.sound({
         };
         break;
     case "stcPianoKeySecondRowFive":
-        ion.sound.play("G");
+        if(toneIndex < 8){
+          toneIndex = 8;
+          ion.sound.play("G");
+        }else{
+          toneIndex = 20;
+          ion.sound.play("high_G");
+        }
         fillAnswerLetter('G');
         break;
     case "stcPianoKeySecondRowSix":
-        ion.sound.play("Gsharp");
+        if(toneIndex < 9){
+          toneIndex = 9;
+          ion.sound.play("Gsharp");
+        }else{
+          toneIndex = 21;
+          ion.sound.play("high_Gsharp");
+        }
         if(sharpsOrFlats == "flats"){
           fillAnswerLetter("Ab");
         }else{
@@ -386,6 +501,7 @@ ion.sound({
     default:
         fillAnswerLetter('other');
     }
+    console.log("toneIndex = " + toneIndex);
   });
   
   $('#stcBkspBtn').click(function(){
