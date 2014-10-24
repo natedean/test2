@@ -15,6 +15,9 @@
           <button id="gcgMediumBtn" class="btn btn-default btn-lg">Medium</button>
           <button id="gcgHardBtn" class="btn btn-default btn-lg">Hard</button>
         </div>
+        <div id="gcgPointsAvailableContainer">
+          <p id="gcgPointsAvailableText">Points Available: <span id="gcgPointsAvailableDisplay"></span></p>
+        </div>
         <h2 id="gcgQuestion"></h2>
         <div id="gcgPointsAvailableContainer">
           <p id="gcgPointsAvailableText">Points Available: <span id="gcgPointsAvailableDisplay"></span></p>
@@ -23,9 +26,16 @@
         <div id="gcgFeedbackContainer">
           <p id="gcgGuessFeedback">What's your guess?</p>
         </div>
-      <div id="gcgGame"></div>
+      
       </div>
-      <div id="gcgLeaderboard" class="leaderboardContainer">
+     
+      
+      <div class="row">
+      <div class="col-md-6">
+        <div id="gcgGame"></div>
+        </div><!--/col-->
+        <div class="col-md-6">
+           <div id="gcgLeaderboard" class="leaderboardContainer">
               <h5 class="text-center">Guitar Chord Game Leaderboard</h5>
               <% if (Parse.User.current()) { %>
               <div id="gcgLeaderboardBtnRow" class="leaderboardBtnRow"><span>Sort by: </span><div id="gcgLbTopScorersBtn" class="btn btn-sm btn-default">Top Scorers</div><div id="gcgLbNearMeBtn" class="btn btn-sm btn-default">Near Me</div></div><% } %>  
@@ -43,6 +53,9 @@
         </tbody>
         </table>
           </div><!--/#gcgLeaderboard-->
+        </div><!--/col--> 
+      </div><!--/row-->  
+
     </div><!--/container -->
     <% include partials/footer %>
     <script src="js/lib/phaser.min.js"></script>

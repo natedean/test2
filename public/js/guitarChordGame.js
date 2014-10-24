@@ -1,6 +1,5 @@
 var leaderboardVersions = ["nearMe","topScorers"];
 var currLeaderboardVersion;
-var pointsAvailable = 10;
 var gameTimer;
 
 
@@ -62,6 +61,30 @@ var questions = {
 
 var settings = [{level: questions.easy, points: 10},{level: questions.medium, points: 15},{level: questions.hard, points: 20}];
 var currDifficultySetting = settings[0];
+var pointsAvailable = currDifficultySetting.points;
+  
+
+  
+//timer stuff ------------------------------------------------------------------------------->
+  function timer() {         
+      if(pointsAvailable > 1){
+        pointsAvailable -= 1;
+      }else{
+        clearInterval(gameTimer);
+      }
+    $('#gcgPointsAvailableDisplay').text(pointsAvailable);    
+  }
+  
+  function resetTimer(){
+    //reset timer
+    if(gameTimer){
+      clearInterval(gameTimer);
+    }
+    pointsAvailable = currDifficultySetting.points;
+    $('#gcgPointsAvailableDisplay').text(pointsAvailable);
+    gameTimer = setInterval(timer, 2000);
+  }
+//---------------------------------------------------------------------------
 
 function preload(){
   //images
@@ -83,22 +106,35 @@ function preload(){
 }// end preload
 
 function create(){
+  
   game.stage.backgroundColor = '#ffffff';
   guitarNeck = game.add.sprite(0, 50, 'guitarNeck');
   guitarNeck.scale.set(.3);
 
   text = game.add.text(150, 0, '', { font: "30pt Courier", fill: "#19cb65", stroke: "#119f4e", strokeThickness: 2 });
-    
+  
+  //initialize non-phaser
+  
+  var u = $('#u').text();
+  if(u){ // user logged in
+    currLeaderboardVersion = leaderboardVersions[0];
+    $('#gcgLbNearMeBtn').addClass('selected');
+  }else{
+    currLeaderboardVersion = leaderboardVersions[1];
+  }  
+  GAME.findLeaders("gcg",currLeaderboardVersion);
+  $('#gcgPointsAvailableDisplay').text(pointsAvailable);
+  setNewChord();  
 }
 
 function update(){
   
-  game.input.onDown.addOnce(updateText, this);
+  game.input.onDown.addOnce(setNewChord, this);
   
 }// end update
 
 
-function updateText(){
+function setNewChord(){
   counter = 0;
   prevRand = currRand;
   
@@ -123,7 +159,7 @@ function updateText(){
   currChord = currDifficultySetting.level[currRand];
   
   game.time.events.repeat(300, 6, setNotes, this);
-  
+  resetTimer();
 //  text.setText(currChord.name); DEBUG
 }
 
@@ -149,28 +185,22 @@ $(function(){
   // click handlers
    $('#gcgEasyBtn').click(function(){
     currDifficultySetting = settings[0];
-    $('#gcgMediumAnswerDisplay').hide();
-    $('#gcgHardAnswerDisplay').hide();
-    
-    $('#gcgEasyAnswerDisplay').show();
+    $('#gcgEasyBtn').addClass('selected');
+    $('#gcgMediumBtn, #gcgHardBtn').removeClass('selected'); 
     setNewChord();
   });
   
   $('#gcgMediumBtn').click(function(){
     currDifficultySetting = settings[1];
-    $('#gcgEasyAnswerDisplay').hide();
-    $('#gcgHardAnswerDisplay').hide();
-    
-    $('#gcgMediumAnswerDisplay').show();
+    $('#gcgMediumBtn').addClass('selected');
+    $('#gcgEasyBtn, #gcgHardBtn').removeClass('selected'); 
     setNewChord();
   });
   
   $('#gcgHardBtn').click(function(){
     currDifficultySetting = settings[2];
-    $('#gcgEasyAnswerDisplay').hide();
-    $('#gcgMediumAnswerDisplay').hide();
-    
-    $('#gcgHardAnswerDisplay').show();
+    $('#gcgHardBtn').addClass('selected');
+    $('#gcgEasyBtn, #gcgMediumBtn').removeClass('selected'); 
     setNewChord();
   });
 });
