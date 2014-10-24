@@ -64,6 +64,20 @@ app.get('/music-theory-master', function(req, res) {
 
 });
 
+app.get('/guitar-chord-game', function(req, res) {
+  if(Parse.User.current()){
+    Parse.User.current().fetch().then(function(user){
+      res.render('guitarChordGame', { message: 'Logged in as ',
+                                     n: user.get("username"),
+                                     u: user.id,
+                                     score: user.get("stcScore")
+                                   });
+    });
+  }else{
+    res.render('guitarChordGame', { message: 'Welcome ', n: "Guest", u: "", score: 0 });
+  }
+});
+
 // You could have a "Log In" link on your website pointing to this.
 app.get('/login', function(req, res) {
   // Renders the login form asking for username and password.
@@ -110,7 +124,7 @@ app.post('/signup', function(req, res) {
   }else if(req.body.username.length > 10){
     res.render('login', {loginMessage: "",signupMessage: "Username cannot exceed 10 characters. Try a shorter one."});
   }else{
-      Parse.User.signUp(req.body.username, req.body.password, { email: req.body.email, stcScore: 0, mtmScore: 0, gtScore: 0, ACL: new Parse.ACL() }).then(function() {
+      Parse.User.signUp(req.body.username, req.body.password, { email: req.body.email, stcScore: 0, mtmScore: 0, gcgScore: 0, gtScore: 0, ACL: new Parse.ACL() }).then(function() {
       // Login succeeded, redirect to homepage.
       // parseExpressCookieSession will automatically set cookie.
       res.redirect('/');
@@ -144,7 +158,7 @@ app.post('/signup-stc', function(req, res) {
   }else if(req.body.username.length > 10){
     res.render('login', {loginMessage: "",signupMessage: "Username cannot exceed 10 characters. Try a shorter one."});
   }else{
-      Parse.User.signUp(req.body.username, req.body.password, { email: req.body.email, stcScore: 0, mtmScore: 0, gtScore: 0, ACL: new Parse.ACL() }).then(function() {
+      Parse.User.signUp(req.body.username, req.body.password, { email: req.body.email, stcScore: 0, mtmScore: 0, gcgScore: 0, gtScore: 0, ACL: new Parse.ACL() }).then(function() {
       // Login succeeded, redirect to homepage.
       // parseExpressCookieSession will automatically set cookie.
       res.redirect('/spell-that-chord');
@@ -176,10 +190,42 @@ app.post('/signup-mtm', function(req, res) {
   }else if(req.body.username.length > 10){
     res.render('login', {loginMessage: "",signupMessage: "Username cannot exceed 10 characters. Try a shorter one."});
   }else{
-      Parse.User.signUp(req.body.username, req.body.password, { email: req.body.email, stcScore: 0, mtmScore: 0, gtScore: 0, ACL: new Parse.ACL() }).then(function() {
+      Parse.User.signUp(req.body.username, req.body.password, { email: req.body.email, stcScore: 0, mtmScore: 0, gcgScore: 0, gtScore: 0, ACL: new Parse.ACL() }).then(function() {
       // Login succeeded, redirect to homepage.
       // parseExpressCookieSession will automatically set cookie.
       res.redirect('/music-theory-master');
+    },
+    function(error) {
+      // Login failed, redirect back to login form.
+      res.render('login', {loginMessage: "",signupMessage: error.message});
+    });
+  }
+});
+
+// Clicking submit on the login form triggers this.
+app.post('/login-gcg', function(req, res) {
+  Parse.User.logIn(req.body.username, req.body.password).then(function() {
+    // Login succeeded, redirect to homepage.
+    // parseExpressCookieSession will automatically set cookie.
+    res.redirect('/guitar-chord-game');
+  },
+  function(error) {
+    // Login failed, redirect back to login form.
+    res.render('login', {loginMessage: error.message,signupMessage: ""});
+  });
+});
+
+// Clicking submit on the login form triggers this.
+app.post('/signup-gcg', function(req, res) {
+  if(req.body.email === ""){
+    res.render('login', {loginMessage: "",signupMessage: "You must have an email address. If you lose your password, it can be recovered via email."});
+  }else if(req.body.username.length > 10){
+    res.render('login', {loginMessage: "",signupMessage: "Username cannot exceed 10 characters. Try a shorter one."});
+  }else{
+      Parse.User.signUp(req.body.username, req.body.password, { email: req.body.email, stcScore: 0, mtmScore: 0, gcgScore: 0, gtScore: 0, ACL: new Parse.ACL() }).then(function() {
+      // Login succeeded, redirect to homepage.
+      // parseExpressCookieSession will automatically set cookie.
+      res.redirect('/guitar-chord-game');
     },
     function(error) {
       // Login failed, redirect back to login form.

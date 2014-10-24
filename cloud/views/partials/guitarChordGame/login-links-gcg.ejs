@@ -1,0 +1,41 @@
+<!-- Button trigger modal -->
+<div class="pull-right">
+<% if (!Parse.User.current()) { %>
+  <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#loginModal">
+    Login/Signup
+  </button>
+  <% } else { %>
+  <a href="/logout" class="btn btn-danger btn-sm">Logout</a>
+<% } %>  
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div style="height: 30px; padding-right:20px;">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="font-size:50px;">&times; </button>
+      </div>
+      <div class="login text-center">   
+      <h2>Log In</h2>
+      <form method="post" action="/login-gcg">
+        <div class="form-group">
+          <input type="text" name="username" placeholder="username" ></input><br>
+          <input type="password" name="password" type="password" placeholder="password" ></input><br>
+          <input class="btn btn-success" type="submit" value="Log In">
+        </div>
+      </form>
+      <small>Creating a username is the only way we can save your scores!  It is completely free, and always will be.  Email address is required in case you forget, or need to change your password or username.</small>
+      <h2>Sign Up</h2>
+      <form method="post" action="/signup-gcg">
+        <div class="form-group">
+          <input type="text" name="username" placeholder="username"></input><br>
+          <input type="email" name="email" type="email" placeholder="email"></input><br>
+          <input type="password" name="password" type="password" placeholder="password"></input><br>
+          <input class="btn btn-success" type="submit" value="Sign Up">
+        </div>
+      </form>
+      </div>  
+    </div>
+  </div>
+</div>
