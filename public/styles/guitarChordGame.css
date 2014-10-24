@@ -1,3 +1,9 @@
-#game canvas{
+#gcgGame canvas{
+  margin: 0 auto;
+}
+
+#gcgDifficultyBtnRow{
+  height: 80px;
+  width: 460px;
   margin: 0 auto;
 }
