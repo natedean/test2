@@ -1,6 +1,6 @@
 require('cloud/app.js');
-var leaderboardFunctions = require('cloud/leaderboardFunctions.js');
 
+var leaderboardFunctions = require('cloud/leaderboardFunctions.js');
 
 Parse.Cloud.define("getLeaders", function(request,response){
   leaderboardFunctions.getLeaders(request,response);

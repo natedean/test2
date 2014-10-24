@@ -3,6 +3,7 @@ var express = require('express');
 var parseExpressHttpsRedirect = require('parse-express-https-redirect');
 var parseExpressCookieSession = require('parse-express-cookie-session');
 var app = express();
+var routes = require('cloud/routes.js');
 
 app.set('views', 'cloud/views');
 app.set('view engine', 'ejs');
@@ -11,96 +12,16 @@ app.use(express.bodyParser());
 app.use(express.cookieParser('YOUR_SIGNING_SECRET'));
 app.use(parseExpressCookieSession({ fetchUser: true, cookie: { maxAge: 3600000 * 24 * 30} }));
 
-// This is an example of hooking up a request handler with a specific request
-// path and HTTP verb using the Express routing API.
-app.get('/', function(req, res) {
-  if(Parse.User.current()){
-    Parse.User.current().fetch().then(function(user){
-      res.render('home', { message: 'Logged in as ',
-                                     n: user.get("username"),
-                                     u: user.id});
-    });
-  }else{
-    res.render('home', { message: 'Welcome ', n: "Guest", u: ""});
-  }
-  
-});
-
-app.get('/nashville-number-system', function(req, res) {
-  res.render('nns');
-});
-
-app.get('/chord-chart-builder', function(req, res) {
-  res.render('chartbuilder');
-});
-
-app.get('/spell-that-chord', function(req, res) {
-  if(Parse.User.current()){
-    Parse.User.current().fetch().then(function(user){
-      res.render('spellThatChord', { message: 'Logged in as ',
-                                     n: user.get("username"),
-                                     u: user.id,
-                                     score: user.get("stcScore")
-                                   });
-    });
-  }else{
-    res.render('spellThatChord', { message: 'Welcome ', n: "Guest", u: "", score: 0 });
-  }
-
-});
-
-app.get('/music-theory-master', function(req, res) {
-  if(Parse.User.current()){
-    Parse.User.current().fetch().then(function(user){
-      res.render('musicTheoryMaster', { message: 'Logged in as ',
-                                     n: user.get("username"),
-                                     u: user.id,
-                                     score: user.get("stcScore")
-                                   });
-    });
-  }else{
-    res.render('musicTheoryMaster', { message: 'Welcome ', n: "Guest", u: "", score: 0 });
-  }
-
-});
-
-app.get('/guitar-chord-game', function(req, res) {
-  if(Parse.User.current()){
-    Parse.User.current().fetch().then(function(user){
-      res.render('guitarChordGame', { message: 'Logged in as ',
-                                     n: user.get("username"),
-                                     u: user.id,
-                                     score: user.get("stcScore")
-                                   });
-    });
-  }else{
-    res.render('guitarChordGame', { message: 'Welcome ', n: "Guest", u: "", score: 0 });
-  }
-});
-
-// You could have a "Log In" link on your website pointing to this.
-app.get('/login', function(req, res) {
-  // Renders the login form asking for username and password.
-  res.render('login.ejs',{loginMessage: "",signupMessage: ""});
-});
-
-// You could have a "Log Out" link on your website pointing to this.
-app.get('/logout', function(req, res) {
-  Parse.User.logOut();
-  res.redirect('/');
-});
-
-app.get('/test', function(req, res){
-  if(Parse.User.current()){
-    Parse.User.current().fetch().then(function(user){
-      res.render('test', { message: 'Logged in as ',
-                                     n: user.get("username"),
-                                     u: user.id});
-    });
-  }else{
-    res.render('test', { message: 'Welcome ', n: "Guest", u: ""});
-  }
-});
+// ROUTING
+app.get('/', routes.home);
+app.get('/nashville-number-system', routes.nns);
+app.get('/chord-chart-builder', routes.chartBuilder);
+app.get('/spell-that-chord', routes.spellThatChord);
+app.get('/music-theory-master', routes.musicTheoryMaster);
+app.get('/guitar-chord-game', routes.guitarChordGame);
+app.get('/login', routes.login);
+app.get('/logout', routes.logout);
+app.get('/test', routes.test);
 
 // -------------------------- END ROUTING ----------------------------------------------------
 
