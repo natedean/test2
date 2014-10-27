@@ -15,6 +15,7 @@ var fretWidth = 78;
 var currRand = 0;
 var prevRand;
 var  guitarTones;
+var newAnswers;
 
 var questions = {
   easy: [
@@ -50,9 +51,15 @@ var questions = {
     {name: "FMaj7", notes: [{fret: -1, finger: "x"},{fret: -1, finger: "x"},{fret: 3,finger: 3},{fret: 2, finger: 2},{fret: 1, finger: 1},{fret: 0, finger: 0}]}
   ],
   hard: [
-    {name: "AMaj9", notes: [{fret: -1, finger: "x"},{fret: 0, finger: 0},{fret: 2,finger: 1},{fret: 1, finger: 1},{fret: 0, finger: 0},{fret: 0, finger: 0}]},
-    {name: "Ddim", notes: [{fret: -1, finger: "x"},{fret: -1, finger: "x"},{fret: 0,finger: 0},{fret: 1, finger: 1},{fret: 0, finger: 0},{fret: 1, finger: 2}]},
-    {name: "A7sus", notes: [{fret: -1, finger: "x"},{fret: 0, finger: 0},{fret: 2,finger: 1},{fret: 0, finger: 0},{fret: 3, finger: 3},{fret: 0, finger: 0}]},
+    {name: "AMaj9", notes: [{fret: -1, finger: "x"},{fret: 0, finger: 0},{fret: 2,finger: 2},{fret: 1, finger: 1},{fret: 0, finger: 0},{fret: 0, finger: 0}],
+      answers: [{answer: "AMaj9", correct: true},{answer: "A9",correct: false},{answer: "AMaj11",correct: false},{answer: "A11",correct: false}]
+    },
+    {name: "Ddim", notes: [{fret: -1, finger: "x"},{fret: -1, finger: "x"},{fret: 0,finger: 0},{fret: 1, finger: 1},{fret: 0, finger: 0},{fret: 1, finger: 2}],
+      answers: [{answer: "Ddim", correct: true},{answer: "Dmin7b5",correct: false},{answer: "D9",correct: false},{answer: "Daug",correct: false}]
+    },
+    {name: "A7sus", notes: [{fret: -1, finger: "x"},{fret: 0, finger: 0},{fret: 2,finger: 1},{fret: 0, finger: 0},{fret: 3, finger: 3},{fret: 0, finger: 0}],
+      answers: [{answer: "A7sus", correct: true},{answer: "A9",correct: false},{answer: "Aaug",correct: false},{answer: "A13",correct: false}]
+    }
   ]
   
 } // end questions
@@ -163,19 +170,9 @@ function create(){
   
 
   text = game.add.text(150, 0, '', { font: "30pt Courier", fill: "#19cb65", stroke: "#119f4e", strokeThickness: 2 });
-  
-  //initialize non-phaser
-  
-  var u = $('#u').text();
-  if(u){ // user logged in
-    currLeaderboardVersion = leaderboardVersions[0];
-    $('#gcgLbNearMeBtn').addClass('selected');
-  }else{
-    currLeaderboardVersion = leaderboardVersions[1];
-  }  
-  GAME.findLeaders("gcg",currLeaderboardVersion);
-  $('#gcgPointsAvailableDisplay').text(pointsAvailable);
-  setNewChord();  
+     
+  //START!!
+  setNewChord();
 }
 
 function update(){
@@ -188,6 +185,8 @@ function update(){
 function setNewChord(){
   counter = 0;
   prevRand = currRand;
+  $('#gcgAnswerContainer').html("");
+//  $('#gcgPointsAvailableDisplay').text("");
   
   function getRand(){
     var rand = game.rnd.integerInRange(0, currDifficultySetting.level.length-1);
@@ -206,11 +205,15 @@ function setNewChord(){
   notes = game.add.group();
 
   currRand = getRand();
-  console.log("currRand = " + currRand);
+  
   currChord = currDifficultySetting.level[currRand];
   
   game.time.events.repeat(300, 6, setNotes, this);
-  resetTimer();
+  setTimeout(function(){
+    setAnswers();
+    resetTimer();
+  },2000);
+    
 //  text.setText(currChord.name); DEBUG
 }
 
@@ -236,7 +239,98 @@ function setNotes(){
     counter += 1;
 }
 
+function setAnswers(){
+  newAnswers = shuffle(currChord.answers);     
+    newAnswers.map(function(item){
+      if(item.correct){
+        $('#gcgAnswerContainer').append(
+          '<div id="c" class="btn btn-lg btn-default answer">' + item.answer + '</div>'
+        );
+      }else{
+        $('#gcgAnswerContainer').append(
+          '<div class="btn btn-lg btn-default answer">' + item.answer + '</div>'
+        );   
+      } 
+    });// end map
+    $('.answer').click(function(e){ // click handler
+//      $('#gcgPointsAvailableText').fadeOut(200);
+      if(e.target.id === "c"){
+        var u = $('#u').text();
+        var n = $('#n').text();
+        
+        if (u === ""){
+          alert('You have to be signed up and logged in to play this game.  This way we can keep track of your score!');
+          return $("#loginModal").modal("show");
+        }
+        $('#gcgGuessFeedback').text("Correct! +" + pointsAvailable).fadeIn(500);
+        
+        Parse.Cloud.run("add",{amount:pointsAvailable,u: u,currApp: "gcg"}).then(function(results){
+          GAME.findLeaders("gcg",currLeaderboardVersion);
+      
+          $('#gcgGuessFeedback').fadeOut(2000);
+
+//          $('#gcgPointsAvailableText').fadeIn(1000);
+        },function(error){
+//          $('#gcgPointsAvailableText').fadeIn(1000);
+          console.log(error.message);
+        });
+      }else{
+        var ans = $("#c").text();
+        $('#gcgGuessFeedback').text("Incorrect. The answer is " + ans).fadeIn(500);
+        setTimeout(function(){
+          GAME.findLeaders("gcg",currLeaderboardVersion);
+         
+
+//          $('#gcgPointsAvailableText').fadeIn(1000);
+          $('#gcgGuessFeedback').fadeOut(2000);
+        },1000);
+      }
+      setTimeout(function(){
+        setNewChord();
+      },2000);
+    });// end click handler
+}
+
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex ;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}// end shuffle
+
+// ------ JQUERY DOC READY STARTS NOW ----------------------------------->
+
 $(function(){
+  
+//initialize game
+  
+  var u = $('#u').text();
+  if(u){ // user logged in
+    currLeaderboardVersion = leaderboardVersions[0];
+    $('#gcgLbNearMeBtn').addClass('selected');
+  }else{
+    currLeaderboardVersion = leaderboardVersions[1];
+  }  
+  GAME.findLeaders("gcg",currLeaderboardVersion);
+  $('#gcgPointsAvailableDisplay').text(pointsAvailable);
+  gameTimer = setInterval(timer, 2000);
+  
+
+  
+
+
   // click handlers
    $('#gcgEasyBtn').click(function(){
     currDifficultySetting = settings[0];
@@ -258,4 +352,19 @@ $(function(){
     $('#gcgEasyBtn, #gcgMediumBtn').removeClass('selected'); 
     setNewChord();
   });
-});
+  
+  $('#gcgLbTopScorersBtn').click(function(){
+    currLeaderboardVersion = leaderboardVersions[1];
+    GAME.findLeaders("gcg",currLeaderboardVersion);
+    $('#gcgLbTopScorersBtn').addClass('selected');
+    $('#gcgLbNearMeBtn').removeClass('selected');
+  });
+  
+  $('#gcgLbNearMeBtn').click(function(){
+    currLeaderboardVersion = leaderboardVersions[0];
+    GAME.findLeaders("gcg",currLeaderboardVersion);
+    $('#gcgLbNearMeBtn').addClass('selected');
+    $('#gcgLbTopScorersBtn').removeClass('selected');
+  });
+  
+});// end doc ready

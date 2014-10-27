@@ -22,7 +22,10 @@ var GAME = (function(){
             $('#masterLeaderboardTable').append('<td class="green scoreTd">' + item.get(currApp) + '</td>');
             $('#masterLeaderboardTable').append('<td class="green scoreTd">' + item.get("gtScore") + '</td>');
             $('#masterLeaderboardTable').append('</tr>');
-            currPlayerScore = item.get("gtScore");
+            if( app === "stc" ){
+              currPlayerStcScore = item.get("stcScore");
+              $('#stcLandscapeSheetMusicNumber').text(currPlayerStcScore);
+            } 
          }else{
             $('#masterLeaderboardTable').append('<tr>');
             $('#masterLeaderboardTable').append('<td>' + i + '</td>');
@@ -53,7 +56,6 @@ var GAME = (function(){
             $('#masterLeaderboardTable').append('<td class="green scoreTd">' + item.get("mtmScore") + '</td>');
             $('#masterLeaderboardTable').append('<td class="green scoreTd">' + item.get("gtScore") + '</td>');
             $('#masterLeaderboardTable').append('</tr>');
-            currPlayerScore = item.get("gtScore");
          }else{
             $('#masterLeaderboardTable').append('<tr>');
             $('#masterLeaderboardTable').append('<td>' + i + '</td>');
