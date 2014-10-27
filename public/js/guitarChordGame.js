@@ -14,26 +14,57 @@ var fretsWidth = [10,76,156,230,308,384];
 var fretWidth = 78;
 var currRand = 0;
 var prevRand;
-var  guitarTones;
+var guitarTones;
 var newAnswers;
+var resetting = false;
 
 var questions = {
   easy: [
-    {name: "C Major", notes: [{fret: -1, finger: "x"},{fret: 3, finger: 3},{fret: 2,finger: 2},{fret: 0, finger: 0},{fret: 1, finger: 1},{fret: 0, finger: 0}]},
-    {name: "G Major", notes: [{fret: 3, finger: 2},{fret: 2, finger: 1},{fret: 0,finger: 0},{fret: 0, finger: 0},{fret: 3, finger: 3},{fret: 3, finger: 4}]},
-    {name: "D Major", notes: [{fret: -1, finger: "x"},{fret: -1, finger: "x"},{fret: 0,finger: 0},{fret: 2, finger: 1},{fret: 3, finger: 3},{fret: 2, finger: 2}]},
-    {name: "A Major", notes: [{fret: -1, finger: "x"},{fret: 0, finger: 0},{fret: 2,finger: 1},{fret: 2, finger: 2},{fret: 2, finger: 3},{fret: 0, finger: 0}]},
-    {name: "E Major", notes: [{fret: 0, finger: 0},{fret: 2, finger: 2},{fret: 2,finger: 2},{fret: 1, finger: 1},{fret: 0, finger: 0},{fret: 0, finger: 0}]},
-    {name: "B Major", notes: [{fret: -1, finger: "x"},{fret: 2, finger: 1},{fret: 4,finger: 2},{fret: 4, finger: 3},{fret: 4, finger: 4},{fret: 2, finger: 1}]},
-    {name: "F# Major", notes: [{fret: 2, finger: 1},{fret: 4, finger: 3},{fret: 4,finger: 4},{fret: 3, finger: 2},{fret: 2, finger: 1},{fret: 2, finger: 1}]},
-    {name: "C# Major", notes: [{fret: -1, finger: "x"},{fret: 4, finger: 1},{fret: 6,finger: 2},{fret: 6, finger: 3},{fret: 6, finger: 4},{fret: 4, finger: 1}]},
-    {name: "F Major", notes: [{fret: -1, finger: "x"},{fret: -1, finger: "x"},{fret: 3,finger: 3},{fret: 2, finger: 2},{fret: 1, finger: 1},{fret: 1, finger: 1}]},
-    {name: "Bb Major", notes: [{fret: -1, finger: "x"},{fret: 1, finger: 1},{fret: 3,finger: 2},{fret: 3, finger: 3},{fret: 3, finger: 4},{fret: 1, finger: 1}]},
-    {name: "A minor", notes: [{fret: -1, finger: "x"},{fret: 0, finger: 0},{fret: 2,finger: 2},{fret: 2, finger: 3},{fret: 1, finger: 1},{fret: 0, finger: 0}]},
-    {name: "E minor", notes: [{fret: 0, finger: 0},{fret: 2, finger: 2},{fret: 2,finger: 3},{fret: 0, finger: 0},{fret: 0, finger: 0},{fret: 0, finger: 0}]},
-    {name: "B minor", notes: [{fret: -1, finger: "x"},{fret: 2, finger: 1},{fret: 4,finger: 3},{fret: 4, finger: 4},{fret: 3, finger: 2},{fret: 2, finger: 1}]},
-    {name: "F# minor", notes: [{fret: 2, finger: 1},{fret: 4, finger: 3},{fret: 4,finger: 4},{fret: 2, finger: 1},{fret: 2, finger: 1},{fret: 2, finger: 1}]},
-    {name: "C# minor", notes: [{fret: -1, finger: "x"},{fret: 4, finger: 1},{fret: 6,finger: 3},{fret: 6, finger: 4},{fret: 5, finger: 2},{fret: 4, finger: 1}]}
+    {name: "C Major", notes: [{fret: -1, finger: "x"},{fret: 3, finger: 3},{fret: 2,finger: 2},{fret: 0, finger: 0},{fret: 1, finger: 1},{fret: 0, finger: 0}],
+      answers: [{answer: "C Major", correct: true},{answer: "G Major",correct: false},{answer: "F Major",correct: false},{answer: "E Major",correct: false}]
+    },
+    {name: "G Major", notes: [{fret: 3, finger: 2},{fret: 2, finger: 1},{fret: 0,finger: 0},{fret: 0, finger: 0},{fret: 3, finger: 3},{fret: 3, finger: 4}],
+      answers: [{answer: "G Major", correct: true},{answer: "C Major",correct: false},{answer: "F Major",correct: false},{answer: "E Major",correct: false}]
+    },
+    {name: "D Major", notes: [{fret: -1, finger: "x"},{fret: -1, finger: "x"},{fret: 0,finger: 0},{fret: 2, finger: 1},{fret: 3, finger: 3},{fret: 2, finger: 2}],
+      answers: [{answer: "D Major", correct: true},{answer: "G Major",correct: false},{answer: "F Major",correct: false},{answer: "E Major",correct: false}]
+    },
+    {name: "A Major", notes: [{fret: -1, finger: "x"},{fret: 0, finger: 0},{fret: 2,finger: 1},{fret: 2, finger: 2},{fret: 2, finger: 3},{fret: 0, finger: 0}],
+      answers: [{answer: "A Major", correct: true},{answer: "G Major",correct: false},{answer: "D Major",correct: false},{answer: "E Major",correct: false}]
+    },
+    {name: "E Major", notes: [{fret: 0, finger: 0},{fret: 2, finger: 2},{fret: 2,finger: 2},{fret: 1, finger: 1},{fret: 0, finger: 0},{fret: 0, finger: 0}],
+      answers: [{answer: "E Major", correct: true},{answer: "A Major",correct: false},{answer: "F Major",correct: false},{answer: "C Major",correct: false}]
+    },
+    {name: "B Major", notes: [{fret: -1, finger: "x"},{fret: 2, finger: 1},{fret: 4,finger: 2},{fret: 4, finger: 3},{fret: 4, finger: 4},{fret: 2, finger: 1}],
+      answers: [{answer: "B Major", correct: true},{answer: "A Major",correct: false},{answer: "F# Major",correct: false},{answer: "E Major",correct: false}]
+    },
+    {name: "F# Major", notes: [{fret: 2, finger: 1},{fret: 4, finger: 3},{fret: 4,finger: 4},{fret: 3, finger: 2},{fret: 2, finger: 1},{fret: 2, finger: 1}],
+      answers: [{answer: "F# Major", correct: true},{answer: "B Major",correct: false},{answer: "F Major",correct: false},{answer: "E Major",correct: false}]
+    },
+    {name: "C# Major", notes: [{fret: -1, finger: "x"},{fret: 4, finger: 1},{fret: 6,finger: 2},{fret: 6, finger: 3},{fret: 6, finger: 4},{fret: 4, finger: 1}],
+      answers: [{answer: "C# Major", correct: true},{answer: "G# Major",correct: false},{answer: "F# Major",correct: false},{answer: "B Major",correct: false}]
+    },
+    {name: "F Major", notes: [{fret: -1, finger: "x"},{fret: -1, finger: "x"},{fret: 3,finger: 3},{fret: 2, finger: 2},{fret: 1, finger: 1},{fret: 1, finger: 1}],
+      answers: [{answer: "F Major", correct: true},{answer: "G Major",correct: false},{answer: "F# Major",correct: false},{answer: "Bb Major",correct: false}]
+    },
+    {name: "Bb Major", notes: [{fret: -1, finger: "x"},{fret: 1, finger: 1},{fret: 3,finger: 2},{fret: 3, finger: 3},{fret: 3, finger: 4},{fret: 1, finger: 1}],
+      answers: [{answer: "Bb Major", correct: true},{answer: "F Major",correct: false},{answer: "B Major",correct: false},{answer: "E Major",correct: false}]
+    },
+    {name: "A minor", notes: [{fret: -1, finger: "x"},{fret: 0, finger: 0},{fret: 2,finger: 2},{fret: 2, finger: 3},{fret: 1, finger: 1},{fret: 0, finger: 0}],
+      answers: [{answer: "A minor", correct: true},{answer: "E minor",correct: false},{answer: "C minor",correct: false},{answer: "D minor",correct: false}]
+    },
+    {name: "E minor", notes: [{fret: 0, finger: 0},{fret: 2, finger: 2},{fret: 2,finger: 3},{fret: 0, finger: 0},{fret: 0, finger: 0},{fret: 0, finger: 0}],
+      answers: [{answer: "E minor", correct: true},{answer: "A minor",correct: false},{answer: "B minor",correct: false},{answer: "D minor",correct: false}]
+    },
+    {name: "B minor", notes: [{fret: -1, finger: "x"},{fret: 2, finger: 1},{fret: 4,finger: 3},{fret: 4, finger: 4},{fret: 3, finger: 2},{fret: 2, finger: 1}],
+      answers: [{answer: "B minor", correct: true},{answer: "E minor",correct: false},{answer: "F# minor",correct: false},{answer: "A minor",correct: false}]
+    },
+    {name: "F# minor", notes: [{fret: 2, finger: 1},{fret: 4, finger: 3},{fret: 4,finger: 4},{fret: 2, finger: 1},{fret: 2, finger: 1},{fret: 2, finger: 1}],
+      answers: [{answer: "F# minor", correct: true},{answer: "F minor",correct: false},{answer: "B minor",correct: false},{answer: "A minor",correct: false}]
+    },
+    {name: "C# minor", notes: [{fret: -1, finger: "x"},{fret: 4, finger: 1},{fret: 6,finger: 3},{fret: 6, finger: 4},{fret: 5, finger: 2},{fret: 4, finger: 1}],
+      answers: [{answer: "C# minor", correct: true},{answer: "F# minor",correct: false},{answer: "B minor",correct: false},{answer: "G# minor",correct: false}]
+    }
   ],
   medium: [
     {name: "D2", notes: [{fret: -1, finger: "x"},{fret: -1, finger: "x"},{fret: 0,finger: 0},{fret: 2, finger: 1},{fret: 3, finger: 3},{fret: 0, finger: 0}]},
@@ -64,11 +95,9 @@ var questions = {
   
 } // end questions
 
-var settings = [{level: questions.easy, points: 10},{level: questions.medium, points: 15},{level: questions.hard, points: 20}];
+var settings = [{level: questions.easy, points: 1},{level: questions.medium, points: 3},{level: questions.hard, points: 5}];
 var currDifficultySetting = settings[0];
 var pointsAvailable = currDifficultySetting.points;
-  
-
   
 //timer stuff ------------------------------------------------------------------------------->
   function timer() {         
@@ -77,7 +106,11 @@ var pointsAvailable = currDifficultySetting.points;
       }else{
         clearInterval(gameTimer);
       }
-    $('#gcgPointsAvailableDisplay').text(pointsAvailable);    
+    if(!resetting){
+      $('#gcgPointsAvailableDisplay').text(pointsAvailable); 
+    }else{
+      $('#gcgPointsAvailableDisplay').text("");
+    }    
   }
   
   function resetTimer(){
@@ -86,7 +119,7 @@ var pointsAvailable = currDifficultySetting.points;
       clearInterval(gameTimer);
     }
     pointsAvailable = currDifficultySetting.points;
-    $('#gcgPointsAvailableDisplay').text(pointsAvailable);
+    $('#gcgPointsAvailableDisplay').text(currDifficultySetting.points);
     gameTimer = setInterval(timer, 2000);
   }
 //---------------------------------------------------------------------------
@@ -186,9 +219,6 @@ function setNewChord(){
   counter = 0;
   prevRand = currRand;
   $('#gcgAnswerContainer').html("");
-  $('#gcgPointsAvailableDisplay').text("Correct! +" + pointsAvailable);
-//  $('#gcgPointsAvailableDisplay').text("");
-  
   function getRand(){
     var rand = game.rnd.integerInRange(0, currDifficultySetting.level.length-1);
     if ( rand === prevRand ) {
@@ -210,10 +240,7 @@ function setNewChord(){
   currChord = currDifficultySetting.level[currRand];
   
   game.time.events.repeat(300, 6, setNotes, this);
-  setTimeout(function(){
-    setAnswers();
-    resetTimer();
-  },2000);
+
     
 //  text.setText(currChord.name); DEBUG
 }
@@ -238,6 +265,11 @@ function setNotes(){
       } 
     }
     counter += 1;
+    if(counter === 6){
+      setAnswers();
+      resetting = false;
+      resetTimer();
+    }
 }
 
 function setAnswers(){
@@ -254,7 +286,9 @@ function setAnswers(){
       } 
     });// end map
     $('.answer').click(function(e){ // click handler
-//      $('#gcgPointsAvailableText').fadeOut(200);
+      
+      resetting = true;
+      
       if(e.target.id === "c"){
         var u = $('#u').text();
         var n = $('#n').text();
@@ -263,16 +297,13 @@ function setAnswers(){
           alert('You have to be signed up and logged in to play this game.  This way we can keep track of your score!');
           return $("#loginModal").modal("show");
         }
+        
         $('#gcgGuessFeedback').text("Correct! +" + pointsAvailable).fadeIn(500);
         
         Parse.Cloud.run("add",{amount:pointsAvailable,u: u,currApp: "gcg"}).then(function(results){
           GAME.findLeaders("gcg",currLeaderboardVersion);
-      
           $('#gcgGuessFeedback').fadeOut(2000);
-
-//          $('#gcgPointsAvailableText').fadeIn(1000);
         },function(error){
-//          $('#gcgPointsAvailableText').fadeIn(1000);
           console.log(error.message);
         });
       }else{
@@ -280,9 +311,6 @@ function setAnswers(){
         $('#gcgGuessFeedback').text("Incorrect. The answer is " + ans).fadeIn(500);
         setTimeout(function(){
           GAME.findLeaders("gcg",currLeaderboardVersion);
-         
-
-//          $('#gcgPointsAvailableText').fadeIn(1000);
           $('#gcgGuessFeedback').fadeOut(2000);
         },1000);
       }
@@ -325,12 +353,8 @@ $(function(){
     currLeaderboardVersion = leaderboardVersions[1];
   }  
   GAME.findLeaders("gcg",currLeaderboardVersion);
-  $('#gcgPointsAvailableDisplay').text(pointsAvailable);
-  gameTimer = setInterval(timer, 2000);
-  
 
   
-
 
   // click handlers
    $('#gcgEasyBtn').click(function(){

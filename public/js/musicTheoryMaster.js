@@ -80,17 +80,14 @@ $(function(){
       } 
     });// end map
     $('.answer').click(function(e){ // click handler
-//      $('#mtmPointsAvailableText').fadeOut(200);
       if(e.target.id === "c"){
         var u = $('#u').text();
         var n = $('#n').text();
-        
         if (u === ""){
           alert('You have to be signed up and logged in to play this game.  This way we can keep track of your score!');
           return $("#loginModal").modal("show");
         }
         $('#mtmGuessFeedback').text("Correct! +" + pointsAvailable).fadeIn(500);
-        
         Parse.Cloud.run("add",{amount:pointsAvailable,u: u,currApp: "mtm"}).then(function(results){
           GAME.findLeaders("mtm",currLeaderboardVersion);
           getNew();
@@ -109,6 +106,7 @@ $(function(){
           GAME.findLeaders("mtm",currLeaderboardVersion);
           getNew();
           resetTimer();
+          $('#gcgPointsAvailableText').fadeIn(200);
 //          $('#mtmPointsAvailableText').fadeIn(1000);
           $('#mtmGuessFeedback').fadeOut(2000);
         },1000);
