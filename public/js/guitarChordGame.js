@@ -186,6 +186,7 @@ function setNewChord(){
   counter = 0;
   prevRand = currRand;
   $('#gcgAnswerContainer').html("");
+  $('#gcgPointsAvailableDisplay').text("Correct! +" + pointsAvailable);
 //  $('#gcgPointsAvailableDisplay').text("");
   
   function getRand(){
