@@ -2,7 +2,6 @@ var leaderboardVersions = ["nearMe","topScorers"];
 var currLeaderboardVersion;
 var gameTimer;
 
-
 var game = new Phaser.Game(500,500, Phaser.CANVAS, 'gcgGame',{preload: preload, create: create, update: update});
 
 var text = "";
@@ -15,8 +14,7 @@ var fretsWidth = [10,76,156,230,308,384];
 var fretWidth = 78;
 var currRand = 0;
 var prevRand;
-
-var tone10;
+var  guitarTones;
 
 var questions = {
   easy: [
@@ -92,16 +90,11 @@ function preload(){
   game.load.image('2', '/images/gcg/2.png');
   game.load.image('3', '/images/gcg/3.png');
   game.load.image('4', '/images/gcg/4.png');
-  game.load.image('bullet', '/images/gcg/bullet.png');
+  game.load.image('0', '/images/gcg/O.png');
+  game.load.image('x', '/images/gcg/X.png');
   game.load.image('guitarNeck', '/images/gcg/GuitarNeck.png');
-
-  //tones
-  for (var i=1; i < 7; i++){
-    for (var j=0; j < 8; j++){
-      var toneString = i.toString() + j.toString();
-      game.load.audio(toneString, [ '../sounds/guitar_tones/' + toneString + '.mp3','../sounds/guitar_tones/' + toneString + '.ogg' ]);
-    }
-  }
+  
+  game.load.audio('guitarTones', [ '../sounds/guitarTones.mp3', '../sounds/guitarTones.ogg' ]);
 
 }// end preload
 
@@ -110,6 +103,64 @@ function create(){
   game.stage.backgroundColor = '#ffffff';
   guitarNeck = game.add.sprite(0, 50, 'guitarNeck');
   guitarNeck.scale.set(.3);
+  
+  guitarTones = game.add.audio('guitarTones');
+  guitarTones.allowMultiple = true;
+
+  guitarTones.addMarker('60', 0, 2);
+  guitarTones.addMarker('61', 2, 2);
+  guitarTones.addMarker('62', 4, 2);
+  guitarTones.addMarker('63', 6, 2);
+  guitarTones.addMarker('64', 8, 2);
+  guitarTones.addMarker('65', 10, 2);
+  guitarTones.addMarker('66', 12, 2);
+  guitarTones.addMarker('67', 14, 2);
+  
+  guitarTones.addMarker('50', 10, 2);
+  guitarTones.addMarker('51', 12, 2);
+  guitarTones.addMarker('52', 14, 2);
+  guitarTones.addMarker('53', 16, 2);
+  guitarTones.addMarker('54', 18, 2);
+  guitarTones.addMarker('55', 20, 2);
+  guitarTones.addMarker('56', 22, 2);
+  guitarTones.addMarker('57', 24, 2);
+  
+  guitarTones.addMarker('40', 20, 2);
+  guitarTones.addMarker('41', 22, 2);
+  guitarTones.addMarker('42', 24, 2);
+  guitarTones.addMarker('43', 26, 2);
+  guitarTones.addMarker('44', 28, 2);
+  guitarTones.addMarker('45', 30, 2);
+  guitarTones.addMarker('46', 32, 2);
+  guitarTones.addMarker('47', 34, 2);
+  
+  guitarTones.addMarker('30', 30, 2);
+  guitarTones.addMarker('31', 32, 2);
+  guitarTones.addMarker('32', 34, 2);
+  guitarTones.addMarker('33', 36, 2);
+  guitarTones.addMarker('34', 38, 2);
+  guitarTones.addMarker('35', 40, 2);
+  guitarTones.addMarker('36', 42, 2);
+  guitarTones.addMarker('37', 44, 2);
+  
+  guitarTones.addMarker('20', 38, 2);
+  guitarTones.addMarker('21', 40, 2);
+  guitarTones.addMarker('22', 42, 2);
+  guitarTones.addMarker('23', 44, 2);
+  guitarTones.addMarker('24', 46, 2);
+  guitarTones.addMarker('25', 48, 2);
+  guitarTones.addMarker('26', 50, 2);
+  guitarTones.addMarker('27', 52, 2);
+  
+  guitarTones.addMarker('10', 48, 2);
+  guitarTones.addMarker('11', 50, 2);
+  guitarTones.addMarker('12', 52, 2);
+  guitarTones.addMarker('13', 54, 2);
+  guitarTones.addMarker('14', 56, 2);
+  guitarTones.addMarker('15', 58, 2);
+  guitarTones.addMarker('16', 60, 2);
+  guitarTones.addMarker('17', 62, 2);
+  
 
   text = game.add.text(150, 0, '', { font: "30pt Courier", fill: "#19cb65", stroke: "#119f4e", strokeThickness: 2 });
   
@@ -167,17 +218,21 @@ function setNotes(){
     var currFret = currChord.notes[counter].fret;
     var currFinger = (currChord.notes[counter].finger).toString();
     var toneString = (6 - counter).toString() + currFret;
-    var currTone = game.add.audio(toneString);
     if (currFret < 0 ){
       // this is an X
-      var note = notes.create(fretsWidth[counter], fretsHeight[0], 'bullet', 0);
+      var note = notes.create(fretsWidth[counter] + 6, fretsHeight[0], 'x', 0);
+      note.scale.set(.6);
     }else{ 
       // not an X
-      currTone.play();
-      var note = notes.create(fretsWidth[counter], fretsHeight[currFret], currFinger, 0);
-      note.scale.set(.4);
+      guitarTones.play(toneString);
+      if( currFinger == 0){
+        var note = notes.create(fretsWidth[counter] + 5, fretsHeight[currFret], currFinger, 0);
+        note.scale.set(.6);
+      }else{
+        var note = notes.create(fretsWidth[counter], fretsHeight[currFret], currFinger, 0);
+        note.scale.set(.4);
+      } 
     }
-    
     counter += 1;
 }
 
