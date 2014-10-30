@@ -1,3 +1,19 @@
+* {
+	margin: 0;
+}
+html, body {
+	height: 100%;
+}
+.wrapper {
+	min-height: 100%;
+	height: auto !important; /* This line and the next line are not necessary unless you need IE6 support */
+	height: 100%;
+	margin: 0 auto -60px; /* the bottom margin is the negative value of the footer's height */
+}
+.footer-bar, .push {
+	height: 60px; /* .push must be the same height as .footer */
+}
+
 .white{
   color: white;
 }
@@ -57,7 +73,6 @@
 }
 
 .footer-bar{
-  height: 60px;
   background-color: grey;
   color: white;
   line-height: 60px;
@@ -92,7 +107,7 @@
   background: rgba(255,255,255,.7);
   min-height: 400px;
   padding: 5px;
-  max-width: 300px;
+  max-width: 400px;
   margin: 0 auto;
 }
 

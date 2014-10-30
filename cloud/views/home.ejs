@@ -10,8 +10,9 @@
       <% include partials/login-links %>
        <p id="homeWelcome" class="pull-right text-muted snall"><%= message %><span id="n"><%= n %></span><span id="u" style="display:none"><%= u %></span></p>
       </div>
+     <div class="container">
       <div class="row">
-      <div class="col-md-4 col-sm-8">
+      <div class="col-lg-4 col-md-6 col-sm-8">
         <div id="gtLeaderboard" class="leaderboardContainer">
               <h4 class="text-center">GuitarThinker Leaderboard</h4>
               <% if (Parse.User.current()) { %>
@@ -20,9 +21,10 @@
         <thead>  
           <tr>  
             <th>#</th>  
-            <th>Name</th>  
+            <th>Name</th>
+            <th><a href="/guitar-chord-game" style="color: #333;">Guitar Chord Game</a></th> 
             <th><a href="/spell-that-chord"><img src="/images/stc/AppIcon40x40.png" alt="Spell That Chord Icon"/></a></th>  
-            <th>Music<br>Theory<br>Master</th>
+            <th><a href="/music-theory-master" style="color: #333;">Music Theory Master</a></th>
             <th><img src="/images/gtLogoPickAndHead.png" alt="GuitarThinker Icon" style="height: 50px; margin: 0 0 -10px -5px;"/><br><span class="text-center">Total</span></th>
           </tr>  
         </thead>  
@@ -33,19 +35,20 @@
 
           </div><!--/#gtLeaderboard-->
       </div><!--/.col-->
-      <div class="col-md-4"></div><!-- SPACER COLUMN -->
-      <div class="col-md-4 col-sm-4">
+      <div class="col-lg-4 col-md-3"></div><!-- SPACER COLUMN -->
+      <div class="col-lg-4 col-md-3 col-sm-4">
         <h4 style="padding-right: 20px;"><span class="glyphicon glyphicon-arrow-left"></span> <span id="homeHeroText"></span></h4>
       </div><!--/.col-->
     </div><!--/.row-->
+    </div><!--/.container-->
     </div><!--/.header-image-->
     
     <div class="container">
-        <div class="row">
+        <div class="row" style="padding: 20px 0">
 		<div class="col-sm-4">
 			<h2 class="text-center">Games</h2>
             <div class="row">
-            <div class="col-sm-6 text-center">
+            <div class="col-xs-6 text-center">
               <div class="homeGameTop">
                 <a href="/spell-that-chord"><img src="/images/stc/AppIcon76x76@2x.png" alt="Spell That Chord Large Icon" style="width: 100px; margin: 0 auto;"></a>
               </div>
@@ -53,7 +56,7 @@
                 <small>Practice building chords. Compete against the world!</small>
               </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-xs-6 text-center">
               <div class="homeGameTop">
                 <a href="music-theory-master">Music Theory Master</a>
               </div>
@@ -78,10 +81,12 @@
 	</div>
         
       <div class="textured-background">
+        <div class="jumbotron">
         <h4>Here's what I think:</h4>
         <p>There is a serious lack of cool web 3.0 tools for musicians.  What does that mean?  Stuff like live data, interactivity, mobile device compatibility, and great looking design.  Why?  Well, probably because music education is not a super lucrative market, or maybe just because most musicians are not also programmers.</p>
         <h4>GuitarThinker to the rescue!</h4>
         <p>This site will be a fun place to visit, learn, come back and see what's new.  GuitarThinker will be a place to compete with yourself and others, because competetion motivates us.  This site will have lots of games that are fun to play and teach you music.</p>
+        </div><!--/.jumbotron-->  
         </div><!--/.textured-background-->
     </div><!-- end container -->
     <% include partials/footer %>

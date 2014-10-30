@@ -33,7 +33,7 @@ exports.getLeaders = function(request,response){
 exports.getMasterLeaders = function(request,response){
   Parse.Cloud.useMasterKey();
   var query = new Parse.Query(Parse.User);
-  query.select("username","stcScore","mtmScore","gtScore");
+  query.select("username","gcgScore","stcScore","mtmScore","gtScore");
   var currUserQuery = new Parse.Query(Parse.User);
   currUserQuery.equalTo("objectId",request.params.u);
   if(request.params.version === "nearMe"){

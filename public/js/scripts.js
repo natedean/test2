@@ -52,6 +52,7 @@ var GAME = (function(){
             $('#masterLeaderboardTable').append('<tr>');
             $('#masterLeaderboardTable').append('<td class="green">' + i + '</td>');
             $('#masterLeaderboardTable').append('<td class="green">' + item.get("username") + '</td>');
+            $('#masterLeaderboardTable').append('<td class="green scoreTd">' + item.get("gcgScore") + '</td>');
             $('#masterLeaderboardTable').append('<td class="green scoreTd">' + item.get("stcScore") + '</td>');
             $('#masterLeaderboardTable').append('<td class="green scoreTd">' + item.get("mtmScore") + '</td>');
             $('#masterLeaderboardTable').append('<td class="green scoreTd">' + item.get("gtScore") + '</td>');
@@ -60,6 +61,7 @@ var GAME = (function(){
             $('#masterLeaderboardTable').append('<tr>');
             $('#masterLeaderboardTable').append('<td>' + i + '</td>');
             $('#masterLeaderboardTable').append('<td>' + item.get("username") + '</td>');
+            $('#masterLeaderboardTable').append('<td class="scoreTd">' + item.get("gcgScore") + '</td>');
             $('#masterLeaderboardTable').append('<td class="scoreTd">' + item.get("stcScore") + '</td>');
             $('#masterLeaderboardTable').append('<td class="scoreTd">' + item.get("mtmScore") + '</td>');
             $('#masterLeaderboardTable').append('<td class="scoreTd">' + item.get("gtScore") + '</td>');

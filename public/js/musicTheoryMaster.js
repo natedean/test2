@@ -71,15 +71,15 @@ $(function(){
     newResults.map(function(item){
       if(item.correct){
         $('#mtmAnswerContainer').append(
-          '<div id="c" class="btn btn-lg btn-default answer">' + item.answer + '</div>'
+          '<div id="c" class="mtmAnswerButton">' + item.answer + '</div>'
         );
       }else{
         $('#mtmAnswerContainer').append(
-          '<div class="btn btn-lg btn-default answer">' + item.answer + '</div>'
+          '<div class="mtmAnswerButton">' + item.answer + '</div>'
         );   
       } 
     });// end map
-    $('.answer').click(function(e){ // click handler
+    $('.mtmAnswerButton').click(function(e){ // click handler
       if(e.target.id === "c"){
         var u = $('#u').text();
         var n = $('#n').text();
