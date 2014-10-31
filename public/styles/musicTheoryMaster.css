@@ -8,6 +8,13 @@ div#mtmMain {
   background-position:center;
 }
 
+#mtmQuestionScreen{
+  padding-top: 100px;
+  max-width: 280px;
+  padding-left: 10px;
+  margin: 0 auto;
+}
+
 h2#mtmQuestion {
   margin-bottom: 20px;
 }
@@ -70,3 +77,22 @@ h2#mtmQuestion {
 #mtmLeaderboard td.scoreTd{
   padding-left: 15px;
 }
+
+/* Smartphones (portrait) ----------- */
+@media only screen 
+and (max-width : 572px) {
+  #mtmQuestionScreen{
+    padding-top: 170px;
+  }
+  .mtmAnswerButton {
+    margin: 4px;
+    width: 80px;
+    height: 50px;
+    padding: 10px;
+  }
+  .mtmAnswerButton:active{
+    height: 38px;
+  }
+
+  
+}/* end media query */

@@ -1,6 +1,6 @@
 var leaderboardVersions = ["nearMe","topScorers"];
 var currLeaderboardVersion;
-var pointsAvailable = 10;
+var pointsAvailable = 5;
 var gameTimer;
 
 var awesomeArray = [{question: "How many sharps in the key of C Major?", answers: [{answer: 0, correct: true},{answer: 1,correct: false},{answer: 2,correct: false},{answer: 3,correct: false}]},
@@ -80,19 +80,21 @@ $(function(){
       } 
     });// end map
     $('.mtmAnswerButton').click(function(e){ // click handler
-      if(e.target.id === "c"){
-        var u = $('#u').text();
-        var n = $('#n').text();
-        if (u === ""){
+      var u = $('#u').text();
+      if (u === ""){
           alert('You have to be signed up and logged in to play this game.  This way we can keep track of your score!');
           return $("#loginModal").modal("show");
-        }
+      }
+      if(e.target.id === "c"){
+        var n = $('#n').text();
         $('#mtmGuessFeedback').text("Correct! +" + pointsAvailable).fadeIn(500);
+        $('#mtmGuessFeedback').fadeOut(2000);
         Parse.Cloud.run("add",{amount:pointsAvailable,u: u,currApp: "mtm"}).then(function(results){
           GAME.findLeaders("mtm",currLeaderboardVersion);
-          getNew();
-          $('#mtmGuessFeedback').fadeOut(2000);
-          resetTimer();
+          setTimeout(function(){
+            getNew();
+            resetTimer();
+          },1000);
 //          $('#mtmPointsAvailableText').fadeIn(1000);
         },function(error){
           resetTimer();
@@ -102,14 +104,14 @@ $(function(){
       }else{
         var ans = $("#c").text();
         $('#mtmGuessFeedback').text("Incorrect. The answer is " + ans).fadeIn(500);
+        $('#mtmGuessFeedback').fadeOut(3000);
         setTimeout(function(){
           GAME.findLeaders("mtm",currLeaderboardVersion);
           getNew();
           resetTimer();
-          $('#gcgPointsAvailableText').fadeIn(200);
 //          $('#mtmPointsAvailableText').fadeIn(1000);
-          $('#mtmGuessFeedback').fadeOut(2000);
-        },1000);
+          
+        },2000);
       }
     });// end click handler
 }// end getNew
