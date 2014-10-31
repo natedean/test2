@@ -11,7 +11,7 @@ exports.getLeaders = function(request,response){
     currUserQuery.first().then(function(currUser){
       query.lessThan(currColumn, currUser.get(currColumn) + leaderBoardAdjustor);
       query.descending(currColumn);
-      query.limit(10);
+      query.limit(15);
       return query.find();
     }).then(function(results){
       response.success(results);
@@ -20,7 +20,7 @@ exports.getLeaders = function(request,response){
     });
   }else{
     query.greaterThan(currColumn,0);
-    query.limit(10);
+    query.limit(15);
     query.descending(currColumn);
     query.find().then(function(results){
       response.success(results);
@@ -40,7 +40,7 @@ exports.getMasterLeaders = function(request,response){
     currUserQuery.first().then(function(currUser){
       query.lessThan("gtScore", currUser.get("gtScore") + leaderBoardAdjustor);
       query.descending("gtScore");
-      query.limit(10);
+      query.limit(15);
       return query.find();
     }).then(function(results){
       response.success(results);
@@ -50,7 +50,7 @@ exports.getMasterLeaders = function(request,response){
   }else{
     currUserQuery.first().then(function(currUser){
     query.greaterThan("gtScore",0);
-    query.limit(10);
+    query.limit(15);
     query.descending("gtScore");
     return query.find();
     }).then(function(results){
