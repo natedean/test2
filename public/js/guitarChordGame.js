@@ -255,10 +255,10 @@ var questions = {
     {name: "BMaj9", notes: [{fret: -1, finger: "x"},{fret: 2, finger: 2},{fret: 1,finger: 1},{fret: 3, finger: 4},{fret: 2, finger: 3},{fret: -1, finger: "x"}],
       answers: [{answer: "BMaj9", correct: true},{answer: "B7#9",correct: false},{answer: "B11",correct: false},{answer: "B9",correct: false}]
     },
-    {name: "Cmin9", notes: [{fret: -1, finger: "x"},{fret: 3, finger: 2},{fret: 1,finger: 1},{fret: 3, finger: 3},{fret: 4, finger: 4},{fret: -1, finger: "x"}],
+    {name: "Cmin9", notes: [{fret: -1, finger: "x"},{fret: 3, finger: 2},{fret: 1,finger: 1},{fret: 3, finger: 3},{fret: 3, finger: 4},{fret: -1, finger: "x"}],
       answers: [{answer: "Cmin9", correct: true},{answer: "Cm7b5",correct: false},{answer: "C7b9",correct: false},{answer: "C9",correct: false}]
     },
-    {name: "Dmin9", notes: [{fret: -1, finger: "x"},{fret: 5, finger: 2},{fret: 3,finger: 1},{fret: 5, finger: 3},{fret: 6, finger: 4},{fret: -1, finger: "x"}],
+    {name: "Dmin9", notes: [{fret: -1, finger: "x"},{fret: 5, finger: 2},{fret: 3,finger: 1},{fret: 5, finger: 3},{fret: 5, finger: 4},{fret: -1, finger: "x"}],
       answers: [{answer: "Dmin9", correct: true},{answer: "Dm7b5",correct: false},{answer: "D7#9",correct: false},{answer: "Dmin11",correct: false}]
     },
     {name: "C7b9", notes: [{fret: -1, finger: "x"},{fret: 3, finger: 2},{fret: 2,finger: 1},{fret: 3, finger: 3},{fret: 2, finger: 1},{fret: -1, finger: "x"}],
@@ -303,7 +303,7 @@ var questions = {
     {name: "Cmin11", notes: [{fret: -1, finger: "x"},{fret: 3, finger: 2},{fret: 1,finger: 1},{fret: 3, finger: 3},{fret: 3, finger: 4},{fret: 1, finger: 1}],
       answers: [{answer: "Cmin11", correct: true},{answer: "Cmin9",correct: false},{answer: "CMaj11",correct: false},{answer: "C11",correct: false}]
     },
-    {name: "Dmin11", notes: [{fret: -1, finger: "x"},{fret: 5, finger: 2},{fret: -1,finger: "x"},{fret: 5, finger: 3},{fret: 5, finger: 4},{fret: 3, finger: 1}],
+    {name: "Dmin11", notes: [{fret: -1, finger: "x"},{fret: 5, finger: 2},{fret: 3,finger: 1},{fret: 5, finger: 3},{fret: 5, finger: 4},{fret: 3, finger: 1}],
       answers: [{answer: "Dmin11", correct: true},{answer: "Dmin9",correct: false},{answer: "DMaj11",correct: false},{answer: "D9",correct: false}]
     }
   ]
