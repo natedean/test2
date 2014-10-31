@@ -1,4 +1,4 @@
-var leaderBoardAdjustor = 50;
+var leaderBoardAdjustor = 25;
 
 exports.getLeaders = function(request,response){
   Parse.Cloud.useMasterKey();

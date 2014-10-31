@@ -28,3 +28,29 @@
 #gcgGuessFeedback{
   font-size: 25px;
 }
+
+
+/* Smartphones (portrait) ----------- */
+@media only screen 
+and (max-width : 480px) {
+  .btn{
+    font-size: 12px;
+    padding: 4px;
+    margin: 4px;
+  }
+  #gcgDifficultyBtnRow{
+    padding-top: 25px;
+    width: auto;
+  }
+  #gcgAnswerContainer{
+    height: 40px;
+  }
+  #gcgFeedbackContainer{
+    height:20px;
+    margin-top: 10px;
+  }
+  #gcgGuessFeedback{
+    font-size: 15px;
+  }
+}/* end media query */
+

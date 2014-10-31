@@ -1,16 +1,43 @@
+var gameSizes = {
+  mobile: {
+    gameWidth: 250,
+    gameHeight: 250,
+    fretsHeight: [25,53,85,115,145,175,205,225,250],
+    fretsWidth: [3,38,76,116,154,191],
+    neckImgScale: .15,
+    nonFingerImgScale: .3,
+    fingerImgScale: .2,
+  },
+  regular: {
+    gameWidth: 500,
+    gameHeight: 500,
+    fretsHeight: [0,57,120,180,243,305,364,400,450],
+    fretsWidth: [10,76,156,232,308,382],
+    neckImgScale: .3,
+    nonFingerImgScale: .6,
+    fingerImgScale: .4,
+  }
+}
+
+var currGameSize;
+
+if (screen.width < 500){
+  currGameSize = gameSizes.mobile;
+}else{
+  currGameSize = gameSizes.regular;
+}
+
 var leaderboardVersions = ["nearMe","topScorers"];
 var currLeaderboardVersion;
 var gameTimer;
 
-var game = new Phaser.Game(500,500, Phaser.CANVAS, 'gcgGame',{preload: preload, create: create, update: update});
+var game = new Phaser.Game(currGameSize.gameWidth,currGameSize.gameWidth, Phaser.CANVAS, 'gcgGame',{preload: preload, create: create, update: update});
 
 var text = "";
 var counter = 0;
 var notes;
 var currChord;
 var guitarNeck;
-var fretsHeight = [0,57,120,180,243,305,364,400,450];
-var fretsWidth = [10,76,156,232,308,382];
 var fretWidth = 78;
 var currRand = 0;
 var prevRand;
@@ -124,6 +151,9 @@ var questions = {
     {name: "Esus", notes: [{fret: 0, finger: 0},{fret: 2, finger: 2},{fret: 2,finger: 3},{fret: 2, finger: 4},{fret: 0, finger: 0},{fret: 0, finger: 0}],
       answers: [{answer: "Esus", correct: true},{answer: "E2",correct: false},{answer: "EMaj7",correct: false},{answer: "Eadd9",correct: false}]
     },
+    {name: "Fsus", notes: [{fret: -1, finger: "x"},{fret: -1, finger: "x"},{fret: 3,finger: 3},{fret: 3, finger: 4},{fret: 1, finger: 1},{fret: 1, finger: 1}],
+      answers: [{answer: "Fsus", correct: true},{answer: "F2",correct: false},{answer: "FMaj7",correct: false},{answer: "Fadd9",correct: false}]
+    },
     {name: "C7", notes: [{fret: -1, finger: "x"},{fret: 3, finger: 3},{fret: 2,finger: 2},{fret: 3, finger: 4},{fret: 1, finger: 1},{fret: 0, finger: 0}],
       answers: [{answer: "C7", correct: true},{answer: "Cdim",correct: false},{answer: "CMaj7",correct: false},{answer: "Caug",correct: false}]
     },
@@ -181,11 +211,17 @@ var questions = {
     {name: "Gaug", notes: [{fret: -1, finger: "x"},{fret: -1, finger: "x"},{fret: 5,finger: 3},{fret: 4, finger: 1},{fret: 4, finger: 2},{fret: -1, finger: "x"}],
       answers: [{answer: "Gaug", correct: true},{answer: "Gsus",correct: false},{answer: "G7",correct: false},{answer: "Gdim",correct: false}]
     },
+    {name: "Gaug", notes: [{fret: 3, finger: 3},{fret: 2, finger: 2},{fret: 1,finger: 1},{fret: 0, finger: 0},{fret: 0, finger: 0},{fret: 3, finger: 4}],
+      answers: [{answer: "Gaug", correct: true},{answer: "GMaj7",correct: false},{answer: "G7",correct: false},{answer: "Gdim",correct: false}]
+    },
     {name: "Daug", notes: [{fret: -1, finger: "x"},{fret: -1, finger: "x"},{fret: 0,finger: 0},{fret: 3, finger: 2},{fret: 3, finger: 3},{fret: 2, finger: 1}],
       answers: [{answer: "Daug", correct: true},{answer: "Dsus",correct: false},{answer: "DMaj7",correct: false},{answer: "Ddim",correct: false}]
     },
     {name: "Aaug", notes: [{fret: -1, finger: "x"},{fret: 0, finger: 0},{fret: 3, finger: 4},{fret: 2, finger: 2},{fret: 2, finger: 3},{fret: 1, finger: 1}],
       answers: [{answer: "Aaug", correct: true},{answer: "Asus",correct: false},{answer: "A7",correct: false},{answer: "Adim",correct: false}]
+    },
+    {name: "Eaug", notes: [{fret: -1, finger: "x"},{fret: -1, finger: "x"},{fret: 2, finger: 3},{fret: 1, finger: 1},{fret: 1, finger: 2},{fret: 0, finger: 0}],
+      answers: [{answer: "Eaug", correct: true},{answer: "Esus",correct: false},{answer: "E7",correct: false},{answer: "Edim",correct: false}]
     },
     {name: "Cmin7", notes: [{fret: -1, finger: "x"},{fret: 3, finger: 3},{fret: 1,finger: 1},{fret: 3, finger: 4},{fret: 1, finger: 1},{fret: -1, finger: "x"}],
       answers: [{answer: "Cmin7", correct: true},{answer: "Cdim",correct: false},{answer: "CMaj7",correct: false},{answer: "Caug",correct: false}]
@@ -216,11 +252,8 @@ var questions = {
     }
   ],
   hard: [
-    {name: "AMaj9", notes: [{fret: -1, finger: "x"},{fret: 0, finger: 0},{fret: 2,finger: 2},{fret: 1, finger: 1},{fret: 0, finger: 0},{fret: 0, finger: 0}],
-      answers: [{answer: "AMaj9", correct: true},{answer: "A9",correct: false},{answer: "AMaj11",correct: false},{answer: "A11",correct: false}]
-    },
     {name: "A7sus", notes: [{fret: -1, finger: "x"},{fret: 0, finger: 0},{fret: 2,finger: 1},{fret: 0, finger: 0},{fret: 3, finger: 3},{fret: 0, finger: 0}],
-      answers: [{answer: "A7sus", correct: true},{answer: "A9",correct: false},{answer: "Aaug",correct: false},{answer: "A13",correct: false}]
+      answers: [{answer: "A7sus", correct: true},{answer: "A9",correct: false},{answer: "A6",correct: false},{answer: "A7#9",correct: false}]
     },
     {name: "C7b5", notes: [{fret: -1, finger: "x"},{fret: 3, finger: 1},{fret: 4,finger: 2},{fret: 3, finger: 1},{fret: 5, finger: 4},{fret: -1, finger: "x"}],
       answers: [{answer: "C7b5", correct: true},{answer: "C7b9",correct: false},{answer: "Cdim7",correct: false},{answer: "C9",correct: false}]
@@ -234,11 +267,23 @@ var questions = {
     {name: "Bb7#5", notes: [{fret: -1, finger: "x"},{fret: 1, finger: 1},{fret: -1,finger: "x"},{fret: 1, finger: 2},{fret: 3, finger: 4},{fret: 2, finger: 3}],
       answers: [{answer: "Bb7#5", correct: true},{answer: "Bb7b9",correct: false},{answer: "Bbdim7",correct: false},{answer: "Bb7b5",correct: false}]
     },
+    {name: "A6", notes: [{fret: -1, finger: "x"},{fret: 0, finger: 0},{fret: 2,finger: 1},{fret: 2, finger: 1},{fret: 2, finger: 1},{fret: 2, finger: 1}],
+      answers: [{answer: "A6", correct: true},{answer: "A9",correct: false},{answer: "A7sus",correct: false},{answer: "A11",correct: false}]
+    },
+    {name: "E6", notes: [{fret: 0, finger: 0},{fret: 2, finger: 2},{fret: 2,finger: 3},{fret: 1, finger: 1},{fret: 2, finger: 4},{fret: 0, finger: 0}],
+      answers: [{answer: "E6", correct: true},{answer: "E7sus",correct: false},{answer: "EMaj9",correct: false},{answer: "E9",correct: false}]
+    },
     {name: "C9", notes: [{fret: -1, finger: "x"},{fret: 3, finger: 2},{fret: 2,finger: 1},{fret: 3, finger: 3},{fret: 3, finger: 4},{fret: -1, finger: "x"}],
       answers: [{answer: "C9", correct: true},{answer: "C7b5",correct: false},{answer: "C7b9",correct: false},{answer: "Cdim7",correct: false}]
     },
+    {name: "G9", notes: [{fret: 3, finger: 3},{fret: -1, finger: "x"},{fret: 0,finger: 0},{fret: 2, finger: 2},{fret: 0, finger: 0},{fret: 1, finger: 1}],
+      answers: [{answer: "G9", correct: true},{answer: "GMaj9",correct: false},{answer: "G11",correct: false},{answer: "G7sus",correct: false}]
+    },
     {name: "D9", notes: [{fret: -1, finger: "x"},{fret: 5, finger: 2},{fret: 4,finger: 1},{fret: 5, finger: 3},{fret: 5, finger: 4},{fret: -1, finger: "x"}],
       answers: [{answer: "D9", correct: true},{answer: "D7b5",correct: false},{answer: "D7b9",correct: false},{answer: "Dm7b5",correct: false}]
+    },
+    {name: "E9", notes: [{fret: 0, finger: 0},{fret: 2, finger: 2},{fret: 0,finger: 0},{fret: 1, finger: 1},{fret: 0, finger: 0},{fret: 2, finger: 4}],
+      answers: [{answer: "E9", correct: true},{answer: "E7sus",correct: false},{answer: "EMaj9",correct: false},{answer: "E11",correct: false}]
     },
     {name: "B9", notes: [{fret: -1, finger: "x"},{fret: 2, finger: 2},{fret: 1,finger: 1},{fret: 2, finger: 3},{fret: 2, finger: 4},{fret: -1, finger: "x"}],
       answers: [{answer: "B9", correct: true},{answer: "B7#9",correct: false},{answer: "B7b9",correct: false},{answer: "BMaj9",correct: false}]
@@ -249,8 +294,14 @@ var questions = {
     {name: "GMaj9", notes: [{fret: -1, finger: "x"},{fret: -1, finger: "x"},{fret: 5,finger: 3},{fret: 2, finger: 1},{fret: 3, finger: 2},{fret: 2, finger: 1}],
       answers: [{answer: "GMaj9", correct: true},{answer: "G7sus",correct: false},{answer: "G7b9",correct: false},{answer: "G11",correct: false}]
     },
+    {name: "GMaj9", notes: [{fret: 3, finger: 3},{fret: -1, finger: "x"},{fret: 0,finger: 0},{fret: 2, finger: 2},{fret: 0, finger: 0},{fret: 2, finger: 1}],
+      answers: [{answer: "GMaj9", correct: true},{answer: "G9",correct: false},{answer: "G11",correct: false},{answer: "GMaj11",correct: false}]
+    },
     {name: "DMaj9", notes: [{fret: -1, finger: "x"},{fret: 5, finger: 2},{fret: 4,finger: 1},{fret: 6, finger: 4},{fret: 5, finger: 3},{fret: -1, finger: "x"}],
       answers: [{answer: "DMaj9", correct: true},{answer: "D7b5",correct: false},{answer: "DMaj11",correct: false},{answer: "D9",correct: false}]
+    },
+    {name: "AMaj9", notes: [{fret: -1, finger: "x"},{fret: 0, finger: 0},{fret: 2,finger: 2},{fret: 1, finger: 1},{fret: 0, finger: 0},{fret: 0, finger: 0}],
+      answers: [{answer: "AMaj9", correct: true},{answer: "A9",correct: false},{answer: "AMaj11",correct: false},{answer: "A11",correct: false}]
     },
     {name: "BMaj9", notes: [{fret: -1, finger: "x"},{fret: 2, finger: 2},{fret: 1,finger: 1},{fret: 3, finger: 4},{fret: 2, finger: 3},{fret: -1, finger: "x"}],
       answers: [{answer: "BMaj9", correct: true},{answer: "B7#9",correct: false},{answer: "B11",correct: false},{answer: "B9",correct: false}]
@@ -263,6 +314,9 @@ var questions = {
     },
     {name: "C7b9", notes: [{fret: -1, finger: "x"},{fret: 3, finger: 2},{fret: 2,finger: 1},{fret: 3, finger: 3},{fret: 2, finger: 1},{fret: -1, finger: "x"}],
       answers: [{answer: "C7b9", correct: true},{answer: "C7#5",correct: false},{answer: "C9",correct: false},{answer: "C7b5",correct: false}]
+    },
+    {name: "G7b9", notes: [{fret: 3, finger: 3},{fret: 2, finger: 2},{fret: 0,finger: 0},{fret: 1, finger: 1},{fret: 3, finger: 4},{fret: 1, finger: 1}],
+      answers: [{answer: "G7b9", correct: true},{answer: "G9",correct: false},{answer: "G11",correct: false},{answer: "Gdim7",correct: false}]
     },
     {name: "D7b9", notes: [{fret: -1, finger: "x"},{fret: 5, finger: 2},{fret: 4,finger: 1},{fret: 5, finger: 3},{fret: 4, finger: 1},{fret: -1, finger: "x"}],
       answers: [{answer: "D7b9", correct: true},{answer: "D7#5",correct: false},{answer: "D9",correct: false},{answer: "Dm7b5",correct: false}]
@@ -297,6 +351,9 @@ var questions = {
     {name: "C11", notes: [{fret: -1, finger: "x"},{fret: 3, finger: 2},{fret: -1,finger: "x"},{fret: 3, finger: 3},{fret: 3, finger: 4},{fret: 1, finger: 1}],
       answers: [{answer: "C11", correct: true},{answer: "CMaj9",correct: false},{answer: "CMaj11",correct: false},{answer: "C9",correct: false}]
     },
+    {name: "G11", notes: [{fret: 3, finger: 4},{fret: 2, finger: 2},{fret: 0,finger: 0},{fret: 2, finger: 3},{fret: 1, finger: 1},{fret: 1, finger: 1}],
+      answers: [{answer: "G11", correct: true},{answer: "G9",correct: false},{answer: "GMaj9",correct: false},{answer: "GMaj11",correct: false}]
+    },
     {name: "D11", notes: [{fret: -1, finger: "x"},{fret: 5, finger: 2},{fret: -1,finger: "x"},{fret: 5, finger: 3},{fret: 5, finger: 4},{fret: 3, finger: 1}],
       answers: [{answer: "D11", correct: true},{answer: "DMaj9",correct: false},{answer: "DMaj11",correct: false},{answer: "D7#9",correct: false}]
     },
@@ -305,6 +362,15 @@ var questions = {
     },
     {name: "Dmin11", notes: [{fret: -1, finger: "x"},{fret: 5, finger: 2},{fret: 3,finger: 1},{fret: 5, finger: 3},{fret: 5, finger: 4},{fret: 3, finger: 1}],
       answers: [{answer: "Dmin11", correct: true},{answer: "Dmin9",correct: false},{answer: "DMaj11",correct: false},{answer: "D9",correct: false}]
+    },
+    {name: "Gmin6", notes: [{fret: 3, finger: 2},{fret: -1, finger: "x"},{fret: 2,finger: 1},{fret: 3, finger: 3},{fret: 3, finger: 4},{fret: -1, finger: "x"}],
+      answers: [{answer: "Gmin6", correct: true},{answer: "Gdim7",correct: false},{answer: "Gm7b5",correct: false},{answer: "Gmin11",correct: false}]
+    },
+    {name: "Dmin6", notes: [{fret: -1, finger: "x"},{fret: -1, finger: "x"},{fret: 0,finger: 0},{fret: 2, finger: 2},{fret: 0, finger: 0},{fret: 1, finger: 1}],
+      answers: [{answer: "Dmin6", correct: true},{answer: "Dmin9",correct: false},{answer: "Dm7b5",correct: false},{answer: "Dmin11",correct: false}]
+    },
+    {name: "Amin6", notes: [{fret: 5, finger: 2},{fret: -1, finger: "x"},{fret: 4,finger: 1},{fret: 5, finger: 3},{fret: 5, finger: 4},{fret: -1, finger: "x"}],
+      answers: [{answer: "Amin6", correct: true},{answer: "Amin9",correct: false},{answer: "Am7b5",correct: false},{answer: "Amin11",correct: false}]
     }
   ]
   
@@ -353,7 +419,7 @@ function create(){
   
   game.stage.backgroundColor = '#ffffff';
   guitarNeck = game.add.sprite(0, 50, 'guitarNeck');
-  guitarNeck.scale.set(.3);
+  guitarNeck.scale.set(currGameSize.neckImgScale);
   
   guitarTones = game.add.audio('guitarTones');
   guitarTones.allowMultiple = true;
@@ -464,17 +530,17 @@ function setNotes(){
       var toneString = (6 - counter).toString() + currFret;
       if (currFret < 0 ){
         // this is an X
-        var note = notes.create(fretsWidth[counter] + 6, fretsHeight[0], 'x', 0);
-        note.scale.set(.6);
+        var note = notes.create(currGameSize.fretsWidth[counter] + 6, currGameSize.fretsHeight[0], 'x', 0);
+        note.scale.set(currGameSize.nonFingerImgScale);
       }else{ 
         // not an X
         guitarTones.play(toneString, 0, .4);
         if( currFinger == 0){
-          var note = notes.create(fretsWidth[counter] + 5, fretsHeight[currFret], currFinger, 0);
-          note.scale.set(.6);
+          var note = notes.create(currGameSize.fretsWidth[counter] + 5, currGameSize.fretsHeight[currFret], currFinger, 0);
+          note.scale.set(currGameSize.nonFingerImgScale);
         }else{
-          var note = notes.create(fretsWidth[counter], fretsHeight[currFret], currFinger, 0);
-          note.scale.set(.4);
+          var note = notes.create(currGameSize.fretsWidth[counter], currGameSize.fretsHeight[currFret], currFinger, 0);
+          note.scale.set(currGameSize.fingerImgScale);
         } 
       }
       counter += 1;
