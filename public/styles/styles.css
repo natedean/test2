@@ -105,7 +105,6 @@ html, body {
 /*leaderboard styles*/
 .leaderboardContainer{
   background: rgba(255,255,255,.7);
-  min-height: 400px;
   padding: 5px;
   max-width: 400px;
   margin: 0 auto;
@@ -113,7 +112,7 @@ html, body {
 
 .leaderboardBtnRow{
   height: 25px; 
-  width: 250px;
+  width: 300px;
   margin: 0 auto;
 }
 

@@ -25,15 +25,15 @@
       </div>
      
       
-      <div class="row" style="min-height: 550px;">
+      <div class="row">
       <div class="col-md-6">
         <div id="gcgGame"></div>
         </div><!--/col-->
         <div class="col-md-6">
-           <div id="gcgLeaderboard" class="leaderboardContainer">
+           <div id="gcgLeaderboard" class="leaderboardContainer" style="padding-bottom: 50px;">
               <h5 class="text-center">Guitar Chord Game Leaderboard</h5>
               <% if (Parse.User.current()) { %>
-              <div id="gcgLeaderboardBtnRow" class="leaderboardBtnRow"><span>Sort by: </span><div id="gcgLbTopScorersBtn" class="btn btn-sm btn-default">Top Scorers</div><div id="gcgLbNearMeBtn" class="btn btn-sm btn-default">Near Me</div></div><% } %>  
+              <div id="gcgLeaderboardBtnRow" class="leaderboardBtnRow"><span>Sort by: </span><div id="gcgLbTopScorersBtn" class="btn btn-sm btn-default">Top Scorers</div><div id="gcgLbNearMeBtn" class="btn btn-sm btn-default">Playing Today</div></div><% } %>  
         <table class="table">  
         <thead>  
           <tr>  

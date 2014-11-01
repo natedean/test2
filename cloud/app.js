@@ -5,6 +5,7 @@ var parseExpressCookieSession = require('parse-express-cookie-session');
 var app = express();
 var routes = require('cloud/routes.js');
 
+
 app.set('views', 'cloud/views');
 app.set('view engine', 'ejs');
 app.use(parseExpressHttpsRedirect());  // Require user to be on HTTPS.
