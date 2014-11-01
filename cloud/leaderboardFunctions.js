@@ -1,4 +1,3 @@
-var leaderBoardAdjustor = 25;
 
 exports.getLeaders = function(request,response){
   Parse.Cloud.useMasterKey();
@@ -9,11 +8,12 @@ exports.getLeaders = function(request,response){
     var currUserQuery = new Parse.Query(Parse.User);
     currUserQuery.equalTo("objectId",request.params.u);
     currUserQuery.first().then(function(currUser){
-      query.lessThan(currColumn, currUser.get(currColumn) + leaderBoardAdjustor);
-      query.descending(currColumn);
+      query.greaterThanOrEqualTo(currColumn, currUser.get(currColumn));
+      query.ascending(currColumn);
       query.limit(15);
       return query.find();
     }).then(function(results){
+      results.reverse();
       response.success(results);
     },function(error){
       response.error(error);
@@ -33,16 +33,17 @@ exports.getLeaders = function(request,response){
 exports.getMasterLeaders = function(request,response){
   Parse.Cloud.useMasterKey();
   var query = new Parse.Query(Parse.User);
-  query.select("username","gcgScore","stcScore","mtmScore","gtScore");
   var currUserQuery = new Parse.Query(Parse.User);
+  query.select("username","gcgScore","stcScore","mtmScore","gtScore");
   currUserQuery.equalTo("objectId",request.params.u);
   if(request.params.version === "nearMe"){
-    currUserQuery.first().then(function(currUser){
-      query.lessThan("gtScore", currUser.get("gtScore") + leaderBoardAdjustor);
-      query.descending("gtScore");
+      currUserQuery.first().then(function(currUser){
+      query.greaterThanOrEqualTo("gtScore", currUser.get("gtScore"));
+      query.ascending("gtScore");
       query.limit(15);
       return query.find();
     }).then(function(results){
+      results.reverse();
       response.success(results);
     },function(error){
       response.error(error);
