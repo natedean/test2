@@ -67,14 +67,3 @@ exports.logout = function(req,res){
   res.redirect('/');
 }
 
-exports.test = function(req,res){
-  if(Parse.User.current()){
-    Parse.User.current().fetch().then(function(user){
-      res.render('test', { message: 'Logged in as ',
-                                     n: user.get("username"),
-                                     u: user.id});
-    });
-  }else{
-    res.render('test', { message: 'Welcome ', n: "Guest", u: ""});
-  }
-}
