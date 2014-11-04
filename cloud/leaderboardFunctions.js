@@ -41,8 +41,7 @@ exports.getMasterLeaders = function(request,response){
   currUserQuery.equalTo("objectId",request.params.u);
   if(request.params.version === "nearMe"){
       currUserQuery.first().then(function(currUser){
-      query.equalTo("lastScoreTime", gtToday);
-      query.descending("gtScore");
+      query.descending("updatedAt");
       query.limit(15);
       return query.find();
     }).then(function(results){
