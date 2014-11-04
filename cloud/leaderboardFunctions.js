@@ -2,7 +2,6 @@ var moment = require('moment');
 
 exports.getLeaders = function(request,response){
   Parse.Cloud.useMasterKey();
-  var gtToday = moment().format('MMMM Do YYYY');
   var currColumn = request.params.currApp + "Score";
   var query = new Parse.Query(Parse.User);
   query.select(currColumn, "username", "gtScore");
@@ -10,12 +9,15 @@ exports.getLeaders = function(request,response){
     var currUserQuery = new Parse.Query(Parse.User);
     currUserQuery.equalTo("objectId",request.params.u);
     currUserQuery.first().then(function(currUser){
-      query.equalTo("lastScoreTime", gtToday);
-      query.greaterThan(currColumn,0);
-      query.descending(currColumn);
+      query.descending("updatedAt");
+      query.notEqualTo(currColumn, 0);
       query.limit(15);
       return query.find();
     }).then(function(results){
+      results.sort(function(obj1, obj2) {
+          // Ascending: first age less than the previous
+          return obj2.get(currColumn) - obj1.get(currColumn);
+      });
       response.success(results);
     },function(error){
       response.error(error);
@@ -34,7 +36,6 @@ exports.getLeaders = function(request,response){
 
 exports.getMasterLeaders = function(request,response){
   Parse.Cloud.useMasterKey();
-  var gtToday = moment().format('MMMM Do YYYY');
   var query = new Parse.Query(Parse.User);
   var currUserQuery = new Parse.Query(Parse.User);
   query.select("username","gcgScore","stcScore","mtmScore","gtScore");
@@ -42,9 +43,14 @@ exports.getMasterLeaders = function(request,response){
   if(request.params.version === "nearMe"){
       currUserQuery.first().then(function(currUser){
       query.descending("updatedAt");
+      query.notEqualTo("gtScore", 0);
       query.limit(15);
       return query.find();
     }).then(function(results){
+      results.sort(function(obj1, obj2) {
+          // Ascending: first age less than the previous
+          return obj2.get("gtScore") - obj1.get("gtScore");
+      });
       response.success(results);
     },function(error){
       response.error(error);

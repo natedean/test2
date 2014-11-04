@@ -41,3 +41,18 @@
 .homeGameTop {
   height: 110px;
 }
+
+.chart{
+  overflow: hidden;
+  margin-top: 120px;
+}
+
+.chart div {
+  background-color: steelblue;
+  text-align: left;
+  padding: 1px 3px;
+  margin: 1px;
+  color: white;
+  opacity: .8;
+}
+

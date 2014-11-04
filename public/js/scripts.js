@@ -44,9 +44,11 @@ var GAME = (function(){
       var currLeaderboardVersion = arguments[0];
       var n = $('#n').text();
       var u = $('#u').text();
+ 
     Parse.Cloud.run("getMasterLeaders",{version: currLeaderboardVersion, u: u}).then(function(results){
         $('#masterLeaderboardTable').html("");
         var i = 1;
+        
         results.forEach(function(item){
           if(item.get("username") == n){
             $('#masterLeaderboardTable').append('<tr>');
@@ -69,6 +71,27 @@ var GAME = (function(){
          }
           i++;
         });
+      
+      $('.chart').html("");
+      
+      var scoresArray = results.map(function(item){
+        return item.get("gtScore");
+      });
+      
+      var maxWidth = $('#chartColumn').width();
+         
+      var x = d3.scale.linear()
+          .domain([0, d3.max(scoresArray)])
+          .range([0, maxWidth]);
+
+      d3.select(".chart")
+        .selectAll("div")
+          .data(results)
+        .enter().append("div")
+          .style("width", function(d) { return x(d.get("gtScore")) + "px"; })
+          .text(function(d) { return d.get("username") });
+         
+      
       },function(error){
         console.log(error.message);
       });
