@@ -11,9 +11,9 @@
       </div>
       <div id="gcgMain" class="text-center">
         <div id="gcgDifficultyBtnRow">
-          <button id="gcgEasyBtn" class="btn btn-default btn-lg selected">Easy</button>
-          <button id="gcgMediumBtn" class="btn btn-default btn-lg">Medium</button>
-          <button id="gcgHardBtn" class="btn btn-default btn-lg">Hard</button>
+          <button id="gcgEasyBtn" class="btn btn-default selected">Easy</button>
+          <button id="gcgMediumBtn" class="btn btn-default">Medium</button>
+          <button id="gcgHardBtn" class="btn btn-default">Hard</button>
         </div>
         <div id="gcgPointsAvailableContainer">
           <p id="gcgPointsAvailableText">Points Available: <span id="gcgPointsAvailableDisplay"></span></p>
@@ -25,11 +25,11 @@
       </div>
      
       
-      <div class="row">
+      <div id="gcgMainRow" class="row">
       <div class="col-md-6">
         <div id="gcgGame"></div>
         </div><!--/col-->
-        <div class="col-md-6">
+        <div id="gcgLeaderboardColumn" class="col-md-6">
            <div id="gcgLeaderboard" class="leaderboardContainer" style="padding-bottom: 50px;">
               <h5 class="text-center">Guitar Chord Game Leaderboard</h5>
               <% if (Parse.User.current()) { %>
