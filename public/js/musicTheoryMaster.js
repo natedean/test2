@@ -50,12 +50,7 @@ $(function(){
   //initialize game
   getNew();
   var u = $('#u').text();
-  if(u){ // user logged in
-    currLeaderboardVersion = leaderboardVersions[0];
-    $('#mtmLbNearMeBtn').addClass('selected');
-  }else{
-    currLeaderboardVersion = leaderboardVersions[1];
-  }  
+  currLeaderboardVersion = leaderboardVersions[0];
   GAME.findLeaders("mtm",currLeaderboardVersion);
   $('#mtmPointsAvailableDisplay').text(pointsAvailable);
   gameTimer = setInterval(timer, 2000);
@@ -169,7 +164,7 @@ $(function(){
     if(gameTimer){
       clearInterval(gameTimer);
     }
-    pointsAvailable = 10;
+    pointsAvailable = 5;
     $('#mtmPointsAvailableDisplay').text(pointsAvailable);
     gameTimer = setInterval(timer, 2000);
   }

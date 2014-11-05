@@ -26,12 +26,7 @@ var hardChordsSharps = [{chord:"C Maj9",spelling:"C E G B D",numbers:"1 3 5 7 9"
 // initialize game
 setNewChord();
 var u = $('#u').text();
-  if(u){ // user logged in
-    currLeaderboardVersion = leaderboardVersions[0];
-    $('#stcLbNearMeBtn').addClass('selected');
-  }else{
-    currLeaderboardVersion = leaderboardVersions[1];
-  }  
+currLeaderboardVersion = leaderboardVersions[0]; 
 GAME.findLeaders("stc",currLeaderboardVersion); 
   
 ion.sound({

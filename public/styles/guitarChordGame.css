@@ -6,6 +6,10 @@
   margin-top: 10px;
 }
 
+#gcgGame{
+  margin-top: 40px;
+}
+
 #gcgGame canvas{
   margin: 0 auto;
 }
@@ -47,6 +51,9 @@
 and (max-width : 480px) {
   #gcgMain{
     margin-top: 20px;
+  }
+  #gcgGame{
+    margin-top: 0;
   }
   #gcgMainRow{
   

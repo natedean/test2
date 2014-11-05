@@ -30,10 +30,10 @@
         <div id="gcgGame"></div>
         </div><!--/col-->
         <div id="gcgLeaderboardColumn" class="col-md-6">
-           <div id="gcgLeaderboard" class="leaderboardContainer" style="padding-bottom: 50px;">
-              <h5 class="text-center">Guitar Chord Game Leaderboard</h5>
-              <% if (Parse.User.current()) { %>
-              <div id="gcgLeaderboardBtnRow" class="leaderboardBtnRow"><span>Sort by: </span><div id="gcgLbTopScorersBtn" class="btn btn-sm btn-default">Top Scorers</div><div id="gcgLbNearMeBtn" class="btn btn-sm btn-default">Recent Players</div></div><% } %>  
+           <div id="gcgLeaderboard" class="leaderboardContainer" style="padding-bottom: 80px;">
+              <h4 class="text-center">Guitar Chord Game Leaderboard</h4>
+              <h5 id="leaderboardMessage" class="text-center"></h5>
+              <div id="gcgLeaderboardBtnRow" class="leaderboardBtnRow"><span>Sort by: </span><div id="gcgLbTopScorersBtn" class="btn btn-sm btn-default">Top Scorers</div><div id="gcgLbNearMeBtn" class="btn btn-sm btn-default selected">Recent Players</div></div> 
         <table class="table">  
         <thead>  
           <tr>  
@@ -42,9 +42,9 @@
             <th>Guitar Chord Game<br>Points</th>  
             <th style="padding-bottom: 0px;"><img src="/images/gtLogoPickAndHead.png" alt="GuitarThinker Icon" style="height: 50px; margin: 0 0 -10px -5px;"/><br><span class="text-center">Total</span></th>
           </tr>  
-        </thead>  
-        <tbody id="masterLeaderboardTable">  
-            
+        </thead>
+        <div class="chart"></div>  
+        <tbody id="masterLeaderboardTable">       
         </tbody>
         </table>
           </div><!--/#gcgLeaderboard-->
@@ -55,6 +55,7 @@
     </div>  
     <% include partials/footer %>
     <script src="js/lib/phaser.min.js"></script>
+    <script src="/js/lib/d3.min.js"></script>  <!-- d3 js -->
     <script src="/js/guitarChordGame.js"></script>  <!-- spellThatChord js -->
   </body>
 </html>

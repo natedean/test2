@@ -23,9 +23,9 @@
         </div><!--/#mtmQuestionScreen--> 
       </div>
       <div id="mtmLeaderboard" class="leaderboardContainer">
-              <h5 class="text-center">Music Theory Master Leaderboard</h5>
-              <% if (Parse.User.current()) { %>
-              <div id="mtmLeaderboardBtnRow" class="leaderboardBtnRow"><span>Sort by: </span><div id="mtmLbTopScorersBtn" class="btn btn-sm btn-default">Top Scorers</div><div id="mtmLbNearMeBtn" class="btn btn-sm btn-default">Recent Players</div></div><% } %>  
+              <h4 class="text-center">Music Theory Master Leaderboard</h4>
+              <h5 id="leaderboardMessage" class="text-center"></h5>
+              <div id="mtmLeaderboardBtnRow" class="leaderboardBtnRow"><span>Sort by: </span><div id="mtmLbTopScorersBtn" class="btn btn-sm btn-default">Top Scorers</div><div id="mtmLbNearMeBtn" class="btn btn-sm btn-default selected">Recent Players</div></div>  
         <table class="table">  
         <thead>  
           <tr>  
@@ -34,14 +34,15 @@
             <th><img src="/images/mtm/MusicTheoryMaster_icon.png" alt="GuitarThinker Icon" style="height: 40px;"/><br>Points</th>  
             <th style="padding-bottom: 0px;"><img src="/images/gtLogoPickAndHead.png" alt="GuitarThinker Icon" style="height: 50px; margin: 0 0 -10px -5px;"/><br><span class="text-center">Total</span></th>
           </tr>  
-        </thead>  
-        <tbody id="masterLeaderboardTable">  
-            
+        </thead>
+        <div class="chart"></div>
+        <tbody id="masterLeaderboardTable">            
         </tbody>
         </table>
           </div><!--/#mtmLeaderboard-->
     </div><!--/container -->
     <% include partials/footer %>
+    <script src="/js/lib/d3.min.js"></script>  <!-- d3 js -->
     <script src="/js/musicTheoryMaster.js"></script>  <!-- spellThatChord js -->
   </body>
 </html>

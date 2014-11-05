@@ -151,7 +151,7 @@ var questions = {
       answers: [{answer: "F2", correct: true},{answer: "Fsus",correct: false},{answer: "FMaj7",correct: false},{answer: "F7",correct: false}]
     },
     {name: "Bb2", notes: [{fret: -1, finger: "x"},{fret: 1, finger: 1},{fret: 3,finger: 3},{fret: 3, finger: 4},{fret: 1, finger: 1},{fret: 1, finger: 1}],
-      answers: [{answer: "Bb2", correct: true},{answer: "Bbsus",correct: false},{answer: "BbMaj7",correct: false},{answer: "Bbaug",correct: false}]
+      answers: [{answer: "Bb2", correct: true},{answer: "Bbsus",correct: false},{answer: "BbMaj7",correct: false},{answer: "Bb7",correct: false}]
     },
     {name: "Cadd9", notes: [{fret: -1, finger: "x"},{fret: 3, finger: 2},{fret: 2, finger: 1},{fret: 0, finger: 0},{fret: 3, finger: 3},{fret: 3, finger: 4}],
       answers: [{answer: "Cadd9", correct: true},{answer: "Csus",correct: false},{answer: "CMaj7",correct: false},{answer: "C7",correct: false}]
@@ -183,8 +183,14 @@ var questions = {
     {name: "Esus", notes: [{fret: 0, finger: 0},{fret: 2, finger: 2},{fret: 2,finger: 3},{fret: 2, finger: 4},{fret: 0, finger: 0},{fret: 0, finger: 0}],
       answers: [{answer: "Esus", correct: true},{answer: "Eadd9",correct: false},{answer: "EMaj7",correct: false},{answer: "Eadd9",correct: false}]
     },
+    {name: "Bsus", notes: [{fret: -1, finger: "x"},{fret: 2, finger: 1},{fret: 4,finger: 2},{fret: 4, finger: 3},{fret: 5, finger: 4},{fret: 2, finger: 1}],
+      answers: [{answer: "Bsus", correct: true},{answer: "B7",correct: false},{answer: "BMaj7",correct: false},{answer: "B2",correct: false}]
+    },
     {name: "Fsus", notes: [{fret: -1, finger: "x"},{fret: -1, finger: "x"},{fret: 3,finger: 3},{fret: 3, finger: 4},{fret: 1, finger: 1},{fret: 1, finger: 1}],
       answers: [{answer: "Fsus", correct: true},{answer: "F2",correct: false},{answer: "FMaj7",correct: false},{answer: "Fadd9",correct: false}]
+    },
+    {name: "Bbsus", notes: [{fret: -1, finger: "x"},{fret: 1, finger: 1},{fret: 3,finger: 2},{fret: 3, finger: 3},{fret: 4, finger: 4},{fret: 1, finger: 1}],
+      answers: [{answer: "Bbsus", correct: true},{answer: "Bb2",correct: false},{answer: "BbMaj7",correct: false},{answer: "Bb7",correct: false}]
     },
     {name: "F#sus", notes: [{fret: -1, finger: "x"},{fret: -1, finger: "x"},{fret: 3,finger: 3},{fret: 3, finger: 4},{fret: 1, finger: 1},{fret: 1, finger: 1}],
       answers: [{answer: "F#sus", correct: true},{answer: "F#2",correct: false},{answer: "F#Maj7",correct: false},{answer: "F#add9",correct: false}]
@@ -209,6 +215,9 @@ var questions = {
     },
     {name: "F#7", notes: [{fret: 2, finger: 1},{fret: 4, finger: 3},{fret: 2,finger: 1},{fret: 3, finger: 2},{fret: 2, finger: 1},{fret: 2, finger: 1}],
       answers: [{answer: "F#7", correct: true},{answer: "F#dim",correct: false},{answer: "F#Maj7",correct: false},{answer: "F#sus",correct: false}]
+    },
+    {name: "Bb7", notes: [{fret: -1, finger: "x"},{fret: 1, finger: 1},{fret: 3,finger: 3},{fret: 1, finger: 1},{fret: 3, finger: 4},{fret: 1, finger: 1}],
+      answers: [{answer: "Bb7", correct: true},{answer: "Bb2",correct: false},{answer: "BbMaj7",correct: false},{answer: "Bbsus",correct: false}]
     },
     {name: "CMaj7", notes: [{fret: -1, finger: "x"},{fret: 3, finger: 3},{fret: 2,finger: 2},{fret: 0, finger: 0},{fret: 0, finger: 0},{fret: 0, finger: 0}],
       answers: [{answer: "CMaj7", correct: true},{answer: "Cdim",correct: false},{answer: "C7",correct: false},{answer: "Csus",correct: false}]
@@ -251,6 +260,9 @@ var questions = {
     },
     {name: "Edim", notes: [{fret: 0, finger: 0},{fret: 1, finger: 1},{fret: 2,finger: 2},{fret: 0, finger: 0},{fret: -1, finger: "x"},{fret: -1, finger: "x"}],
       answers: [{answer: "Edim", correct: true},{answer: "EMaj7",correct: false},{answer: "E7",correct: false},{answer: "Esus",correct: false}]
+    },
+    {name: "Bdim", notes: [{fret: -1, finger: "x"},{fret: 2, finger: 1},{fret: 3,finger: 2},{fret: 4, finger: 4},{fret: 3, finger: 3},{fret: -1, finger: "x"}],
+      answers: [{answer: "Bdim", correct: true},{answer: "Baug",correct: false},{answer: "B7",correct: false},{answer: "B2",correct: false}]
     },
     {name: "F#dim", notes: [{fret: -1, finger: "x"},{fret: -1, finger: "x"},{fret: 4,finger: 4},{fret: 2, finger: 2},{fret: 1, finger: 1},{fret: -1, finger: "x"}],
       answers: [{answer: "F#dim", correct: true},{answer: "F#min7",correct: false},{answer: "F#7",correct: false},{answer: "F#sus",correct: false}]
@@ -308,6 +320,9 @@ var questions = {
     }
   ],
   hard: [
+    {name: "G7sus", notes: [{fret: 3, finger: 3},{fret: -1, finger: "x"},{fret: 0,finger: 0},{fret: 0, finger: 0},{fret: 1, finger: 1},{fret: 1, finger: 1}],
+      answers: [{answer: "G7sus", correct: true},{answer: "GMaj9",correct: false},{answer: "G11",correct: false},{answer: "G9",correct: false}]
+    },
     {name: "A7sus", notes: [{fret: -1, finger: "x"},{fret: 0, finger: 0},{fret: 2,finger: 1},{fret: 0, finger: 0},{fret: 3, finger: 3},{fret: 0, finger: 0}],
       answers: [{answer: "A7sus", correct: true},{answer: "A9",correct: false},{answer: "A6",correct: false},{answer: "Amin11",correct: false}]
     },
@@ -435,7 +450,10 @@ var questions = {
       answers: [{answer: "Dm7b5", correct: true},{answer: "D7#5",correct: false},{answer: "D7#9",correct: false},{answer: "Ddim7",correct: false}]
     },
     {name: "Am7b5", notes: [{fret: 5, finger: 2},{fret: -1, finger: "x"},{fret: 5,finger: 3},{fret: 5, finger: 4},{fret: 4, finger: 1},{fret: -1, finger: "x"}],
-      answers: [{answer: "Am7b5", correct: true},{answer: "A7b9",correct: false},{answer: "Amin11",correct: false},{answer: "A7sus",correct: false}]
+      answers: [{answer: "Am7b5", correct: true},{answer: "A9",correct: false},{answer: "Amin11",correct: false},{answer: "A7sus",correct: false}]
+    },
+    {name: "Em7b5", notes: [{fret: 0, finger: 0},{fret: 1, finger: 1},{fret: 0,finger: 0},{fret: 0, finger: 0},{fret: 3, finger: 3},{fret: 0, finger: 0}],
+      answers: [{answer: "Em7b5", correct: true},{answer: "Emin6",correct: false},{answer: "Emin11",correct: false},{answer: "Emin9",correct: false}]
     },
     {name: "Bbm7b5", notes: [{fret: -1, finger: "x"},{fret: 1, finger: 1},{fret: 2,finger: 3},{fret: 1, finger: 2},{fret: 2, finger: 4},{fret: -1, finger: "x"}],
       answers: [{answer: "Bbm7b5", correct: true},{answer: "Bb7#5",correct: false},{answer: "Bb7b9",correct: false},{answer: "Bbdim7",correct: false}]
@@ -470,6 +488,9 @@ var questions = {
     {name: "CMaj11", notes: [{fret: -1, finger: "x"},{fret: 3, finger: 3},{fret: 2,finger: 2},{fret: 0, finger: 0},{fret: 0, finger: 0},{fret: 1, finger: 1}],
       answers: [{answer: "CMaj11", correct: true},{answer: "CMaj9",correct: false},{answer: "C11",correct: false},{answer: "C9",correct: false}]
     },
+    {name: "GMaj11", notes: [{fret: 3, finger: 4},{fret: -1, finger: "x"},{fret: 0,finger: 0},{fret: 0, finger: 0},{fret: 1, finger: 1},{fret: 2, finger: 2}],
+      answers: [{answer: "GMaj11", correct: true},{answer: "G9",correct: false},{answer: "G11",correct: false},{answer: "GMaj9",correct: false}]
+    },
     {name: "DMaj11", notes: [{fret: -1, finger: "x"},{fret: 5, finger: 4},{fret: 4,finger: 3},{fret: 0, finger: 0},{fret: 2, finger: 1},{fret: 0, finger: 0}],
       answers: [{answer: "DMaj11", correct: true},{answer: "DMaj9",correct: false},{answer: "D11",correct: false},{answer: "D7#9",correct: false}]
     },
@@ -501,7 +522,7 @@ var questions = {
       answers: [{answer: "Amin6", correct: true},{answer: "A7sus",correct: false},{answer: "Am7b5",correct: false},{answer: "Amin11",correct: false}]
     },
     {name: "Amin6", notes: [{fret: -1, finger: "x"},{fret: 0, finger: 0},{fret: 2,finger: 2},{fret: 2, finger: 3},{fret: 1, finger: 1},{fret: 2, finger: 4}],
-      answers: [{answer: "Amin6", correct: true},{answer: "A7sus",correct: false},{answer: "Am7b5",correct: false},{answer: "A7sus",correct: false}]
+      answers: [{answer: "Amin6", correct: true},{answer: "A7sus",correct: false},{answer: "Am7b5",correct: false},{answer: "A11",correct: false}]
     },
     {name: "Emin6", notes: [{fret: 0, finger: 0},{fret: 2, finger: 1},{fret: 2,finger: 2},{fret: 0, finger: 0},{fret: 2, finger: 3},{fret: 0, finger: 0}],
       answers: [{answer: "Emin6", correct: true},{answer: "E9",correct: false},{answer: "Emin11",correct: false},{answer: "Em7b5",correct: false}]
@@ -857,12 +878,7 @@ $(function(){
 //initialize game
   
   var u = $('#u').text();
-  if(u){ // user logged in
-    currLeaderboardVersion = leaderboardVersions[0];
-    $('#gcgLbNearMeBtn').addClass('selected');
-  }else{
-    currLeaderboardVersion = leaderboardVersions[1];
-  }  
+  currLeaderboardVersion = leaderboardVersions[0];
   GAME.findLeaders("gcg",currLeaderboardVersion);
 
   

@@ -104,10 +104,11 @@ html, body {
 /* leaderboard styles*/
 /*leaderboard styles*/
 .leaderboardContainer{
-  background: rgba(255,255,255,.7);
+  background: rgba(255,255,255,.9);
   padding: 5px;
-  max-width: 400px;
+  max-width: 600px;
   margin: 0 auto;
+  border-radius: 5px;
 }
 
 .leaderboardBtnRow{
@@ -120,8 +121,34 @@ html, body {
   margin: 0 10px;
 }
 
+.leaderboardContainer td{
+  padding-left: 10px;
+}
+
+.leaderboardContainer td.scoreTd{
+  padding-left: 15px;
+}
+
+#leaderboardMessage{
+  color: #d9534f;
+}
+
+.chart{
+  overflow: hidden;
+  position: absolute;
+  margin-top: 68px;
+}
+
+.chart div {
+  background-color: steelblue;
+  text-align: left;
+  margin: 2px;
+  opacity: .2;
+  height: 18px;
+}
+
 .btn.selected{
-  border: 1px solid #4cae4c;
+  border: 2px solid steelblue;;
 }
 
 /*large screen media queries*/

@@ -92,9 +92,9 @@
         </div><!--/col-->
         <div class="col-md-6">
           <div id="stcLeaderboard" class="leaderboardContainer">
-              <h5 class="text-center">Spell That Chord Leaderboard</h5>
-              <% if (Parse.User.current()) { %>
-              <div id="stcLeaderboardBtnRow" class="leaderboardBtnRow"><span>Sort by: </span><div id="stcLbTopScorersBtn" class="btn btn-sm btn-default">Top Scorers</div><div id="stcLbNearMeBtn" class="btn btn-sm btn-default">Recent Players</div></div><% } %>  
+              <h4 class="text-center">Spell That Chord Leaderboard</h4>
+              <h5 id="leaderboardMessage" class="text-center"></h5>
+              <div id="stcLeaderboardBtnRow" class="leaderboardBtnRow"><span>Sort by: </span><div id="stcLbTopScorersBtn" class="btn btn-sm btn-default">Top Scorers</div><div id="stcLbNearMeBtn" class="btn btn-sm btn-default selected">Recent Players</div></div>  
         <table class="table">  
         <thead>  
           <tr>  
@@ -103,9 +103,9 @@
             <th><img src="/images/stc/AppIcon40x40.png" alt="Spell That Chord Icon"></th>  
             <th style="padding-bottom: 0px;"><img src="/images/gtLogoPickAndHead.png" alt="GuitarThinker Icon" style="height: 50px; margin: 0 0 -10px -5px;"/><br><span class="text-center">Total</span></th>
           </tr>  
-        </thead>  
-        <tbody id="masterLeaderboardTable">  
-            
+        </thead>
+        <div class="chart"></div>  
+        <tbody id="masterLeaderboardTable">     
         </tbody>
         </table>
           </div><!--/#stcLeaderboard-->
@@ -114,6 +114,7 @@
     </div><!--/container -->
     <% include partials/footer %>
     <script src="/js/lib/ion.sound.min.js"></script>  <!-- spellThatChord js -->
+    <script src="/js/lib/d3.min.js"></script>  <!-- d3 js -->
     <script src="/js/spellThatChord.js"></script>  <!-- spellThatChord js -->
   </body>
 </html>

@@ -35,11 +35,9 @@ h2#mtmQuestion {
   transition: .2s;
 }
 
-
 .mtmAnswerButton:active{
   height:78px;
 }
-
 
 #mtmFeedbackContainer{
   height:20px;
@@ -69,7 +67,6 @@ h2#mtmQuestion {
   margin: 0 10px;
 }
 
-
 #mtmLeaderboard td{
   padding-left: 10px;
 }
@@ -77,6 +74,11 @@ h2#mtmQuestion {
 #mtmLeaderboard td.scoreTd{
   padding-left: 15px;
 }
+
+.chart{
+  margin-top: 76px;
+}
+
 
 /* Smartphones (portrait) ----------- */
 @media only screen 
