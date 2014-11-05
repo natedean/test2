@@ -30,9 +30,14 @@
   font-size: 14px;
 }
 
-
 .homeGameTop {
   height: 110px;
+}
+
+.homeGameTop img{
+  width: 100%; 
+  max-width: 100px; 
+  margin: 0 auto;
 }
 
 

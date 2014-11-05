@@ -112,7 +112,7 @@ html, body {
 }
 
 .leaderboardBtnRow{
-  height: 25px; 
+  height: 35px; 
   width: 300px;
   margin: 0 auto;
 }
@@ -136,14 +136,14 @@ html, body {
 .chart{
   overflow: hidden;
   position: absolute;
-  margin-top: 68px;
+  margin-top: 58px;
 }
 
 .chart div {
   background-color: steelblue;
   text-align: left;
   margin: 2px;
-  opacity: .2;
+  opacity: .5;
   height: 18px;
 }
 
@@ -159,3 +159,11 @@ html, body {
   }
 
 }
+
+/* Smartphones (portrait) ----------- */
+@media only screen 
+and (max-width : 480px) {
+  .chart{
+    margin-top: 76px;
+  } 
+}/* end media query */
