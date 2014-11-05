@@ -1,6 +1,35 @@
 Parse.initialize("jjrIZ3jiKnpq02brttE2FXl9BuZCmj9ZuY1UTJaU",
                    "DkUgGQuFMOOPfyi06JcEWy6W6Qh4bSz2bOMY2wSg");
 
+window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '387284918091017',
+      xfbml      : true,
+      version    : 'v2.2'
+    });
+  
+  Parse.FacebookUtils.logIn(null, {
+  success: function(user) {
+      if (!user.existed()) {
+        alert("User signed up and logged in through Facebook!");
+      } else {
+        alert("User logged in through Facebook!");
+      }
+    },
+    error: function(user, error) {
+      alert("User cancelled the Facebook login or did not fully authorize.");
+    }
+  });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
 var windowWidth = window.innerWidth;
 
 

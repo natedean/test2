@@ -72,6 +72,10 @@ html, body {
   border:none;
 }
 
+.fb_iframe_widget {
+  position: absolute !important;
+}
+
 .footer-bar{
   background-color: grey;
   color: white;
@@ -163,7 +167,16 @@ html, body {
 /* Smartphones (portrait) ----------- */
 @media only screen 
 and (max-width : 480px) {
+  .navbar-brand{
+    height: 50px;
+  }
+  .navLogoImg{
+    height: 50px;
+  }
   .chart{
-    margin-top: 76px;
+    margin-top: 58px;
   } 
+  .fb_iframe_widget {
+    position: relative !important;
+  }
 }/* end media query */

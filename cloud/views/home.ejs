@@ -6,11 +6,12 @@
     <link href="/styles/home.css" rel="stylesheet" type="text/css" />
     
     <div class="header-image">
-      <div id="homeLoginSection">
-      <% include partials/login-links %>
-       <p id="homeWelcome" class="pull-right text-muted snall"><%= message %><span id="n"><%= n %></span><span id="u" style="display:none"><%= u %></span></p>
-      </div>
      <div class="container">
+       <div id="homeLoginSection">
+          <% include partials/fb-links %>
+          <% include partials/login-links %>
+          <p id="homeWelcome" class="pull-right text-muted snall"><%= message %><span id="n"><%= n %></span><span id="u" style="display:none"><%= u %></span></p>
+       </div>
         <div id="gtLeaderboard" class="leaderboardContainer">
               <h4 class="text-center">GuitarThinker Leaderboard</h4>
               <h5 id="leaderboardMessage" class="text-center"></h5>
@@ -62,6 +63,9 @@
 		</div>
 		<div class="col-sm-4">
 			<h2 class="text-center">Apps</h2>
+            <div class="homeAppTop text-center">
+              <a href="/nashville-number-system"><img src="/images/nnsIcon.png" alt="Nashville Number System Icon"/></a>
+            </div>
 		</div>
 		<div class="col-sm-4">
 			<h4>This site is dedicated to making learning music easier and more fun.</h4>
