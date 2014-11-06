@@ -1,0 +1,5 @@
+# www.robotstxt.org/
+# http://code.google.com/web/controlcrawlindex/
+#
+sitemap: https://www.guitarthinker.com/sitemap.xml
+#-- 11/5/14 --

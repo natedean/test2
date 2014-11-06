@@ -12,7 +12,9 @@
           <% include partials/login-links %>
           <p id="homeWelcome" class="pull-right text-muted snall"><%= message %><span id="n"><%= n %></span><span id="u" style="display:none"><%= u %></span></p>
        </div>
-        <div id="gtLeaderboard" class="leaderboardContainer">
+       <div class="row">
+       <div class="col-md-6">
+         <div id="gtLeaderboard" class="leaderboardContainer">
               <h4 class="text-center">GuitarThinker Leaderboard</h4>
               <h5 id="leaderboardMessage" class="text-center"></h5>
               <div id="gtLeaderboardBtnRow" class="leaderboardBtnRow"><span>Sort by: </span><div id="gtLbTopScorersBtn" class="btn btn-sm btn-default">Top Scorers</div><div id="gtLbNearMeBtn" class="btn btn-sm btn-default">Recent Players</div></div>
@@ -33,7 +35,15 @@
         </tbody>
         </table>
 
-          </div><!--/#gtLeaderboard-->
+          </div><!--/#gtLeaderboard-->  
+       </div>
+       <div class="col-md-6">
+        <div id="twitterContainer" class="text-center">
+        <a class="twitter-timeline" href="https://twitter.com/GuitarThinker" data-widget-id="530401530214498304">Tweets by @GuitarThinker</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        </div>  
+       </div>   
+       </div><!--/row-->
     </div><!--/.container-->
     </div><!--/.header-image-->
     
@@ -77,14 +87,12 @@
 		</div>
 	</div>
         
-      <div class="textured-background">
         <div class="jumbotron">
-        <h4>Here's what I think:</h4>
+        <h3>Here's what I think:</h3>
         <p>There is a serious lack of cool web 3.0 tools for musicians.  What does that mean?  Stuff like live data, interactivity, mobile device compatibility, and great looking design.  Why?  Well, probably because music education is not a super lucrative market, or maybe just because most musicians are not also programmers.</p>
-        <h4>GuitarThinker to the rescue!</h4>
+        <h3>GuitarThinker to the rescue!</h3>
         <p>This site will be a fun place to visit, learn, come back and see what's new.  GuitarThinker will be a place to compete with yourself and others, because competetion motivates us.  This site will have lots of games that are fun to play and teach you music.</p>
         </div><!--/.jumbotron-->  
-        </div><!--/.textured-background-->
     
     </div><!-- end container -->
     <% include partials/footer %>
