@@ -65,16 +65,20 @@ var loginWarning = false;
 var questions = {
   easy: [
     {name: "C Major", notes: [{fret: -1, finger: "x"},{fret: 3, finger: 3},{fret: 2,finger: 2},{fret: 0, finger: 0},{fret: 1, finger: 1},{fret: 0, finger: 0}],
-      answers: [{answer: "C Major", correct: true},{answer: "G Major",correct: false},{answer: "F Major",correct: false},{answer: "E Major",correct: false}]
+      answers: [{answer: "C Major", correct: true},{answer: "G Major",correct: false},{answer: "F Major",correct: false},{answer: "E Major",correct: false}],
+      scaleTones: ["x",1,3,5,1,3], noteLetters: ["x","C","E","G","C","E"]
     },
     {name: "C Major", notes: [{fret: -1, finger: "x"},{fret: 3, finger: 1},{fret: 5,finger: 2},{fret: 5, finger: 3},{fret: 5, finger: 4},{fret: 3, finger: 1}],
-      answers: [{answer: "C Major", correct: true},{answer: "G Major",correct: false},{answer: "F Major",correct: false},{answer: "E Major",correct: false}]
+      answers: [{answer: "C Major", correct: true},{answer: "G Major",correct: false},{answer: "F Major",correct: false},{answer: "E Major",correct: false}],
+      scaleTones: ["x",1,5,1,3,5], noteLetters: ["x","C","G","C","E","G"]
     },
     {name: "G Major", notes: [{fret: 3, finger: 2},{fret: 2, finger: 1},{fret: 0,finger: 0},{fret: 0, finger: 0},{fret: 3, finger: 3},{fret: 3, finger: 4}],
-      answers: [{answer: "G Major", correct: true},{answer: "C Major",correct: false},{answer: "F Major",correct: false},{answer: "E Major",correct: false}]
+      answers: [{answer: "G Major", correct: true},{answer: "C Major",correct: false},{answer: "F Major",correct: false},{answer: "E Major",correct: false}],
+      scaleTones: [1,3,5,1,5,1], noteLetters: ["G","B","D","G","D","G"]
     },
     {name: "G Major", notes: [{fret: 3, finger: 1},{fret: 5, finger: 3},{fret: 5,finger: 4},{fret: 4, finger: 2},{fret: 3, finger: 1},{fret: 3, finger: 1}],
-      answers: [{answer: "G Major", correct: true},{answer: "C Major",correct: false},{answer: "F Major",correct: false},{answer: "E Major",correct: false}]
+      answers: [{answer: "G Major", correct: true},{answer: "C Major",correct: false},{answer: "F Major",correct: false},{answer: "E Major",correct: false}],
+      scaleTones: [1,5,1,3,5,1], noteLetters: ["G","D","G","B","D","G"]
     },
     {name: "D Major", notes: [{fret: -1, finger: "x"},{fret: -1, finger: "x"},{fret: 0,finger: 0},{fret: 2, finger: 1},{fret: 3, finger: 3},{fret: 2, finger: 2}],
       answers: [{answer: "D Major", correct: true},{answer: "G Major",correct: false},{answer: "F Major",correct: false},{answer: "E Major",correct: false}]
@@ -240,11 +244,14 @@ var questions = {
     {name: "BMaj7", notes: [{fret: -1, finger: "x"},{fret: 2, finger: 1},{fret: 4,finger: 3},{fret: 3, finger: 2},{fret: 4, finger: 4},{fret: 2, finger: 1}],
       answers: [{answer: "BMaj7", correct: true},{answer: "Bdim",correct: false},{answer: "B7",correct: false},{answer: "Baug",correct: false}]
     },
+    {name: "F#Maj7", notes: [{fret: 2, finger: 1},{fret: -1, finger: "x"},{fret: 3,finger: 3},{fret: 3, finger: 4},{fret: 2, finger: 2},{fret: -1, finger: "x"}],
+      answers: [{answer: "F#Maj7", correct: true},{answer: "F#dim",correct: false},{answer: "F#7",correct: false},{answer: "F#sus",correct: false}]
+    },
     {name: "FMaj7", notes: [{fret: -1, finger: "x"},{fret: -1, finger: "x"},{fret: 3,finger: 3},{fret: 2, finger: 2},{fret: 1, finger: 1},{fret: 0, finger: 0}],
       answers: [{answer: "FMaj7", correct: true},{answer: "F2",correct: false},{answer: "F7",correct: false},{answer: "Fsus",correct: false}]
     },
-    {name: "F#Maj7", notes: [{fret: 2, finger: 1},{fret: -1, finger: "x"},{fret: 3,finger: 3},{fret: 3, finger: 4},{fret: 2, finger: 2},{fret: -1, finger: "x"}],
-      answers: [{answer: "F#Maj7", correct: true},{answer: "F#dim",correct: false},{answer: "F#7",correct: false},{answer: "F#sus",correct: false}]
+    {name: "BbMaj7", notes: [{fret: -1, finger: "x"},{fret: 1, finger: 1},{fret: 3,finger: 3},{fret: 2, finger: 2},{fret: 3, finger: 4},{fret: 1, finger: 1}],
+      answers: [{answer: "BbMaj7", correct: true},{answer: "Bb2",correct: false},{answer: "Bb7",correct: false},{answer: "Bbsus",correct: false}]
     },
     {name: "Cdim", notes: [{fret: -1, finger: "x"},{fret: 3, finger: 1},{fret: 4,finger: 2},{fret: 5, finger: 4},{fret: 4, finger: 3},{fret: -1, finger: "x"}],
       answers: [{answer: "Cdim", correct: true},{answer: "Cmin7",correct: false},{answer: "C7",correct: false},{answer: "Caug",correct: false}]
@@ -672,7 +679,7 @@ function setNewChord(){
   currRand = getRand();
   currChord = currDifficultySetting.level[currRand];
   
-  game.time.events.repeat(200, 6, setNotes, this);
+  game.time.events.repeat(100, 6, setNotes, this);
 
 //  text.setText(currChord.name); DEBUG
 }
@@ -687,8 +694,6 @@ function setWrongAnswerAnimation(guess){
     return item.name == guess; 
   });
   
-  console.log(currGuess);
-
   if(notes){
     notes.destroy();
   }
@@ -833,20 +838,24 @@ function setAnswers(){
           $('#gcgGuessFeedback').html("<span class='glyphicon glyphicon-remove red'></span> The answer is " + ans).fadeIn(500);
           $('#c').addClass('green');
  
-            setWrongAnswerAnimation(guess);
+          setWrongAnswerAnimation(guess);
 
           setTimeout(function(){
              // GAME.findLeaders("gcg",currLeaderboardVersion);
-
+            
+            $('#gcgGuessFeedback').html('<div class="btn btn-default">Click to Move On</div>').fadeIn(500);
+            $('#gcgGuessFeedback').click(function(){
               wrongGuitarNeckOne.kill();
               wrongGuitarNeckTwo.kill();
               wrongTextOne.destroy();
               wrongTextTwo.destroy();
-
-            
-            $('#gcgGuessFeedback').fadeOut(200);
-            setNewChord();
-          },8000);
+              if(notes){
+                notes.destroy();
+              }
+              $('#gcgGuessFeedback').fadeOut(500);
+              setNewChord();
+            });  
+          },5000);
         }
       }  
     });// end click handler
