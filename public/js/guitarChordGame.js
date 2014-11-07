@@ -697,6 +697,7 @@ function create(){
   
 
   text = game.add.text(150, 0, '', { font: "30pt Courier", fill: "#19cb65", stroke: "#119f4e", strokeThickness: 2 });
+  $('#loadingText').html('');
      
   //START!!
   setNewChord();
