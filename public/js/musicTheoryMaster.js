@@ -42,7 +42,22 @@ var awesomeArray = [{question: "How many sharps in the key of C Major?", answers
                     {question: "What notes of the major scale make up a diminished chord?", answers: [{answer: "1 b3 b5", correct: true},{answer: "1 2 3",correct: false},{answer: "1 3 5",correct: false},{answer: "1 b3 5",correct: false}]},
                     {question: "What notes of the major scale make up a augmented chord?", answers: [{answer: "1 3 #5", correct: true},{answer: "1 #3 5",correct: false},{answer: "1 3 5",correct: false},{answer: "1 b3 5",correct: false}]},
                     {question: "What notes of the major scale make up a suspended chord?", answers: [{answer: "1 4 5", correct: true},{answer: "1 3 5",correct: false},{answer: "1 b3 5",correct: false},{answer: "1 5 6",correct: false}]},
-                    {question: "What notes of the major scale make up a 2 chord?", answers: [{answer: "1 2 5", correct: true},{answer: "1 3 5",correct: false},{answer: "1 2 3",correct: false},{answer: "1 2 4",correct: false}]}
+                    {question: "What notes of the major scale make up a 2 chord?", answers: [{answer: "1 2 5", correct: true},{answer: "1 3 5",correct: false},{answer: "1 2 3",correct: false},{answer: "1 2 4",correct: false}]},
+                    {question: "What notes of the major scale make up a 7 chord?", answers: [{answer: "1 3 5 b7", correct: true},{answer: "1 3 5 7",correct: false},{answer: "1 3 7 8",correct: false},{answer: "1 3 5 6",correct: false}]},
+                    {question: "What notes of the major scale make up a Maj7 chord?", answers: [{answer: "1 3 5 7", correct: true},{answer: "1 3 5 b7",correct: false},{answer: "1 2 3 4",correct: false},{answer: "1 3 7 9",correct: false}]},
+                    {question: "What notes of the major scale make up a min7 chord?", answers: [{answer: "1 b3 5 b7", correct: true},{answer: "1 3 5 b7",correct: false},{answer: "1 2 b3 4",correct: false},{answer: "1 b3 7 9",correct: false}]},
+                    {question: "What is the second chord in the key of A Major?", answers: [{answer: "Bmin", correct: true},{answer: "C",correct: false},{answer: "Gmin",correct: false},{answer: "D",correct: false}]},
+                    {question: "What is the second chord in the key of E Major?", answers: [{answer: "F#min", correct: true},{answer: "A",correct: false},{answer: "B",correct: false},{answer: "Dmin",correct: false}]},
+                    {question: "What is the second chord in the key of B Major?", answers: [{answer: "C#min", correct: true},{answer: "D#",correct: false},{answer: "Emin",correct: false},{answer: "E",correct: false}]},
+                    {question: "What is the third chord in the key of C Major?", answers: [{answer: "Emin", correct: true},{answer: "F",correct: false},{answer: "Gmin",correct: false},{answer: "Amin",correct: false}]},
+                    {question: "What is the third chord in the key of G Major?", answers: [{answer: "Bmin", correct: true},{answer: "Emin",correct: false},{answer: "D",correct: false},{answer: "Amin",correct: false}]},
+                    {question: "What is the third chord in the key of A Major?", answers: [{answer: "C#min", correct: true},{answer: "C",correct: false},{answer: "Gmin",correct: false},{answer: "Emin",correct: false}]},
+                    {question: "What is the third chord in the key of E Major?", answers: [{answer: "G#min", correct: true},{answer: "G",correct: false},{answer: "Gmin",correct: false},{answer: "A",correct: false}]},
+                    {question: "What is the fourth chord in the key of C Major?", answers: [{answer: "F", correct: true},{answer: "G",correct: false},{answer: "Emin",correct: false},{answer: "Amin",correct: false}]},
+                    {question: "What is the fourth chord in the key of G Major?", answers: [{answer: "C", correct: true},{answer: "D",correct: false},{answer: "Emin",correct: false},{answer: "A",correct: false}]},
+                    {question: "What is the fourth chord in the key of A Major?", answers: [{answer: "D", correct: true},{answer: "E",correct: false},{answer: "F#min",correct: false},{answer: "B",correct: false}]},
+                    {question: "What is the fifth chord in the key of C Major?", answers: [{answer: "G", correct: true},{answer: "E",correct: false},{answer: "F#min",correct: false},{answer: "F",correct: false}]},
+                    {question: "What is the fifth chord in the key of G Major?", answers: [{answer: "D", correct: true},{answer: "A",correct: false},{answer: "Emin",correct: false},{answer: "C",correct: false}]}
                    ];
 
 $(function(){
@@ -83,13 +98,14 @@ $(function(){
       if(e.target.id === "c"){
         var n = $('#n').text();
         $('#mtmGuessFeedback').text("Correct! +" + pointsAvailable).fadeIn(500);
-        $('#mtmGuessFeedback').fadeOut(2000);
+       
         Parse.Cloud.run("add",{amount:pointsAvailable,u: u,currApp: "mtm"}).then(function(results){
           GAME.findLeaders("mtm",currLeaderboardVersion);
           setTimeout(function(){
+             $('#mtmGuessFeedback').fadeOut(500);
             getNew();
             resetTimer();
-          },1000);
+          },2000);
 //          $('#mtmPointsAvailableText').fadeIn(1000);
         },function(error){
           resetTimer();
@@ -99,14 +115,15 @@ $(function(){
       }else{
         var ans = $("#c").text();
         $('#mtmGuessFeedback').text("Incorrect. The answer is " + ans).fadeIn(500);
-        $('#mtmGuessFeedback').fadeOut(3000);
+        
         setTimeout(function(){
           GAME.findLeaders("mtm",currLeaderboardVersion);
+          $('#mtmGuessFeedback').fadeOut(500);
           getNew();
           resetTimer();
 //          $('#mtmPointsAvailableText').fadeIn(1000);
           
-        },2000);
+        },4000);
       }
     });// end click handler
 }// end getNew
