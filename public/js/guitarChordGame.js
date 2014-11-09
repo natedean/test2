@@ -61,6 +61,7 @@ var guitarTones;
 var newAnswers;
 var resetting = false;
 var loginWarning = false;
+var leaderboardTeaserCounter = 0;
 
 var questions = {
   easy: [
@@ -196,6 +197,9 @@ var questions = {
     {name: "Bsus", notes: [{fret: -1, finger: "x"},{fret: 2, finger: 1},{fret: 4,finger: 2},{fret: 4, finger: 3},{fret: 5, finger: 4},{fret: 2, finger: 1}],
       answers: [{answer: "Bsus", correct: true},{answer: "B7",correct: false},{answer: "BMaj7",correct: false},{answer: "B2",correct: false}]
     },
+    {name: "F#sus", notes: [{fret: -1, finger: "x"},{fret: -1, finger: "x"},{fret: 4,finger: 3},{fret: 4, finger: 4},{fret: 2, finger: 1},{fret: 2, finger: 1}],
+      answers: [{answer: "F#sus", correct: true},{answer: "F#2",correct: false},{answer: "F#Maj7",correct: false},{answer: "F#add9",correct: false}]
+    },
     {name: "Fsus", notes: [{fret: -1, finger: "x"},{fret: -1, finger: "x"},{fret: 3,finger: 3},{fret: 3, finger: 4},{fret: 1, finger: 1},{fret: 1, finger: 1}],
       answers: [{answer: "Fsus", correct: true},{answer: "F2",correct: false},{answer: "FMaj7",correct: false},{answer: "Fadd9",correct: false}]
     },
@@ -204,9 +208,6 @@ var questions = {
     },
     {name: "Ebsus", notes: [{fret: -1, finger: "x"},{fret: -1, finger: "x"},{fret: 1,finger: 1},{fret: 3, finger: 2},{fret: 4, finger: 3},{fret: 4, finger: 4}],
       answers: [{answer: "Ebsus", correct: true},{answer: "Eb2",correct: false},{answer: "EbMaj7",correct: false},{answer: "Eb7",correct: false}]
-    },
-    {name: "F#sus", notes: [{fret: -1, finger: "x"},{fret: -1, finger: "x"},{fret: 3,finger: 3},{fret: 3, finger: 4},{fret: 1, finger: 1},{fret: 1, finger: 1}],
-      answers: [{answer: "F#sus", correct: true},{answer: "F#2",correct: false},{answer: "F#Maj7",correct: false},{answer: "F#add9",correct: false}]
     },
     {name: "C7", notes: [{fret: -1, finger: "x"},{fret: 3, finger: 3},{fret: 2,finger: 2},{fret: 3, finger: 4},{fret: 1, finger: 1},{fret: 0, finger: 0}],
       answers: [{answer: "C7", correct: true},{answer: "Cdim",correct: false},{answer: "CMaj7",correct: false},{answer: "Caug",correct: false}]
@@ -661,10 +662,6 @@ var pointsAvailable = currDifficultySetting.points;
     gameTimer = setInterval(timer, 2000);
   }
 
-//set timer to refresh leaderboard
- setInterval(function(){
-   GAME.findLeaders("gcg",currLeaderboardVersion);
- },5000);
 //---------------------------------------------------------------------------
 
 function preload(){
