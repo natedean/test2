@@ -62,6 +62,7 @@ var newAnswers;
 var resetting = false;
 var loginWarning = false;
 var leaderboardTeaserCounter = 0;
+var leaderboardDecrementor = 1000;
 
 var questions = {
   easy: [
@@ -517,7 +518,7 @@ var questions = {
     {name: "C7#9", notes: [{fret: -1, finger: "x"},{fret: 3, finger: 2},{fret: 2,finger: 1},{fret: 3, finger: 3},{fret: 4, finger: 4},{fret: -1, finger: "x"}],
       answers: [{answer: "C7#9", correct: true},{answer: "C7#5",correct: false},{answer: "C7b9",correct: false},{answer: "Cm7b5",correct: false}]
     },
-    {name: "G7#9", notes: [{fret: 5, finger: 2},{fret: 4, finger: 1},{fret: 5,finger: 3},{fret: 5, finger: 4},{fret: -1, finger: "x"},{fret: -1, finger: "x"}],
+    {name: "G7#9", notes: [{fret: 3, finger: 2},{fret: 2, finger: 1},{fret: 3,finger: 3},{fret: 3, finger: 4},{fret: -1, finger: "x"},{fret: -1, finger: "x"}],
       answers: [{answer: "G7#9", correct: true},{answer: "G9",correct: false},{answer: "G11",correct: false},{answer: "G7b9",correct: false}]
     },
     {name: "D7#9", notes: [{fret: -1, finger: "x"},{fret: 5, finger: 2},{fret: 4,finger: 1},{fret: 5, finger: 3},{fret: 6, finger: 4},{fret: -1, finger: "x"}],
@@ -661,6 +662,17 @@ var pointsAvailable = currDifficultySetting.points;
     $('#gcgPointsAvailableDisplay').text(currDifficultySetting.points);
     gameTimer = setInterval(timer, 2000);
   }
+
+  function decrementLeaderboardTimer(){
+    GAME.findLeaders("gcg",currLeaderboardVersion);
+    leaderboardDecrementor = leaderboardDecrementor + 1000;
+    // console.log("leaderboardDecrementor = " + leaderboardDecrementor);
+    setTimeout(function(){
+      decrementLeaderboardTimer();
+    },leaderboardDecrementor);
+  }
+
+  decrementLeaderboardTimer();
 
 //---------------------------------------------------------------------------
 
