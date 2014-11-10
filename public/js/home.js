@@ -3,20 +3,25 @@ $(function(){
   var leaderboardVersions = ["nearMe","topScorers"];
   var currLeaderboardVersion;
   var currPlayerScore = 0;
-  
+  var leaderboardDecrementor = 1000;
   
   //initialize
-  var u = $('#u').text();
-
-    currLeaderboardVersion = leaderboardVersions[0];
-    $('#gtLbNearMeBtn').addClass('selected');
+  currLeaderboardVersion = leaderboardVersions[0];
+  $('#gtLbNearMeBtn').addClass('selected');
 
   GAME.masterLeaders(currLeaderboardVersion);
    
-//set timer to refresh leaderboard
- setInterval(function(){
-   GAME.masterLeaders(currLeaderboardVersion);
- },5000);
+//set decrementing timer to refresh leaderboard
+ function decrementLeaderboardTimer(){
+    GAME.masterLeaders(currLeaderboardVersion);
+    leaderboardDecrementor = leaderboardDecrementor + 1000;
+    // console.log("leaderboardDecrementor = " + leaderboardDecrementor);
+    setTimeout(function(){
+      decrementLeaderboardTimer();
+    },leaderboardDecrementor);
+  }
+
+  decrementLeaderboardTimer();
   
   
 //------------------------------------------------------------------------------------------------------
