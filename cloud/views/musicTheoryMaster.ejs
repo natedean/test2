@@ -5,11 +5,11 @@
     <% include partials/nav %>
     <div class="container main">
        <link href="/styles/musicTheoryMaster.css" rel="stylesheet" type="text/css" />
-      <div class="gameHeader">
-        <%  include partials/fb-links  %>
-        <%  include partials/musicTheoryMaster/login-links-mtm  %>
-          <p class="pull-right text-muted"><%= message %><span id="n"><%= n %></span><span id="u" style="display:none"><%= u %></span></p>  
-      </div>
+      <div id="loginSection">
+          <% include partials/fb-links %>
+          <%  include partials/musicTheoryMaster/login-links-mtm  %>
+         <p id="loginMessage" class="pull-right"><%= message %><span id="n"><%= n %></span><span id="u" style="display:none"><%= u %></span></p>
+       </div>
       <div id="mtmMain" class="text-center">
         <img src="/images/mtm/mtm_logo.png" alt="Music Theory Master Logo" style="margin-top: 40px; width: 90%;"/>
         <div id="mtmPointsAvailableContainer">

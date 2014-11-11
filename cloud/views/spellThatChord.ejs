@@ -5,11 +5,11 @@
     <% include partials/nav %>
     <div class="container main">
        <link href="/styles/spellThatChord.css" rel="stylesheet" type="text/css" />
-      <div class="gameHeader">
-        <%  include partials/fb-links  %>
-        <%  include partials/spellThatChord/login-links-stc  %>
-          <p class="pull-right text-muted"><%= message %><span id="n"><%= n %></span><span id="u" style="display:none"><%= u %></span></p>  
-      </div>
+      <div id="loginSection">
+          <% include partials/fb-links %>
+          <%  include partials/spellThatChord/login-links-stc  %>
+         <p id="loginMessage" class="pull-right"><%= message %><span id="n"><%= n %></span><span id="u" style="display:none"><%= u %></span></p>
+       </div>
       <div class="row">
         <h1 id="stcHeader" class="text-center" style="margin-bottom:20px;"><img src="/images/stc/AppIcon76x76@2x.png" alt="Spell That Chord Large Icon"> <span class="hidden-xs hidden-sm">Spell That Chord</span></h1>
       <div class="col-md-6">

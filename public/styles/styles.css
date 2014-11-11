@@ -42,6 +42,7 @@ html, body {
 
 .navbar-default{
   background-color: white;
+  margin-top: -5px;
 }
 
 .navbar .container{
@@ -55,8 +56,24 @@ html, body {
 }
 
 /*login*/
-#loginModalBtn{
-  padding: 2px 5px;
+#loginSection{
+  height: 40px;
+}
+
+#logoutModalBtn, #loginModalBtn{
+  font-size: 11px;
+  font-weight: bold;
+  padding: 3px 5px;
+}
+
+#loginMessage{
+  font-size: 12px;
+  padding: 5px;
+}
+
+.container.main .row.main{
+  margin-top: 20px;
+  border-bottom: 1px solid #e7e7e7;
 }
 
 .textured-background{
@@ -65,11 +82,8 @@ html, body {
 }
 
 .jumbotron{
-  background-color: rgba(245,245,245,.5);
-}
-
-.navbar{
-  border:none;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .fb_iframe_widget {
@@ -110,7 +124,7 @@ html, body {
 .leaderboardContainer{
   background: rgba(255,255,255,.9);
   padding: 5px;
-  max-width: 600px;
+  width: 100%;
   margin: 0 auto;
   border-radius: 5px;
   overflow: hidden;
@@ -170,6 +184,7 @@ html, body {
 and (max-width : 480px) {
   .navbar-brand{
     height: 50px;
+    width: 120px;
   }
   .navLogoImg{
     height: 50px;

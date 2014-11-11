@@ -6,11 +6,11 @@
     <div class="container main">
        <link href="/styles/guitarChordGame.css" rel="stylesheet" type="text/css" />
       <h5 id="loadingText" class="visible-xs visible-sm text-center">This game takes a few seconds to load on mobile devices.  If you are not seeing anything, just give it a second while all the graphics and sound load.  Be sure to scroll down below the game and check out the live leaderboard.</h5>
-      <div class="gameHeader">
-        <%  include partials/fb-links  %>
-        <%  include partials/guitarChordGame/login-links-gcg  %>
-          <p class="pull-right text-muted"><%= message %><span id="n"><%= n %></span><span id="u" style="display:none"><%= u %></span></p>  
-      </div>
+      <div id="loginSection">
+          <% include partials/fb-links %>
+          <%  include partials/guitarChordGame/login-links-gcg  %>
+         <p id="loginMessage" class="pull-right"><%= message %><span id="n"><%= n %></span><span id="u" style="display:none"><%= u %></span></p>
+       </div>
       <div id="gcgMain" class="text-center">
         <div id="gcgDifficultyBtnRow">
           <button id="gcgEasyBtn" class="btn btn-default selected">Easy</button>

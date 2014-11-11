@@ -6,7 +6,7 @@ exports.home = function(req,res){
                                      u: user.id});
     });
   }else{
-    res.render('home', { message: 'Welcome ', n: "Guest", u: ""});
+    res.render('home', { message: 'You are not logged in ', n: "", u: ""});
   }
 }
 
@@ -28,7 +28,7 @@ exports.spellThatChord = function(req,res){
                                    });
     });
   }else{
-    res.render('spellThatChord', { message: 'Welcome ', n: "Guest", u: "", score: 0 });
+    res.render('spellThatChord', { message: 'You are not logged in  ', n: "", u: "", score: 0 });
   }
 }
 
@@ -41,7 +41,7 @@ exports.musicTheoryMaster = function(req,res){
                                    });
     });
   }else{
-    res.render('musicTheoryMaster', { message: 'Welcome ', n: "Guest", u: "" });
+    res.render('musicTheoryMaster', { message: 'You are not logged in  ', n: "", u: "" });
   }  
 }
 
@@ -54,7 +54,7 @@ exports.guitarChordGame = function(req,res){
                                    });
     });
   }else{
-    res.render('guitarChordGame', { message: 'Welcome ', n: "Guest", u: ""});
+    res.render('guitarChordGame', { message: 'You are not logged in  ', n: "", u: ""});
   }
 }
 
