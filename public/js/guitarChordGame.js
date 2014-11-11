@@ -40,7 +40,7 @@ if (screen.width < 500){
 }
 
 var leaderboardVersions = ["nearMe","topScorers"];
-var currLeaderboardVersion;
+var currLeaderboardVersion = leaderboardVersions[0];
 var gameTimer;
 
 var game = new Phaser.Game(currGameSize.gameWidth,currGameSize.gameWidth, Phaser.CANVAS, 'gcgGame',{preload: preload, create: create, update: update});
@@ -1001,7 +1001,6 @@ $(function(){
 //initialize game
   
   var u = $('#u').text();
-  currLeaderboardVersion = leaderboardVersions[0];
   GAME.findLeaders("gcg",currLeaderboardVersion);
 
   

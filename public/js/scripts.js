@@ -49,10 +49,8 @@ var GAME = (function(){
             $('#masterLeaderboardTable').append('<td class="green scoreTd">' + item.get(currApp) + '</td>');
             $('#masterLeaderboardTable').append('<td class="green scoreTd">' + item.get("gtScore") + '</td>');
             $('#masterLeaderboardTable').append('</tr>');
-            if( app === "stc" ){
-              currPlayerStcScore = item.get("stcScore");
-              $('#stcLandscapeSheetMusicNumber').text(currPlayerStcScore);
-            } 
+            currPlayerStcScore = item.get(currApp);
+            $('#currUserScore').text(currPlayerStcScore);
          }else{
             $('#masterLeaderboardTable').append('<tr>');
             $('#masterLeaderboardTable').append('<td>' + i + '</td>');

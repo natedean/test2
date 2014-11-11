@@ -5,34 +5,12 @@
     <% include partials/nav %>
     <div class="container main">
        <link href="/styles/guitarChordGame.css" rel="stylesheet" type="text/css" />
-      <h5 id="loadingText" class="visible-xs visible-sm text-center">This game takes a few seconds to load on mobile devices.  If you are not seeing anything, just give it a second while all the graphics and sound load.  Be sure to scroll down below the game and check out the live leaderboard.</h5>
       <div id="loginSection">
           <% include partials/fb-links %>
           <%  include partials/guitarChordGame/login-links-gcg  %>
          <p id="loginMessage" class="pull-right"><%= message %><span id="n"><%= n %></span><span id="u" style="display:none"><%= u %></span></p>
        </div>
-      <div id="gcgMain" class="text-center">
-        <div id="gcgDifficultyBtnRow">
-          <button id="gcgEasyBtn" class="btn btn-default selected">Easy</button>
-          <button id="gcgMediumBtn" class="btn btn-default">Medium</button>
-          <button id="gcgHardBtn" class="btn btn-default">Hard</button>
-        </div>
-        <div id="gcgPointsAvailableContainer">
-          <p id="gcgPointsAvailableText">Points Available: <span id="gcgPointsAvailableDisplay"></span></p>
-        </div>
-        <div id="gcgFeedbackContainer">
-          <p id="gcgGuessFeedback">What chord is this?</p>
-        </div>
-        <div id="gcgAnswerContainer"></div>
-      </div>
-     
-      
-      <div id="gcgMainRow" class="row">
-      <div class="col-md-6">
-        <div id="gcgGame"></div>
-        </div><!--/col-->
-        <div id="gcgLeaderboardColumn" class="col-md-6">
-           <div id="gcgLeaderboard" class="leaderboardContainer" style="padding-bottom: 80px;">
+      <div id="gcgLeaderboard" class="leaderboardContainer">
               <h4 class="text-center">Guitar Chord Game Leaderboard</h4>
               <h5 id="leaderboardMessage" class="text-center"></h5>
               <div id="gcgLeaderboardBtnRow" class="leaderboardBtnRow"><span>Sort by: </span><div id="gcgLbTopScorersBtn" class="btn btn-sm btn-default">Top Scorers</div><div id="gcgLbNearMeBtn" class="btn btn-sm btn-default selected">Recent Players</div></div> 
@@ -49,10 +27,25 @@
         <tbody id="masterLeaderboardTable">       
         </tbody>
         </table>
-          </div><!--/#gcgLeaderboard-->
-        </div><!--/col--> 
+      </div><!--/#gcgLeaderboard-->
+      <h5 id="loadingText" class="visible-xs visible-sm text-center">This game takes a few seconds to load on mobile devices.  If you are not seeing anything, just give it a second while all the graphics and sound load.  Be sure to scroll down below the game and check out the live leaderboard.</h5>
+      <div id="gcgMainRow" class="row">
+          <div id="gcgMain" class="text-center">
+            <div id="gcgPointsAvailableContainer">
+              <p id="gcgPointsAvailableText">Points Available: <span id="gcgPointsAvailableDisplay"></span></p><p id="currUserText">Score: <span id="currUserScore">0</span></p>
+            </div>
+            <div id="gcgDifficultyBtnRow">
+              <button id="gcgEasyBtn" class="btn btn-default selected">Easy</button>
+              <button id="gcgMediumBtn" class="btn btn-default">Medium</button>
+              <button id="gcgHardBtn" class="btn btn-default">Hard</button>
+            </div>
+            <div id="gcgAnswerContainer"></div>
+            <div id="gcgFeedbackContainer">
+                <p id="gcgGuessFeedback">What chord is this?</p>
+            </div>
+          </div><!--/gcgMain-->   
+          <div id="gcgGame"></div>
       </div><!--/row-->  
-
     </div><!--/container -->
     </div>  
     <% include partials/footer %>
