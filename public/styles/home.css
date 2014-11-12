@@ -10,6 +10,12 @@
   line-height: 35px;
 }
 
+.row.gameIcons {
+  max-width: 600px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
 #topRightRow{
   padding: 0 5%;
 }
@@ -41,6 +47,14 @@
 .table{
   margin-bottom: 14px;
 }
+
+/* Smartphones (portrait) ----------- */
+@media only screen 
+and (max-width : 480px) {
+.row.gameIcons {
+  margin-bottom: 0;
+}
+}/* end media query */
 
 
 
