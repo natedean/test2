@@ -1,4 +1,5 @@
 var moment = require('moment');
+var leaderboardLimit = 20;
 
 exports.getLeaders = function(request,response){
   Parse.Cloud.useMasterKey();
@@ -11,7 +12,7 @@ exports.getLeaders = function(request,response){
     currUserQuery.first().then(function(currUser){
       query.descending("updatedAt");
       query.notEqualTo(currColumn, 0);
-      query.limit(15);
+      query.limit(leaderboardLimit);
       return query.find();
     }).then(function(results){
       results.sort(function(obj1, obj2) {
@@ -24,7 +25,7 @@ exports.getLeaders = function(request,response){
     });
   }else{
     query.greaterThan(currColumn,0);
-    query.limit(15);
+    query.limit(leaderboardLimit);
     query.descending(currColumn);
     query.find().then(function(results){
       response.success(results);
@@ -44,7 +45,7 @@ exports.getMasterLeaders = function(request,response){
       currUserQuery.first().then(function(currUser){
       query.descending("updatedAt");
       query.notEqualTo("gtScore", 0);
-      query.limit(15);
+      query.limit(leaderboardLimit);
       return query.find();
     }).then(function(results){
       results.sort(function(obj1, obj2) {
@@ -58,7 +59,7 @@ exports.getMasterLeaders = function(request,response){
   }else{
     currUserQuery.first().then(function(currUser){
     query.greaterThan("gtScore",0);
-    query.limit(15);
+    query.limit(leaderboardLimit);
     query.descending("gtScore");
     return query.find();
     }).then(function(results){

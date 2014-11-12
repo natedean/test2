@@ -49,13 +49,7 @@ h2#mtmQuestion {
 }
 
 /*leaderboard styles*/
-#mtmLeaderboard{
-  background: rgba(255,255,255,.4);
-  min-height: 400px;
-  padding: 5px;
-  max-width: 480px;
-  margin: 0 auto;
-}
+
 
 #mtmLeaderboardBtnRow{
   height: 40px; 

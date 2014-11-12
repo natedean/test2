@@ -1,9 +1,5 @@
-#gcgMain{
-  margin-top: 30px;
-}
-
 #gcgMainRow{
-  margin-top: 10px;
+  margin-top: 30px;
 }
 
 #gcgGame{
@@ -64,16 +60,13 @@
 /* Smartphones (portrait) ----------- */
 @media only screen 
 and (max-width : 480px) {
-  #gcgMain{
+  #gcgMainRow{
     margin-top: 10px;
   }
   #gcgGame{
     margin-top: 0;
     height: 250px;
   }
-  #gcgMainRow{
-  
-  } 
   .btn{
     font-size: 12px;
     padding: 4px;
