@@ -17,7 +17,7 @@
           <input class="btn btn-success" type="submit" value="Log In">
         </div>
       </form>
-      <p id="logInErrorMsg"><%= loginMessage %></p>
+      <p id="logInErrorMsg" class="errorMessage"><%= loginMessage %></p>
     
       <h2>Sign Up</h2>
       <form method="post" action="/signup">
@@ -28,7 +28,16 @@
           <input class="btn btn-success" type="submit" value="Sign Up">
         </div>
       </form>
-      <p id="signUpErrorMsg"><%= signupMessage %></p>
+      <p id="signUpErrorMsg" class="errorMessage"><%= signupMessage %></p>
+
+      <form method="post" action="/reset">
+		<h2>Forgot Password?</h2>
+        <div class="form-group">
+          <input type="email" name="email" type="email" placeholder="email"></input><br>
+          <input class="btn btn-success" type="submit" value="Reset Password">
+        </div>  
+      </form>
+      <p id="resetErrorMsg" class="errorMessage"><%= resetMessage %></p>  
       </div>  
   
  <!-- ----- END LOGIN MARKUP ------ --> 

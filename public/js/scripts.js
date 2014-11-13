@@ -20,7 +20,6 @@ window.fbAsyncInit = function() {
 
 var windowWidth = window.innerWidth;
 
-
 var GAME = (function(){
   
   return {

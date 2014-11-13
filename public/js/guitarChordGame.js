@@ -1001,9 +1001,6 @@ $(function(){
 //initialize game
   
   var u = $('#u').text();
-  GAME.findLeaders("gcg",currLeaderboardVersion);
-
-  
 
   // click handlers
    $('#gcgEasyBtn').click(function(){

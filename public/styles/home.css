@@ -13,8 +13,19 @@
 .row.gameIcons {
   max-width: 600px;
   margin: 0 auto;
+  margin-top: 20px;  
   margin-bottom: 20px;
 }
+
+.topTextContainer{
+    max-width: 800px;
+    padding: 20px;
+    margin: 0 auto;
+    font-size: 1.5em;
+ 
+}
+
+
 
 #topRightRow{
   padding: 0 5%;
@@ -48,10 +59,15 @@
   margin-bottom: 14px;
 }
 
+.bottomHomeContainer{
+    padding: 20px;
+}
+
 /* Smartphones (portrait) ----------- */
 @media only screen 
 and (max-width : 480px) {
 .row.gameIcons {
+  margin-top: 0;   
   margin-bottom: 0;
 }
 }/* end media query */

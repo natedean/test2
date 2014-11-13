@@ -30,6 +30,11 @@ html, body {
   color: brown;
 }
 
+/*google ads*/
+#gtTopAd, #gtBottomAd{
+    text-align: center;
+}
+
 .navbar-brand{
   height: 70px;
   padding-top: 0;
@@ -80,9 +85,8 @@ html, body {
   padding: 10px;
 }
 
-.jumbotron{
+.texturedPanel{
   background: url('/images/lightBlueBackground.png');
-  margin-bottom: 0;
 }
 
 .fb_iframe_widget {
@@ -103,7 +107,7 @@ html, body {
   text-align:center;
 }
 
-#signUpErrorMsg, #logInErrorMsg{
+.errorMessage{
   color: red;
 }
 

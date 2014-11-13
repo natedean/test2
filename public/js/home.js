@@ -8,9 +8,7 @@ $(function(){
   //initialize
   currLeaderboardVersion = leaderboardVersions[0];
   $('#gtLbNearMeBtn').addClass('selected');
-
-  GAME.masterLeaders(currLeaderboardVersion);
-   
+  
 //set decrementing timer to refresh leaderboard
  function decrementLeaderboardTimer(){
     GAME.masterLeaders(currLeaderboardVersion);
