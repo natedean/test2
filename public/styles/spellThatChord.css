@@ -1,5 +1,14 @@
 .container.main{
   background: url('/images/lightBlueBackground.png');
+  padding-top: 10px;
+}
+
+#stcHeader{
+  margin: 0 0 20px;
+}
+
+#stcHeader img{
+  width: 100px;
 }
 
 #stcFloorBackground{
@@ -351,6 +360,8 @@ margin-right: 50px;
 #stcLeaderboard td.scoreTd{
   padding-left: 15px;
 }
+
+
 
 
 

@@ -9,6 +9,7 @@ html, body {
 	height: auto !important; /* This line and the next line are not necessary unless you need IE6 support */
 	height: 100%;
 	margin: 0 auto -60px; /* the bottom margin is the negative value of the footer's height */
+    overflow-x: hidden;
 }
 .footer-bar, .push {
 	height: 60px; /* .push must be the same height as .footer */
@@ -185,12 +186,19 @@ html, body {
 /* Smartphones (portrait) ----------- */
 @media only screen 
 and (max-width : 480px) {
+  h1{
+    font-size: 1.2em;
+  }
   .navbar-brand{
     height: 50px;
     width: 120px;
   }
   .navLogoImg{
     height: 50px;
+  }
+/*  facebook buttons text*/
+  td._51m-.pls._51mw div {
+    display: none;
   }
   .chart{
     margin-top: 58px;

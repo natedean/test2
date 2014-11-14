@@ -22,7 +22,6 @@
     padding: 20px;
     margin: 0 auto;
     font-size: 1.5em;
- 
 }
 
 
@@ -69,6 +68,10 @@ and (max-width : 480px) {
 .row.gameIcons {
   margin-top: 0;   
   margin-bottom: 0;
+}
+.topTextContainer{
+    padding: 15px 10px;
+    font-size: 1.2em;
 }
 }/* end media query */
 
