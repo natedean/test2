@@ -362,7 +362,154 @@ margin-right: 50px;
 }
 
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
+
+/* Smartphones (portrait) ----------- */
+@media only screen 
+and (max-width : 480px) {
+  
+.container.main{
+  padding: 0;
+}
+  
+#stcFloorBackground{
+  width: 320px;
+  height: 460px;
+}
+
+#stcPiano{
+  width: 320px;
+  height: 295px;
+}
+
+#stcHowToPlay .modal-content{
+  height: 400px;
+}
+
+#stcHowToPlayImage{
+  width: 320px;
+  height: 400px;
+}
+
+#stcLeaderboard{
+  padding: 3px;
+  max-width: 320px;
+}
+
+#stcTopPianoRow{
+  height: 55px;
+  width: 320px;
+  padding: 3px 10px;
+}
+
+.stcTopPianoRowBtn{
+  width: 80px;
+  height: 50px;
+}
+  
+#stcScoreDisplayRow{
+  height: 64px;
+  width: 320px;
+  padding: 3px 10px;
+}
+  
+#stcScoreTextRowPointsText {
+  margin-left: 30px;
+}
+
+#stcScoreTextRowScoreText {
+  margin-right: 30px;
+}
+
+#stcPortraitSheetMusic{
+  width: 80px;
+  height: 64px;
+  float: left;
+}
+  
+#stcLandscapeSheetMusic{ 
+  width: 70px;
+  height: 70px;
+}
+
+.stcSheetMusicNumber{
+  line-height: 70px;
+  font-size: large;
+}
+
+#stcAnswerDisplay{
+  width: 150px;
+  height: 70px;
+}
+  
+#stcScoreTextRow {
+  height: 40px;
+  width: 300px;
+}
+  
+.stcEasyAnswerDisplayLetter {
+  width: 22%;
+  border-bottom: 3px solid white;
+  height:50px;
+}
+
+.stcMediumAnswerDisplayLetter{
+  width: 17%;
+  border-bottom: 3px solid white;
+  height:50px;
+}
+
+.stcHardAnswerDisplayLetter{
+  width: 12%;
+  border-bottom: 3px solid white;
+  height:50px;
+}
+ 
+.stcPianoKeyboardRow {
+  width: 300px;
+  height: 46px;
+}
+  
+.stcPianoKeyFirstRow, .stcPianoKeySecondRow {
+  height: 40px;
+  width: 40px;
+}
+  
+.stcPianoKeyFirstRow:active, .stcPianoKeySecondRow:active{
+  height:41px;
+}
+
+#stcFirstBtnRow, #stcSecondBtnRow {
+  height: 50px;
+  width: 320px;
+  margin: 0 auto;
+  margin-top: 15px;
+}
+  
+.stcFirstRowBtn {
+  width: 80px;
+  height: 50px;
+  margin: 10px;
+}
+  
+#stcSecondBtnRow button {
+  margin: 7px;
+  padding: 10px 15px;
+  font-size: 18px;
+}
+  
+.container.main h1{
+  font-size: 25px;
+}
+  
+.container.main h2{
+  font-size: 20px;
+}
+
+  
+
+}/* end media query */
 
 
 
