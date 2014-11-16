@@ -15,6 +15,12 @@ $(function(){
   var currLeaderboardVersion;
   var currLetterNumber = 1;
   var toneIndex = 0;
+  var tempEasyChordsFlatsArray = [];
+  var tempEasyChordsSharpsArray = [];
+  var tempMediumChordsFlatsArray = [];
+  var tempMediumChordsSharpsArray = [];
+  var tempHardChordsFlatsArray = [];
+  var tempHardChordsSharpsArray = [];
     
 var easyChordsFlats = [{chord:"C Major",spelling:"C E G",numbers:"1 3 5"},{chord:"C minor",spelling:"C Eb G",numbers:"1 b3 5"},{chord:"G minor",spelling:"G Bb D",numbers:"1 b3 5"},{chord:"D minor",spelling:"D F A",numbers:"1 b3 5"},{chord:"A minor",spelling:"A C E",numbers:"1 b3 5"},{chord:"E minor",spelling:"E G B",numbers:"1 b3 5"},{chord:"F Major",spelling:"F A C",numbers:"1 3 5"},{chord:"F minor",spelling:"F Ab C",numbers:"1 b3 5"},{chord:"Bb Major",spelling:"Bb D F",numbers:"1 3 5"},{chord:"Bb minor",spelling:"Bb Db F",numbers:"1 b3 5"},{chord:"Db Major",spelling:"Db F Ab",numbers:"1 3 5"},{chord:"Eb Major",spelling:"Eb G Bb",numbers:"1 3 5"},{chord:"Eb minor",spelling:"Eb Gb Bb",numbers:"1 b3 5"},{chord:"Ab Major",spelling:"Ab C Eb",numbers:"1 3 5"}];
 var easyChordsSharps = [{chord:"G Major",spelling:"G B D",numbers:"1 3 5"},{chord:"D Major",spelling:"D F# A",numbers:"1 3 5"},{chord:"A Major",spelling:"A C# E",numbers:"1 3 5"},{chord:"E Major",spelling:"E G# B",numbers:"1 3 5"},{chord:"B Major",spelling:"B D# F#",numbers:"1 3 5"},{chord:"F# Major",spelling:"F# A# C#",numbers:"1 3 5"},{chord:"B minor",spelling:"B D F#",numbers:"1 b3 5"},{chord:"F# minor",spelling:"F# A C#",numbers:"1 b3 5"},{chord:"C# minor",spelling:"C# E G#",numbers:"1 b3 5"}];
@@ -22,6 +28,13 @@ var mediumChordsFlats = [{chord:"C Maj7",spelling:"C E G B",numbers:"1 3 5 7"},{
 var mediumChordsSharps = [{chord:"G Maj7",spelling:"G B D F#",numbers:"1 3 5 7"},{chord:"D Maj7",spelling:"D F# A C#",numbers:"1 3 5 7"},{chord:"A Maj7",spelling:"A C# E G#",numbers:"1 3 5 7"},{chord:"E Maj7",spelling:"E G# B D#",numbers:"1 3 5 7"},{chord:"B Maj7",spelling:"B D# F# A#",numbers:"1 3 5 7"},{chord:"B min7",spelling:"B D F# A",numbers:"1 b3 5 b7"},{chord:"F# min7",spelling:"F# A C# E",numbers:"1 b3 5 b7"},{chord:"C# min7",spelling:"C# E G# B",numbers:"1 b3 5 b7"},{chord:"G7",spelling:"G B D F",numbers:"1 3 5 b7"},{chord:"D7",spelling:"D F# A C",numbers:"1 3 5 b7"},{chord:"A7",spelling:"A C# E G",numbers:"1 3 5 b7"},{chord:"E7",spelling:"E G# B D",numbers:"1 3 5 b7"},{chord:"B7",spelling:"B D# F# A",numbers:"1 3 5 b7"},{chord:"B min7b5",spelling:"B D F A",numbers:"1 b3 b5 b7"},{chord:"F# min7b5",spelling:"F# A C E",numbers:"1 b3 b5 b7"},{chord:"C# min7b5",spelling:"C# E G B",numbers:"1 b3 b5 b7"},{chord:"G# min7b5",spelling:"G# B D F#",numbers:"1 b3 b5 b7"},{chord:"G6",spelling:"G B D E",numbers:"1 3 5 6"},{chord:"A6",spelling:"A C# E F#",numbers:"1 3 5 6"},{chord:"E6",spelling:"E G# B C#",numbers:"1 3 5 6"},{chord:"G add9",spelling:"G B D A",numbers:"1 3 5 9"},{chord:"D add9",spelling:"D F# A E",numbers:"1 3 5 9"},{chord:"A add9",spelling:"A C# E B",numbers:"1 3 5 9"},{chord:"E add9",spelling:"E G# B F#",numbers:"1 3 5 9"}];
 var hardChordsFlats = [{chord:"C min9",spelling:"C Eb G Bb D",numbers:"1 b3 5 b7 9"},{chord:"D min9",spelling:"D F A C E",numbers:"1 b3 5 b7 9"},{chord:"G min9",spelling:"G Bb D F A",numbers:"1 b3 5 b7 9"},{chord:"F min9",spelling:"F Ab C Eb G",numbers:"1 b3 5 b7 9"},{chord:"F Maj9",spelling:"F A C E G",numbers:"1 3 5 7 9"},{chord:"Bb Maj9",spelling:"Bb D F A C",numbers:"1 3 5 7 9"},{chord:"Bb min9",spelling:"Bb Db F Ab C",numbers:"1 b3 5 b7 9"},{chord:"Db Maj9",spelling:"Db F Ab C Eb",numbers:"1 3 5 7 9"},{chord:"Eb Maj9",spelling:"Eb G Bb D F",numbers:"1 3 5 7 9"},{chord:"Eb min9",spelling:"Eb Gb Bb Db F",numbers:"1 b3 5 b7 9"},{chord:"Ab Maj9",spelling:"Ab C Eb G Bb",numbers:"1 3 5 7 9"},{chord:"C9",spelling:"C E G Bb D",numbers:"1 3 5 b7 9"},{chord:"F9",spelling:"F A C Eb G",numbers:"1 3 5 b7 9"},{chord:"Bb9",spelling:"Bb D F Ab C",numbers:"1 3 5 b7 9"},{chord:"Eb9",spelling:"Eb G Bb Db F",numbers:"1 3 5 b7 9"},{chord:"Ab9",spelling:"Ab C Eb Gb Bb",numbers:"1 3 5 b7 9"}];
 var hardChordsSharps = [{chord:"C Maj9",spelling:"C E G B D",numbers:"1 3 5 7 9"},{chord:"G Maj9",spelling:"G B D F# A",numbers:"1 3 5 7 9"},{chord:"D Maj9",spelling:"D F# A C# E",numbers:"1 3 5 7 9"},{chord:"A Maj9",spelling:"A C# E G# B",numbers:"1 3 5 7 9"},{chord:"E Maj9",spelling:"E G# B D# F#",numbers:"1 3 5 7 9"},{chord:"A min9",spelling:"A C E G B",numbers:"1 b3 5 b7 9"},{chord:"E min9",spelling:"E G B D F#",numbers:"1 b3 5 b7 9"},{chord:"F# min9",spelling:"F# A C# E G#",numbers:"1 b3 5 b7 9"},{chord:"C# min9",spelling:"C# E G# B D#",numbers:"1 b3 5 b7 9"},{chord:"G9",spelling:"G B D F A",numbers:"1 3 5 b7 9"},{chord:"D9",spelling:"D F# A C E",numbers:"1 3 5 b7 9"},{chord:"A9",spelling:"A C# E G B",numbers:"1 3 5 b7 9"},{chord:"E9",spelling:"E G# B D F#",numbers:"1 3 5 b7 9"},{chord:"F#9",spelling:"F# A# C# E G#",numbers:"1 3 5 b7 9"}];
+  
+tempEasyChordsFlatsArray = easyChordsFlats.slice();
+tempEasyChordsSharpsArray = easyChordsSharps.slice();
+tempMediumChordsFlatsArray = mediumChordsFlats.slice();
+tempMediumChordsSharpsArray = mediumChordsSharps.slice();
+tempHardChordsFlatsArray = hardChordsFlats.slice();
+tempHardChordsSharpsArray = hardChordsSharps.slice();
 
 // initialize game
 setNewChord();
@@ -156,43 +169,67 @@ ion.sound({
     case "easy":
         pointsAvailable = currDifficultySetting.points;
         if(sharpsOrFlats == "flats"){
-          rand = Math.floor(Math.random()*easyChordsFlats.length);
-          currChord = easyChordsFlats[rand].chord;
-          currSpelling = easyChordsFlats[rand].spelling;
-          currNumbers = easyChordsFlats[rand].numbers;
+          rand = Math.floor(Math.random()*tempEasyChordsFlatsArray.length);
+          currChord = tempEasyChordsFlatsArray[rand].chord;
+          currSpelling = tempEasyChordsFlatsArray[rand].spelling;
+          currNumbers = tempEasyChordsFlatsArray[rand].numbers;
+          tempEasyChordsFlatsArray.splice(rand,1);
+          if(tempEasyChordsFlatsArray.length === 0){
+            tempEasyChordsFlatsArray = easyChordsFlats.slice();
+          }
         }else{
-          rand = Math.floor(Math.random()*easyChordsSharps.length);
-          currChord = easyChordsSharps[rand].chord;
-          currSpelling = easyChordsSharps[rand].spelling;
-          currNumbers = easyChordsSharps[rand].numbers;
+          rand = Math.floor(Math.random()*tempEasyChordsSharpsArray.length);
+          currChord = tempEasyChordsSharpsArray[rand].chord;
+          currSpelling = tempEasyChordsSharpsArray[rand].spelling;
+          currNumbers = tempEasyChordsSharpsArray[rand].numbers;
+          tempEasyChordsSharpsArray.splice(rand,1);
+          if(tempEasyChordsSharpsArray.length === 0){
+            tempEasyChordsSharpsArray = easyChordsSharps.slice();
+          }
         }
         break;
     case "medium":
         pointsAvailable = currDifficultySetting.points;
         if(sharpsOrFlats == "flats"){
-          rand = Math.floor(Math.random()*mediumChordsFlats.length);
-          currChord = mediumChordsFlats[rand].chord;
-          currSpelling = mediumChordsFlats[rand].spelling;
-          currNumbers = mediumChordsFlats[rand].numbers;
+          rand = Math.floor(Math.random()*tempMediumChordsFlatsArray.length);
+          currChord = tempMediumChordsFlatsArray[rand].chord;
+          currSpelling = tempMediumChordsFlatsArray[rand].spelling;
+          currNumbers = tempMediumChordsFlatsArray[rand].numbers;
+          tempMediumChordsFlatsArray.splice(rand,1);
+          if(tempMediumChordsFlatsArray.length === 0){
+            tempMediumChordsFlatsArray = mediumChordsFlats.slice();
+          }
         }else{
-          rand = Math.floor(Math.random()*mediumChordsSharps.length);
-          currChord = mediumChordsSharps[rand].chord;
-          currSpelling = mediumChordsSharps[rand].spelling;
-          currNumbers = mediumChordsSharps[rand].numbers;
+          rand = Math.floor(Math.random()*tempMediumChordsSharpsArray.length);
+          currChord = tempMediumChordsSharpsArray[rand].chord;
+          currSpelling = tempMediumChordsSharpsArray[rand].spelling;
+          currNumbers = tempMediumChordsSharpsArray[rand].numbers;
+          tempMediumChordsSharpsArray.splice(rand,1);
+          if(tempMediumChordsSharpsArray.length === 0){
+            tempMediumChordsSharpsArray = mediumChordsSharps.slice();
+          }
         }
         break;
     case "hard":
         pointsAvailable = currDifficultySetting.points;
         if(sharpsOrFlats == "flats"){
-          rand = Math.floor(Math.random()*hardChordsFlats.length);
-          currChord = hardChordsFlats[rand].chord;
-          currSpelling = hardChordsFlats[rand].spelling;
-          currNumbers = hardChordsFlats[rand].numbers;
+          rand = Math.floor(Math.random()*tempHardChordsFlatsArray.length);
+          currChord = tempHardChordsFlatsArray[rand].chord;
+          currSpelling = tempHardChordsFlatsArray[rand].spelling;
+          currNumbers = tempHardChordsFlatsArray[rand].numbers;
+          tempHardChordsFlatsArray.splice(rand,1);
+          if(tempHardChordsFlatsArray.length === 0){
+            tempHardChordsFlatsArray = hardChordsFlats.slice();
+          }
         }else{
-          rand = Math.floor(Math.random()*hardChordsSharps.length);
-          currChord = hardChordsSharps[rand].chord;
-          currSpelling = hardChordsSharps[rand].spelling;
-          currNumbers = hardChordsSharps[rand].numbers;
+          rand = Math.floor(Math.random()*tempHardChordsSharpsArray.length);
+          currChord = tempHardChordsSharpsArray[rand].chord;
+          currSpelling = tempHardChordsSharpsArray[rand].spelling;
+          currNumbers = tempHardChordsSharpsArray[rand].numbers;
+          tempHardChordsSharpsArray.splice(rand,1);
+          if(tempHardChordsSharpsArray.length === 0){
+            tempHardChordsSharpsArray = hardChordsSharps.slice();
+          }
         }
         break;
     default:

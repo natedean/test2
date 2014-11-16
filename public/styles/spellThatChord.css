@@ -412,6 +412,12 @@ and (max-width : 480px) {
   height: 64px;
   width: 320px;
   padding: 3px 10px;
+  margin-top: -10px;
+}
+  
+.stcScoreText {
+  font-size: small;
+  line-height: 20px;
 }
   
 #stcScoreTextRowPointsText {
@@ -419,7 +425,7 @@ and (max-width : 480px) {
 }
 
 #stcScoreTextRowScoreText {
-  margin-right: 30px;
+  margin-right: 5px;
 }
 
 #stcPortraitSheetMusic{
@@ -435,7 +441,7 @@ and (max-width : 480px) {
 
 .stcSheetMusicNumber{
   line-height: 70px;
-  font-size: large;
+  font-size: small;
 }
 
 #stcAnswerDisplay{
@@ -449,19 +455,19 @@ and (max-width : 480px) {
 }
   
 .stcEasyAnswerDisplayLetter {
-  width: 22%;
+  width: 23%;
   border-bottom: 3px solid white;
   height:50px;
 }
 
 .stcMediumAnswerDisplayLetter{
-  width: 17%;
+  width: 18%;
   border-bottom: 3px solid white;
   height:50px;
 }
 
 .stcHardAnswerDisplayLetter{
-  width: 12%;
+  width: 14%;
   border-bottom: 3px solid white;
   height:50px;
 }
@@ -481,7 +487,7 @@ and (max-width : 480px) {
 }
 
 #stcFirstBtnRow, #stcSecondBtnRow {
-  height: 50px;
+  height: 60px;
   width: 320px;
   margin: 0 auto;
   margin-top: 15px;
