@@ -303,7 +303,7 @@ var questions = {
     {name: "Adim", notes: [{fret: -1, finger: "x"},{fret: 0, finger: 0},{fret: 1,finger: 1},{fret: 2, finger: 3},{fret: 1, finger: 2},{fret: -1, finger: "x"}],
       answers: [{answer: "Adim", correct: true},{answer: "Amin7",correct: false},{answer: "A7",correct: false},{answer: "Aaug",correct: false}]
     },
-    {name: "Edim", notes: [{fret: -1, finger: "x"},{fret: -1, finger: "x"},{fret: 2,finger: 1},{fret: 3, finger: 3},{fret: 2, finger: 2},{fret: 3, finger: 4}],
+    {name: "Edim", notes: [{fret: -1, finger: "x"},{fret: -1, finger: "x"},{fret: 2,finger: 1},{fret: 3, finger: 2},{fret: 5, finger: 4},{fret: 3, finger: 3}],
       answers: [{answer: "Edim", correct: true},{answer: "EMaj7",correct: false},{answer: "E7",correct: false},{answer: "Esus",correct: false}]
     },
     {name: "Edim", notes: [{fret: 0, finger: 0},{fret: 1, finger: 1},{fret: 2,finger: 2},{fret: 0, finger: 0},{fret: -1, finger: "x"},{fret: -1, finger: "x"}],
@@ -982,9 +982,7 @@ function setAnswers(){
           $('#c').addClass('green');
           
           currDifficultySetting.tempArray.splice(currRand,1);
-  
-          console.log("temp array length for this difficulty = " + currDifficultySetting.tempArray.length);
-
+ 
           if(currDifficultySetting.tempArray.length === 0){
             if(currDifficultySetting === settings.easy){
               currDifficultySetting.tempArray = questions.easy.slice();
