@@ -63,6 +63,9 @@ var resetting = false;
 var loginWarning = false;
 var leaderboardTeaserCounter = 0;
 var leaderboardDecrementor = 1000;
+var tempEasyArray = [];
+var tempMediumArray = [];
+var tempHardArray = [];
 
 var questions = {
   easy: [
@@ -369,7 +372,7 @@ var questions = {
   ],
   hard: [
     {name: "G7sus", notes: [{fret: 3, finger: 3},{fret: -1, finger: "x"},{fret: 0,finger: 0},{fret: 0, finger: 0},{fret: 1, finger: 1},{fret: 1, finger: 1}],
-      answers: [{answer: "G7sus", correct: true},{answer: "GMaj9",correct: false},{answer: "G11",correct: false},{answer: "G9",correct: false}]
+      answers: [{answer: "G7sus", correct: true},{answer: "GMaj9",correct: false},{answer: "G6",correct: false},{answer: "G9",correct: false}]
     },
     {name: "A7sus", notes: [{fret: -1, finger: "x"},{fret: 0, finger: 0},{fret: 2,finger: 1},{fret: 0, finger: 0},{fret: 3, finger: 3},{fret: 0, finger: 0}],
       answers: [{answer: "A7sus", correct: true},{answer: "A9",correct: false},{answer: "A6",correct: false},{answer: "Amin11",correct: false}]
@@ -684,11 +687,18 @@ var questions = {
       answers: [{answer: "Emin6", correct: true},{answer: "E9",correct: false},{answer: "Emin11",correct: false},{answer: "Em7b5",correct: false}]
     }
   ]
-  
 } // end questions
 
-var settings = [{level: questions.easy, points: 2},{level: questions.medium, points: 5},{level: questions.hard, points: 10}];
-var currDifficultySetting = settings[0];
+tempEasyArray = questions.easy.slice();
+tempMediumArray = questions.medium.slice();
+tempHardArray = questions.hard.slice();
+
+var settings = { easy: {level: questions.easy, points: 2, tempArray: tempEasyArray}, 
+                 medium: {level: questions.medium, points: 5, tempArray: tempMediumArray}, 
+                 hard: {level: questions.hard, points: 10, tempArray: tempHardArray}
+               };
+
+var currDifficultySetting = settings.easy;
 var pointsAvailable = currDifficultySetting.points;
   
 //timer stuff ------------------------------------------------------------------------------->
@@ -820,27 +830,20 @@ function update(){
 function setNewChord(){
   guitarNeck.revive();
   counter = 0;
-  prevRand = currRand;
+
   $('#gcgAnswerContainer').html("");
   resetting = true;
-  function getRand(){
-    var rand = game.rnd.integerInRange(0, currDifficultySetting.level.length-1);
-    if ( rand === prevRand ) {
-      return getRand();
-    }else{
-      return rand;
-    }
-  }
-  
+
+  currRand = game.rnd.integerInRange(0, currDifficultySetting.tempArray.length-1);
+
   if(notes){
     notes.destroy();
   }
   
   notes = game.add.group();
 
-  currRand = getRand();
-  currChord = currDifficultySetting.level[currRand];
-  
+  currChord = currDifficultySetting.tempArray[currRand];
+   
   game.time.events.repeat(100, 6, setNotes, this);
 
 //  text.setText(currChord.name); DEBUG
@@ -978,6 +981,22 @@ function setAnswers(){
           $('#gcgGuessFeedback').html("<span class='glyphicon glyphicon-ok green'></span> +" + pointsAvailable).fadeIn(500);
           $('#c').addClass('green');
           
+          currDifficultySetting.tempArray.splice(currRand,1);
+  
+          console.log("temp array length for this difficulty = " + currDifficultySetting.tempArray.length);
+
+          if(currDifficultySetting.tempArray.length === 0){
+            if(currDifficultySetting === settings.easy){
+              currDifficultySetting.tempArray = questions.easy.slice();
+            }
+            if(currDifficultySetting === settings.medium){
+              currDifficultySetting.tempArray = questions.medium.slice();
+            }
+            if(currDifficultySetting === settings.hard){
+              currDifficultySetting.tempArray = questions.hard.slice();
+            }
+          }
+          
           if(u !== ""){
             Parse.Cloud.run("add",{amount:pointsAvailable,u: u,currApp: "gcg"}).then(function(results){
               GAME.findLeaders("gcg",currLeaderboardVersion);
@@ -1037,12 +1056,12 @@ $(function(){
         if(gameTimer){
           clearInterval(gameTimer);
         }
-        currDifficultySetting = settings[0];
+        currDifficultySetting = settings.easy;
         $('#gcgEasyBtn').addClass('selected');
         $('#gcgMediumBtn, #gcgHardBtn').removeClass('selected'); 
         setNewChord();
       }else{
-        currDifficultySetting = settings[0];
+        currDifficultySetting = settings.easy;
         $('#gcgEasyBtn').addClass('selected');
         $('#gcgMediumBtn, #gcgHardBtn').removeClass('selected'); 
       }
@@ -1053,12 +1072,12 @@ $(function(){
         if(gameTimer){
           clearInterval(gameTimer);
         }
-        currDifficultySetting = settings[1];
+        currDifficultySetting = settings.medium;
         $('#gcgMediumBtn').addClass('selected');
         $('#gcgEasyBtn, #gcgHardBtn').removeClass('selected'); 
         setNewChord();
       }else{
-        currDifficultySetting = settings[1];
+        currDifficultySetting = settings.medium;
         $('#gcgMediumBtn').addClass('selected');
         $('#gcgEasyBtn, #gcgHardBtn').removeClass('selected'); 
       }  
@@ -1069,12 +1088,12 @@ $(function(){
         if(gameTimer){
           clearInterval(gameTimer);
         }
-        currDifficultySetting = settings[2];
+        currDifficultySetting = settings.hard;
         $('#gcgHardBtn').addClass('selected');
         $('#gcgEasyBtn, #gcgMediumBtn').removeClass('selected'); 
         setNewChord();
       }else{
-        currDifficultySetting = settings[2];
+        currDifficultySetting = settings.hard;
         $('#gcgHardBtn').addClass('selected');
         $('#gcgEasyBtn, #gcgMediumBtn').removeClass('selected'); 
       }  
