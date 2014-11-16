@@ -2,6 +2,8 @@ var leaderboardVersions = ["nearMe","topScorers"];
 var currLeaderboardVersion;
 var pointsAvailable = 5;
 var gameTimer;
+var questionIndex;
+var tempArray;
 
 var awesomeArray = [{question: "How many sharps in the key of C Major?", answers: [{answer: 0, correct: true},{answer: 1,correct: false},{answer: 2,correct: false},{answer: 3,correct: false}]},
                     {question: "How many sharps in the key of G Major?", answers: [{answer: 1, correct: true},{answer: 0,correct: false},{answer: 2,correct: false},{answer: 3,correct: false}]},
@@ -60,6 +62,8 @@ var awesomeArray = [{question: "How many sharps in the key of C Major?", answers
                     {question: "What is the fifth chord in the key of G Major?", answers: [{answer: "D", correct: true},{answer: "A",correct: false},{answer: "Emin",correct: false},{answer: "C",correct: false}]}
                    ];
 
+tempArray = awesomeArray.slice();
+
 $(function(){
   
   //initialize game
@@ -72,12 +76,13 @@ $(function(){
   
   
   function getNew(){
-    var newQuestion = awesomeArray[Math.floor(Math.random()*awesomeArray.length)];
+    questionIndex = Math.floor(Math.random()*tempArray.length);
+    var newQuestion = tempArray[questionIndex];
     
     $('#mtmAnswerContainer').html("");
     $('#mtmQuestion').text(newQuestion.question);
     
-    var newResults = shuffle(newQuestion.answers);     
+    var newResults = GAME.shuffle(newQuestion.answers);     
     newResults.map(function(item){
       if(item.correct){
         $('#mtmAnswerContainer').append(
@@ -97,8 +102,11 @@ $(function(){
       }
       if(e.target.id === "c"){
         var n = $('#n').text();
-        $('#mtmGuessFeedback').text("Correct! +" + pointsAvailable).fadeIn(500);
-       
+        tempArray.splice(questionIndex,1);   
+        if(tempArray.length === 0){
+          tempArray = awesomeArray.slice();
+        }  
+        $('#mtmGuessFeedback').text("Correct! +" + pointsAvailable).fadeIn(200);     
         Parse.Cloud.run("add",{amount:pointsAvailable,u: u,currApp: "mtm"}).then(function(results){
           GAME.findLeaders("mtm",currLeaderboardVersion);
           setTimeout(function(){
@@ -123,29 +131,12 @@ $(function(){
           resetTimer();
 //          $('#mtmPointsAvailableText').fadeIn(1000);
           
-        },4000);
+        },5000);
       }
     });// end click handler
 }// end getNew
   
-  function shuffle(array) {
-  var currentIndex = array.length, temporaryValue, randomIndex ;
-
-  // While there remain elements to shuffle...
-  while (0 !== currentIndex) {
-
-    // Pick a remaining element...
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-
-    // And swap it with the current element.
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-
-  return array;
-}// end shuffle
+  
   
 // click handlers
 

@@ -78,16 +78,16 @@ app.post('/login-stc', function(req, res) {
   },
   function(error) {
     // Login failed, redirect back to login form.
-    res.render('login', {loginMessage: error.message,signupMessage: ""});
+    res.render('login', {loginMessage: error.message,signupMessage: "",resetMessage: ""});
   });
 });
 
 // Clicking submit on the login form triggers this.
 app.post('/signup-stc', function(req, res) {
   if(req.body.email === ""){
-    res.render('login', {loginMessage: "",signupMessage: "You must have an email address. If you lose your password, it can be recovered via email."});
+    res.render('login', {loginMessage: "",signupMessage: "You must have an email address. If you lose your password, it can be recovered via email.",resetMessage: ""});
   }else if(req.body.username.length > 10){
-    res.render('login', {loginMessage: "",signupMessage: "Username cannot exceed 10 characters. Try a shorter one."});
+    res.render('login', {loginMessage: "",signupMessage: "Username cannot exceed 10 characters. Try a shorter one.",resetMessage: ""});
   }else{
       Parse.User.signUp(req.body.username, req.body.password, { email: req.body.email, stcScore: 0, mtmScore: 0, gcgScore: 0, gtScore: 0, ACL: new Parse.ACL() }).then(function() {
       // Login succeeded, redirect to homepage.
@@ -96,7 +96,7 @@ app.post('/signup-stc', function(req, res) {
     },
     function(error) {
       // Login failed, redirect back to login form.
-      res.render('login', {loginMessage: "",signupMessage: error.message});
+      res.render('login', {loginMessage: "",signupMessage: error.message,resetMessage: ""});
     });
   }
 });
@@ -110,16 +110,16 @@ app.post('/login-mtm', function(req, res) {
   },
   function(error) {
     // Login failed, redirect back to login form.
-    res.render('login', {loginMessage: error.message,signupMessage: ""});
+    res.render('login', {loginMessage: error.message,signupMessage: "",resetMessage: ""});
   });
 });
 
 // Clicking submit on the login form triggers this.
 app.post('/signup-mtm', function(req, res) {
   if(req.body.email === ""){
-    res.render('login', {loginMessage: "",signupMessage: "You must have an email address. If you lose your password, it can be recovered via email."});
+    res.render('login', {loginMessage: "",signupMessage: "You must have an email address. If you lose your password, it can be recovered via email.",resetMessage: ""});
   }else if(req.body.username.length > 10){
-    res.render('login', {loginMessage: "",signupMessage: "Username cannot exceed 10 characters. Try a shorter one."});
+    res.render('login', {loginMessage: "",signupMessage: "Username cannot exceed 10 characters. Try a shorter one.",resetMessage: ""});
   }else{
       Parse.User.signUp(req.body.username, req.body.password, { email: req.body.email, stcScore: 0, mtmScore: 0, gcgScore: 0, gtScore: 0, ACL: new Parse.ACL() }).then(function() {
       // Login succeeded, redirect to homepage.
@@ -128,7 +128,7 @@ app.post('/signup-mtm', function(req, res) {
     },
     function(error) {
       // Login failed, redirect back to login form.
-      res.render('login', {loginMessage: "",signupMessage: error.message});
+      res.render('login', {loginMessage: "",signupMessage: error.message,resetMessage: ""});
     });
   }
 });
@@ -142,16 +142,16 @@ app.post('/login-gcg', function(req, res) {
   },
   function(error) {
     // Login failed, redirect back to login form.
-    res.render('login', {loginMessage: error.message,signupMessage: ""});
+    res.render('login', {loginMessage: error.message,signupMessage: "",resetMessage: ""});
   });
 });
 
 // Clicking submit on the login form triggers this.
 app.post('/signup-gcg', function(req, res) {
   if(req.body.email === ""){
-    res.render('login', {loginMessage: "",signupMessage: "You must have an email address. If you lose your password, it can be recovered via email."});
+    res.render('login', {loginMessage: "",signupMessage: "You must have an email address. If you lose your password, it can be recovered via email.",resetMessage: ""});
   }else if(req.body.username.length > 10){
-    res.render('login', {loginMessage: "",signupMessage: "Username cannot exceed 10 characters. Try a shorter one."});
+    res.render('login', {loginMessage: "",signupMessage: "Username cannot exceed 10 characters. Try a shorter one.",resetMessage: ""});
   }else{
       Parse.User.signUp(req.body.username, req.body.password, { email: req.body.email, stcScore: 0, mtmScore: 0, gcgScore: 0, gtScore: 0, ACL: new Parse.ACL() }).then(function() {
       // Login succeeded, redirect to homepage.
@@ -160,7 +160,7 @@ app.post('/signup-gcg', function(req, res) {
     },
     function(error) {
       // Login failed, redirect back to login form.
-      res.render('login', {loginMessage: "",signupMessage: error.message});
+      res.render('login', {loginMessage: "",signupMessage: error.message,resetMessage: ""});
     });
   }
 });
