@@ -1,6 +1,6 @@
 $(function(){
   
-  var settings = [{level: "easy", points: 10, numLetters: 3},{level: "medium", points: 15, numLetters: 4},{level: "hard", points: 20, numLetters: 5}];
+  var settings = [{level: "easy", points: 5, numLetters: 3},{level: "medium", points: 10, numLetters: 4},{level: "hard", points: 15, numLetters: 5}];
   var leaderboardVersions = ["nearMe","topScorers"];
   
   var currDifficultySetting = settings[0]; // set initial to easy object
