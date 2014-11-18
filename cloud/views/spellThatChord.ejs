@@ -95,7 +95,7 @@
           <div id="stcLeaderboard" class="leaderboardContainer">
               <h4 class="text-center">Spell That Chord Leaderboard</h4>
               <h5 id="leaderboardMessage" class="text-center"></h5>
-              <div id="stcLeaderboardBtnRow" class="leaderboardBtnRow"><span>Sort by: </span><div id="stcLbTopScorersBtn" class="btn btn-sm btn-default">Top Scorers</div><div id="stcLbNearMeBtn" class="btn btn-sm btn-default selected">Recent Players</div></div>  
+              <div id="stcLeaderboardBtnRow" class="leaderboardBtnRow"><span>Sort by: </span><div id="stcLbTopScorersBtn" class="btn btn-sm btn-default">Top Scorers</div><div id="stcLbNearMeBtn" class="btn btn-sm btn-default selected">Recent Thinkers</div></div>  
         <table class="table">  
         <thead>  
           <tr>  
@@ -109,6 +109,11 @@
         <tbody id="masterLeaderboardTable">     
         </tbody>
         </table>
+            <% if (Parse.User.current()) { %>
+                <p class="text-center"><a href="/#gtLeaderboard">Where do I rank on the master leaderboard?</a></p>
+            <% }else{ %>
+                <p class="text-center"><a href="/#gtLeaderboard">Where is the master leaderboard?</a></p>
+            <% } %>      
           </div><!--/#stcLeaderboard-->
         </div><!--/col--> 
       </div><!--/row-->  

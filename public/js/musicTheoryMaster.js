@@ -1,6 +1,6 @@
 var leaderboardVersions = ["nearMe","topScorers"];
 var currLeaderboardVersion;
-var pointsAvailable = 5;
+var pointsAvailable = 10;
 var gameTimer;
 var questionIndex;
 var tempArray;
@@ -48,18 +48,41 @@ var awesomeArray = [{question: "How many sharps in the key of C Major?", answers
                     {question: "What notes of the major scale make up a 7 chord?", answers: [{answer: "1 3 5 b7", correct: true},{answer: "1 3 5 7",correct: false},{answer: "1 3 7 8",correct: false},{answer: "1 3 5 6",correct: false}]},
                     {question: "What notes of the major scale make up a Maj7 chord?", answers: [{answer: "1 3 5 7", correct: true},{answer: "1 3 5 b7",correct: false},{answer: "1 2 3 4",correct: false},{answer: "1 3 7 9",correct: false}]},
                     {question: "What notes of the major scale make up a min7 chord?", answers: [{answer: "1 b3 5 b7", correct: true},{answer: "1 3 5 b7",correct: false},{answer: "1 2 b3 4",correct: false},{answer: "1 b3 7 9",correct: false}]},
-                    {question: "What is the second chord in the key of A Major?", answers: [{answer: "Bmin", correct: true},{answer: "C",correct: false},{answer: "Gmin",correct: false},{answer: "D",correct: false}]},
-                    {question: "What is the second chord in the key of E Major?", answers: [{answer: "F#min", correct: true},{answer: "A",correct: false},{answer: "B",correct: false},{answer: "Dmin",correct: false}]},
+                    {question: "What is the second chord in the key of C Major?", answers: [{answer: "Dmin", correct: true},{answer: "Amin",correct: false},{answer: "Gmin",correct: false},{answer: "Emin",correct: false}]},
+                    {question: "What is the second chord in the key of D Major?", answers: [{answer: "Emin", correct: true},{answer: "Cmin",correct: false},{answer: "F#min",correct: false},{answer: "Bmin",correct: false}]},
+                    {question: "What is the second chord in the key of A Major?", answers: [{answer: "Bmin", correct: true},{answer: "Cmin",correct: false},{answer: "Gmin",correct: false},{answer: "Dmin",correct: false}]},
+                    {question: "What is the second chord in the key of E Major?", answers: [{answer: "F#min", correct: true},{answer: "Amin",correct: false},{answer: "Bmin",correct: false},{answer: "Dmin",correct: false}]},
                     {question: "What is the second chord in the key of B Major?", answers: [{answer: "C#min", correct: true},{answer: "D#",correct: false},{answer: "Emin",correct: false},{answer: "E",correct: false}]},
-                    {question: "What is the third chord in the key of C Major?", answers: [{answer: "Emin", correct: true},{answer: "F",correct: false},{answer: "Gmin",correct: false},{answer: "Amin",correct: false}]},
-                    {question: "What is the third chord in the key of G Major?", answers: [{answer: "Bmin", correct: true},{answer: "Emin",correct: false},{answer: "D",correct: false},{answer: "Amin",correct: false}]},
-                    {question: "What is the third chord in the key of A Major?", answers: [{answer: "C#min", correct: true},{answer: "C",correct: false},{answer: "Gmin",correct: false},{answer: "Emin",correct: false}]},
-                    {question: "What is the third chord in the key of E Major?", answers: [{answer: "G#min", correct: true},{answer: "G",correct: false},{answer: "Gmin",correct: false},{answer: "A",correct: false}]},
-                    {question: "What is the fourth chord in the key of C Major?", answers: [{answer: "F", correct: true},{answer: "G",correct: false},{answer: "Emin",correct: false},{answer: "Amin",correct: false}]},
+                    {question: "What is the third chord in the key of C Major?", answers: [{answer: "Emin", correct: true},{answer: "Fmin",correct: false},{answer: "Gmin",correct: false},{answer: "Amin",correct: false}]},
+                    {question: "What is the third chord in the key of G Major?", answers: [{answer: "Bmin", correct: true},{answer: "Emin",correct: false},{answer: "Dmin",correct: false},{answer: "Amin",correct: false}]},
+                    {question: "What is the third chord in the key of A Major?", answers: [{answer: "C#min", correct: true},{answer: "Cmin",correct: false},{answer: "Gmin",correct: false},{answer: "Emin",correct: false}]},
+                    {question: "What is the third chord in the key of E Major?", answers: [{answer: "G#min", correct: true},{answer: "Gmin",correct: false},{answer: "Bmin",correct: false},{answer: "Amin",correct: false}]},
+                    {question: "What is the fourth chord in the key of C Major?", answers: [{answer: "F", correct: true},{answer: "G",correct: false},{answer: "E",correct: false},{answer: "A",correct: false}]},
                     {question: "What is the fourth chord in the key of G Major?", answers: [{answer: "C", correct: true},{answer: "D",correct: false},{answer: "Emin",correct: false},{answer: "A",correct: false}]},
-                    {question: "What is the fourth chord in the key of A Major?", answers: [{answer: "D", correct: true},{answer: "E",correct: false},{answer: "F#min",correct: false},{answer: "B",correct: false}]},
-                    {question: "What is the fifth chord in the key of C Major?", answers: [{answer: "G", correct: true},{answer: "E",correct: false},{answer: "F#min",correct: false},{answer: "F",correct: false}]},
-                    {question: "What is the fifth chord in the key of G Major?", answers: [{answer: "D", correct: true},{answer: "A",correct: false},{answer: "Emin",correct: false},{answer: "C",correct: false}]}
+                    {question: "What is the fourth chord in the key of A Major?", answers: [{answer: "D", correct: true},{answer: "E",correct: false},{answer: "F#",correct: false},{answer: "B",correct: false}]},
+                    {question: "What is the fifth chord in the key of C Major?", answers: [{answer: "G", correct: true},{answer: "E",correct: false},{answer: "F",correct: false},{answer: "A",correct: false}]},
+                    {question: "What is the fifth chord in the key of G Major?", answers: [{answer: "D", correct: true},{answer: "A",correct: false},{answer: "E",correct: false},{answer: "C",correct: false}]},
+                    {question: "What is the fifth chord in the key of D Major?", answers: [{answer: "A", correct: true},{answer: "G",correct: false},{answer: "E",correct: false},{answer: "C",correct: false}]},
+                    {question: "What is the fifth chord in the key of A Major?", answers: [{answer: "E", correct: true},{answer: "G",correct: false},{answer: "D",correct: false},{answer: "F#",correct: false}]},
+                    {question: "What is the fifth chord in the key of B Major?", answers: [{answer: "F#", correct: true},{answer: "A",correct: false},{answer: "E",correct: false},{answer: "D#",correct: false}]},
+                    {question: "What is the fifth chord in the key of F Major?", answers: [{answer: "C", correct: true},{answer: "Bb",correct: false},{answer: "D",correct: false},{answer: "A",correct: false}]},
+                    {question: "What is the fifth chord in the key of Bb Major?", answers: [{answer: "F", correct: true},{answer: "Eb",correct: false},{answer: "E",correct: false},{answer: "C",correct: false}]},
+                    {question: "What is relative minor of C Major?", answers: [{answer: "Amin", correct: true},{answer: "Bmin",correct: false},{answer: "Emin",correct: false},{answer: "Fmin",correct: false}]},
+                    {question: "What is relative minor of G Major?", answers: [{answer: "Emin", correct: true},{answer: "Bmin",correct: false},{answer: "Amin",correct: false},{answer: "Fmin",correct: false}]},
+                    {question: "What is relative minor of D Major?", answers: [{answer: "Bmin", correct: true},{answer: "Amin",correct: false},{answer: "Emin",correct: false},{answer: "Fmin",correct: false}]},
+                    {question: "What is relative minor of A Major?", answers: [{answer: "F#min", correct: true},{answer: "Bmin",correct: false},{answer: "Emin",correct: false},{answer: "C#min",correct: false}]},
+                    {question: "What is relative minor of E Major?", answers: [{answer: "C#min", correct: true},{answer: "Bmin",correct: false},{answer: "F#min",correct: false},{answer: "G#min",correct: false}]},
+                    {question: "What is relative minor of B Major?", answers: [{answer: "G#min", correct: true},{answer: "Emin",correct: false},{answer: "F#min",correct: false},{answer: "Amin",correct: false}]},
+                    {question: "What is relative minor of E Major?", answers: [{answer: "C#min", correct: true},{answer: "Bmin",correct: false},{answer: "F#min",correct: false},{answer: "G#min",correct: false}]},
+                    {question: "What is relative minor of F# Major?", answers: [{answer: "D#min", correct: true},{answer: "Bmin",correct: false},{answer: "C#min",correct: false},{answer: "G#min",correct: false}]},
+                    {question: "What is relative minor of C# Major?", answers: [{answer: "A#min", correct: true},{answer: "D#min",correct: false},{answer: "F#min",correct: false},{answer: "G#min",correct: false}]},
+                    {question: "What is relative minor of F Major?", answers: [{answer: "Dmin", correct: true},{answer: "Bmin",correct: false},{answer: "Gmin",correct: false},{answer: "Amin",correct: false}]},
+                    {question: "What is relative minor of Bb Major?", answers: [{answer: "Gmin", correct: true},{answer: "Bmin",correct: false},{answer: "Cmin",correct: false},{answer: "Amin",correct: false}]},
+                    {question: "What is relative minor of Eb Major?", answers: [{answer: "Cmin", correct: true},{answer: "Fmin",correct: false},{answer: "Gmin",correct: false},{answer: "Amin",correct: false}]},
+                    {question: "What is relative minor of Ab Major?", answers: [{answer: "Fmin", correct: true},{answer: "Bbmin",correct: false},{answer: "Gmin",correct: false},{answer: "Amin",correct: false}]},
+                    {question: "What is relative minor of Db Major?", answers: [{answer: "Bbmin", correct: true},{answer: "Fmin",correct: false},{answer: "Gmin",correct: false},{answer: "Ebmin",correct: false}]},
+                    {question: "What is relative minor of Gb Major?", answers: [{answer: "Ebmin", correct: true},{answer: "Fmin",correct: false},{answer: "Gmin",correct: false},{answer: "Abmin",correct: false}]},
+                    {question: "What is relative minor of Cb Major?", answers: [{answer: "Abmin", correct: true},{answer: "Dbmin",correct: false},{answer: "Ebmin",correct: false},{answer: "Amin",correct: false}]}
                    ];
 
 tempArray = awesomeArray.slice();
@@ -172,7 +195,7 @@ $(function(){
     if(gameTimer){
       clearInterval(gameTimer);
     }
-    pointsAvailable = 5;
+    pointsAvailable = 10;
     $('#mtmPointsAvailableDisplay').text(pointsAvailable);
     gameTimer = setInterval(timer, 2000);
   }

@@ -15,7 +15,7 @@
       <div id="gcgLeaderboard" class="leaderboardContainer">
               <h4 class="text-center">Guitar Chord Game Leaderboard</h4>
               <h5 id="leaderboardMessage" class="text-center"></h5>
-              <div id="gcgLeaderboardBtnRow" class="leaderboardBtnRow"><span>Sort by: </span><div id="gcgLbTopScorersBtn" class="btn btn-sm btn-default">Top Scorers</div><div id="gcgLbNearMeBtn" class="btn btn-sm btn-default selected">Recent Players</div></div> 
+              <div id="gcgLeaderboardBtnRow" class="leaderboardBtnRow"><span>Sort by: </span><div id="gcgLbTopScorersBtn" class="btn btn-sm btn-default">Top Scorers</div><div id="gcgLbNearMeBtn" class="btn btn-sm btn-default selected">Recent Thinkers</div></div> 
         <table class="table">  
         <thead>  
           <tr>  
@@ -29,6 +29,11 @@
         <tbody id="masterLeaderboardTable">       
         </tbody>
         </table>
+            <% if (Parse.User.current()) { %>
+                <p class="text-center"><a href="/#gtLeaderboard">Where do I rank on the master leaderboard?</a></p>
+            <% }else{ %>
+                <p class="text-center"><a href="/#gtLeaderboard">Where is the master leaderboard?</a></p>
+            <% } %>
       </div><!--/#gcgLeaderboard-->
       </div><!--/col-->
       <div class="col-lg-6 col-lg-pull-6">         
