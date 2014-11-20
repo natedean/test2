@@ -2,8 +2,8 @@ var gameSizes = {
   mobile: {
     gameWidth: 250,
     gameHeight: 250,
-    fretsHeight: [25,53,85,115,145,175,205,225,250],
-    fretsWidth: [3,38,76,116,154,191],
+    fretsHeight: [15,43,75,105,135,165,195,215,240],
+    fretsWidth: [15,50,88,128,166,203],
     neckImgScale: .15,
     nonFingerImgScale: .3,
     fingerImgScale: .2,
@@ -17,15 +17,15 @@ var gameSizes = {
   regular: {
     gameWidth: 500,
     gameHeight: 500,
-    fretsHeight: [0,57,120,180,243,305,364,400,450],
-    fretsWidth: [10,76,156,232,308,382],
+    fretsHeight: [30,87,150,210,273,335,394,430,480],
+    fretsWidth: [40,106,186,262,338,412],
     neckImgScale: .3,
     nonFingerImgScale: .6,
     fingerImgScale: .4,
     wrongNeckImgScale: .15,
-    wrongFretsHeight: [77,104,135,165,195,230,260,290,320],
-    wrongFretsWidthOne: [6,41,75,113,152,188],
-    wrongFretsWidthTwo: [253,289,327,365,404,440],
+    wrongFretsHeight: [107,134,165,195,225,255,290,325,350],
+    wrongFretsWidthOne: [14,49,88,125,162,198],
+    wrongFretsWidthTwo: [263,299,337,375,414,450],
     wrongFingerImgScale: .2,
     wrongNonFingerImgScale: .3
   }
@@ -752,7 +752,12 @@ function create(){
   
   game.stage.backgroundColor = '#ffffff';
   
-  guitarNeck = game.add.sprite(0, 50, 'guitarNeck');
+  if(screen.width < 500){
+    guitarNeck = game.add.sprite(12, 40, 'guitarNeck');
+  }else{
+    guitarNeck = game.add.sprite(30, 80, 'guitarNeck');
+  }
+  
   guitarNeck.scale.set(currGameSize.neckImgScale);
   
   guitarTones = game.add.audio('guitarTones');
@@ -863,9 +868,9 @@ function setWrongAnswerAnimation(guess){
     notes.destroy();
   }
   
-  wrongGuitarNeckOne = game.add.sprite(0, 100, 'guitarNeck');
+  wrongGuitarNeckOne = game.add.sprite(10, 130, 'guitarNeck');
   wrongGuitarNeckOne.scale.set(currGameSize.wrongNeckImgScale);
-  wrongGuitarNeckTwo = game.add.sprite(250, 100, 'guitarNeck');
+  wrongGuitarNeckTwo = game.add.sprite(260, 130, 'guitarNeck');
   wrongGuitarNeckTwo.scale.set(currGameSize.wrongNeckImgScale);
   
   notes = game.add.group();
@@ -951,11 +956,11 @@ function setAnswers(){
     newAnswers.map(function(item){
       if(item.correct){
         $('#gcgAnswerContainer').append(
-          '<div id="c" class="btn btn-default answer">' + item.answer + '</div>'
+          '<div id="c" class="btn btn-default btn-lg answer">' + item.answer + '</div>'
         );
       }else{
         $('#gcgAnswerContainer').append(
-          '<div class="btn btn-default answer">' + item.answer + '</div>'
+          '<div class="btn btn-default btn-lg answer">' + item.answer + '</div>'
         );   
       } 
     });// end map
@@ -1022,7 +1027,7 @@ function setAnswers(){
           setTimeout(function(){
              // GAME.findLeaders("gcg",currLeaderboardVersion);
             
-            $('#gcgGuessFeedback').html('<div class="btn btn-default">Click to Move On</div>').fadeIn(500);
+            $('#gcgGuessFeedback').html('<div class="btn btn-lg btn-success">Click to Move On</div>').fadeIn(500);
             $('#gcgGuessFeedback').click(function(){
               wrongGuitarNeckOne.kill();
               wrongGuitarNeckTwo.kill();

@@ -1,5 +1,4 @@
-var moment = require('moment');
-var leaderboardLimit = 20;
+var leaderboardLimit = 25;
 
 exports.getLeaders = function(request,response){
   Parse.Cloud.useMasterKey();

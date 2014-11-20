@@ -11,7 +11,25 @@
          <p id="loginMessage" class="pull-right"><%= message %><span id="n"><%= n %></span><span id="u" style="display:none"><%= u %></span></p>
        </div>
       <div id="gcgMainRow" class="row">
-      <div class="col-lg-6 col-lg-push-6">
+      <div class="col-lg-6">         
+      <h5 id="loadingText" class="visible-xs visible-sm text-center">This game takes a few seconds to load on mobile devices.  Hang around, it's worth it!<br>Remember to sign up with your twitter handle and I'll tweet you if you make it to the top of the leaderboard.</h5>  
+      <div id="gcgMain" class="text-center">
+        <div id="gcgFeedbackContainer" class="text-center">
+            <p id="gcgGuessFeedback">What chord is this?</p> 
+        </div>
+      <div id="gcgAnswerContainer"></div>
+      <div id="gcgGame"></div>
+        <div id="gcgPointsAvailableContainer">
+          <p id="gcgPointsAvailableText">Points Available: <span id="gcgPointsAvailableDisplay"></span></p><p id="currUserText">Score: <span id="currUserScore">0</span></p>
+        </div>
+        <div id="gcgDifficultyBtnRow">
+          <button id="gcgEasyBtn" class="btn btn-default btn-lg selected">Easy</button>
+          <button id="gcgMediumBtn" class="btn btn-default btn-lg">Medium</button>
+          <button id="gcgHardBtn" class="btn btn-default btn-lg">Hard</button>
+        </div>
+      </div><!--/gcgMain--> 
+    </div><!--/col-->
+        <div class="col-lg-6">
       <div id="gcgLeaderboard" class="leaderboardContainer">
               <h4 class="text-center">Guitar Chord Game Leaderboard</h4>
               <h5 id="leaderboardMessage" class="text-center"></h5>
@@ -35,25 +53,7 @@
                 <p class="text-center"><a href="/#gtLeaderboard">Where is the master leaderboard?</a></p>
             <% } %>
       </div><!--/#gcgLeaderboard-->
-      </div><!--/col-->
-      <div class="col-lg-6 col-lg-pull-6">         
-      <h5 id="loadingText" class="visible-xs visible-sm text-center">Game loading...<br>Remember to sign up with your twitter handle and I'll tweet you if you make it to the top of the leaderboard.</h5>  
-          <div id="gcgMain" class="text-center">
-            <div id="gcgPointsAvailableContainer">
-              <p id="gcgPointsAvailableText">Points Available: <span id="gcgPointsAvailableDisplay"></span></p><p id="currUserText">Score: <span id="currUserScore">0</span></p>
-            </div>
-            <div id="gcgDifficultyBtnRow">
-              <button id="gcgEasyBtn" class="btn btn-default selected">Easy</button>
-              <button id="gcgMediumBtn" class="btn btn-default">Medium</button>
-              <button id="gcgHardBtn" class="btn btn-default">Hard</button>
-            </div>
-            <div id="gcgAnswerContainer"></div>
-            <div id="gcgFeedbackContainer">
-                <p id="gcgGuessFeedback">What chord is this?</p>
-            </div>
-          </div><!--/gcgMain-->   
-          <div id="gcgGame"></div>
-        </div><!--/col--> 
+      </div><!--/col-->  
       </div><!--/row-->  
     </div><!--/container -->  
     <% include partials/footer %>

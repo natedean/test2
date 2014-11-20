@@ -163,10 +163,9 @@ html, body {
 }
 
 .chart div {
-  background-color: steelblue;
+  background-color: rgba(70, 130, 180, .5);;
   text-align: left;
   margin: 2px;
-  opacity: .5;
   height: 18px;
 }
 

@@ -1,5 +1,4 @@
 require('cloud/app.js');
-var moment = require('moment');
 
 var leaderboardFunctions = require('cloud/leaderboardFunctions.js');
 
@@ -22,7 +21,6 @@ Parse.Cloud.define("add", function(request, response){
   query.first().then(function(currentUser){
     currentUser.increment(currColumn, request.params.amount);
     currentUser.increment('gtScore', request.params.amount);
-    currentUser.set('lastScoreTime', moment().format('MMMM Do YYYY'));
     return currentUser.save(); 
   }).then(function(results){
     response.success(results);
