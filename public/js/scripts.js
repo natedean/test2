@@ -20,6 +20,10 @@ window.fbAsyncInit = function() {
 
 var windowWidth = window.innerWidth;
 
+window.addEventListener('load', function() {
+    FastClick.attach(document.body);
+}, false);
+
 var GAME = (function(){
   
   return {

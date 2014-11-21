@@ -9,7 +9,7 @@ var gameSizes = {
     fingerImgScale: .2,
     wrongNeckImgScale: .15,
     wrongFretsHeight: [77,104,135,165,195,230,260,290,320],
-    wrongFretsWidthOne: [6,41,75,113,152,188],
+    wrongFretsWidthOne: [11,46,86,126,163,198],
     wrongFretsWidthTwo: [253,289,327,365,404,440],
     wrongFingerImgScale: .2,
     wrongNonFingerImgScale: .3
@@ -868,7 +868,11 @@ function setWrongAnswerAnimation(guess){
     notes.destroy();
   }
   
-  wrongGuitarNeckOne = game.add.sprite(10, 130, 'guitarNeck');
+  if(screen.width < 500){
+    wrongGuitarNeckOne = game.add.sprite(10, 100, 'guitarNeck');
+  }else{
+    wrongGuitarNeckOne = game.add.sprite(10, 130, 'guitarNeck');
+  }
   wrongGuitarNeckOne.scale.set(currGameSize.wrongNeckImgScale);
   wrongGuitarNeckTwo = game.add.sprite(260, 130, 'guitarNeck');
   wrongGuitarNeckTwo.scale.set(currGameSize.wrongNeckImgScale);
