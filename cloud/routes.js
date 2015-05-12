@@ -67,3 +67,7 @@ exports.logout = function(req,res){
   res.redirect('/');
 }
 
+exports.test = function(req,res){
+  res.render('test');
+}
+
