@@ -1,37 +1,56 @@
-var gulp = require('gulp'),
-  gutil = require('gulp-util'),
-  uglify = require('gulp-uglify'),
-  concat = require('gulp-concat'),
-  notify = require('gulp-notify'),
-  jshint = require('gulp-jshint');
+var gulp = require('gulp');
+var concat = require('gulp-concat');
+var uglify = require('gulp-uglify');
+var imagemin = require('gulp-imagemin');
+var sourcemaps = require('gulp-sourcemaps');
+var rename = require('gulp-rename');
+var del = require('del');
 
+var paths = {
+  scripts: ['source/js/**/*.js', '!source/js/vendor/**/*.js'],
+  images: 'client/img/**/*'
+};
 
-gulp.task('default', ['watch']);
+var currDevPage = 'test';
 
-// configure the jshint task
-gulp.task('jshint', function() {
-  return gulp.src(['source/js/**/*.js','!source/js/vendor/**/*.js'])
-    .pipe(jshint())
-    .pipe(jshint.reporter('jshint-stylish'));
+ //Not all tasks need to use streams
+ //A gulpfile is just another node program and you can use all packages available on npm
+gulp.task('cleanDevPage', function(cb) {
+  // You can use multiple globbing patterns as you would with `gulp.src`
+  del(['cloud/views/' + currDevPage + '.ejs'], cb);
 });
 
-// uglify task
-gulp.task('js', function() {
-  // main app js file
-  gulp.src(['source/js/**/*.js','!source/js/vendor/**/*.js'])
-    .pipe(uglify())
-    .pipe(concat("app.min.js"))
-    .pipe(gulp.dest('./public/js/'));
-
-  // create 1 vendor.js file from all vendor plugin code
-  gulp.src('./source/js/vendor/**/*.js')
-    .pipe(uglify())
-    .pipe(concat("vendor.min.js"))
-    .pipe(gulp.dest('./public/js'))
-    .pipe( notify({ message: "Javascript is now ugly!"}) );
+gulp.task('copyDevPage', ['cleanDevPage'], function(){
+  return gulp.src('./index.html')
+    .pipe(rename(currDevPage + '.ejs'))
+    .pipe(gulp.dest('cloud/views/'));
 });
 
-// configure which files to watch and what tasks to use on file changes
+gulp.task('scripts', function() {
+  // Minify and copy all JavaScript (except vendor scripts)
+  // with sourcemaps all the way down
+  return gulp.src(paths.scripts)
+    .pipe(sourcemaps.init())
+    .pipe(uglify())
+    .pipe(concat('app.min.js'))
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest('public/js'));
+});
+
+// Copy all static images
+gulp.task('images', ['clean'], function() {
+  return gulp.src(paths.images)
+    // Pass in options to the task
+    .pipe(imagemin({optimizationLevel: 5}))
+    .pipe(gulp.dest('build/img'));
+});
+
+// Rerun the task when a file changes
 gulp.task('watch', function() {
-  gulp.watch('source/js/**/*.js', ['jshint','js']);
+  gulp.watch('./index.html', ['copyDevPage']);
+  gulp.watch(paths.scripts, ['scripts']);
+  gulp.watch(paths.images, ['images']);
 });
+
+// The default task (called when you run `gulp` from cli)
+gulp.task('default', ['watch', 'scripts', 'copyDevPage']);
