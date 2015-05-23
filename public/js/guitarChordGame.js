@@ -1045,8 +1045,6 @@ function setAnswers(){
 $(function(){
   
 //initialize game
-  
-  var u = $('#u').text();
 
   // click handlers
    $('#gcgEasyBtn').click(function(){
