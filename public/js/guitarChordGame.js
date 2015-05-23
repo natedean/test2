@@ -976,15 +976,6 @@ function setAnswers(){
         resetting = true;
         var u = $('#u').text();
         var n = $('#n').text();
-
-        if (u === ""){
-          if (!loginWarning){
-            loginWarning = true;
-            setNewChord();
-            return $("#loginModal").modal("show");
-          }
-          
-        }  
         
         if(e.target.id === "c"){ //correct answer
           $('#gcgGuessFeedback').html("<span class='glyphicon glyphicon-ok green'></span> +" + pointsAvailable).fadeIn(500);

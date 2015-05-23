@@ -5,11 +5,11 @@
     <% include partials/nav %>
     <div class="container main">
        <link href="/styles/guitarChordGame.css" rel="stylesheet" type="text/css" />
-      <div id="loginSection">
-          <% include partials/fb-links %>
-          <%  include partials/guitarChordGame/login-links-gcg  %>
-         <p id="loginMessage" class="pull-right"><%= message %><span id="n"><%= n %></span><span id="u" style="display:none"><%= u %></span></p>
-       </div>
+
+      <div style="display: none;">
+        <span id="n"><%= n %></span><span id="u" style="display:none"><%= u %></span>
+      </div>
+
       <div id="gcgMainRow" class="row">
       <div class="col-lg-6">         
       <h5 id="loadingText" class="visible-xs visible-sm text-center">This game takes a few seconds to load on mobile devices.  Hang around, it's worth it!<br>Remember to sign up with your twitter handle and I'll tweet you if you make it to the top of the leaderboard.</h5>  

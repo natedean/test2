@@ -8,6 +8,10 @@ var del = require('del');
 
 var paths = {
   scripts: ['source/js/**/*.js', '!source/js/vendor/**/*.js'],
+  sharedScripts: ['node_modules/jquery/dist/jquery.min.js',
+                  'node_modules/bootstrap/dist/js/bootstrap.min.js',
+                  'node_modules/underscore/underscore-min.js',
+                  'source/js/vendor/fastclick.js'],
   images: 'client/img/**/*'
 };
 
@@ -35,6 +39,22 @@ gulp.task('scripts', function() {
     .pipe(concat('app.min.js'))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('public/js'));
+});
+
+gulp.task('concatSharedScripts', function() {
+  // Minify and copy all JavaScript (except vendor scripts)
+  // with sourcemaps all the way down
+  return gulp.src(paths.sharedScripts)
+    .pipe(uglify())
+    .pipe(concat('sharedScripts.min.js'))
+    .pipe(gulp.dest('public/js'));
+});
+
+gulp.task('concatMainFile', function(){
+  return gulp.src('source/js/scripts.js')
+    .pipe(uglify())
+    .pipe(concat('scripts.min.js'))
+    .pipe(gulp.dest('public/js'))
 });
 
 // Copy all static images

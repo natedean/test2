@@ -5,11 +5,6 @@
     <% include partials/nav %>
     <link href="/styles/home.css" rel="stylesheet" type="text/css" />
      <div class="container main">
-       <div id="loginSection">
-          <% include partials/fb-links %>
-          <% include partials/login-links %>
-         <p id="loginMessage" class="pull-right"><%= message %><span id="n"><%= n %></span><span id="u" style="display:none"><%= u %></span></p>
-       </div>
             <h1 class="text-center">Guitar and Music Theory Games</h1>
             <div class="row gameIcons">
               <div class="col-xs-4 text-center">
@@ -67,18 +62,12 @@
        </div><!--/row-->
         <div class="row texturedPanel">
         <div class="container bottomHomeContainer">
-        <div class="col-sm-6 col-md-7">
-        <h3>Here's what I think:</h3>
+        <div class="col-sm-12">
+        <h3 class="text-center">Here's what I think:</h3>
         <p>There is a serious lack of cool web 3.0 tools for musicians.  What does that mean?  Stuff like live data, interactivity, mobile device compatibility, and great looking design.  Why?  Well, probably because music education is not a super lucrative market, or maybe just because most musicians are not also programmers.</p>
-        <h3>GuitarThinker to the rescue!</h3>
+        <h3 class="text-center">GuitarThinker to the rescue!</h3>
         <p>This site will be a fun place to visit, learn, come back and see what's new.  GuitarThinker will be a place to compete with yourself and others, because competetion motivates us.</p>
         </div><!--/col-->
-        <div class="col-sm-6 col-md-5">
-            <div id="twitterContainer" class="text-center">
-            <a class="twitter-timeline" href="https://twitter.com/GuitarThinker" data-widget-id="530401530214498304">Tweets by @GuitarThinker</a>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-            </div>  
-       </div><!--/col-->
         </div><!--/container -->    
         </div><!--/row-->  
     <% include partials/footer %>
