@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
-var imagemin = require('gulp-imagemin');
+//var imagemin = require('gulp-imagemin');
 var sourcemaps = require('gulp-sourcemaps');
 var rename = require('gulp-rename');
 var del = require('del');
@@ -58,12 +58,12 @@ gulp.task('concatMainFile', function(){
 });
 
 // Copy all static images
-gulp.task('images', ['clean'], function() {
-  return gulp.src(paths.images)
-    // Pass in options to the task
-    .pipe(imagemin({optimizationLevel: 5}))
-    .pipe(gulp.dest('build/img'));
-});
+//gulp.task('images', ['clean'], function() {
+//  return gulp.src(paths.images)
+//    // Pass in options to the task
+//    .pipe(imagemin({optimizationLevel: 5}))
+//    .pipe(gulp.dest('build/img'));
+//});
 
 // Rerun the task when a file changes
 gulp.task('watch', function() {
