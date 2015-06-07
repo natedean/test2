@@ -1,10 +1,10 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
-//var imagemin = require('gulp-imagemin');
 var sourcemaps = require('gulp-sourcemaps');
 var rename = require('gulp-rename');
 var del = require('del');
+var run = require('gulp-run');
 
 var paths = {
   scripts: ['source/js/**/*.js', '!source/js/vendor/**/*.js'],
@@ -57,13 +57,6 @@ gulp.task('concatMainFile', function(){
     .pipe(gulp.dest('public/js'))
 });
 
-// Copy all static images
-//gulp.task('images', ['clean'], function() {
-//  return gulp.src(paths.images)
-//    // Pass in options to the task
-//    .pipe(imagemin({optimizationLevel: 5}))
-//    .pipe(gulp.dest('build/img'));
-//});
 
 // Rerun the task when a file changes
 gulp.task('watch', function() {
@@ -72,5 +65,10 @@ gulp.task('watch', function() {
   gulp.watch(paths.images, ['images']);
 });
 
+gulp.task('test', function(){
+  run('node sayHi.js').exec();
+  run('node sayHi.js').exec();
+});
+
 // The default task (called when you run `gulp` from cli)
-gulp.task('default', ['watch', 'scripts', 'copyDevPage']);
+gulp.task('default', ['watch', 'scripts', 'copyDevPage', 'test']);
