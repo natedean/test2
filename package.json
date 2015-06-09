@@ -39,6 +39,7 @@
     "dependencies": {
       "angular": "github:angular/bower-angular@^1.4.0",
       "bootstrap": "github:twbs/bootstrap@^3.3.4",
+      "css": "github:systemjs/plugin-css@^0.1.12",
       "lodash": "npm:lodash@^3.9.3"
     }
   }
