@@ -2,11 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Testing!</title>
+    <title>Testing JSPM!</title>
+    <link rel="stylesheet" href="./public/styles/test.css"/>
 </head>
 <body>
-<h1 style="text-align: center">This IS horrific! Whatever though, it's a start.</h1>
-<script src="./public/js/vendor.min.js"></script>
-<script src="./public/js/app.min.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Special+Elite' rel='stylesheet' type='text/css'>
+<div ng-app="myApp">
+    <div ng-controller="MainController as vm">
+        <h3 class="text-center">What Kind Of Questions Do You Want?</h3>
+        <div class="categoryButtonsContainer">
+            <button
+              ng-repeat="category in vm.categories"
+              class="btn btn-lg btn-default categoryBtn"
+              ng-class="{'categoryBtn--selected': vm.selectedCategories.indexOf(category) >= 0}"
+              ng-click="vm.selectCategory($event)">
+                {{ ::category }}
+            </button>
+        </div>
+        <div class="gameContainer">
+            <div class="questionTextContainer">
+      <span class="questionText">
+      {{ vm.question.question }}
+      </span>
+            </div>
+        </div>
+    </div><!-- Main Controller -->
+</div>
+
+<!-- DEV MODE -->
+<script src="jspm_packages/system.js"></script>
+<script src="config.js"></script>
+<script>
+    System.import('lib/main')
+</script>
 </body>
 </html>

@@ -1,0 +1,48 @@
+body {
+    font-family: 'Special Elite', serif;
+    background-color: tan;
+}
+
+.gameContainer {
+    text-align: center;
+    position: relative;
+    width: 600px;
+    height: 430px;
+    background: url("https://www.guitarthinker.com/images/mtm/background.png") no-repeat;
+    margin: 3em auto;
+}
+
+.questionTextContainer {
+    position: relative;
+    margin: 0 auto;
+    width: 300px;
+    height: 140px;
+    font-size: 1.6em;
+    top: 90px;
+}
+
+.questionText {
+    position: relative;
+    display: block;
+    top: 50%;
+    transform: translateY(-50%);
+    color: red !important;
+}
+
+.categoryButtonsContainer {
+    text-align: center;
+}
+
+.categoryBtn {
+    margin: 0 3px;
+}
+
+.categoryBtn--selected {
+    background-color: green;
+}
+
+.categoryBtn--selected:hover,
+.categoryBtn--selected:active,
+.categoryBtn--selected:focus {
+    background-color: lightgreen;
+}

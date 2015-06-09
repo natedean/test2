@@ -35,6 +35,11 @@
   "jspm": {
     "directories": {
       "lib": "lib"
+    },
+    "dependencies": {
+      "angular": "github:angular/bower-angular@^1.4.0",
+      "bootstrap": "github:twbs/bootstrap@^3.3.4",
+      "lodash": "npm:lodash@^3.9.3"
     }
   }
 }
