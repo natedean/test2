@@ -11,6 +11,9 @@ System.config({
       "react",
       "react",
       "react",
+      "react",
+      "react",
+      "react",
       "react"
     ],
     "optional": [
