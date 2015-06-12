@@ -7,7 +7,12 @@ System.config({
     "npm:*": "jspm_packages/npm/*.js"
   },
   "babelOptions": {
-    "blacklist": [],
+    "blacklist": [
+      "react",
+      "react",
+      "react",
+      "react"
+    ],
     "optional": [
       "runtime"
     ]
