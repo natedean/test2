@@ -1,8 +1,3 @@
-body {
-    font-family: 'Special Elite', serif;
-    background-color: tan;
-}
-
 .gameContainer {
     text-align: center;
     position: relative;
@@ -43,13 +38,7 @@ body {
 }
 
 .categoryBtn--selected {
-    background-color: green;
+    border-color: green;
+    color: green;
 }
 
-.categoryBtn--selected:hover{
-    background-color: lightgreen;
-}
-.categoryBtn--selected:active,
-.categoryBtn--selected:focus {
-    background-color: green;
-}

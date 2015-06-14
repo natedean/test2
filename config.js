@@ -8,12 +8,6 @@ System.config({
   },
   "babelOptions": {
     "blacklist": [
-      "react",
-      "react",
-      "react",
-      "react",
-      "react",
-      "react",
       "react"
     ],
     "optional": [
