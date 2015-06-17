@@ -1,36 +1,38 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Testing JSPM!</title>
-    <script src="jspm_packages/system.js"></script>
-    <script src="config.js"></script>
-    <script>
-      System.import('lib/main')
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Testing JSPM!</title>
+  <script src="jspm_packages/system.js"></script>
+  <script src="config.js"></script>
+  <script>
+    System.import('lib/main')
+  </script>
 </head>
 <body>
 <div ng-app="myApp">
-    <div ng-controller="MainController as vm">
-        <h3 class="text-center">What Kind Of Questions Do You Want?</h3>
-        <div class="categoryButtonsContainer">
-            <button
-              ng-repeat="category in vm.categories"
-              class="btn btn-lg btn-default categoryBtn"
-              ng-class="{'categoryBtn--selected': vm.selectedCategories.indexOf(category) >= 0}"
-              ng-click="vm.selectCategory($event)">
-                {{ ::category }}
-            </button>
-        </div>
-        <p class="categoryMessage">{{ vm.categoryMessage }}</p>
-        <div class="gameContainer">
-            <div class="questionTextContainer">
-      <span class="questionText">
-      {{ vm.question.question }}
-      </span>
-            </div>
-        </div>
-    </div><!-- Main Controller -->
+  <div ng-controller="MainController as vm">
+    <div class="gtHeader__container">
+      <span>My Level: 1</span>
+    </div>
+    <div class="gameContainer">
+      <div class="questionTextContainer">
+      <span class="questionText">{{ vm.question.question }}</span>
+      </div>
+    </div>
+    <h5 class="gtTest__gameHeader">What Kind Of Questions Do You Want?</h5>
+    <div class="categoryButtonsContainer">
+      <button
+        ng-repeat="category in vm.categories"
+        class="btn btn-lg btn-default categoryBtn"
+        ng-class="{'categoryBtn--selected': vm.selectedCategories.indexOf(category) >= 0}"
+        ng-click="vm.selectCategory($event)">
+        {{ ::category }}
+      </button>
+    </div>
+    <p class="categoryMessage">{{ vm.categoryMessage }}</p>
+  </div><!-- Main Controller -->
 </div>
 
 

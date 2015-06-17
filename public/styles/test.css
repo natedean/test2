@@ -3,8 +3,12 @@
     position: relative;
     width: 600px;
     height: 430px;
-    background: url("https://www.guitarthinker.com/images/mtm/background.png") no-repeat;
+    background: url("https://www.guitarthinker.com/images/table.png") no-repeat;
     margin: 1em auto;
+}
+
+.gtTest__gameHeader{
+    text-align: center;
 }
 
 .questionTextContainer {
@@ -41,4 +45,6 @@
     border-color: green;
     color: green;
 }
+
+
 

@@ -22,7 +22,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "nate": "node sayHi.js",
-    "copyHTML": "./node_modules/.bin/html-dist index.html --remove-all --minify --insert js/app.min.js -o cloud/views/test.ejs",
+    "copyHTML": "./node_modules/.bin/html-dist index.html --remove-all --minify --insert js/app.min.js -o cloud/views/test.ejs --insert-in-head",
     "build": "sudo jspm bundle-sfx --minify lib/main -o public/js/app.min.js && npm run copyHTML"
   },
   "repository": {
