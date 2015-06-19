@@ -15,17 +15,17 @@
     position: relative;
     margin: 0 auto;
     width: 300px;
-    height: 140px;
+    height: 160px;
     font-size: 1.6em;
-    top: 90px;
+    top: 67px;
 }
 
 .questionText {
-    position: relative;
     display: block;
+    color: #a32025;
+    position: relative;
     top: 50%;
     transform: translateY(-50%);
-    color: red !important;
 }
 
 .categoryButtonsContainer {
@@ -38,13 +38,43 @@
 }
 
 .categoryBtn {
+    transition: 0.5s;
     margin: 0 3px;
+    border-color: #a32025;
+    color: #a32025;
 }
 
-.categoryBtn--selected {
-    border-color: green;
-    color: green;
+.categoryBtn:hover,
+.categoryBtn:focus,
+.categoryBtn:active{
+    border-color: #a32025;
+    color: #a32025;
 }
 
+.categoryBtn--dormant {
+    height: 16px;
+    line-height: 16px;
+    border-color: black;
+    color: black;
+}
+
+.categoryBtn--dormant:focus,
+.categoryBtn--dormant:active{
+    border-color: black;
+    color: black;
+}
+
+.gtTest__answerBtnRow{
+    position: absolute;
+    top: 260px;
+    width: 80%;
+    left: 10%;
+}
+
+.gtTest__answerBtn{
+    box-shadow: 0 2px 3px black;
+    text-transform: none;
+    font-size: 1em;
+}
 
 
