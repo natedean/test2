@@ -637,20 +637,26 @@ input[type="reset"].button-primary,
 input[type="button"].button-primary {
     color: black;
     background-color: #f2cda9;
-    border-color: #f2cda9; }
+    border-color: #f2cda9;
+}
 .button.button-primary:hover,
 button.button-primary:hover,
 input[type="submit"].button-primary:hover,
 input[type="reset"].button-primary:hover,
-input[type="button"].button-primary:hover,
+input[type="button"].button-primary:hover{
+    color: black;
+    background-color: sandybrown;
+    border-color: sandybrown;
+}
 .button.button-primary:focus,
 button.button-primary:focus,
 input[type="submit"].button-primary:focus,
 input[type="reset"].button-primary:focus,
 input[type="button"].button-primary:focus {
     color: black;
-    background-color: sandybrown;
-    border-color: sandybrown; }
+    background-color: #f2cda9;
+    border-color: #f2cda9;
+}
 
 
 /* Forms
