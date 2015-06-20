@@ -75,6 +75,8 @@
     box-shadow: 0 2px 3px black;
     text-transform: none;
     font-size: 1em;
+    padding: 0 10px;
+    min-width: 80px;
 }
 
 
