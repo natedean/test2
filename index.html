@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>Testing JSPM!</title>
-  <script src="https://cdn.firebase.com/js/client/2.2.7/firebase.js"></script>
   <script src="jspm_packages/system.js"></script>
   <script src="config.js"></script>
   <script>
@@ -16,7 +15,7 @@
   <div ng-controller="MainController as vm">
     <div class="gtHeader__container">
       <span>My Level: 1</span>
-      <span>My Score: {{ vm.userScore }}</span>
+      <span>My Score: {{ vm.user.score }}</span>
       <h5 class="gtTest__gameHeader">What Kind Of Questions Do You Want?</h5>
       <div class="categoryButtonsContainer">
         <button
