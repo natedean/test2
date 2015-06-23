@@ -25,7 +25,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "nate": "node sayHi.js",
     "copyHTML": "./node_modules/.bin/html-dist index.html --remove-all --minify --insert js/app.min.js -o cloud/views/test.ejs",
-    "build": "sudo jspm bundle-sfx --minify lib/main -o public/js/app.min.js && npm run copyHTML && parse deploy && open https://GuitarThinker.com/test"
+    "build": "sudo jspm bundle-sfx --minify lib/main -o public/js/app.min.js && npm run copyHTML && parse deploy"
   },
   "repository": {
     "type": "git",
