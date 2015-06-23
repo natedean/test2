@@ -29,6 +29,18 @@ System.config({
       "react",
       "react",
       "react",
+      "react",
+      "react",
+      "react",
+      "react",
+      "react",
+      "react",
+      "react",
+      "react",
+      "react",
+      "react",
+      "react",
+      "react",
       "react"
     ],
     "optional": [
@@ -40,6 +52,7 @@ System.config({
 System.config({
   "map": {
     "angular": "github:angular/bower-angular@1.4.0",
+    "angular-animate": "npm:angular-animate@1.4.1",
     "angularfire": "npm:angularfire@1.1.1",
     "bootstrap": "github:twbs/bootstrap@3.3.4",
     "css": "github:systemjs/plugin-css@0.1.12",
