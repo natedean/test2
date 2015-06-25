@@ -20,6 +20,7 @@ System.config({
     "angularfire": "npm:angularfire@1.1.1",
     "bootstrap": "github:twbs/bootstrap@3.3.4",
     "css": "github:systemjs/plugin-css@0.1.12",
+    "d3": "github:mbostock/d3@3.5.5",
     "lodash": "npm:lodash@3.9.3",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"

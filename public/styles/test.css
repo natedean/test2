@@ -144,3 +144,49 @@
 .animate-repeat.ng-enter.ng-enter-active {
     opacity:1;
 }
+
+ /*===============================================================*/
+ /*D3 CRAZINESS*/
+.background {
+    fill: transparent;
+}
+
+.component {
+    fill: #e1e1e1;
+}
+
+.component .label {
+    font-family: Myriad, "Helvetic Neue", Helvetica, Arial;
+    text-anchor: middle;
+    fill: #0000FF;
+}
+
+.arc {
+    stroke-weight:0.1;
+    fill: #4e8fff;
+}
+
+
+.arc2 {
+    stroke-weight:0.1;
+    fill: #3660b0;
+}
+
+.radial-svg {
+    display: block;
+    margin: 0 auto;
+}
+
+#div1 {
+    width: 33%;
+    height: 150px;
+    box-sizing: border-box;
+    float: left;
+}
+
+.radial {
+    border-radius: 3px;
+    background: #FFFFFF;
+    color: #000;
+
+}
