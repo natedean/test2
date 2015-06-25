@@ -7,6 +7,52 @@
     margin: 1em auto;
 }
 
+.gtSidebar__container{
+    width: 120px;
+    height: 480px;
+    position: fixed;
+    background-color: rgb(27, 27, 35);
+    border-radius: 0 5px 5px 0;
+    top: 50px;
+    color: sandybrown;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.gtSidebar__item{
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid sandybrown;
+    height: 100px;
+    list-style: none;
+    padding: 10px;
+}
+
+.gtSidebar__text{
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.gtSidebar__text--label{
+    font-size: 0.9em;
+    color: #a32025;
+    text-decoration: underline;
+    margin-bottom: -5px;
+}
+
+.gtSidebar__score{
+
+}
+
+.gtSidebar__username{
+
+}
+
+.gtSidebar__item:last-child{
+    border-bottom: none;
+}
+
 .gtTest__gameHeader{
     text-align: center;
 }
