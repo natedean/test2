@@ -20,6 +20,7 @@
 }
 
 .gtSidebar__item{
+    position: relative;
     margin: 0;
     padding: 0;
     border-bottom: 1px solid sandybrown;
@@ -32,13 +33,27 @@
     padding: 0;
     margin: 0;
     text-align: center;
+    white-space: nowrap;
+    width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .gtSidebar__text--label{
-    font-size: 0.9em;
     color: #a32025;
     text-decoration: underline;
     margin-bottom: -5px;
+}
+
+.gtSidebar__levelLabel{
+    position: absolute;
+    top: 40%;
+    text-decoration: none;
+}
+
+.gtBonusPointsContainer{
+    text-align: center;
+    padding-top: 20px;
 }
 
 .gtSidebar__score{
@@ -152,18 +167,12 @@
 }
 
 .component {
-    fill: #e1e1e1;
-}
-
-.component .label {
-    font-family: Myriad, "Helvetic Neue", Helvetica, Arial;
-    text-anchor: middle;
-    fill: #0000FF;
+    fill: sandybrown;
 }
 
 .arc {
     stroke-weight:0.1;
-    fill: #4e8fff;
+    fill: #a32025;
 }
 
 
