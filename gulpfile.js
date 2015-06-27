@@ -5,6 +5,25 @@ var sourcemaps = require('gulp-sourcemaps');
 var rename = require('gulp-rename');
 var del = require('del');
 var run = require('gulp-run');
+var sass = require('gulp-sass');
+var minifyCss = require('gulp-minify-css');
+
+//gulp.task('minify-css', function() {
+//  return gulp.src('styles/*.css')
+//    .pipe(minifyCss({compatibility: 'ie8'}))
+//    .pipe(gulp.dest('dist'));
+//});
+
+gulp.task('sass', function () {
+  gulp.src('./lib/sass/index.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(minifyCss({compatibility: 'ie8'}))
+    .pipe(gulp.dest('./public/styles'));
+});
+
+gulp.task('sass:watch', function () {
+  gulp.watch('./lib/sass/*.scss', ['sass']);
+});
 
 var paths = {
   scripts: ['source/js/**/*.js', '!source/js/vendor/**/*.js'],

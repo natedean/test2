@@ -1,0 +1,39 @@
+/*===============================================================*/
+/*D3 CRAZINESS*/
+.background {
+  fill: transparent;
+}
+
+.component {
+  fill: sandybrown;
+}
+
+.arc {
+  stroke-weight:0.1;
+  fill: #a32025;
+}
+
+
+.arc2 {
+  stroke-weight:0.1;
+  fill: #3660b0;
+}
+
+.radial-svg {
+  display: block;
+  margin: 0 auto;
+}
+
+#div1 {
+  width: 33%;
+  height: 150px;
+  box-sizing: border-box;
+  float: left;
+}
+
+.radial {
+  border-radius: 3px;
+  background: #FFFFFF;
+  color: #000;
+
+}
