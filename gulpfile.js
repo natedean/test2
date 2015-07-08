@@ -18,7 +18,7 @@ gulp.task('sass', function () {
   gulp.src('./lib/sass/index.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(minifyCss({compatibility: 'ie8'}))
-    .pipe(gulp.dest('./public/styles'));
+    .pipe(gulp.dest('./dist/styles'));
 });
 
 gulp.task('sass:watch', function () {

@@ -15,7 +15,7 @@ System.config({
 
 System.config({
   "map": {
-    "angular": "github:angular/bower-angular@1.4.0",
+    "angular": "npm:angular@1.4.2",
     "angular-animate": "npm:angular-animate@1.4.1",
     "angularfire": "npm:angularfire@1.1.1",
     "bootstrap": "github:twbs/bootstrap@3.3.4",
@@ -96,11 +96,11 @@ System.config({
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.1"
     },
-    "npm:angular@1.4.1": {
+    "npm:angular@1.4.2": {
       "process": "github:jspm/nodelibs-process@0.1.1"
     },
     "npm:angularfire@1.1.1": {
-      "angular": "npm:angular@1.4.1",
+      "angular": "npm:angular@1.4.2",
       "firebase": "npm:firebase@2.2.7",
       "process": "github:jspm/nodelibs-process@0.1.1"
     },
