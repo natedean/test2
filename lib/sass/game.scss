@@ -40,7 +40,7 @@
 }
 
 .gtSidebar__text--label{
-  color: $color-burgundy;
+  color: $color-tan-light;
   text-decoration: underline;
   margin-bottom: -5px;
 }
@@ -74,19 +74,20 @@
 
 .questionTextContainer {
   position: relative;
-  margin: 0 auto;
-  width: 300px;
-  height: 200px;
+  left: 155px;
+  top: 40px;
   font-size: 1.6em;
-  top: 44px;
+  display:table-cell;
+  vertical-align:middle;
+  width:300px;
+  height:200px;
 }
 
 .questionText {
-  display: block;
   color: $color-burgundy;
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
+  margin-left:auto;
+  margin-right:auto;
+  line-height: 1.4em;
 }
 
 .categoryButtonsContainer {
@@ -140,23 +141,30 @@
   min-width: 80px;
 }
 
-/* ANIMATE STUFF*/
+.gtTest__moveOnBtn{
+  background-color: $color-burgundy;
+  color: $color-tan;
+  transition: 0.15s;
+  position: absolute;
+  left: calc(100% - 281px);
+  bottom: 0;
 
-.animate-repeat.ng-move,
-.animate-repeat.ng-enter{
-  -webkit-transition:all linear 0.5s;
-  transition:all linear 0.5s;
+  &:hover{
+    background-color: $color-tan;
+    color: $color-burgundy;
+  }
 }
 
-.animate-repeat.ng-leave.ng-leave-active,
-.animate-repeat.ng-move,
-.animate-repeat.ng-enter {
-  opacity:0;
+.gtTest__answerBtn--correct{
+  background-color: $color-tan !important;
 }
 
-.animate-repeat.ng-leave,
-.animate-repeat.ng-move.ng-move-active,
-.animate-repeat.ng-enter.ng-enter-active {
-  opacity:1;
+.gtTest__answerBtn--pulsate{
+  -webkit-animation: pulsate 1.2s ease-out;
+  -webkit-animation-iteration-count: infinite;
 }
-
+@-webkit-keyframes pulsate {
+  0% {-webkit-transform: scale(0.9, 0.9);}
+  50% {-webkit-transform: scale(1.1, 1.1); }
+  100% {-webkit-transform: scale(0.9, 0.9);}
+}
