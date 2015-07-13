@@ -9,11 +9,9 @@
 
 .gtSidebar__container{
   width: 120px;
-  height: 480px;
+  height: 100%;
   position: fixed;
   background-color: rgb(27, 27, 35);
-  border-radius: 0 5px 5px 0;
-  top: 50px;
   color: $color-tan;
   overflow: hidden;
   z-index: 10;
@@ -43,6 +41,10 @@
   color: $color-tan-light;
   text-decoration: underline;
   margin-bottom: -5px;
+}
+
+.gtSidebar__scoreLabel{
+  margin-top: 8px;
 }
 
 .gtSidebar__levelLabel{
