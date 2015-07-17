@@ -1,4 +1,14 @@
-.gameContainer {
+//.gtGameHeader{}
+
+.gtGameHeader__cta{
+  text-align: center;
+}
+
+.gtGameHeader__categoryButtonsContainer {
+  text-align: center;
+}
+
+.gtGameContainer {
   text-align: center;
   position: relative;
   width: 600px;
@@ -7,74 +17,7 @@
   margin: 1em auto;
 }
 
-.gtSidebar__container{
-  width: 120px;
-  height: 100%;
-  position: fixed;
-  background-color: rgb(27, 27, 35);
-  color: $color-tan;
-  overflow: hidden;
-  z-index: 10;
-}
-
-.gtSidebar__item{
-  position: relative;
-  margin: 0;
-  padding: 0;
-  border-bottom: 1px solid $color-tan;
-  height: 100px;
-  list-style: none;
-  padding: 10px;
-}
-
-.gtSidebar__text{
-  padding: 0;
-  margin: 0;
-  text-align: center;
-  white-space: nowrap;
-  width: 100px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.gtSidebar__text--label{
-  color: $color-tan-light;
-  text-decoration: underline;
-  margin-bottom: -5px;
-}
-
-.gtSidebar__scoreLabel{
-  margin-top: 8px;
-}
-
-.gtSidebar__levelLabel{
-  position: absolute;
-  top: 40%;
-  text-decoration: none;
-}
-
-.gtBonusPointsContainer{
-  text-align: center;
-  padding-top: 20px;
-}
-
-.gtSidebar__score{
-
-}
-
-.gtSidebar__username{
-
-}
-
-.gtSidebar__item:last-child{
-  border-bottom: none;
-}
-
-.gtTest__gameHeader{
-  text-align: center;
-}
-
-.questionTextContainer {
+.gtGameContainer__questionTextContainer {
   position: relative;
   left: 155px;
   top: 40px;
@@ -85,32 +28,28 @@
   height:200px;
 }
 
-.questionText {
+.gtGameContainer__questionText {
   color: $color-burgundy;
   margin-left:auto;
   margin-right:auto;
   line-height: 1.4em;
 }
 
-.categoryButtonsContainer {
-  text-align: center;
-}
-
-.categoryMessage{
+.gtGameHeader__categoryMessage{
   text-align: center;
   margin: 10px 0 0;
 }
 
-.categoryBtn {
+.gtGameHeader__categoryBtn {
   transition: 0.5s;
   margin: 0 3px;
   border-color: $color-burgundy;
   color: $color-burgundy;
 }
 
-.categoryBtn:hover,
-.categoryBtn:focus,
-.categoryBtn:active{
+.gtGameHeader__categoryBtn:hover,
+.gtGameHeader__categoryBtn:focus,
+.gtGameHeader__categoryBtn:active{
   border-color: $color-burgundy;
   color: $color-burgundy;
 }
@@ -128,14 +67,14 @@
   color: $color-black;
 }
 
-.gtTest__answerBtnRow{
+.gtGameContainer__answerBtnRow{
   position: absolute;
   top: 260px;
   width: 80%;
   left: 10%;
 }
 
-.gtTest__answerBtn{
+.gtGameContainer__answerBtn{
   box-shadow: 0 2px 3px $color-black;
   text-transform: none;
   font-size: 1em;
@@ -143,7 +82,7 @@
   min-width: 80px;
 }
 
-.gtTest__moveOnBtn{
+.gtGameContainer__moveOnBtn{
   background-color: $color-burgundy;
   color: $color-tan;
   transition: 0.15s;
@@ -157,11 +96,11 @@
   }
 }
 
-.gtTest__answerBtn--correct{
+.gtGameContainer__answerBtn--correct{
   background-color: $color-tan !important;
 }
 
-.gtTest__answerBtn--pulsate{
+.gtGameContainer__answerBtn--pulsate{
   -webkit-animation: pulsate 1.2s ease-out;
   -webkit-animation-iteration-count: infinite;
 }

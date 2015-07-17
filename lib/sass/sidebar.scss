@@ -1,0 +1,57 @@
+.gtSidebar__container{
+  width: 120px;
+  height: 100%;
+  position: fixed;
+  background-color: rgb(27, 27, 35);
+  color: $color-tan;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.gtSidebar__item{
+  position: relative;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid $color-tan;
+  height: 100px;
+  list-style: none;
+  padding: 10px;
+}
+
+.gtSidebar__text{
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  white-space: nowrap;
+  width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gtSidebar__text--label{
+  color: $color-tan-light;
+  text-decoration: underline;
+  margin-bottom: -5px;
+}
+
+.gtSidebar__scoreLabel{
+  margin-top: 8px;
+}
+
+.gtSidebar__levelLabel{
+  position: absolute;
+  top: 40%;
+  text-decoration: none;
+}
+
+.gtSidebar__score{
+
+}
+
+.gtSidebar__username{
+
+}
+
+.gtSidebar__item:last-child{
+  border-bottom: none;
+}
