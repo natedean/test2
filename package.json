@@ -4,7 +4,13 @@
   "description": "GuitarThinker.com",
   "main": "index.html",
   "dependencies": {
-    "firebase": "^2.2.7"
+    "co-fs": "^1.2.0",
+    "firebase": "^2.2.7",
+    "koa": "^0.21.0",
+    "koa-cors": "0.0.16",
+    "koa-mongo": "^0.4.1",
+    "koa-router": "^5.1.2",
+    "koa-static": "^1.4.9"
   },
   "devDependencies": {
     "browser-sync": "^2.7.13",

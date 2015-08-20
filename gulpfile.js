@@ -22,3 +22,5 @@ gulp.task('sass', function () {
     .pipe(minifyCss({compatibility: 'ie8'}))
     .pipe(gulp.dest('./dist/styles'));
 });
+
+gulp.task('default', ['serve']);
