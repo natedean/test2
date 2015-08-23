@@ -31,8 +31,6 @@
     "jspm": "^0.14.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "nate": "node sayHi.js",
     "copyHTML": "./node_modules/.bin/html-dist index.html --remove-all --minify --insert app.min.js -o dist/index.html",
     "build": "sudo jspm bundle-sfx --minify lib/main -o dist/app.min.js && npm run copyHTML"
   },
