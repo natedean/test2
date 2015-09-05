@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var shell = require('gulp-shell');
+var autoprefixer = require('gulp-autoprefixer');
 var browserSync = require('browser-sync').create();
 
 // Static Server + watching scss/html files
@@ -21,6 +22,10 @@ gulp.task('sass', function () {
   gulp.src('./lib/sass/index.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(minifyCss({compatibility: 'ie8'}))
+    .pipe(autoprefixer({
+      browsers: ['last 2 versions'],
+      cascade: false
+    }))
     .pipe(gulp.dest('./dist/styles'));
 });
 
