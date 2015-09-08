@@ -8,7 +8,7 @@
   color: $color-tan;
   overflow: hidden;
   z-index: 10;
-  transition: left 0.4s;
+  transition: left $slide-transition-time;
 
   &--active{
     left: 0;

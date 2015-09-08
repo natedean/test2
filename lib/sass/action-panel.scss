@@ -1,0 +1,28 @@
+.gtActionPanel{
+  position: fixed;
+  bottom: -150px;
+  right: 0;
+  left: 0;
+  height: 150px;
+  width: 50%;
+  margin: 0 auto;
+  background-color: $color-black;
+  transition: bottom $slide-transition-time;
+
+  &--active{
+    bottom: 0;
+  }
+}
+
+.gtActionPanel__moveOnBtn{
+  background-color: $color-burgundy;
+  color: $color-tan;
+  transition: 0.15s;
+  position: absolute;
+  margin: 0 auto;
+
+  &:hover{
+    background-color: $color-tan;
+    color: $color-burgundy;
+  }
+}

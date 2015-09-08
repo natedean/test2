@@ -88,20 +88,6 @@
   min-width: 80px;
 }
 
-.gtGameContainer__moveOnBtn{
-  background-color: $color-burgundy;
-  color: $color-tan;
-  transition: 0.15s;
-  position: absolute;
-  left: calc(100% - 281px);
-  bottom: 0;
-
-  &:hover{
-    background-color: $color-tan;
-    color: $color-burgundy;
-  }
-}
-
 .gtGameContainer__answerBtn--correct{
   background-color: $color-tan !important;
 }
