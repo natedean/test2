@@ -30,7 +30,6 @@ gulp.task('sass', function () {
 });
 
 gulp.task('dev-server', shell.task([
-  'nvm use 0.12.7',
   'nodemon --harmony app.js'
 ]));
 

@@ -3,10 +3,16 @@
   height: 100%;
   position: fixed;
   top: 0;
+  left: -120px;
   background-color: rgb(27, 27, 35);
   color: $color-tan;
   overflow: hidden;
   z-index: 10;
+  transition: left 0.4s;
+
+  &--active{
+    left: 0;
+  }
 }
 
 .gtSidebar__item{
