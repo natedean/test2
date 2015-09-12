@@ -1,13 +1,2 @@
-@import 'variables';
-@import 'breakpoints';
-@import 'utility-mixins';
-
-@import 'normalize';
-@import 'skeleton';
-
-@import 'animations';
-@import 'sidebar';
-@import 'game';
-@import 'charts';
-@import 'leaderboard';
-@import 'action-panel';
+@import 'global/index';
+@import 'components/index';
