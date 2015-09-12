@@ -1,0 +1,47 @@
+// Using Breakpoint map that is defined in the variables folder. This will create
+// new breakpoint based off the values within that map, there should be no need
+// to edit this mixin code.
+
+$breakpoints: (
+  'small': 320px,
+  'mobile': 480px,
+  'tablet': 750px,
+  'desktop': 1000px,
+  'large': 1200px
+);
+
+/* Larger than mobile */
+@media (min-width: 400px) {}
+
+/* Larger than phablet (also point when grid becomes active) */
+@media (min-width: 550px) {}
+
+/* Larger than tablet */
+@media (min-width: 750px) {}
+
+/* Larger than desktop */
+@media (min-width: 1000px) {}
+
+/* Larger than Desktop HD */
+@media (min-width: 1200px) {}
+
+@mixin breakpoint($breakpoint) {
+  $value: map-get($breakpoints, $breakpoint);
+
+  @if $value != null {
+    @media (min-width: $value) {
+      @content;
+    }
+  }
+
+  @else {
+    @warn "'#{$breakpoint}' is not defined in the $breakpoints map.";
+  }
+}
+
+// Retina mixin in for high pixel ratio displays
+@mixin retina {
+  @media only screen and (-webkit-min-device-pixel-ratio : 1.5), only screen and (min-device-pixel-ratio : 1.5) {
+    @content;
+  }
+}

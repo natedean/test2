@@ -172,13 +172,13 @@ input[type="submit"],
 input[type="reset"],
 input[type="button"] {
   display: inline-block;
-  height: 38px;
-  padding: 0 30px;
+  height: 20px;
+  padding: 0 0.5em;
+  line-height: 20px;
   color: #555;
   text-align: center;
   font-size: 11px;
   font-weight: 600;
-  line-height: 38px;
   letter-spacing: .1rem;
   text-transform: uppercase;
   text-decoration: none;
@@ -187,7 +187,20 @@ input[type="button"] {
   border-radius: 4px;
   border: 1px solid #bbb;
   cursor: pointer;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+
+  @include breakpoint(mobile){
+    height: 30px;
+    padding: 0 20px;
+    line-height: 30px;
+  }
+
+  @include breakpoint(tablet){
+    height: 38px;
+    padding: 0 30px;
+    line-height: 38px;
+  }
+}
 .button:hover,
 button:hover,
 input[type="submit"]:hover,

@@ -9,30 +9,57 @@
   text-align: center;
 }
 
-.gtGameContainer {
+.gtGame {
+  width: 320px;
+  height: 215px;
+  background: url("https://www.guitarthinker.com/images/table.png") no-repeat;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
   text-align: center;
   position: relative;
-  width: 600px;
-  height: 430px;
-  background: url("https://www.guitarthinker.com/images/table.png") no-repeat;
   margin: 1em auto;
+
+  @include breakpoint(mobile){
+    width: 450px;
+    height: 300px;
+  }
+
+  @include breakpoint(tablet){
+    width: 600px;
+    height: 430px;
+  }
+
 }
 
-.gtGameContainer__questionTextContainer {
-  position: relative;
-  left: 155px;
-  top: 40px;
-  font-size: 1.6em;
-  display:table-cell;
-  vertical-align:middle;
-  width:300px;
-  height:212px;
+.gtGame__questionTextContainer {
+  position: absolute;
+  width: 180px;
+  height: 100px;
+  left: 0;
+  right: 0;
+  top: 20px;
+  margin: 0 auto;
+
+  @include breakpoint(mobile){
+    font-size: 1.3em;
+    width:240px;
+    height: 145px;
+  }
+
+  @include breakpoint(tablet){
+    font-size: 1.6em;
+    width:300px;
+    height: 190px;
+    top: 50px;
+  }
+
 }
 
-.gtGameContainer__questionText {
+.gtGame__questionText {
   color: $color-burgundy;
-  margin-left:auto;
-  margin-right:auto;
+  @include vertical-align();
+  margin: 0 auto;
   line-height: 1.4em;
 }
 
@@ -68,31 +95,53 @@
   color: $color-black;
 }
 
-.gtGameContainer__correctAnswerTextContainer{
+.gtGame__correctAnswerTextContainer{
   color: $color-burgundy;
   font-size: 0.8em;
 }
 
-.gtGameContainer__answerBtnRow{
+.gtGame__answerBtnRow{
   position: absolute;
-  top: 260px;
-  width: 80%;
-  left: 10%;
+  width: 90%;
+  left: 0;
+  right: 0;
+  top: 130px;
+  margin: auto;
+
+  @include breakpoint(mobile){
+    top: 185px;
+  }
+
+  @include breakpoint(tablet){
+    top: 260px;
+  }
 }
 
-.gtGameContainer__answerBtn{
+.gtGame__answerBtnContainer{
+  width: 25%;
+  float: left;
+}
+
+.gtGame__answerBtn{
   box-shadow: 0 2px 3px $color-black;
   text-transform: none;
   font-size: 1em;
   padding: 0 10px;
-  min-width: 80px;
+  font-size: 0.75em;
+  min-width: 50px;
+
+  @include breakpoint(mobile){
+    font-size: 1em;
+    min-width: 80px;
+  }
+
 }
 
-.gtGameContainer__answerBtn--correct{
+.gtGame__answerBtn--correct{
   background-color: $color-tan !important;
 }
 
-.gtGameContainer__answerBtn--pulsate{
+.gtGame__answerBtn--pulsate{
   -webkit-animation: pulsate 1.2s ease-out;
   -webkit-animation-iteration-count: infinite;
 }
