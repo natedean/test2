@@ -8,10 +8,10 @@
   color: $color-tan;
   overflow: hidden;
   z-index: 10;
-  transition: left $slide-transition-time;
+  transition: transform $slide-transition-time;
 
   &--active{
-    left: 0;
+    transform: translateX(120px);
   }
 }
 

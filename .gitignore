@@ -41,6 +41,9 @@ jspm_packages
 
 ## Directory-based project format:
 .idea/
+
+### VSCode stuff
+jsconfig.json
 .vscode/
 # if you remove the above rule, at least ignore the following:
 
