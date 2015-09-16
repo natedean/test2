@@ -4,18 +4,17 @@
   left: 16px; //offset for background image being offcenter
   margin: 0 auto;
   transition: bottom $slide-transition-time;
-  bottom: -50px;
-  height: 50px;
+  bottom: -45px;
+  height: 45px;
 
   @include breakpoint(mobile){
-    bottom: -60px;
-    height: 60px;
+    bottom: -56px;
+    height: 56px;
   }
 
   @include breakpoint(tablet){
     bottom: -90px;
     height: 90px;
-    width: 200px;
   }
 
   &--active{
@@ -28,28 +27,24 @@
   color: $color-tan;
   transition: 0.15s;
   margin: 0 auto;
+  height: 40px;
+  line-height: 15px;
+  
+  @include breakpoint(mobile){
+    height: 44px;
+    line-height: 17px;
+  }
+  
+  @include breakpoint(tablet){
+    height: 67px;
+    line-height: 25px;
+    font-size: .9em;
+  }
 
   &:hover{
     background-color: $color-tan;
     color: $color-burgundy;
   }
-}
-
-.gtActionPanel__text{ // default state is 'error' state
-  color: $color-burgundy;
-  font-size: 1.1em;
-
-  @include breakpoint(mobile){
-    font-size: 1.3em;
-  }
-
-  @include breakpoint(tablet){
-    font-size: 1.5em;
-  }
-}
-
-.gtActionPanel--correct .gtActionPanel__text{
-  color: $color-black;
 }
 
 .gtActionPanel--correct .gtActionPanel__moveOnBtn{
