@@ -34,8 +34,7 @@
     "jspm": "^0.16.10"
   },
   "scripts": {
-    "copyHTML": "./node_modules/.bin/html-dist index.html --remove-all --minify --insert app.min.js -o dist/index.html",
-    "build": "sudo jspm bundle-sfx --minify lib/main -o dist/app.min.js && npm run copyHTML"
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -56,6 +55,7 @@
       "angular-animate": "npm:angular-animate@^1.4.1",
       "angularfire": "npm:angularfire@^1.1.1",
       "bootstrap": "github:twbs/bootstrap@^3.3.4",
+      "clean-css": "npm:clean-css@^3.4.5",
       "css": "github:systemjs/plugin-css@^0.1.12",
       "d3": "github:mbostock/d3@^3.5.5",
       "lodash": "npm:lodash@^3.9.3"
